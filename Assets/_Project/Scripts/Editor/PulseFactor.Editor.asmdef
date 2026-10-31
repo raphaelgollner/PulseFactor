@@ -1,0 +1,20 @@
+{
+    "name": "PulseFactor.Editor",
+    "rootNamespace": "PulseFactor.EditorTools",
+    "references": [
+        "PulseFactor.Runtime",
+        "Unity.InputSystem",
+        "Unity.Mathematics",
+        "Unity.Localization",
+        "Unity.Localization.Editor",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.RenderPipelines.Core.Runtime",
+        "UnityEditor.TestRunner",
+        "UnityEngine.TestRunner"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "autoReferenced": true
+}
