@@ -58,6 +58,10 @@ namespace PulseFactor.EditorTools
 
             Resource("iron", 10); Resource("ice", 8); Resource("coal", 12);
             Resource("copper", 25); Resource("titanium", 60); Resource("cobalt", 80);
+            // Produtos de comercio entre estacoes (fase 2E).
+            Resource("medical", 45); Resource("construction", 30); Resource("ship_parts", 90);
+            Resource("scrap", 6); Resource("rations", 20); Resource("processors", 120);
+            Resource("energy_cells", 55); Resource("solid_fuel", 25); Resource("alloys", 70); Resource("water", 12);
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();

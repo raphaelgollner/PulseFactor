@@ -25,33 +25,86 @@ MonoBehaviour:
   corporationId: magna
   corporation: {fileID: 11400000, guid: 5e204ea595e22684db9459e1f3250a25, type: 2}
   style: 2
-  hasShipyard: 1
+  hasShipyard: 0
   dockSizes: 00000000000000000000000000000000010000000100000002000000
   market:
   - resource: {fileID: 11400000, guid: 4340199683d5d194ab4c71a7c49450af, type: 2}
     sells: 1
     buys: 0
     priceMultiplier: 1
+    capacity: 240
+    startStock: 194
+    ratePerHour: 120
+  - resource: {fileID: 11400000, guid: 3efa8d7f721a1bc46a23f0c59d0cb14a, type: 2}
+    sells: 1
+    buys: 0
+    priceMultiplier: 0.95
+    capacity: 200
+    startStock: 163
+    ratePerHour: 100
+  - resource: {fileID: 11400000, guid: 26b5ae00048635e4aaaa816ec968992e, type: 2}
+    sells: 1
+    buys: 0
+    priceMultiplier: 0.95
+    capacity: 90
+    startStock: 63
+    ratePerHour: 45
+  - resource: {fileID: 11400000, guid: 58e0524d76ff32e4cb08db7577d37883, type: 2}
+    sells: 1
+    buys: 0
+    priceMultiplier: 0.95
+    capacity: 70
+    startStock: 44
+    ratePerHour: 35
+  - resource: {fileID: 11400000, guid: 40a9862342c697a47801565e142774e9, type: 2}
+    sells: 1
+    buys: 0
+    priceMultiplier: 0.95
+    capacity: 240
+    startStock: 160
+    ratePerHour: 120
   - resource: {fileID: 11400000, guid: 833c601c3d1f36940858a3bf16771b24, type: 2}
-    sells: 1
-    buys: 0
-    priceMultiplier: 0.95
-  - resource: {fileID: 11400000, guid: 5ccb7bf5d6ec2004aa0ccc64dad8386e, type: 2}
-    sells: 1
-    buys: 0
-    priceMultiplier: 0.95
+    sells: 0
+    buys: 1
+    priceMultiplier: 1.25
+    capacity: 600
+    startStock: 84
+    ratePerHour: 200
   - resource: {fileID: 11400000, guid: 3c2cb886cbdc5354eb381b3df6bc66e4, type: 2}
     sells: 0
     buys: 1
     priceMultiplier: 1.3
+    capacity: 600
+    startStock: 263
+    ratePerHour: 200
   - resource: {fileID: 11400000, guid: 2f2469a33ecbada4fa1cfc29dcef03bb, type: 2}
     sells: 0
     buys: 1
     priceMultiplier: 1.35
+    capacity: 100
+    startStock: 37
+    ratePerHour: 33.333332
   - resource: {fileID: 11400000, guid: 60d2eafa6ad073641b806a01e889d515, type: 2}
     sells: 0
     buys: 1
     priceMultiplier: 1.4
+    capacity: 80
+    startStock: 27
+    ratePerHour: 26.666666
+  - resource: {fileID: 11400000, guid: bab50b7dc9922b94188b8f518c719473, type: 2}
+    sells: 0
+    buys: 1
+    priceMultiplier: 1.3
+    capacity: 600
+    startStock: 144
+    ratePerHour: 200
+  - resource: {fileID: 11400000, guid: 900b23d2a1fda754880b4705fddd6642, type: 2}
+    sells: 0
+    buys: 1
+    priceMultiplier: 1.3
+    capacity: 50
+    startStock: 10
+    ratePerHour: 16.666666
   references:
     version: 2
     RefIds: []

@@ -11,7 +11,7 @@ namespace PulseFactor
 
         static Material white, grey, dark, orange, glass, panel, rock, crater;
 
-        public static Station Build(StationDef def, GameConfig config, Reputation reputation, WorldPosition position, Material hull, Material rockMat)
+        public static Station Build(StationDef def, GameConfig config, Reputation reputation, WorldPosition position, Material hull, Material rockMat, Economy economy = null)
         {
             CreateMaterials(hull, rockMat);
             var root = new GameObject("Outpost_" + def.id);
@@ -63,7 +63,7 @@ namespace PulseFactor
             docks[1] = ElevatedPad(t, 1, DockSize.M, basePos + new Vector3(-140, 0, -150), 58f, 32f, hull);
             docks[2] = ElevatedPad(t, 2, DockSize.G, basePos + new Vector3(-20, 0, -190), 78f, 36f, hull);
 
-            station.Initialize(def, config, docks, reputation);
+            station.Initialize(def, config, docks, reputation, economy);
             anchor.SetWorld(position);
             return station;
         }

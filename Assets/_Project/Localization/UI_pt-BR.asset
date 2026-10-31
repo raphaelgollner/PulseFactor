@@ -1229,6 +1229,74 @@ MonoBehaviour:
     m_Localized: "F10 \u2014 novo jogo (desenvolvimento)"
     m_Metadata:
       m_Items: []
+  - m_Id: 234100960743424
+    m_Localized: "Suprimentos M\xE9dicos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103552
+    m_Localized: "Materiais de Constru\xE7\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103553
+    m_Localized: "Pe\xE7as de Naves"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103554
+    m_Localized: Sucata
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103555
+    m_Localized: "Ra\xE7\xE3o Militar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103556
+    m_Localized: Processadores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103557
+    m_Localized: "C\xE9lulas de Energia"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103558
+    m_Localized: "Combust\xEDvel S\xF3lido"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103559
+    m_Localized: "Ligas Met\xE1licas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103560
+    m_Localized: "\xC1gua Purificada"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103561
+    m_Localized: "A esta\xE7\xE3o est\xE1 sem estoque"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103562
+    m_Localized: "O estoque da esta\xE7\xE3o est\xE1 cheio"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103563
+    m_Localized: Estoque
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103564
+    m_Localized: Demanda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103565
+    m_Localized: Alta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103566
+    m_Localized: "M\xE9dia"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103567
+    m_Localized: Baixa
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

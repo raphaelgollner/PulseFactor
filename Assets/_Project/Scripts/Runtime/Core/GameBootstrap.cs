@@ -52,6 +52,7 @@ namespace PulseFactor
             contracts.Resources = resources;
             contracts.Player = Player;
             Player.Contracts = contracts;
+            contracts.RegisterStations();
             if (save != null) RestoreProgress(save, contracts);
 
             var dust = new GameObject("SpaceDust").AddComponent<SpaceDust>();
@@ -67,7 +68,7 @@ namespace PulseFactor
                 PlanetMaterial = planetMaterial, SunMaterial = sunMaterial, HullMaterial = hullMaterial,
                 LightMaterial = lightMaterial, AsteroidMaterial = asteroidMaterial,
                 GateMaterial = gateMaterial, PortalMaterial = portalMaterial,
-                Reputation = contracts.Reputation,
+                Reputation = contracts.Reputation, Economy = contracts.Economy,
                 SmallTraders = smallTraders, MediumTrader = mediumTrader, Corporations = corporations,
             };
             Player.Sectors = sectors;
@@ -136,6 +137,7 @@ namespace PulseFactor
             foreach (var (corp, value) in c.Reputation.All)
                 data.reputation.Add(new SaveData.RepEntry { corpId = corp, value = value });
             data.contracts.AddRange(c.Log.Active);
+            data.stocks.AddRange(c.Economy.Snapshot());
             try { SaveSystem.Save(data, SaveSystem.DefaultPath); }
             catch (System.Exception e) { Debug.LogWarning("[PulseFactor] Falha ao salvar: " + e.Message); }
         }
@@ -152,6 +154,7 @@ namespace PulseFactor
                 Player.Ship.Cargo.Reserve(res, e.reserved);
             }
             contracts.Log.Restore(save.contracts);
+            contracts.Economy.Restore(save.stocks);
         }
 
         void PlaceAtSaved(SaveData save)

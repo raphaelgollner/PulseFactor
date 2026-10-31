@@ -24,6 +24,7 @@ namespace PulseFactor
         public List<CargoEntry> cargo = new();
         public List<RepEntry> reputation = new();
         public List<Contract> contracts = new();
+        public List<Economy.StockEntry> stocks = new(); // vazio em saves antigos: estoques iniciais
     }
 
     // Save em JSON. Ausente, corrompido ou de versao futura: retorna null (o jogo comeca do zero).

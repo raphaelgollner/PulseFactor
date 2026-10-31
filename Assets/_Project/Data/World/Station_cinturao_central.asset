@@ -32,22 +32,72 @@ MonoBehaviour:
     sells: 1
     buys: 0
     priceMultiplier: 0.9
+    capacity: 600
+    startStock: 430
+    ratePerHour: 300
   - resource: {fileID: 11400000, guid: 60d2eafa6ad073641b806a01e889d515, type: 2}
     sells: 1
     buys: 0
     priceMultiplier: 0.9
+    capacity: 80
+    startStock: 59
+    ratePerHour: 40
+  - resource: {fileID: 11400000, guid: e8e38d6dd304fc449a589b651e94b710, type: 2}
+    sells: 1
+    buys: 0
+    priceMultiplier: 0.95
+    capacity: 300
+    startStock: 177
+    ratePerHour: 150
+  - resource: {fileID: 11400000, guid: 28ccb08ef65e49146891a93fc03cbb4b, type: 2}
+    sells: 1
+    buys: 0
+    priceMultiplier: 0.95
+    capacity: 110
+    startStock: 82
+    ratePerHour: 55
   - resource: {fileID: 11400000, guid: 3c2cb886cbdc5354eb381b3df6bc66e4, type: 2}
     sells: 0
     buys: 1
     priceMultiplier: 1.3
+    capacity: 600
+    startStock: 88
+    ratePerHour: 200
   - resource: {fileID: 11400000, guid: 5ccb7bf5d6ec2004aa0ccc64dad8386e, type: 2}
     sells: 0
     buys: 1
     priceMultiplier: 1.3
+    capacity: 500
+    startStock: 149
+    ratePerHour: 166.66667
   - resource: {fileID: 11400000, guid: 4340199683d5d194ab4c71a7c49450af, type: 2}
     sells: 0
     buys: 1
     priceMultiplier: 1.3
+    capacity: 240
+    startStock: 108
+    ratePerHour: 80
+  - resource: {fileID: 11400000, guid: 58e0524d76ff32e4cb08db7577d37883, type: 2}
+    sells: 0
+    buys: 1
+    priceMultiplier: 1.35
+    capacity: 70
+    startStock: 19
+    ratePerHour: 46.666668
+  - resource: {fileID: 11400000, guid: e4777017b450c1549a0e6024aa774aef, type: 2}
+    sells: 0
+    buys: 1
+    priceMultiplier: 1.3
+    capacity: 130
+    startStock: 31
+    ratePerHour: 43.333332
+  - resource: {fileID: 11400000, guid: 40a9862342c697a47801565e142774e9, type: 2}
+    sells: 0
+    buys: 1
+    priceMultiplier: 1.3
+    capacity: 240
+    startStock: 46
+    ratePerHour: 80
   references:
     version: 2
     RefIds: []

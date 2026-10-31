@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &551224849
+--- !u!1 &1464879654
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,9 +127,123 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 551224852}
-  - component: {fileID: 551224851}
-  - component: {fileID: 551224850}
+  - component: {fileID: 1464879656}
+  - component: {fileID: 1464879655}
+  m_Layer: 0
+  m_Name: GameBootstrap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1464879655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464879654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a81b93f8f3fe642b97f00889eb80f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PulseFactor.Runtime::PulseFactor.GameBootstrap
+  galaxy: {fileID: 11400000, guid: 1ab23bbb1188ab4468fd896ce08bc8fe, type: 2}
+  config: {fileID: 11400000, guid: a8ace8393a809b045bf404a798b82971, type: 2}
+  startingShip: {fileID: 11400000, guid: dbd1f2208eecb634fb23598fdcf2c392, type: 2}
+  catalog:
+  - {fileID: 11400000, guid: 7e91f916e25b61a4b899f07ed12d4bf1, type: 2}
+  - {fileID: 11400000, guid: 7024242460ef0e64aae627b2e33c0331, type: 2}
+  - {fileID: 11400000, guid: 8de58dda0ee17eb498ab0c699d354fc4, type: 2}
+  - {fileID: 11400000, guid: f8aae4907c7589a4e85d92b744805d9a, type: 2}
+  - {fileID: 11400000, guid: d3703646bf96e4c46950ca0ddf6ee2ac, type: 2}
+  - {fileID: 11400000, guid: 23b0f628ea841cf478e1afe2fee25e60, type: 2}
+  - {fileID: 11400000, guid: a15ad368d73927a46b0072a3d61f54f7, type: 2}
+  - {fileID: 11400000, guid: 5ab0217e6d7085f4a991539b7ad40cad, type: 2}
+  - {fileID: 11400000, guid: 4c65b70460be0174286e70b9aa6f3dcf, type: 2}
+  - {fileID: 11400000, guid: ce5dec8b85ee215418616ed15a6e24ff, type: 2}
+  - {fileID: 11400000, guid: e2c92feead1fb8348b36cd35394b369c, type: 2}
+  - {fileID: 11400000, guid: 08353138bb878904f95c9efb962dc3a6, type: 2}
+  - {fileID: 11400000, guid: bacda63a800073a44912f58ec42f7418, type: 2}
+  - {fileID: 11400000, guid: ff4f062d2152350499022cfec789435e, type: 2}
+  - {fileID: 11400000, guid: c30f987786444664f8b1c08409121634, type: 2}
+  - {fileID: 11400000, guid: 296747e0b142b244e977a4316be25d67, type: 2}
+  - {fileID: 11400000, guid: ebee75d67001f99449d699598eb53e41, type: 2}
+  - {fileID: 11400000, guid: 32c4eb00136e49449a47e5b981f65fa5, type: 2}
+  - {fileID: 11400000, guid: d82574756fa85e340933bba160bb17c7, type: 2}
+  - {fileID: 11400000, guid: dcd5707c344588b4e83100cef9fd42e9, type: 2}
+  - {fileID: 11400000, guid: a0e70e98f72a5804c8b5a37e62deb338, type: 2}
+  - {fileID: 11400000, guid: d01e1e345642ec944ab78aab32896dde, type: 2}
+  - {fileID: 11400000, guid: d9180cfb70f12fd4894b8d527707058e, type: 2}
+  - {fileID: 11400000, guid: 4be582636047dd146b42c0e84c6b8450, type: 2}
+  - {fileID: 11400000, guid: e9355eecfe8579d46bbad88c3262a22b, type: 2}
+  - {fileID: 11400000, guid: 8a2a3d9f122b17c49b623533137bc424, type: 2}
+  - {fileID: 11400000, guid: 3f8d9fdf04842c34291ab53e07832ebf, type: 2}
+  resources:
+  - {fileID: 11400000, guid: 833c601c3d1f36940858a3bf16771b24, type: 2}
+  - {fileID: 11400000, guid: 3c2cb886cbdc5354eb381b3df6bc66e4, type: 2}
+  - {fileID: 11400000, guid: 5ccb7bf5d6ec2004aa0ccc64dad8386e, type: 2}
+  - {fileID: 11400000, guid: 4340199683d5d194ab4c71a7c49450af, type: 2}
+  - {fileID: 11400000, guid: 2f2469a33ecbada4fa1cfc29dcef03bb, type: 2}
+  - {fileID: 11400000, guid: 60d2eafa6ad073641b806a01e889d515, type: 2}
+  - {fileID: 11400000, guid: 5da766bdb2739dd4db27db0d12f242f1, type: 2}
+  - {fileID: 11400000, guid: bab50b7dc9922b94188b8f518c719473, type: 2}
+  - {fileID: 11400000, guid: e8e38d6dd304fc449a589b651e94b710, type: 2}
+  - {fileID: 11400000, guid: 40a9862342c697a47801565e142774e9, type: 2}
+  - {fileID: 11400000, guid: 3efa8d7f721a1bc46a23f0c59d0cb14a, type: 2}
+  - {fileID: 11400000, guid: e4777017b450c1549a0e6024aa774aef, type: 2}
+  - {fileID: 11400000, guid: 28ccb08ef65e49146891a93fc03cbb4b, type: 2}
+  - {fileID: 11400000, guid: 26b5ae00048635e4aaaa816ec968992e, type: 2}
+  - {fileID: 11400000, guid: 58e0524d76ff32e4cb08db7577d37883, type: 2}
+  - {fileID: 11400000, guid: 900b23d2a1fda754880b4705fddd6642, type: 2}
+  smallTraders:
+  - {fileID: 11400000, guid: 4c04ec3f9cb9dba49a3a9843eae6f270, type: 2}
+  - {fileID: 11400000, guid: 93742654d61f5664fbb369401cfc2c8d, type: 2}
+  mediumTrader: {fileID: 11400000, guid: 1e9bea594ffd358479e874aece14c7c3, type: 2}
+  corporations:
+  - {fileID: 11400000, guid: 1204066adbcbcab448fc45b819f5467d, type: 2}
+  - {fileID: 11400000, guid: 5e204ea595e22684db9459e1f3250a25, type: 2}
+  - {fileID: 11400000, guid: e9bbd8429a28ce049a93f83f8ef5d4e9, type: 2}
+  - {fileID: 11400000, guid: a68ddf67dab81904c910fe913fdcb558, type: 2}
+  planetMaterial: {fileID: 2100000, guid: 6300b46186acd7d4c8dac7233a270392, type: 2}
+  sunMaterial: {fileID: 2100000, guid: e105bef2d9acddf44a58a6b22473ee22, type: 2}
+  hullMaterial: {fileID: 2100000, guid: a398e0f1f53e0424eb9d4e34598e5380, type: 2}
+  lightMaterial: {fileID: 2100000, guid: 403bf48a98b8ba7408fac2410ea83705, type: 2}
+  asteroidMaterial: {fileID: 2100000, guid: b6e6e2b4c7b7d274c977633c6b14bfd3, type: 2}
+  gateMaterial: {fileID: 2100000, guid: 76d25b04f72f9fe47a3f4c7db10866a0, type: 2}
+  portalMaterial: {fileID: 2100000, guid: 76019c20f54d32f4cb67aa2f51b89633, type: 2}
+  beamMaterial: {fileID: 2100000, guid: bcbefb04d6875a04fb02474377969e3f, type: 2}
+  starMaterial: {fileID: 2100000, guid: 6ea24ce1eedeaf14d83a662f19bd4106, type: 2}
+  dustMaterial: {fileID: 2100000, guid: f7a8cf73af98d62488d325b13c799653, type: 2}
+  screenPanel: {fileID: 11400000, guid: 9b8c2e60fcafb304691efc9e13c4ea3e, type: 2}
+  terminalPanel: {fileID: 11400000, guid: 24bad13a287e1ef40a1dede822dd0894, type: 2}
+  cockpitPanelBase: {fileID: 11400000, guid: 6fd0a9e365eb5ff4a8d30215fc55cdad, type: 2}
+--- !u!4 &1464879656
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464879654}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2043962860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2043962863}
+  - component: {fileID: 2043962862}
+  - component: {fileID: 2043962861}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -137,21 +251,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &551224850
+--- !u!81 &2043962861
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 551224849}
+  m_GameObject: {fileID: 2043962860}
   m_Enabled: 1
---- !u!20 &551224851
+--- !u!20 &2043962862
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 551224849}
+  m_GameObject: {fileID: 2043962860}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -196,117 +310,13 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!4 &551224852
+--- !u!4 &2043962863
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 551224849}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &882019512
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 882019514}
-  - component: {fileID: 882019513}
-  m_Layer: 0
-  m_Name: GameBootstrap
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &882019513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 882019512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8a81b93f8f3fe642b97f00889eb80f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: PulseFactor.Runtime::PulseFactor.GameBootstrap
-  galaxy: {fileID: 11400000, guid: 1ab23bbb1188ab4468fd896ce08bc8fe, type: 2}
-  config: {fileID: 11400000, guid: a8ace8393a809b045bf404a798b82971, type: 2}
-  startingShip: {fileID: 11400000, guid: dbd1f2208eecb634fb23598fdcf2c392, type: 2}
-  catalog:
-  - {fileID: 11400000, guid: 7e91f916e25b61a4b899f07ed12d4bf1, type: 2}
-  - {fileID: 11400000, guid: 7024242460ef0e64aae627b2e33c0331, type: 2}
-  - {fileID: 11400000, guid: 8de58dda0ee17eb498ab0c699d354fc4, type: 2}
-  - {fileID: 11400000, guid: f8aae4907c7589a4e85d92b744805d9a, type: 2}
-  - {fileID: 11400000, guid: d3703646bf96e4c46950ca0ddf6ee2ac, type: 2}
-  - {fileID: 11400000, guid: 23b0f628ea841cf478e1afe2fee25e60, type: 2}
-  - {fileID: 11400000, guid: a15ad368d73927a46b0072a3d61f54f7, type: 2}
-  - {fileID: 11400000, guid: 5ab0217e6d7085f4a991539b7ad40cad, type: 2}
-  - {fileID: 11400000, guid: 4c65b70460be0174286e70b9aa6f3dcf, type: 2}
-  - {fileID: 11400000, guid: ce5dec8b85ee215418616ed15a6e24ff, type: 2}
-  - {fileID: 11400000, guid: e2c92feead1fb8348b36cd35394b369c, type: 2}
-  - {fileID: 11400000, guid: 08353138bb878904f95c9efb962dc3a6, type: 2}
-  - {fileID: 11400000, guid: bacda63a800073a44912f58ec42f7418, type: 2}
-  - {fileID: 11400000, guid: ff4f062d2152350499022cfec789435e, type: 2}
-  - {fileID: 11400000, guid: c30f987786444664f8b1c08409121634, type: 2}
-  - {fileID: 11400000, guid: 296747e0b142b244e977a4316be25d67, type: 2}
-  - {fileID: 11400000, guid: ebee75d67001f99449d699598eb53e41, type: 2}
-  - {fileID: 11400000, guid: 32c4eb00136e49449a47e5b981f65fa5, type: 2}
-  - {fileID: 11400000, guid: d82574756fa85e340933bba160bb17c7, type: 2}
-  - {fileID: 11400000, guid: dcd5707c344588b4e83100cef9fd42e9, type: 2}
-  - {fileID: 11400000, guid: a0e70e98f72a5804c8b5a37e62deb338, type: 2}
-  - {fileID: 11400000, guid: d01e1e345642ec944ab78aab32896dde, type: 2}
-  - {fileID: 11400000, guid: d9180cfb70f12fd4894b8d527707058e, type: 2}
-  - {fileID: 11400000, guid: 4be582636047dd146b42c0e84c6b8450, type: 2}
-  - {fileID: 11400000, guid: e9355eecfe8579d46bbad88c3262a22b, type: 2}
-  - {fileID: 11400000, guid: 8a2a3d9f122b17c49b623533137bc424, type: 2}
-  - {fileID: 11400000, guid: 3f8d9fdf04842c34291ab53e07832ebf, type: 2}
-  resources:
-  - {fileID: 11400000, guid: 833c601c3d1f36940858a3bf16771b24, type: 2}
-  - {fileID: 11400000, guid: 3c2cb886cbdc5354eb381b3df6bc66e4, type: 2}
-  - {fileID: 11400000, guid: 5ccb7bf5d6ec2004aa0ccc64dad8386e, type: 2}
-  - {fileID: 11400000, guid: 4340199683d5d194ab4c71a7c49450af, type: 2}
-  - {fileID: 11400000, guid: 2f2469a33ecbada4fa1cfc29dcef03bb, type: 2}
-  - {fileID: 11400000, guid: 60d2eafa6ad073641b806a01e889d515, type: 2}
-  smallTraders:
-  - {fileID: 11400000, guid: 4c04ec3f9cb9dba49a3a9843eae6f270, type: 2}
-  - {fileID: 11400000, guid: 93742654d61f5664fbb369401cfc2c8d, type: 2}
-  mediumTrader: {fileID: 11400000, guid: 1e9bea594ffd358479e874aece14c7c3, type: 2}
-  corporations:
-  - {fileID: 11400000, guid: 1204066adbcbcab448fc45b819f5467d, type: 2}
-  - {fileID: 11400000, guid: 5e204ea595e22684db9459e1f3250a25, type: 2}
-  - {fileID: 11400000, guid: e9bbd8429a28ce049a93f83f8ef5d4e9, type: 2}
-  - {fileID: 11400000, guid: a68ddf67dab81904c910fe913fdcb558, type: 2}
-  planetMaterial: {fileID: 2100000, guid: 6300b46186acd7d4c8dac7233a270392, type: 2}
-  sunMaterial: {fileID: 2100000, guid: e105bef2d9acddf44a58a6b22473ee22, type: 2}
-  hullMaterial: {fileID: 2100000, guid: a398e0f1f53e0424eb9d4e34598e5380, type: 2}
-  lightMaterial: {fileID: 2100000, guid: 403bf48a98b8ba7408fac2410ea83705, type: 2}
-  asteroidMaterial: {fileID: 2100000, guid: b6e6e2b4c7b7d274c977633c6b14bfd3, type: 2}
-  gateMaterial: {fileID: 2100000, guid: 76d25b04f72f9fe47a3f4c7db10866a0, type: 2}
-  portalMaterial: {fileID: 2100000, guid: 76019c20f54d32f4cb67aa2f51b89633, type: 2}
-  beamMaterial: {fileID: 2100000, guid: bcbefb04d6875a04fb02474377969e3f, type: 2}
-  starMaterial: {fileID: 2100000, guid: 6ea24ce1eedeaf14d83a662f19bd4106, type: 2}
-  dustMaterial: {fileID: 2100000, guid: f7a8cf73af98d62488d325b13c799653, type: 2}
-  screenPanel: {fileID: 11400000, guid: 9b8c2e60fcafb304691efc9e13c4ea3e, type: 2}
-  terminalPanel: {fileID: 11400000, guid: 24bad13a287e1ef40a1dede822dd0894, type: 2}
-  cockpitPanelBase: {fileID: 11400000, guid: 6fd0a9e365eb5ff4a8d30215fc55cdad, type: 2}
---- !u!4 &882019514
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 882019512}
+  m_GameObject: {fileID: 2043962860}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -319,5 +329,5 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 551224852}
-  - {fileID: 882019514}
+  - {fileID: 2043962863}
+  - {fileID: 1464879656}

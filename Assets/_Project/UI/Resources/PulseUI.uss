@@ -153,6 +153,12 @@
 .market-row { flex-direction: row; align-items: center; padding: 6px 4px; border-bottom-width: 1px; border-color: rgba(80, 160, 190, 0.25); }
 .cell { width: 13%; font-size: 15px; color: rgb(200, 235, 245); }
 .cell-wide { width: 18%; }
+.market-row > .cell { width: 11%; }
+.market-row > .cell-wide { width: 18%; }
+.market-row > .cell-narrow { width: 9%; }
+.demand-high { color: rgb(120, 230, 120); -unity-font-style: bold; }
+.demand-medium { color: rgb(235, 210, 110); }
+.demand-low { color: rgb(150, 160, 170); }
 .btn { padding: 4px 12px; margin-left: 4px; background-color: rgb(30, 110, 140); color: rgb(230, 250, 255); border-width: 0; -unity-font-style: bold; }
 .btn:hover { background-color: rgb(50, 160, 200); }
 .btn:disabled { background-color: rgba(60, 70, 80, 0.6); color: rgb(120, 130, 140); }

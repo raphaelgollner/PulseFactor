@@ -19,12 +19,12 @@ namespace PulseFactor
 
         void Awake() => anchor = GetComponent<WorldAnchor>();
 
-        public void Initialize(StationDef def, GameConfig config, Dock[] docks, Reputation reputation = null)
+        public void Initialize(StationDef def, GameConfig config, Dock[] docks, Reputation reputation = null, Economy economy = null)
         {
             Def = def;
             Docks = docks;
             Docking = new DockingService(System.Array.ConvertAll(docks, d => d.size));
-            Market = new Market(def, config, reputation);
+            Market = new Market(def, config, reputation, economy);
         }
 
         // Vaga liberada para quem estava na fila (shipId, indice da doca).

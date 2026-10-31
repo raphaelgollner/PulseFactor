@@ -30,3 +30,5 @@ Referência: print de "PAD 04" do Elite Dangerous (enviado no chat).
 - Bloqueio de massa não é rechecado durante o aquecimento da dobra.
 - Rotação da estação usa a posição interpolada da nave.
 - Lacunas de teste: gerador sem cockpit/cauda/asa; caminho de autorização perdida.
+- Economia: naves comerciais NPC compram/vendem e mexem nos estoques das estações (hoje só o jogador mexe).
+- Economia: entregas de contratos também abastecem o estoque da estação de destino.

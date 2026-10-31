@@ -17,7 +17,7 @@ namespace PulseFactor
 
         static Material white, blue, dark, orange, glass;
 
-        public static Station Build(StationDef def, GameConfig config, Reputation reputation, WorldPosition position, Material hull, Material light)
+        public static Station Build(StationDef def, GameConfig config, Reputation reputation, WorldPosition position, Material hull, Material light, Economy economy = null)
         {
             CreateMaterials(hull, light);
             var root = new GameObject("Station_" + def.id);
@@ -51,7 +51,7 @@ namespace PulseFactor
             }
             PadBuilder.AddLight(t, Vector3.up * (HubHalfHeight + 120f), new Color(1f, 0.9f, 0.75f), 500f, 3f);
 
-            station.Initialize(def, config, docks, reputation);
+            station.Initialize(def, config, docks, reputation, economy);
             anchor.SetWorld(position);
             root.AddComponent<StationSpin>();
             return station;

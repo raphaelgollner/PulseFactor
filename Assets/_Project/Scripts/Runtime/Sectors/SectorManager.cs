@@ -13,6 +13,7 @@ namespace PulseFactor
         public Material PlanetMaterial, SunMaterial, HullMaterial, LightMaterial, AsteroidMaterial, GateMaterial, PortalMaterial;
         public Camera Camera;
         public Reputation Reputation;
+        public Economy Economy;
         public List<ShipModelDef> SmallTraders = new();
         public ShipModelDef MediumTrader;
         public List<CorporationDef> Corporations = new();
@@ -49,9 +50,9 @@ namespace PulseFactor
                 var pos = SectorDef.Resolve(s.at, bodies);
                 var station = s.def.style switch
                 {
-                    StationStyle.Outpost => OutpostBuilder.Build(s.def, Context.Config, Context.Reputation, pos, Context.HullMaterial, Context.AsteroidMaterial),
-                    StationStyle.Industrial => IndustrialStationBuilder.Build(s.def, Context.Config, Context.Reputation, pos, Context.HullMaterial),
-                    _ => StationBuilder.Build(s.def, Context.Config, Context.Reputation, pos, Context.HullMaterial, Context.LightMaterial),
+                    StationStyle.Outpost => OutpostBuilder.Build(s.def, Context.Config, Context.Reputation, pos, Context.HullMaterial, Context.AsteroidMaterial, Context.Economy),
+                    StationStyle.Industrial => IndustrialStationBuilder.Build(s.def, Context.Config, Context.Reputation, pos, Context.HullMaterial, Context.Economy),
+                    _ => StationBuilder.Build(s.def, Context.Config, Context.Reputation, pos, Context.HullMaterial, Context.LightMaterial, Context.Economy),
                 };
                 station.transform.SetParent(root.transform, true);
                 Stations.Add(station);

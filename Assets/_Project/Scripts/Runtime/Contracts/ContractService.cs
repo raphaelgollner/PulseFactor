@@ -15,6 +15,7 @@ namespace PulseFactor
         public GameClock Clock { get; } = new();
         public ContractLog Log { get; } = new();
         public Reputation Reputation { get; set; } = new();
+        public Economy Economy { get; } = new();
 
         class Board { public List<Contract> offers = new(); public double nextRefresh; }
 
@@ -22,6 +23,14 @@ namespace PulseFactor
         readonly Dictionary<string, ResourceDef> byId = new();
         List<StationInfo> stations;
         float tickTimer;
+
+        // Todas as estacoes da galaxia produzem e consomem, mesmo em setores nao carregados.
+        public void RegisterStations()
+        {
+            if (Galaxy)
+                foreach (var sector in Galaxy.sectors)
+                    foreach (var st in sector.stations) Economy.Register(st.def);
+        }
 
         void Awake()
         {
@@ -38,6 +47,7 @@ namespace PulseFactor
         void Update()
         {
             Clock.Tick(Time.deltaTime);
+            Economy.Tick(Time.deltaTime);
             tickTimer += Time.deltaTime;
             if (tickTimer < 1f || Player == null || !Player.Ship) return;
             tickTimer = 0f;

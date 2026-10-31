@@ -52,6 +52,14 @@ namespace PulseFactor.EditorTools
 
         // ---------- Recursos ----------
 
+        // Ordem da lista do mercado: minerios primeiro, depois produtos.
+        static readonly string[] Goods =
+        {
+            "iron", "ice", "coal", "copper", "titanium", "cobalt",
+            "water", "scrap", "rations", "solid_fuel", "construction", "medical",
+            "energy_cells", "alloys", "ship_parts", "processors",
+        };
+
         static Dictionary<string, ResourceDef> LoadResources()
         {
             var dict = new Dictionary<string, ResourceDef>();
@@ -60,7 +68,7 @@ namespace PulseFactor.EditorTools
                 var r = AssetDatabase.LoadAssetAtPath<ResourceDef>(AssetDatabase.GUIDToAssetPath(guid));
                 dict[r.id] = r;
             }
-            if (dict.Count < 6) throw new System.InvalidOperationException("Rode 'PulseFactor/Generate Primitive Blocks' antes.");
+            if (dict.Count < Goods.Length) throw new System.InvalidOperationException("Rode 'PulseFactor/Generate Primitive Blocks' antes.");
             return dict;
         }
 
@@ -77,9 +85,13 @@ namespace PulseFactor.EditorTools
             Body(aster, "aster", null, 6e6, 0, 0, new Color(0.3f, 0.5f, 0.85f));
             Body(aster, "aster_i", "aster", 1.7e6, 4e8, 30, new Color(0.6f, 0.6f, 0.62f));
             Station(aster, "gollner", "nova", StationStyle.Ring, Standard, "aster", 2e7, 0, r,
-                Sell("iron", 1f), Sell("ice", 1f), Sell("coal", 1f), Buy("copper", 1.25f), Buy("titanium", 1.3f), Buy("cobalt", 1.3f));
+                Sell("iron", 1f), Sell("ice", 1f), Sell("coal", 1f), Sell("medical", 0.95f), Sell("processors", 0.95f),
+                Buy("copper", 1.25f), Buy("titanium", 1.3f), Buy("cobalt", 1.3f),
+                Buy("ship_parts", 1.3f), Buy("construction", 1.25f), Buy("water", 1.3f));
             Station(aster, "apollo", "nova", StationStyle.Outpost, Outpost, "aster_i", 5e6, 0, r,
-                Sell("copper", 0.9f), Sell("titanium", 0.95f), Buy("ice", 1.35f), Buy("coal", 1.3f), Buy("iron", 1.2f));
+                Sell("copper", 0.9f), Sell("titanium", 0.95f), Sell("water", 0.9f), Sell("scrap", 0.9f),
+                Buy("ice", 1.35f), Buy("coal", 1.3f), Buy("iron", 1.2f),
+                Buy("rations", 1.3f), Buy("medical", 1.3f), Buy("energy_cells", 1.3f), Buy("solid_fuel", 1.3f));
             PlaceApolloFacingGollner(aster);
             Field(aster, "aster_field", "aster", 2.15e7, 3, 150, 3000, 101, false,
                 (r["iron"], 35), (r["ice"], 25), (r["coal"], 20), (r["copper"], 12), (r["titanium"], 5), (r["cobalt"], 3));
@@ -88,7 +100,9 @@ namespace PulseFactor.EditorTools
             Body(venera, "venera", null, 5e6, 0, 0, new Color(0.85f, 0.65f, 0.35f));
             Body(venera, "venera_i", "venera", 1.2e6, 3e8, 200, new Color(0.55f, 0.5f, 0.45f));
             Station(venera, "magna", "magna", StationStyle.Industrial, Standard, "venera", 1.8e7, 90, r,
-                Sell("copper", 1f), Sell("iron", 0.95f), Sell("coal", 0.95f), Buy("ice", 1.3f), Buy("titanium", 1.35f), Buy("cobalt", 1.4f));
+                Sell("copper", 1f), Sell("construction", 0.95f), Sell("alloys", 0.95f), Sell("ship_parts", 0.95f), Sell("solid_fuel", 0.95f),
+                Buy("iron", 1.25f), Buy("ice", 1.3f), Buy("titanium", 1.35f), Buy("cobalt", 1.4f),
+                Buy("scrap", 1.3f), Buy("processors", 1.3f));
             Field(venera, "venera_field", "venera", 2e7, 95, 120, 3000, 202, true,
                 (r["copper"], 35), (r["ice"], 30), (r["iron"], 20), (r["titanium"], 10), (r["cobalt"], 5));
 
@@ -99,14 +113,18 @@ namespace PulseFactor.EditorTools
             Body(centaurus, "centaurus_iii", "centaurus", 1.5e6, 5e8, 170, new Color(0.65f, 0.55f, 0.5f));
             Body(centaurus, "centaurus_iv", "centaurus", 2.5e6, 7e8, 260, new Color(0.8f, 0.82f, 0.85f));
             Station(centaurus, "centaurus_ii_yard", "federation", StationStyle.Ring, Standard, "centaurus_ii", 8e6, 0, r,
-                Sell("titanium", 1f), Sell("coal", 1f), Buy("iron", 1.3f), Buy("ice", 1.3f), Buy("copper", 1.3f), Buy("cobalt", 1.3f));
+                Sell("titanium", 1f), Sell("coal", 1f), Sell("energy_cells", 1f),
+                Buy("iron", 1.3f), Buy("copper", 1.3f),
+                Buy("ship_parts", 1.35f), Buy("alloys", 1.3f), Buy("construction", 1.3f), Buy("processors", 1.3f));
             Field(centaurus, "centaurus_field", "centaurus_iii", 1e7, 40, 150, 3500, 303, true,
                 (r["titanium"], 30), (r["cobalt"], 20), (r["iron"], 25), (r["ice"], 25));
 
             // Cinturao: so asteroides, estacao central no asteroide gigante.
             Body(cinturao, "cinturao", null, 4e4, 0, 0, new Color(0.45f, 0.42f, 0.4f));
             Station(cinturao, "cinturao_central", "atlas", StationStyle.Ring, Standard, "cinturao", 4.5e4, 0, r,
-                Sell("iron", 0.9f), Sell("cobalt", 0.9f), Buy("ice", 1.3f), Buy("coal", 1.3f), Buy("copper", 1.3f));
+                Sell("iron", 0.9f), Sell("cobalt", 0.9f), Sell("rations", 0.95f), Sell("energy_cells", 0.95f),
+                Buy("ice", 1.3f), Buy("coal", 1.3f), Buy("copper", 1.3f),
+                Buy("ship_parts", 1.35f), Buy("medical", 1.3f), Buy("solid_fuel", 1.3f));
             Field(cinturao, "cinturao_field_a", "cinturao", 5e5, 0, 260, 5000, 404, true,
                 (r["iron"], 30), (r["cobalt"], 20), (r["titanium"], 15), (r["coal"], 20), (r["copper"], 15));
             Field(cinturao, "cinturao_field_b", "cinturao", 8e5, 150, 220, 5000, 505, true,
@@ -173,11 +191,38 @@ namespace PulseFactor.EditorTools
             def.corporation = AssetDatabase.LoadAssetAtPath<CorporationDef>($"{WorldData}/Corp_{corp}.asset");
             def.style = style;
             def.dockSizes = docks;
-            def.hasShipyard = style != StationStyle.Outpost;
-            def.market = market.Select(m => new MarketEntry { resource = r[m.res], sells = m.sells, buys = !m.sells, priceMultiplier = m.mult }).ToList();
+            // Magna fabrica Pecas de Naves e nao tem estaleiro; todo estaleiro consome pecas (fase 2E).
+            def.hasShipyard = style != StationStyle.Outpost && id != "magna";
+            def.market = market.Select(m => Entry(id, r[m.res], m.sells, m.mult, def.hasShipyard)).ToList();
             EditorUtility.SetDirty(def);
             // Estacoes 20% mais afastadas do corpo que orbitam (playtest 2026-10-31).
             s.stations.Add(new StationPlacement { def = def, at = new Placement { parentId = parent, distance = Scaled(s, parent, dist * StationOrbitFactor), angleDeg = angle } });
+        }
+
+        // Estoque: produtos baratos tem mais volume. Produtor repoe tudo em ~2 h de jogo; consumidor esvazia em ~3 h
+        // (estaleiro consome pecas de naves 2x mais rapido). Estoque inicial varia por estacao.
+        static MarketEntry Entry(string stationId, ResourceDef res, bool sells, float mult, bool shipyard)
+        {
+            int capacity = Mathf.Clamp(Mathf.RoundToInt(6000f / res.basePrice / 10f) * 10, 40, 600);
+            float rate = sells ? capacity / 2f : capacity / 3f;
+            if (!sells && shipyard && res.id == "ship_parts") rate *= 2f;
+            float jitter = StableHash(stationId + res.id) % 1000 / 1000f;
+            float fill = sells ? 0.55f + 0.3f * jitter : 0.1f + 0.4f * jitter;
+            return new MarketEntry
+            {
+                resource = res, sells = sells, buys = !sells, priceMultiplier = mult,
+                capacity = capacity, startStock = Mathf.RoundToInt(capacity * fill), ratePerHour = rate,
+            };
+        }
+
+        static int StableHash(string s)
+        {
+            unchecked
+            {
+                int h = 17;
+                foreach (var c in s) h = h * 31 + c;
+                return h & 0x7fffffff;
+            }
         }
 
         static void Field(SectorDef s, string id, string parent, double dist, float angle, int count, float radius, int seed, bool pirates,
@@ -394,7 +439,7 @@ namespace PulseFactor.EditorTools
             boot.startingShip = AssetDatabase.LoadAssetAtPath<ShipModelDef>($"{Root}/Data/Ships/Model_cruise.asset");
             boot.catalog = AssetDatabase.FindAssets("t:BlockDef", new[] { Root + "/Data/Ships/Blocks" })
                 .Select(g => AssetDatabase.LoadAssetAtPath<BlockDef>(AssetDatabase.GUIDToAssetPath(g))).ToList();
-            boot.resources = new[] { "iron", "ice", "coal", "copper", "titanium", "cobalt" }.Select(k => res[k]).ToList();
+            boot.resources = Goods.Select(k => res[k]).ToList();
             boot.smallTraders = new[] { "typec", "horder" }
                 .Select(id => AssetDatabase.LoadAssetAtPath<ShipModelDef>($"{Root}/Data/Ships/Model_{id}.asset")).Where(m => m).ToList();
             boot.mediumTrader = AssetDatabase.LoadAssetAtPath<ShipModelDef>($"{Root}/Data/Ships/Model_hulker.asset");

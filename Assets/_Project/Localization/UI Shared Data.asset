@@ -1211,6 +1211,74 @@ MonoBehaviour:
     m_Key: controls.newgame
     m_Metadata:
       m_Items: []
+  - m_Id: 234100960743424
+    m_Key: target.medical
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103552
+    m_Key: target.construction
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103553
+    m_Key: target.ship_parts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103554
+    m_Key: target.scrap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103555
+    m_Key: target.rations
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103556
+    m_Key: target.processors
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103557
+    m_Key: target.energy_cells
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103558
+    m_Key: target.solid_fuel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103559
+    m_Key: target.alloys
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103560
+    m_Key: target.water
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103561
+    m_Key: trade.OutOfStock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103562
+    m_Key: trade.StationFull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103563
+    m_Key: terminal.col_stock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103564
+    m_Key: terminal.col_demand
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103565
+    m_Key: demand.High
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103566
+    m_Key: demand.Medium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 234100990103567
+    m_Key: demand.Low
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

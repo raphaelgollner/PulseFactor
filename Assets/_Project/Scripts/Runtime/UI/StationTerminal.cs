@@ -158,8 +158,8 @@ namespace PulseFactor
         void BuildMarket()
         {
             var header = Row(content, "market-row");
-            foreach (var key in new[] { "terminal.col_resource", "terminal.col_buy", "terminal.col_sell", "terminal.col_cargo", "terminal.col_qty" })
-                Lbl(header, key == "terminal.col_resource" ? "cell cell-wide" : "cell").text = Loc.T(key);
+            foreach (var key in new[] { "terminal.col_resource", "terminal.col_stock", "terminal.col_demand", "terminal.col_buy", "terminal.col_sell", "terminal.col_cargo", "terminal.col_qty" })
+                Lbl(header, key == "terminal.col_resource" ? "cell cell-wide" : key is "terminal.col_stock" or "terminal.col_demand" ? "cell cell-narrow" : "cell").text = Loc.T(key);
 
             var market = Station.Market;
             var cargo = Player.Ship.Cargo;
@@ -171,6 +171,16 @@ namespace PulseFactor
 
                 var row = Row(content, "market-row");
                 Lbl(row, "cell cell-wide").text = Loc.T("target." + r.id);
+                bool stocked = market.HasStock(r);
+                Lbl(row, "cell cell-narrow").text = stocked ? $"{market.Stock(r)}/{market.Capacity(r)}" : "—";
+                var demand = Lbl(row, "cell cell-narrow");
+                if (stocked && entry.buys)
+                {
+                    var level = market.Demand(r);
+                    demand.text = Loc.T("demand." + level);
+                    demand.AddToClassList("demand-" + level.ToString().ToLowerInvariant());
+                }
+                else demand.text = "—";
                 Lbl(row, "cell").text = entry.sells ? market.BuyPriceOf(r).ToString("N0") : "—";
                 Lbl(row, "cell").text = entry.buys ? market.PriceOf(r).ToString("N0") : "—";
                 int reserved = cargo.Reserved(r);

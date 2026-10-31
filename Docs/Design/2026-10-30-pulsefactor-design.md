@@ -445,3 +445,13 @@ Master Hauling · **Hulker** · tamanho **M** · classe Cargo · carga **600** �
 
 ### 15.4 Peso em dobra
 +20% a cada nível: giro 40% / 24% / 12% do normal.
+
+## 16. Fase 2E — Estoque, demanda e novos produtos (decisão do autor, 2026-10-31)
+- Cada estação tem **estoque** visível por produto (limitado) e **demanda**: demanda alta → a estação paga mais.
+- Novos produtos: Suprimentos Médicos, Materiais de Construção, Peças de Naves (sempre demanda em estações com estaleiro), Sucata (futuro: pegar de graça e levar a uma estação de descarte), Ração Militar, Processadores, Células de Energia, Combustível Sólido. **[decisão do Claude]** + Ligas Metálicas, Água Purificada.
+- **[decisões do Claude]**
+  - Preço de compra (estação vende): 85% (estoque cheio) a 135% (estoque vazio) do preço base × multiplicador.
+  - Preço de venda (estação compra): 140% (demanda alta, estoque vazio) a 60% (estoque cheio). Rótulo: Alta (< 1/3), Média (< 2/3), Baixa.
+  - Produção repõe o estoque do que a estação vende; consumo baixa o estoque do que ela compra (por hora de jogo). Estoques salvos no save.
+  - Magna passa a ser **sem estaleiro** (ela fabrica Peças de Naves). Estaleiros: Gollner, Central do Cinturão, Doca Centaurus II.
+  - Tabela de produção/consumo por estação no `SliceContentFactory`.

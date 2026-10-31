@@ -12,6 +12,11 @@ namespace PulseFactor
         public bool sells;
         public bool buys;
         public float priceMultiplier = 1f;
+        // Estoque: capacidade, estoque inicial e producao (se vende) ou consumo (se compra) por hora de jogo.
+        // Capacidade 0 = sem estoque (comercio ilimitado, como antes).
+        public int capacity;
+        public int startStock;
+        public float ratePerHour;
     }
 
     public enum StationStyle { Ring, Outpost, Industrial }

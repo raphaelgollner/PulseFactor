@@ -16,7 +16,7 @@ namespace PulseFactor
             new(0.85f, 0.45f, 0.15f), new(0.55f, 0.57f, 0.6f), new(0.9f, 0.7f, 0.15f), new(0.35f, 0.38f, 0.42f), new(0.7f, 0.3f, 0.2f),
         };
 
-        public static Station Build(StationDef def, GameConfig config, Reputation reputation, WorldPosition position, Material hull)
+        public static Station Build(StationDef def, GameConfig config, Reputation reputation, WorldPosition position, Material hull, Economy economy = null)
         {
             CreateMaterials(hull);
             var root = new GameObject("Industrial_" + def.id);
@@ -80,7 +80,7 @@ namespace PulseFactor
             PadBuilder.AddLight(t, new Vector3(Length / 2f, 60f, 0), flood, 380f, 3f);
             PadBuilder.AddLight(t, new Vector3(150, top + 80f, -90), new Color(0.8f, 0.9f, 1f), 300f, 2.5f);
 
-            station.Initialize(def, config, docks, reputation);
+            station.Initialize(def, config, docks, reputation, economy);
             anchor.SetWorld(position);
             return station;
         }
