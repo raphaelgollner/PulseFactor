@@ -68,7 +68,7 @@ namespace PulseFactor.EditorTools
         {
             var aster = Sector("aster", new Vector3(0.4f, 0.15f, 1f));
             var venera = Sector("venera", new Vector3(-0.6f, 0.1f, 0.8f));
-            var centarus = Sector("centarus", new Vector3(0.9f, -0.2f, -0.3f));
+            var centaurus = Sector("centaurus", new Vector3(0.9f, -0.2f, -0.3f));
             var cinturao = Sector("cinturao", new Vector3(-0.2f, 0.4f, -1f));
 
             // Aster: planeta azulado, 1 lua, setor inicial.
@@ -87,15 +87,15 @@ namespace PulseFactor.EditorTools
             Field(venera, "venera_field", "venera", 2e7, 95, 120, 3000, 202, true,
                 (r["copper"], 35), (r["ice"], 30), (r["iron"], 20), (r["titanium"], 10), (r["cobalt"], 5));
 
-            // Centarus: gigante gasoso com 4 luas.
-            Body(centarus, "centarus", null, 4e7, 0, 0, new Color(0.88f, 0.76f, 0.55f));
-            Body(centarus, "centarus_i", "centarus", 1e6, 2e8, 0, new Color(0.7f, 0.68f, 0.6f));
-            Body(centarus, "centarus_ii", "centarus", 2e6, 3.5e8, 80, new Color(0.5f, 0.55f, 0.6f));
-            Body(centarus, "centarus_iii", "centarus", 1.5e6, 5e8, 170, new Color(0.65f, 0.55f, 0.5f));
-            Body(centarus, "centarus_iv", "centarus", 2.5e6, 7e8, 260, new Color(0.8f, 0.82f, 0.85f));
-            Station(centarus, "centarus_ii_yard", "corp_c", "centarus_ii", 8e6, 0, r,
+            // Centaurus: gigante gasoso com 4 luas.
+            Body(centaurus, "centaurus", null, 4e7, 0, 0, new Color(0.88f, 0.76f, 0.55f));
+            Body(centaurus, "centaurus_i", "centaurus", 1e6, 2e8, 0, new Color(0.7f, 0.68f, 0.6f));
+            Body(centaurus, "centaurus_ii", "centaurus", 2e6, 3.5e8, 80, new Color(0.5f, 0.55f, 0.6f));
+            Body(centaurus, "centaurus_iii", "centaurus", 1.5e6, 5e8, 170, new Color(0.65f, 0.55f, 0.5f));
+            Body(centaurus, "centaurus_iv", "centaurus", 2.5e6, 7e8, 260, new Color(0.8f, 0.82f, 0.85f));
+            Station(centaurus, "centaurus_ii_yard", "corp_c", "centaurus_ii", 8e6, 0, r,
                 sells: new[] { "titanium", "coal" }, buys: new[] { "iron", "ice", "copper", "cobalt" }, buyMult: 1.3f);
-            Field(centarus, "centarus_field", "centarus_iii", 1e7, 40, 150, 3500, 303, true,
+            Field(centaurus, "centaurus_field", "centaurus_iii", 1e7, 40, 150, 3500, 303, true,
                 (r["titanium"], 30), (r["cobalt"], 20), (r["iron"], 25), (r["ice"], 25));
 
             // Cinturao: so asteroides, estacao central no asteroide gigante.
@@ -107,13 +107,13 @@ namespace PulseFactor.EditorTools
             Field(cinturao, "cinturao_field_b", "cinturao", 8e5, 150, 220, 5000, 505, true,
                 (r["iron"], 25), (r["cobalt"], 25), (r["titanium"], 20), (r["ice"], 30));
 
-            // Gates: Aster-Venera, Aster-Cinturao, Cinturao-Centarus.
+            // Gates: Aster-Venera, Aster-Cinturao, Cinturao-Centaurus.
             Link(aster, "gate_aster_venera", "aster", 4e7, 120, venera, "gate_venera_aster", "venera", 4e7, 300);
             Link(aster, "gate_aster_cinturao", "aster", 4e7, 240, cinturao, "gate_cinturao_aster", "cinturao", 3e6, 60);
-            Link(cinturao, "gate_cinturao_centarus", "cinturao", 3e6, 240, centarus, "gate_centarus_cinturao", "centarus", 1.5e8, 330);
+            Link(cinturao, "gate_cinturao_centaurus", "cinturao", 3e6, 240, centaurus, "gate_centaurus_cinturao", "centaurus", 1.5e8, 330);
 
             var galaxy = Asset<GalaxyDef>($"{WorldData}/Galaxy.asset");
-            galaxy.sectors = new List<SectorDef> { aster, venera, centarus, cinturao };
+            galaxy.sectors = new List<SectorDef> { aster, venera, centaurus, cinturao };
             galaxy.start = aster;
             foreach (var s in galaxy.sectors) EditorUtility.SetDirty(s);
             EditorUtility.SetDirty(galaxy);

@@ -18,12 +18,19 @@ namespace PulseFactor
     {
         readonly StationDef def;
         readonly GameConfig config;
+        readonly Reputation reputation;
 
-        public Market(StationDef def, GameConfig config)
+        public Market(StationDef def, GameConfig config, Reputation reputation = null)
         {
             this.def = def;
             this.config = config;
+            this.reputation = reputation;
         }
+
+        public float Discount => reputation != null ? reputation.DiscountFor(def.CorpId) : 0f;
+
+        // Preco de compra com o desconto de reputacao da corporacao dona da estacao.
+        public int BuyPriceOf(ResourceDef r) => Mathf.RoundToInt(PriceOf(r) * (1f - Discount));
 
         public StationDef Def => def;
 
@@ -45,7 +52,7 @@ namespace PulseFactor
             qty = Mathf.Min(qty, cargo.Free);
             if (qty == 0) return TradeResult.Fail(TradeFailReason.NoCargoSpace);
 
-            int price = PriceOf(r);
+            int price = BuyPriceOf(r);
             bool free = config != null && config.testMode;
             if (!free) qty = (int)Mathf.Min(qty, price > 0 ? wallet.Credits / price : qty);
             if (qty == 0) return TradeResult.Fail(TradeFailReason.NotEnoughCredits);

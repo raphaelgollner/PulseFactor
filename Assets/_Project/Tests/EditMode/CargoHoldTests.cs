@@ -51,5 +51,41 @@ namespace PulseFactor.Tests
             hold.Add(Resource("iron", 10), 1);
             Assert.AreEqual(1, calls);
         }
+
+        [Test]
+        public void Reserved_units_are_not_removed_by_normal_remove()
+        {
+            var iron = Resource("iron", 10);
+            var hold = new CargoHold(50);
+            hold.Add(iron, 10);
+            hold.Reserve(iron, 6);
+            Assert.AreEqual(4, hold.Sellable(iron));
+            Assert.AreEqual(4, hold.Remove(iron, 10));
+            Assert.AreEqual(6, hold.Count(iron));
+            Assert.AreEqual(6, hold.Reserved(iron));
+        }
+
+        [Test]
+        public void RemoveReserved_takes_reserved_units()
+        {
+            var iron = Resource("iron", 10);
+            var hold = new CargoHold(50);
+            hold.Add(iron, 10);
+            hold.Reserve(iron, 6);
+            Assert.AreEqual(6, hold.RemoveReserved(iron, 10));
+            Assert.AreEqual(4, hold.Count(iron));
+            Assert.AreEqual(0, hold.Reserved(iron));
+        }
+
+        [Test]
+        public void Cannot_reserve_more_than_unreserved_units()
+        {
+            var iron = Resource("iron", 10);
+            var hold = new CargoHold(50);
+            hold.Add(iron, 5);
+            hold.Reserve(iron, 3);
+            hold.Reserve(iron, 9);
+            Assert.AreEqual(5, hold.Reserved(iron));
+        }
     }
 }

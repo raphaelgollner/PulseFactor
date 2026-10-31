@@ -14,14 +14,20 @@ namespace PulseFactor
         public float priceMultiplier = 1f;
     }
 
+    public enum StationStyle { Ring, Outpost, Industrial }
+
     [CreateAssetMenu(menuName = "PulseFactor/Station")]
     public class StationDef : ScriptableObject
     {
         public string id;
         public LocalizedString displayName;
         public string corporationId;
+        public CorporationDef corporation;
+        public StationStyle style = StationStyle.Ring;
         public bool hasShipyard;
-        public int dockCount = 4;
+        public DockSize[] dockSizes = { DockSize.P, DockSize.P, DockSize.P, DockSize.P, DockSize.M, DockSize.M, DockSize.G };
+
+        public string CorpId => corporation ? corporation.id : corporationId;
         public List<MarketEntry> market = new();
     }
 }

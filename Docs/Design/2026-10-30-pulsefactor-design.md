@@ -294,8 +294,8 @@ Documento aprovado pelo autor. A **primeira fatia jogável** (substitui a Fase 1
 - Dentro do setor: subluz e dobra, como no §4.3. Entre setores: **jump gates**.
 - Jump gate = **"rosquinha" gigante** (toro). **[decisão do Claude]** Raio externo 1 000 m, raio do tubo 150 m (abertura de ~1,7 km). Atravessar o anel leva ao gate pareado no setor vizinho; o jogador sai 1,5 km à frente do gate de chegada, mantendo a velocidade.
 - O sol aparece ao fundo em todos os setores (direção e tamanho por setor).
-- Setores recebem o **nome do corpo celeste principal** (decisão do autor): Setor Aster (planeta, inicial), Setor Venera (planeta), Setor Centarus (gigante gasoso com 4 luas), Setor Cinturão (só asteroides, estação central num asteroide gigante).
-- **[decisão do Claude]** Só o setor atual fica carregado. A fatia 1 tem os **4 setores**. Rotas: Aster↔Venera, Aster↔Cinturão, Cinturão↔Centarus. O Cinturão é o setor mais perigoso (campo denso, mais piratas).
+- Setores recebem o **nome do corpo celeste principal** (decisão do autor): Setor Aster (planeta, inicial), Setor Venera (planeta), Setor Centaurus (gigante gasoso com 4 luas), Setor Cinturão (só asteroides, estação central num asteroide gigante).
+- **[decisão do Claude]** Só o setor atual fica carregado. A fatia 1 tem os **4 setores**. Rotas: Aster↔Venera, Aster↔Cinturão, Cinturão↔Centaurus. O Cinturão é o setor mais perigoso (campo denso, mais piratas).
 
 ## 10. Plano de fases (cada fase jogável)
 
@@ -315,3 +315,53 @@ Cada fase recebe seu próprio plano de implementação detalhado.
 - Níveis de reputação e percentuais de desconto.
 - Nomes e lore das corporações.
 - Nave inicial do jogador.
+
+---
+
+## 12. Fase 2 — Contratos, reputação, save e novas estações (aprovado em 2026-10-31)
+
+### 12.1 Corporações e estações
+Lore completa em `Docs/Lore.md`. A **Federação** é dona do sistema; corporações operam com licença.
+
+| Setor | Estação (id) | Corporação | Estilo / docas |
+|---|---|---|---|
+| Aster | Estação Gollner (`gollner`) | Nova Technology | anel giratório; 4 P, 2 M, 1 G |
+| Aster | Posto Avançado Apollo (`apollo`) | Nova Technology | base sobre asteroide em órbita de Aster I; 1 P, 1 M, 1 G; sem estaleiro |
+| Venera | Estação Magna (`magna`) | Magna Hauling Co. | plataforma industrial; 4 P, 2 M, 1 G |
+| Cinturão | Central do Cinturão (`cinturao_central`) | Atlas Universal | anel (provisório) |
+| Centaurus | Doca Centaurus II (`centaurus_ii_yard`) | Federação | anel (provisório) |
+
+- **[decisão do Claude]** Magna e Apollo são estáticos (não giram); só as estações em anel giram.
+- A rixa Atlas × Magna e a segurança da Atlas não têm efeito no jogo por enquanto.
+
+### 12.2 Contratos (decisões do autor)
+- **Entrega**: a estação fornece a carga; o jogador leva ao destino. Prazo depende da rota: ~30 min dentro do setor (ex.: Gollner → Apollo), maior para outros setores.
+- **Requisição**: a estação pede X unidades; o jogador consegue como quiser (minerar/comprar). Várias viagens, entregas parciais acumulam. Prazo longo: **2 h**.
+- Prazos em **tempo de jogo** (só corre com o jogo aberto).
+- O jogador pode ter vários contratos ao mesmo tempo.
+
+**[decisões do Claude]**
+- Mural por estação: 3–6 ofertas, renova a cada 20 min de jogo; ofertas geradas do mercado da estação (o que vende → entrega; o que compra → requisição).
+- Máximo de **5 contratos ativos**.
+- Entrega: só aceita se a carga inteira couber; a carga fica **reservada** (não pode ser vendida). Prazo = 30 min + 25 min por salto de gate. Recompensa = 25% do valor da carga + 400 cr + 600 cr por salto.
+- Requisição: quantidade 40–150 (pode exceder o porão). Recompensa = 160% do valor de mercado.
+- Falha (prazo vence) ou abandono: perde reputação; na entrega, a carga reservada é confiscada e cobra-se multa de 50% do valor (até o saldo disponível).
+- HUD: contratos ativos com prazo na lateral; no cockpit, painel esquerdo.
+
+### 12.3 Reputação (decisão do autor: funciona com descontos)
+- Por corporação, de −100 a +100, começa em 0. Entrega cumprida +3 (+1 por salto); requisição +5; falha −5 (entrega) / −6 (requisição).
+- **[decisão do Claude]** Desconto no preço de **compra** nas estações da corporação: rep ≥ 10 → 2%, ≥ 25 → 5%, ≥ 50 → 8%, ≥ 80 → 12%.
+
+### 12.4 Economia
+- **Modo de teste desligado** (decisão do autor): comprar debita créditos.
+- Mercados complementares entre Gollner, Apollo e Magna para o comércio valer a pena.
+- Futuro: **Mercado Galáctico** (demanda variável, atualiza a cada 3 h de jogo com alerta "Atualização no Mercado Galáctico") — próxima fase.
+
+### 12.5 Save (decisão do Claude — necessário com prazos de 2 h)
+- Save automático em JSON (`persistentDataPath/save.json`): créditos, carga, reputação, contratos ativos, relógio de jogo, setor e posição. Ao docar, decolar, saltar de gate e sair do jogo. Carrega ao iniciar.
+- Murais não são salvos (regeneram). Atalho de desenvolvimento para novo jogo: **F10** (apaga o save).
+
+### 12.6 Plataformas e docagem
+- Plataformas estilo Elite: faixas laranja laterais, cantoneiras, número **pintado** `01`…`07` na borda (sem P/M/G, sem holograma do tamanho).
+- Ao conceder docagem: aviso em destaque "Solicitação de pouso recebida e permissão concedida. Por favor, dirija-se até a doca 0X." + holograma do número **só** sobre a doca concedida (com a seta azul).
+- Ao pousar: "Bem-vindo à <estação>" (~2 s) e então o terminal.

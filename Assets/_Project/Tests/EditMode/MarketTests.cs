@@ -128,5 +128,27 @@ namespace PulseFactor.Tests
             var r = new Market(station, Config(true)).Buy(iron, 0, new CargoHold(50), new Wallet(10));
             Assert.IsFalse(r.ok);
         }
+
+        [Test]
+        public void Sell_ignores_contract_reserved_cargo()
+        {
+            var hold = new CargoHold(50);
+            hold.Add(copper, 10);
+            hold.Reserve(copper, 6);
+            var r = new Market(station, Config(true)).Sell(copper, 10, hold, new Wallet(0));
+            Assert.AreEqual(4, r.quantity);
+            Assert.AreEqual(6, hold.Count(copper));
+        }
+
+        [Test]
+        public void Sell_with_only_reserved_cargo_fails()
+        {
+            var hold = new CargoHold(50);
+            hold.Add(copper, 5);
+            hold.Reserve(copper, 5);
+            var r = new Market(station, Config(true)).Sell(copper, 5, hold, new Wallet(0));
+            Assert.IsFalse(r.ok);
+            Assert.AreEqual(TradeFailReason.NotInCargo, r.reason);
+        }
     }
 }
