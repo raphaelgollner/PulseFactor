@@ -253,6 +253,7 @@ namespace PulseFactor
                 if (used >= MaxMarkers) break;
                 // Scanner: naves e asteroides so aparecem dentro do alcance; estacoes, corpos e portais sempre.
                 if (ReferenceEquals(t, current)) continue;
+                if (t.Kind == TargetKind.Asteroid) continue; // asteroides so aparecem quando marcados
                 if (!Project(cam, camWorld, t, out var screen, out double dist)) continue;
                 if (!Scanner.Detects(t.Kind, dist, ScannerRange)) continue;
                 var (marker, label) = markers[used++];

@@ -6,7 +6,7 @@ namespace PulseFactor
     public class BoostTank
     {
         public const float DrainPerSecond = 30f;
-        public const float RechargePerSecond = 15f;
+        public const float RechargePerSecond = 4.5f; // 70% mais lento (playtest 2026-10-31)
         public const float RechargeDelay = 1f;
         public const float SpeedMultiplier = 1.5f;
         const float Empty = 0.01f; // abaixo disso a barra conta como vazia (resto de arredondamento do float)

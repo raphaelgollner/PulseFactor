@@ -87,13 +87,18 @@
 .panel-bar-label { font-size: 18px; color: rgb(170, 210, 225); margin-bottom: 2px; }
 .panel-bar { height: 18px; width: 100%; margin-bottom: 8px; background-color: rgba(10, 30, 40, 0.9); border-width: 1px; border-color: rgba(120, 200, 230, 0.4); }
 .panel-tabs { flex-direction: row; justify-content: space-between; margin-bottom: 6px; }
-.panel-tab { flex-grow: 1; margin: 0 2px; padding: 4px 2px; font-size: 15px; background-color: rgba(30, 70, 90, 0.7); color: rgb(200, 235, 245); border-width: 0; }
+.panel-tab { flex-grow: 1; margin: 0 2px; padding: 4px 2px; font-size: 12px; background-color: rgba(30, 70, 90, 0.7); color: rgb(200, 235, 245); border-width: 0; }
 .panel-tab-active { background-color: rgb(40, 150, 190); color: rgb(5, 15, 20); }
 .panel-list { flex-grow: 1; }
 .panel-feed { font-size: 16px; color: rgb(205, 230, 240); white-space: normal; margin-bottom: 3px; }
 .panel-hostile { color: rgb(255, 80, 70); }
 .panel-centered { justify-content: center; align-items: center; }
 .panel-clock { font-size: 72px; color: rgb(150, 230, 255); -unity-font-style: bold; -unity-text-align: middle-center; }
+.panel-radar { flex-grow: 1; }
+.panel-small { font-size: 20px; color: rgb(200, 235, 245); }
+.panel-feed-small { font-size: 15px; color: rgb(200, 230, 240); white-space: normal; margin-bottom: 1px; }
+.panel-ship-header { font-size: 26px; color: rgb(230, 250, 255); -unity-font-style: bold; margin-bottom: 8px; }
+.panel-slot-row { flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 6px; }
 .panel-ship-name { font-size: 48px; color: rgb(230, 250, 255); -unity-font-style: bold; -unity-text-align: middle-center; }
 .panel-ship-sub { font-size: 20px; color: rgb(140, 190, 210); -unity-text-align: middle-center; }
 .name-field { width: 260px; font-size: 15px; }

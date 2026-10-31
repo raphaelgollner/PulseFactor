@@ -275,7 +275,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3587919934
-    m_Localized: Out of docking range (8 km)
+    m_Localized: Out of docking range (2 km)
     m_Metadata:
       m_Items: []
   - m_Id: 3587919935
@@ -966,6 +966,114 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 193878927560748
     m_Localized: 'Ship renamed: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030452301824
+    m_Localized: SHIP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661952
+    m_Localized: CARGO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661953
+    m_Localized: SLOTS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661954
+    m_Localized: SHIP STATUS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661955
+    m_Localized: CARGO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661956
+    m_Localized: WEAPON SLOTS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661957
+    m_Localized: SECTOR RADAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661958
+    m_Localized: Hold empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661959
+    m_Localized: '{0}: {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661960
+    m_Localized: '{0}: {1} ({2} on contract)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661961
+    m_Localized: 'Slot {0}: {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661962
+    m_Localized: Mining laser
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661963
+    m_Localized: Empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661964
+    m_Localized: GROUP 1 (LMB)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661965
+    m_Localized: GROUP 2 (RMB)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661966
+    m_Localized: 'Resource: {0} ({1} u.)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661967
+    m_Localized: No mineable resources
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661968
+    m_Localized: Asteroid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661969
+    m_Localized: Cruise
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661970
+    m_Localized: Crusader
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661971
+    m_Localized: Rapid Fire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661972
+    m_Localized: Type A
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661973
+    m_Localized: Type C
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661974
+    m_Localized: Horder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661975
+    m_Localized: 'Warp drop: mass lock ({0})'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661976
+    m_Localized: 'Warp drop: destination reached ({0})'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661977
+    m_Localized: Asteroid has no mineable resources
     m_Metadata:
       m_Items: []
   references:

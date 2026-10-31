@@ -27,3 +27,4 @@ MonoBehaviour:
     weight: 25
   - resource: {fileID: 11400000, guid: 3c2cb886cbdc5354eb381b3df6bc66e4, type: 2}
     weight: 25
+  resourceChance: 0.25

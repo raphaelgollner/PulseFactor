@@ -275,7 +275,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3587919934
-    m_Localized: Fora do alcance de docagem (8 km)
+    m_Localized: Fora do alcance de docagem (2 km)
     m_Metadata:
       m_Items: []
   - m_Id: 3587919935
@@ -969,6 +969,114 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 193878927560748
     m_Localized: 'Nave renomeada: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030452301824
+    m_Localized: NAVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661952
+    m_Localized: CARGA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661953
+    m_Localized: ENCAIXES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661954
+    m_Localized: STATUS DA NAVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661955
+    m_Localized: CARGA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661956
+    m_Localized: ENCAIXES DE ARMAS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661957
+    m_Localized: RADAR DO SETOR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661958
+    m_Localized: "Por\xE3o vazio"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661959
+    m_Localized: '{0}: {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661960
+    m_Localized: '{0}: {1} ({2} em contrato)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661961
+    m_Localized: 'Encaixe {0}: {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661962
+    m_Localized: "Laser de minera\xE7\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661963
+    m_Localized: Vazio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661964
+    m_Localized: GRUPO 1 (LMB)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661965
+    m_Localized: GRUPO 2 (RMB)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661966
+    m_Localized: 'Recurso: {0} ({1} un.)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661967
+    m_Localized: "Sem recursos miner\xE1veis"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661968
+    m_Localized: Asteroide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661969
+    m_Localized: Cruise
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661970
+    m_Localized: Crusader
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661971
+    m_Localized: Rapid Fire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661972
+    m_Localized: Type A
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661973
+    m_Localized: Type C
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661974
+    m_Localized: Horder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661975
+    m_Localized: "Sa\xEDda da dobra: bloqueio de massa ({0})"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661976
+    m_Localized: "Sa\xEDda da dobra: destino alcan\xE7ado ({0})"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661977
+    m_Localized: "Asteroide sem recursos miner\xE1veis"
     m_Metadata:
       m_Items: []
   references:

@@ -9,7 +9,8 @@ namespace PulseFactor
         WorldAnchor anchor;
 
         public WorldPosition Position => anchor.World;
-        public string DisplayId => Deposit != null && Deposit.Resource ? Deposit.Resource.id : "asteroid";
+        public string DisplayId => "asteroid";
+        public bool HasResource => Deposit != null && Deposit.Resource && !Deposit.Depleted;
         public TargetKind Kind => TargetKind.Asteroid;
 
         void Awake() => anchor = GetComponent<WorldAnchor>();
@@ -20,7 +21,7 @@ namespace PulseFactor
 
         public void OnMined()
         {
-            if (Deposit.Depleted) Destroy(gameObject);
+            if (Deposit != null && Deposit.Resource && Deposit.Depleted) Destroy(gameObject);
         }
     }
 }

@@ -246,7 +246,7 @@ namespace PulseFactor
         {
             if (sectors.Stations.Count == 0) return;
             var station = sectors.Stations[0];
-            var pos = station.Position + new double3(0, 300, -4000);
+            var pos = station.Position + new double3(0, 200, -1500); // dentro do alcance de docagem (2 km)
             var anchor = Player.Ship.GetComponent<WorldAnchor>();
             anchor.SetWorld(pos);
             origin.Rebase(pos);

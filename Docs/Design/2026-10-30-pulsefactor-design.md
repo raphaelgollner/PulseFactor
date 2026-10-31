@@ -414,3 +414,12 @@ Toda nave: **3 painéis embaixo e 2 em cima** (formato/posição variam por cabi
 - **Cima esquerdo**: hora real, centralizada.
 - **Cima direito**: nome da nave (grande; máx. 18 caracteres, definido na compra), classe e fabricante (menores). **[decisão do Claude]** Até existir estaleiro: nome padrão "PULSE-01", renomeável na aba Serviços do terminal.
 - **[decisão do Claude]** Em terceira pessoa o HUD de tela continua como está; as abas existem nos painéis físicos.
+
+## 14. Fase 2C — Ajustes de playtest (decisões do autor, 2026-10-31)
+- **Bloqueio de massa padrão 2 km** (estações, postos, portais). **Pedido de docagem: 2 km.** **[decisão do Claude]** Planetas/luas mantêm o bloqueio ligado à zona do alerta (1,1 R do centro). A dobra sai a **3 km** do alvo.
+- Saídas da dobra aparecem no feed com o motivo (bloqueio de massa com o nome do objeto, destino alcançado, emergência).
+- **Boost**: recarga 70% mais lenta (4,5/s). **Sem limite de velocidade** enquanto houver barra; ao acabar, desacelera gradualmente até o máximo normal. Em cruzeiro, o alvo sobe junto.
+- **Asteroides**: **[decisão do Claude]** ~25% têm recurso. No HUD só aparecem quando marcados, como "Asteroide". O painel esquerdo mostra o recurso ou "Sem recursos mineráveis".
+- **Número da plataforma** pintado legível de cima.
+- **Portal de salto** novo (ref. `Docs/Design/refs/portal-de-salto.webp`), **grande** para naves capitais no futuro: **[decisão do Claude]** raio externo 2 km, abertura ~1,7 km de raio.
+- **Cockpit**: cima-esquerda = feed; cima-direita = informações do sistema; central = **minimapa (radar)** com a nave no centro; direita = abas **NAVE** ("NOME - Modelo", barras, velocidade), **CARGA** (conteúdo + barra), **CONTRATOS**, **REPUTAÇÃO**, **MÓDULOS**, **ENCAIXES** (grupo 1 = botão esquerdo, grupo 2 = botão direito por arma).

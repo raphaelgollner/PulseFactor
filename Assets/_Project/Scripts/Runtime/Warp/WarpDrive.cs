@@ -17,7 +17,7 @@ namespace PulseFactor
         public double rampSeconds = 3;                  // tempo para ir de 0 ao teto do nivel
         public double brakeK = 1.0;                     // 1/s: v <= brakeK * distancia ao alvo (indo na direcao dele)
         public double bodyK = 1.0;                      // 1/s: v <= bodyK * distancia a superficie do corpo mais proximo
-        public double exitDistance = 10000;
+        public double exitDistance = 3000; // logo fora do bloqueio de 2 km
     }
 
     // Logica pura da Velocidade de Dobra: aquecimento, 3 niveis (marchas), freio perto do alvo e de corpos.

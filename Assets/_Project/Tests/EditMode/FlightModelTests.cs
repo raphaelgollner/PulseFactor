@@ -77,6 +77,37 @@ namespace PulseFactor.Tests
         }
 
         [Test]
+        public void Boost_has_no_speed_cap_and_pushes_forward()
+        {
+            var m = new FlightModel(Scout()) { Boosting = true };
+            var v = Run(m, new Vector3(0, 0, 200), new FlightInput { aimDirection = Vector3.forward }, 0f, 10f);
+            Assert.Greater(v.z, 220f + 300f, "sem teto: 10 s a 1,5x da aceleracao");
+        }
+
+        [Test]
+        public void After_boost_speed_decays_gradually_to_max()
+        {
+            var m = new FlightModel(Scout());
+            var v = m.StepVelocity(new Vector3(0, 0, 400), Quaternion.identity, Throttle(1), 0f, Dt);
+            Assert.AreEqual(400f - 40f * Dt, v.z, 0.01f, "desacelera, nao trava no maximo de uma vez");
+            v = Run(m, v, Throttle(1), 0f, 10f);
+            Assert.AreEqual(220f, v.magnitude, 0.01f);
+        }
+
+        [Test]
+        public void Cruise_target_rises_with_boost_and_returns_after()
+        {
+            var m = new FlightModel(Scout());
+            var v = m.StepVelocity(new Vector3(0, 0, 200), Quaternion.identity, new FlightInput { cruiseToggle = true, aimDirection = Vector3.forward }, 0f, Dt);
+            m.Boosting = true;
+            v = Run(m, v, Throttle(0), 0f, 5f);
+            Assert.Greater(m.CruiseTarget, 220f);
+            m.Boosting = false;
+            Run(m, v, Throttle(0), 0f, 0.1f);
+            Assert.LessOrEqual(m.CruiseTarget, 220f);
+        }
+
+        [Test]
         public void Speed_multiplier_raises_max_speed()
         {
             var m = new FlightModel(Scout()) { SpeedMultiplier = 1.5f };

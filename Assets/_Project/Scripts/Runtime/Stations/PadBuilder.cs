@@ -54,7 +54,7 @@ namespace PulseFactor
 
             // Numero pintado deitado na borda, sempre visivel.
             var painted = Text(t, "PaintedNumber", (index + 1).ToString("00"), new Vector3(0, 1.25f, -b + padSize * 0.13f), padSize * 0.022f, paint.color);
-            painted.transform.localRotation = Quaternion.Euler(90, 0, 0);
+            painted.transform.localRotation = Quaternion.Euler(-90, 180, 0); // deitado, legivel para quem vem de cima
 
             // Seta azul + holograma do numero: so quando a doca e concedida.
             var marker = new GameObject("Marker");

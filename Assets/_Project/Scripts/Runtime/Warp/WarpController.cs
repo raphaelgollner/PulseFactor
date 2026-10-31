@@ -31,6 +31,8 @@ namespace PulseFactor
         float lastThrottle;
         readonly List<MassSource> lockSources = new();
         readonly List<MassSource> bodies = new();
+        readonly List<MassSource> artificial = new();   // estacoes e portais (bloqueio de 2 km)
+        readonly List<string> artificialIds = new();
 
         void Awake()
         {
@@ -59,7 +61,7 @@ namespace PulseFactor
                     GameMessages.Post("msg.warp_cancelled");
                     break;
                 case WarpState.Active:
-                    ExitWarp();
+                    ExitWarp("msg.warp_exit");
                     break;
             }
         }
@@ -72,17 +74,23 @@ namespace PulseFactor
 
             lockSources.Clear();
             bodies.Clear();
+            artificial.Clear();
+            artificialIds.Clear();
             foreach (var t in TargetRegistry.All)
             {
-                if (t is CelestialBody b) { var m = b.AsMassSource(); lockSources.Add(m); bodies.Add(m); }
-                else if (t.Kind == TargetKind.Station) lockSources.Add(MassSource.Station(t.Position.value));
-                else if (t.Kind == TargetKind.Gate) lockSources.Add(MassSource.Gate(t.Position.value));
+                if (t is CelestialBody b) { var m = b.AsMassSource(); lockSources.Add(m); bodies.Add(m); continue; }
+                if (t.Kind != TargetKind.Station && t.Kind != TargetKind.Gate) continue;
+                var src = t.Kind == TargetKind.Station ? MassSource.Station(t.Position.value) : MassSource.Gate(t.Position.value);
+                lockSources.Add(src);
+                artificial.Add(src);
+                artificialIds.Add(t.DisplayId);
             }
             MassLocked = MassLock.IsLocked(shipWorld.value, lockSources);
             double nearestBody = MassLock.NearestDistance(shipWorld.value, bodies);
 
             var target = Target;
             if (Drive.State == WarpState.Charging && target == null) { Drive.Cancel(); GameMessages.Post("msg.warp_cancelled"); }
+            if (Drive.State == WarpState.Charging && MassLocked) { Drive.Cancel(); GameMessages.Post("msg.warp_masslocked"); }
             bool heading = false;
             DistanceToTarget = double.PositiveInfinity;
             if (target != null)
@@ -97,6 +105,17 @@ namespace PulseFactor
             ship.Flight.SteeringScale = Drive.State == WarpState.Active ? WarpDrive.SteeringFactor(Drive.Level) : 1f;
             double speed = Drive.Tick(Time.deltaTime, nearestBody, DistanceToTarget, heading);
 
+            // Passou dentro do bloqueio de massa de uma estacao/portal: sai da dobra e diz por que no feed.
+            if (Drive.State == WarpState.Active)
+            {
+                int locking = MassLock.LockingIndex(shipWorld.value, artificial);
+                if (locking >= 0)
+                {
+                    ExitWarp("msg.warp_drop_masslock", Loc.T("target." + artificialIds[locking]));
+                    return;
+                }
+            }
+
             if (Drive.State == WarpState.Active)
             {
                 ship.TranslationLocked = true;
@@ -107,7 +126,7 @@ namespace PulseFactor
             }
             else if (Drive.State == WarpState.Exiting)
             {
-                ExitWarp();
+                ExitWarp("msg.warp_arrived", target != null ? Loc.T("target." + target.DisplayId) : "");
             }
 
             if (Drive.State != lastState)
@@ -137,12 +156,12 @@ namespace PulseFactor
             GameMessages.Post("msg.warp_emergency");
         }
 
-        void ExitWarp()
+        void ExitWarp(string messageKey, params object[] args)
         {
             Drive.Complete();
             ship.TranslationLocked = false;
             ship.SetVelocity(transform.forward * ship.Flight.EffectiveMaxSpeed(ship.Cargo.LoadFraction));
-            GameMessages.Post("msg.warp_exit");
+            GameMessages.Post(messageKey, args);
         }
     }
 }

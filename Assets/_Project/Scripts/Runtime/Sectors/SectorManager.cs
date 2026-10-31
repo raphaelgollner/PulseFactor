@@ -18,7 +18,7 @@ namespace PulseFactor
     // Carrega um setor por vez: corpos celestes, sol, estacoes, campos (com piratas) e jump gates.
     public class SectorManager : MonoBehaviour
     {
-        public const double ArrivalDistance = 1500;
+        public const double ArrivalDistance = 4000; // fora da estrutura do portal (raio 2 km)
 
         public Transform Player;
         public SectorBuildContext Context = new();

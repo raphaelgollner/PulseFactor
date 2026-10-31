@@ -34,14 +34,14 @@ namespace PulseFactor.Tests
         }
 
         [Test]
-        public void Recharges_15_per_second_after_one_second()
+        public void Recharges_4_5_per_second_after_one_second()
         {
             var b = new BoostTank(150);
             Run(b, 2f, true);           // 90
             Run(b, 1f, false);          // espera de 1 s, sem recarga
             Assert.AreEqual(90f, b.Value, 0.01f);
-            Run(b, 2f, false);          // +30
-            Assert.AreEqual(120f, b.Value, 0.01f);
+            Run(b, 2f, false);          // +9 (70% mais lento que antes)
+            Assert.AreEqual(99f, b.Value, 0.01f);
         }
 
         [Test]
@@ -92,5 +92,34 @@ namespace PulseFactor.Tests
 
         [Test]
         public void Default_range_is_5km() => Assert.AreEqual(5000.0, Scanner.DefaultRange);
+    }
+}
+
+namespace PulseFactor.Tests
+{
+    public class RadarTests
+    {
+        [Test]
+        public void Radar_radius_grows_with_distance_and_fits()
+        {
+            float near = CockpitPanels.RadarRadius(500), mid = CockpitPanels.RadarRadius(1e6), far = CockpitPanels.RadarRadius(1e12);
+            Assert.Less(near, mid);
+            Assert.Less(mid, far);
+            Assert.LessOrEqual(far, 1f);
+        }
+    }
+
+    public class AsteroidResourceChanceTests
+    {
+        [Test]
+        public void About_a_quarter_of_asteroids_have_resources()
+        {
+            var def = UnityEngine.ScriptableObject.CreateInstance<AsteroidFieldDef>();
+            def.composition.Add(new AsteroidFieldDef.Composition { resource = TestDefs.Resource("iron", 10), weight = 1 });
+            var rng = new System.Random(3);
+            int withResource = 0;
+            for (int i = 0; i < 2000; i++) if (def.PickResource(rng)) withResource++;
+            Assert.AreEqual(0.25, withResource / 2000.0, 0.04);
+        }
     }
 }

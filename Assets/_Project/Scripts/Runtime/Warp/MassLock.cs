@@ -5,7 +5,7 @@ namespace PulseFactor
 {
     public struct MassSource
     {
-        public const double StationLockRadius = 7000;
+        public const double StationLockRadius = 2000;
         public const double GateLockRadius = 2000;
         public const double BodyLockFactor = 1.1; // dentro da zona de perigo (1,2 R do centro): quem sai do alerta pode dobrar
 
@@ -20,6 +20,14 @@ namespace PulseFactor
 
     public static class MassLock
     {
+        // Indice da fonte que bloqueia (para dizer no feed quem tirou da dobra); -1 se nenhuma.
+        public static int LockingIndex(double3 ship, IReadOnlyList<MassSource> sources)
+        {
+            for (int i = 0; i < sources.Count; i++)
+                if (math.distance(ship, sources[i].position) < sources[i].lockRadius) return i;
+            return -1;
+        }
+
         public static bool IsLocked(double3 ship, IEnumerable<MassSource> sources)
         {
             foreach (var s in sources)

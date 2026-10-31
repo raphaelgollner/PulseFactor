@@ -8,7 +8,7 @@ namespace PulseFactor.Tests
         public void Grants_free_dock_in_range()
         {
             var s = new DockingService(4);
-            var r = s.Request("player", 5000);
+            var r = s.Request("player", 1500);
             Assert.IsTrue(r.granted);
             Assert.AreEqual(0, r.dockIndex);
             Assert.AreEqual(0, s.AssignedDock("player"));
@@ -46,7 +46,7 @@ namespace PulseFactor.Tests
         public void Leaving_range_cancels_authorization()
         {
             var s = new DockingService(4);
-            s.Request("player", 5000);
+            s.Request("player", 1500);
             s.Tick("player", 8100);
             Assert.IsNull(s.AssignedDock("player"));
             Assert.AreEqual(0, s.Request("other", 1000).dockIndex);
@@ -56,7 +56,7 @@ namespace PulseFactor.Tests
         public void Docked_ship_is_not_cancelled_by_tick()
         {
             var s = new DockingService(4);
-            s.Request("player", 5000);
+            s.Request("player", 1500);
             s.MarkDocked("player");
             s.Tick("player", 9000);
             Assert.AreEqual(0, s.AssignedDock("player"));
@@ -80,12 +80,12 @@ namespace PulseFactor.Tests
         });
 
         [Test]
-        public void Default_request_range_is_6km()
+        public void Default_request_range_is_2km()
         {
             var s = Standard();
-            Assert.AreEqual(6000f, s.RequestRange);
-            Assert.IsTrue(s.Request("player", 5900).granted);
-            Assert.AreEqual(DockDenyReason.OutOfRange, s.Request("other", 6100).reason);
+            Assert.AreEqual(2000f, s.RequestRange);
+            Assert.IsTrue(s.Request("player", 1900).granted);
+            Assert.AreEqual(DockDenyReason.OutOfRange, s.Request("other", 2100).reason);
         }
 
         [Test]

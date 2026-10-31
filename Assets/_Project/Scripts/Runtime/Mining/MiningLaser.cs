@@ -46,7 +46,7 @@ namespace PulseFactor
         ShipController ship;
         readonly MiningProgress progress = new();
         LineRenderer beam;
-        bool cargoFullWarned;
+        bool cargoFullWarned, barrenWarned;
 
         void Awake() => ship = GetComponent<ShipController>();
 
@@ -74,7 +74,7 @@ namespace PulseFactor
             bool inWarp = Warp && Warp.Drive.State != WarpState.Idle;
             Firing = TriggerHeld() && !inWarp && !ship.ControlsLocked;
             CurrentAsteroid = null;
-            if (!Firing) { beam.enabled = false; cargoFullWarned = false; return; }
+            if (!Firing) { beam.enabled = false; cargoFullWarned = barrenWarned = false; return; }
 
             var cam = Camera.main;
             Vector3 origin = transform.position + transform.forward * 4f - transform.up * 0.8f;
@@ -85,7 +85,12 @@ namespace PulseFactor
             {
                 end = hit.point;
                 CurrentAsteroid = hit.collider.GetComponentInParent<Asteroid>();
-                if (CurrentAsteroid)
+                if (CurrentAsteroid && !CurrentAsteroid.HasResource)
+                {
+                    if (!barrenWarned) GameMessages.Post("msg.asteroid_barren");
+                    barrenWarned = true;
+                }
+                else if (CurrentAsteroid)
                 {
                     if (ship.Cargo.Free <= 0)
                     {

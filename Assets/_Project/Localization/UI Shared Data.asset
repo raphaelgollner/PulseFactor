@@ -955,6 +955,114 @@ MonoBehaviour:
     m_Key: msg.ship_renamed
     m_Metadata:
       m_Items: []
+  - m_Id: 209030452301824
+    m_Key: panel.tab_ship
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661952
+    m_Key: panel.tab_cargo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661953
+    m_Key: panel.tab_slots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661954
+    m_Key: panel.tab_ship_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661955
+    m_Key: panel.tab_cargo_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661956
+    m_Key: panel.tab_slots_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661957
+    m_Key: panel.radar_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661958
+    m_Key: panel.cargo_empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661959
+    m_Key: panel.cargo_line
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661960
+    m_Key: panel.cargo_line_reserved
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661961
+    m_Key: panel.slot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661962
+    m_Key: panel.weapon_mining
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661963
+    m_Key: panel.weapon_empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661964
+    m_Key: panel.group1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661965
+    m_Key: panel.group2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661966
+    m_Key: panel.asteroid_resource
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661967
+    m_Key: panel.asteroid_barren
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661968
+    m_Key: target.asteroid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661969
+    m_Key: model.cruise
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661970
+    m_Key: model.crusader
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661971
+    m_Key: model.rapidfire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661972
+    m_Key: model.typea
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661973
+    m_Key: model.typec
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661974
+    m_Key: model.horder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661975
+    m_Key: msg.warp_drop_masslock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661976
+    m_Key: msg.warp_arrived
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209030481661977
+    m_Key: msg.asteroid_barren
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

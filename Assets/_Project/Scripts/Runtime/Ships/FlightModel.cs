@@ -15,6 +15,10 @@ namespace PulseFactor
         // Multiplicador da velocidade maxima (Boost 1,5; Sobrecarga de Motor 2,0).
         public float SpeedMultiplier { get; set; } = 1f;
 
+        // Boost (Shift): sem teto de velocidade enquanto houver barra; empurra para frente com 1,5x a aceleracao.
+        public bool Boosting { get; set; }
+        public const float BoostThrust = 1.5f;
+
         // Peso do giro (1 = normal; em dobra cai por nivel): reduz giro maximo e resposta angular.
         public float SteeringScale { get; set; } = 1f;
         public float CruiseTarget { get; private set; }
@@ -34,13 +38,23 @@ namespace PulseFactor
             // Velocidade no referencial da nave.
             Vector3 local = Quaternion.Inverse(rotation) * velocity;
 
+            // Teto deste passo: sem teto no Boost; acima do maximo (fim do Boost) desce aos poucos.
+            float incoming = velocity.magnitude;
+            float limit = Boosting ? float.PositiveInfinity
+                : incoming > maxSpeed ? Mathf.Max(maxSpeed, incoming - accel * dt) : maxSpeed;
+
             if (input.cruiseToggle)
             {
                 CruiseActive = !CruiseActive;
                 if (CruiseActive) CruiseTarget = Mathf.Clamp(local.z, 0f, maxSpeed);
             }
 
-            if (CruiseActive)
+            if (Boosting)
+            {
+                local.z += accel * BoostThrust * dt;
+                if (CruiseActive) CruiseTarget = Mathf.Max(CruiseTarget, local.z); // o cruzeiro sobe junto
+            }
+            else if (CruiseActive)
             {
                 CruiseTarget = Mathf.Clamp(CruiseTarget + input.throttle * def.cruiseAdjustRate * dt, 0f, maxSpeed);
                 local.z = Mathf.MoveTowards(local.z, CruiseTarget, accel * dt);
@@ -48,7 +62,7 @@ namespace PulseFactor
             else if (Mathf.Abs(input.throttle) > 0.001f)
             {
                 local.z += input.throttle * accel * dt;
-                local.z = Mathf.Clamp(local.z, -maxSpeed * ReverseFraction, maxSpeed);
+                local.z = Mathf.Clamp(local.z, -maxSpeed * ReverseFraction, Mathf.Max(maxSpeed, Mathf.Min(local.z, limit)));
             }
             else
             {
@@ -61,7 +75,7 @@ namespace PulseFactor
             local.y = Axis(local.y, input.strafe.y, strafeAccel, release, strafeMax, dt);
 
             Vector3 result = rotation * local;
-            return Vector3.ClampMagnitude(result, maxSpeed);
+            return float.IsPositiveInfinity(limit) ? result : Vector3.ClampMagnitude(result, limit);
         }
 
         // Lateral/vertical: acelera ate o limite de strafe; acima dele (ex.: depois de uma curva) so desacelera.

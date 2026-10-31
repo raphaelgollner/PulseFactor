@@ -126,10 +126,12 @@ namespace PulseFactor.Tests
         }
 
         [Test]
-        public void Exits_at_10km_from_target()
+        public void Exits_at_3km_from_target()
         {
             var d = Active();
-            d.Tick(0.1f, Far, 9999, true);
+            d.Tick(0.1f, Far, 3500, true);
+            Assert.AreEqual(WarpState.Active, d.State);
+            d.Tick(0.1f, Far, 2999, true);
             Assert.AreEqual(WarpState.Exiting, d.State);
             d.Complete();
             Assert.AreEqual(WarpState.Idle, d.State);
@@ -190,11 +192,11 @@ namespace PulseFactor.Tests
         static MassSource Planet(double3 p, double r) => MassSource.Body(p, r);
 
         [Test]
-        public void Locked_within_7km_of_station()
+        public void Locked_within_2km_of_station()
         {
             var s = new[] { Station(double3.zero) };
-            Assert.IsTrue(MassLock.IsLocked(new double3(6999, 0, 0), s));
-            Assert.IsFalse(MassLock.IsLocked(new double3(7001, 0, 0), s));
+            Assert.IsTrue(MassLock.IsLocked(new double3(1999, 0, 0), s));
+            Assert.IsFalse(MassLock.IsLocked(new double3(2001, 0, 0), s));
         }
 
         [Test]
@@ -229,6 +231,14 @@ namespace PulseFactor.Tests
         public void Danger_zone_is_a_fifth_of_the_radius()
         {
             Assert.AreEqual(0.2, ProximityRules.DefaultDangerFactor, 1e-9);
+        }
+
+        [Test]
+        public void Locking_source_is_reported_for_the_feed()
+        {
+            var s = new[] { Station(new double3(1e6, 0, 0)), MassSource.Gate(new double3(5000, 0, 0)) };
+            Assert.AreEqual(1, MassLock.LockingIndex(new double3(4000, 0, 0), s));
+            Assert.AreEqual(-1, MassLock.LockingIndex(new double3(-9000, 0, 0), s));
         }
 
         [Test]
