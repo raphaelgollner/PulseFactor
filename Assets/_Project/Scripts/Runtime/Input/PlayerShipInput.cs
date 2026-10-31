@@ -7,7 +7,8 @@ namespace PulseFactor
     // Mira estilo Everspace: o mouse move um reticulo virtual; a nave gira na direcao dele.
     public class PlayerShipInput : MonoBehaviour
     {
-        [SerializeField] float mouseSensitivity = 0.0025f; // fracao da tela por pixel
+        [SerializeField] float mouseSensitivity = 0.0012f; // fracao da tela por pixel
+        [SerializeField] float maxMouseDelta = 150f;       // pixels por frame; acima disso e salto de foco
         [SerializeField] float reticleRadius = 0.35f;      // fracao da altura da tela
         [SerializeField] float deadZone = 0.02f;
         [SerializeField] float stickSpeed = 1.5f;
@@ -66,8 +67,14 @@ namespace PulseFactor
             if (!Ship) return;
             var cam = AimCamera ? AimCamera : Camera.main;
 
+            // Ignora o "salto" do mouse ao focar a janela / travar o cursor.
+            Vector2 mouse = Controls.AimDelta.ReadValue<Vector2>();
+            bool mouseValid = Application.isFocused && UnityEngine.Cursor.lockState == CursorLockMode.Locked
+                              && mouse.sqrMagnitude < maxMouseDelta * maxMouseDelta;
+            if (!mouseValid) mouse = Vector2.zero;
+
             Vector2 offset = ReticleOffset
-                + Controls.AimDelta.ReadValue<Vector2>() * mouseSensitivity
+                + mouse * mouseSensitivity
                 + Controls.AimStick.ReadValue<Vector2>() * (stickSpeed * Time.deltaTime);
             ReticleOffset = Vector2.ClampMagnitude(offset, reticleRadius);
 

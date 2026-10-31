@@ -51,7 +51,7 @@ namespace PulseFactor
                 if (angle < bestAngle) { bestAngle = angle; best = t; }
             }
             Select(best);
-            GameMessages.Post(best != null ? "msg.target_selected" : "msg.no_target", best?.DisplayId);
+            GameMessages.Post(best != null ? "msg.target_selected" : "msg.no_target", best != null ? Loc.T("target." + best.DisplayId) : "");
         }
     }
 }

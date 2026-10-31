@@ -64,7 +64,7 @@ namespace PulseFactor
             Load(target, arrivalGateId);
 
             if (body && !body.isKinematic) body.linearVelocity = Player.forward * speed;
-            GameMessages.Post("msg.gate_jump", target.id);
+            GameMessages.Post("msg.gate_jump", Loc.T("sector.name", Loc.T("body." + target.bodies[0].id)));
         }
 
         public void Unload()

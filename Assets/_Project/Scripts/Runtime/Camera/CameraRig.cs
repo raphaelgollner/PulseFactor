@@ -9,14 +9,15 @@ namespace PulseFactor
 
         public const string ExteriorCockpitLayer = "ShipExteriorCockpit";
 
-        [SerializeField] float followSmoothTime = 0.1f;
+        [SerializeField] float rotationFollow = 7f; // quanto maior, mais rapido a camera alcanca a rotacao da nave
         [SerializeField] float showcaseSpeed = 12f; // graus/s
 
         public Mode CurrentMode { get; private set; } = Mode.ThirdPerson;
 
         Camera cam;
         AssembledShip ship;
-        Vector3 followVelocity;
+        Quaternion followRotation = Quaternion.identity;
+        float shipSize = 10f;
         float showcaseAngle;
         int fullMask = ~0;
 
@@ -34,7 +35,7 @@ namespace PulseFactor
         {
             Init();
             ship = shipObject.GetComponent<AssembledShip>();
-            lastShipPos = ship.transform.position;
+            shipSize = ship.LocalBounds().size.magnitude;
             SetMode(CurrentMode);
         }
 
@@ -47,29 +48,23 @@ namespace PulseFactor
             int layer = LayerMask.NameToLayer(ExteriorCockpitLayer);
             cam.cullingMask = mode == Mode.Cockpit && layer >= 0 ? fullMask & ~(1 << layer) : fullMask;
             cam.nearClipPlane = mode == Mode.Cockpit ? 0.05f : 0.3f;
-            followVelocity = Vector3.zero;
+            if (ship) followRotation = ship.transform.rotation;
             Snap();
         }
-
-        Vector3 lastShipPos;
 
         void LateUpdate()
         {
             if (!ship) return;
-            // Rebase da origem flutuante: a nave "pula"; a camera acompanha o pulo sem suavizar.
-            var shipPos = ship.transform.position;
-            if ((shipPos - lastShipPos).sqrMagnitude > 500f * 500f) transform.position += shipPos - lastShipPos;
-            lastShipPos = shipPos;
-
             switch (CurrentMode)
             {
                 case Mode.Cockpit:
                     Snap();
                     break;
                 case Mode.ThirdPerson:
-                    var target = ThirdPersonPosition();
-                    transform.position = Vector3.SmoothDamp(transform.position, target, ref followVelocity, followSmoothTime);
-                    transform.rotation = ship.transform.rotation;
+                    // Rotacao com leve atraso (peso); posicao presa a nave para nao tremer em alta velocidade.
+                    float k = 1f - Mathf.Exp(-rotationFollow * Time.deltaTime);
+                    followRotation = Quaternion.Slerp(followRotation, ship.transform.rotation, k);
+                    transform.SetPositionAndRotation(ThirdPersonPosition(followRotation), followRotation);
                     break;
                 case Mode.Showcase:
                     showcaseAngle += showcaseSpeed * Time.unscaledDeltaTime;
@@ -88,7 +83,8 @@ namespace PulseFactor
                     transform.SetPositionAndRotation(eye.position, ship.transform.rotation);
                     break;
                 case Mode.ThirdPerson:
-                    transform.SetPositionAndRotation(ThirdPersonPosition(), ship.transform.rotation);
+                    followRotation = ship.transform.rotation;
+                    transform.SetPositionAndRotation(ThirdPersonPosition(followRotation), followRotation);
                     break;
                 case Mode.Showcase:
                     PlaceShowcase();
@@ -96,18 +92,15 @@ namespace PulseFactor
             }
         }
 
-        float ShipSize() => ship.LocalBounds().size.magnitude;
-
-        Vector3 ThirdPersonPosition()
+        Vector3 ThirdPersonPosition(Quaternion rotation)
         {
-            float d = Mathf.Max(8f, ShipSize() * 1.2f);
-            var t = ship.transform;
-            return t.position - t.forward * d + t.up * (d * 0.28f);
+            float d = Mathf.Max(8f, shipSize * 1.2f);
+            return ship.transform.position + rotation * new Vector3(0f, d * 0.28f, -d);
         }
 
         void PlaceShowcase()
         {
-            float d = Mathf.Max(8f, ShipSize() * 1.4f);
+            float d = Mathf.Max(8f, shipSize * 1.4f);
             var t = ship.transform;
             var dir = Quaternion.AngleAxis(showcaseAngle, t.up) * (t.forward + t.up * 0.35f).normalized;
             transform.position = t.position + dir * d;

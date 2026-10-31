@@ -61,17 +61,34 @@ namespace PulseFactor
                 ? speed + input * accel * dt
                 : Mathf.MoveTowards(speed, 0f, release * dt);
 
+        // Velocidade angular local (graus/s): x = pitch, y = yaw, z = roll.
+        public Vector3 AngularVelocity { get; private set; }
+
+        // Giro proporcional ao erro da mira (satura em steerAngle) com aceleracao angular: a nave tem peso.
         public Quaternion StepRotation(Quaternion rotation, FlightInput input, float dt)
         {
-            float maxStep = def.turnRateDeg * dt;
+            float rate = def.turnRateDeg;
+            Vector2 steer = Vector2.zero;
             if (input.aimDirection.sqrMagnitude > 1e-6f)
             {
-                var target = Quaternion.LookRotation(input.aimDirection, rotation * Vector3.up);
-                rotation = Quaternion.RotateTowards(rotation, target, maxStep);
+                var local = Quaternion.Inverse(rotation) * input.aimDirection.normalized;
+                float yawErr = Mathf.Atan2(local.x, local.z) * Mathf.Rad2Deg;
+                float pitchErr = -Mathf.Atan2(local.y, new Vector2(local.x, local.z).magnitude) * Mathf.Rad2Deg;
+                if (local.z < 0f && Mathf.Abs(local.x) < 1e-3f) yawErr = 180f; // mira exatamente atras
+                steer = new Vector2(
+                    Mathf.Clamp(yawErr / def.steerAngleDeg, -1f, 1f),
+                    Mathf.Clamp(pitchErr / def.steerAngleDeg, -1f, 1f));
             }
-            if (Mathf.Abs(input.roll) > 0.001f)
-                rotation *= Quaternion.Euler(0f, 0f, -input.roll * maxStep);
-            return rotation;
+
+            var target = new Vector3(steer.y * rate, steer.x * rate, -Mathf.Clamp(input.roll, -1f, 1f) * rate);
+            float accel = rate * def.angularResponse * dt;
+            var w = AngularVelocity;
+            w = new Vector3(
+                Mathf.MoveTowards(w.x, target.x, accel),
+                Mathf.MoveTowards(w.y, target.y, accel),
+                Mathf.MoveTowards(w.z, target.z, accel));
+            AngularVelocity = w;
+            return rotation * Quaternion.Euler(w * dt);
         }
     }
 }

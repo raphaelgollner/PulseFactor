@@ -341,29 +341,28 @@ namespace PulseFactor.EditorTools
             var glassRoot = Empty(r, "Glass", Vector3.zero);
             glass(glassRoot);
 
+            // Interior: painel baixo a frente do piloto e 3 telas apoiadas nele, viradas para o olho.
             var interior = Empty(r, "Interior", Vector3.zero);
             float w = width * 0.8f;
-            Prim(interior, PrimitiveType.Cube, "Floor", new Vector3(0, -height * 0.3f, eyeZ - 0.2f), new Vector3(w, 0.1f, length * 0.7f), Ch.Interior);
-            Prim(interior, PrimitiveType.Cube, "Seat", new Vector3(0, -height * 0.2f, eyeZ - 0.9f), new Vector3(0.8f, 1.2f, 0.3f), Ch.Interior);
-            Prim(interior, PrimitiveType.Cube, "Dash", new Vector3(0, -0.35f, eyeZ + 0.9f), new Vector3(w, 0.45f, 0.5f), Ch.Interior, rot: new Vector3(-20, 0, 0));
-            Prim(interior, PrimitiveType.Cube, "FrameL", new Vector3(-w / 2f, 0.2f, eyeZ + 0.6f), new Vector3(0.08f, 1.2f, 0.08f), Ch.Interior, rot: new Vector3(-25, 0, 0));
-            Prim(interior, PrimitiveType.Cube, "FrameR", new Vector3(w / 2f, 0.2f, eyeZ + 0.6f), new Vector3(0.08f, 1.2f, 0.08f), Ch.Interior, rot: new Vector3(-25, 0, 0));
+            var eye = new Vector3(0, 0.1f, eyeZ - 0.4f);
+            Prim(interior, PrimitiveType.Cube, "Dash", eye + new Vector3(0, -0.55f, 0.95f), new Vector3(w, 0.5f, 0.6f), Ch.Interior);
+            Prim(interior, PrimitiveType.Cube, "FrameL", eye + new Vector3(-w / 2f, 0.2f, 0.95f), new Vector3(0.05f, 1f, 0.05f), Ch.Interior, rot: new Vector3(-20, 0, 0));
+            Prim(interior, PrimitiveType.Cube, "FrameR", eye + new Vector3(w / 2f, 0.2f, 0.95f), new Vector3(0.05f, 1f, 0.05f), Ch.Interior, rot: new Vector3(-20, 0, 0));
 
-            Empty(interior, "EyePoint", new Vector3(0, 0.1f, eyeZ - 0.4f));
-            Screen(interior, "ScreenMount_Center", new Vector3(0, -0.12f, eyeZ + 0.62f), new Vector2(0.7f, 0.32f), 0f);
-            Screen(interior, "ScreenMount_Left", new Vector3(-0.55f, -0.18f, eyeZ + 0.55f), new Vector2(0.38f, 0.26f), -25f);
-            Screen(interior, "ScreenMount_Right", new Vector3(0.55f, -0.18f, eyeZ + 0.55f), new Vector2(0.38f, 0.26f), 25f);
+            Empty(interior, "EyePoint", eye);
+            Screen(interior, "ScreenMount_Center", eye, eye + new Vector3(0, -0.2f, 0.72f), new Vector2(0.5f, 0.2f));
+            Screen(interior, "ScreenMount_Left", eye, eye + new Vector3(-0.45f, -0.22f, 0.66f), new Vector2(0.3f, 0.16f));
+            Screen(interior, "ScreenMount_Right", eye, eye + new Vector3(0.45f, -0.22f, 0.66f), new Vector2(0.3f, 0.16f));
 
             Empty(r, "WeaponMount_Cockpit", new Vector3(0, -height * 0.4f, length));
         }
 
-        static void Screen(Transform parent, string name, Vector3 pos, Vector2 size, float yaw)
+        static void Screen(Transform parent, string name, Vector3 eye, Vector3 pos, Vector2 size)
         {
             var mount = Empty(parent, name, pos);
-            mount.localRotation = Quaternion.Euler(-30f, yaw, 0f);
+            mount.localRotation = Quaternion.LookRotation(pos - eye, Vector3.up); // a face do quad fica para o olho
             mount.localScale = new Vector3(size.x, size.y, 1f);
-            var quad = Prim(mount, PrimitiveType.Quad, "Display", Vector3.zero, Vector3.one, Ch.Screen);
-            quad.localRotation = Quaternion.Euler(0, 180, 0); // de frente para o piloto
+            Prim(mount, PrimitiveType.Quad, "Display", Vector3.zero, Vector3.one, Ch.Screen);
         }
 
         static void Nozzle(Transform r, Vector3 pos, float diameter)
@@ -479,12 +478,17 @@ namespace PulseFactor.EditorTools
             interiorMat = Mat("M_CockpitInterior", lit, new Color(0.12f, 0.13f, 0.15f), m => m.SetFloat("_Smoothness", 0.2f));
             screenMat = Mat("M_CockpitScreen", unlit, new Color(0.02f, 0.08f, 0.1f), null);
             glowMat = Mat("M_ThrusterGlow", unlit, new Color(0.4f, 0.8f, 1f) * 2.5f, null);
-            glassMat = Mat("M_CockpitGlass", lit, new Color(0.55f, 0.8f, 0.9f, 0.18f), m =>
+            glassMat = Mat("M_CockpitGlass", lit, new Color(0.55f, 0.8f, 0.9f, 0.06f), m =>
             {
+                // Quase invisivel por dentro: sem brilho especular nem reflexo do ambiente.
+                m.SetFloat("_SpecularHighlights", 0f);
+                m.SetFloat("_EnvironmentReflections", 0f);
+                m.EnableKeyword("_SPECULARHIGHLIGHTS_OFF");
+                m.EnableKeyword("_ENVIRONMENTREFLECTIONS_OFF");
                 m.SetFloat("_Surface", 1f);      // transparente
                 m.SetFloat("_Blend", 0f);
                 m.SetFloat("_Cull", 0f);         // duas faces: visto de dentro e de fora
-                m.SetFloat("_Smoothness", 0.95f);
+                m.SetFloat("_Smoothness", 0.5f);
                 m.SetFloat("_ZWrite", 0f);
                 m.SetOverrideTag("RenderType", "Transparent");
                 m.renderQueue = (int)RenderQueue.Transparent;

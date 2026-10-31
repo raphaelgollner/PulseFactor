@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8e58ca67f2a80468e913898b96bf45, type: 3}
+  m_Name: Sector_venera
+  m_EditorClassIdentifier: PulseFactor.Runtime::PulseFactor.SectorDef
+  id: venera
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  sunDirection: {x: -0.6, y: 0.1, z: 0.8}
+  sunDistance: 150000000000
+  sunRadius: 700000000
+  bodies:
+  - id: venera
+    parentId: 
+    radius: 5000000
+    orbitDistance: 0
+    orbitAngleDeg: 0
+    color: {r: 0.85, g: 0.65, b: 0.35, a: 1}
+    isStar: 0
+  - id: venera_i
+    parentId: venera
+    radius: 1200000
+    orbitDistance: 300000000
+    orbitAngleDeg: 200
+    color: {r: 0.55, g: 0.5, b: 0.45, a: 1}
+    isStar: 0
+  stations:
+  - def: {fileID: 11400000, guid: 27cbe336a839ffb40b3acb0ae5fe108d, type: 2}
+    at:
+      parentId: venera
+      distance: 18000000
+      angleDeg: 90
+      elevationDeg: 0
+  fields:
+  - def: {fileID: 11400000, guid: 7af3d8e664334594aac32cd93442e96e, type: 2}
+    at:
+      parentId: venera
+      distance: 20000000
+      angleDeg: 95
+      elevationDeg: 0
+    pirates: 1
+  gates:
+  - id: gate_venera_aster
+    at:
+      parentId: venera
+      distance: 40000000
+      angleDeg: 300
+      elevationDeg: 0
+    target: {fileID: 11400000, guid: d2d9e9fee89b1f743b341b604b83b40f, type: 2}
+    targetGateId: gate_aster_venera
+  references:
+    version: 2
+    RefIds: []

@@ -1,0 +1,416 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: UI
+  m_TableCollectionNameGuidString: af5adbaf44904344e98d410686df46bd
+  m_Entries:
+  - m_Id: 3525005312
+    m_Key: sector.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3583725568
+    m_Key: body.aster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919872
+    m_Key: body.venera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919873
+    m_Key: body.centarus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919874
+    m_Key: body.cinturao
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919875
+    m_Key: target.aster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919876
+    m_Key: target.aster_i
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919877
+    m_Key: target.venera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919878
+    m_Key: target.venera_i
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919879
+    m_Key: target.centarus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919880
+    m_Key: target.centarus_i
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919881
+    m_Key: target.centarus_ii
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919882
+    m_Key: target.centarus_iii
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919883
+    m_Key: target.centarus_iv
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919884
+    m_Key: target.cinturao
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919885
+    m_Key: target.aster_orbital
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919886
+    m_Key: target.venera_hub
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919887
+    m_Key: target.centarus_ii_yard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919888
+    m_Key: target.cinturao_central
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919889
+    m_Key: target.aster_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919890
+    m_Key: target.venera_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919891
+    m_Key: target.centarus_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919892
+    m_Key: target.cinturao_field_a
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919893
+    m_Key: target.cinturao_field_b
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919894
+    m_Key: target.gate_aster_venera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919895
+    m_Key: target.gate_aster_cinturao
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919896
+    m_Key: target.gate_venera_aster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919897
+    m_Key: target.gate_cinturao_aster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919898
+    m_Key: target.gate_cinturao_centarus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919899
+    m_Key: target.gate_centarus_cinturao
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919900
+    m_Key: target.pirate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919901
+    m_Key: target.iron
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919902
+    m_Key: target.ice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919903
+    m_Key: target.coal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919904
+    m_Key: target.copper
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919905
+    m_Key: target.titanium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919906
+    m_Key: target.cobalt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919907
+    m_Key: hud.credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919908
+    m_Key: hud.test_mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919909
+    m_Key: hud.cruise
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919910
+    m_Key: hud.max_speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919911
+    m_Key: hud.cargo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919912
+    m_Key: hud.slot_mining
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919913
+    m_Key: hud.skill_empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919914
+    m_Key: hud.speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919915
+    m_Key: hud.warp_ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919916
+    m_Key: hud.warp_charging
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919917
+    m_Key: hud.warp_active
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919918
+    m_Key: hud.warp_masslocked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919919
+    m_Key: hud.warp_no_target
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919920
+    m_Key: panel.status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919921
+    m_Key: panel.shield_hull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919922
+    m_Key: panel.target
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919923
+    m_Key: panel.no_target
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919924
+    m_Key: panel.weapons
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919925
+    m_Key: panel.systems
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919926
+    m_Key: msg.target_selected
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919927
+    m_Key: msg.no_target
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919928
+    m_Key: msg.warp_charging
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919929
+    m_Key: msg.warp_masslocked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919930
+    m_Key: msg.warp_no_target
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919931
+    m_Key: msg.warp_cancelled
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919932
+    m_Key: msg.warp_exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919933
+    m_Key: msg.dock_no_station
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919934
+    m_Key: msg.dock_out_of_range
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919935
+    m_Key: msg.dock_no_free
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919936
+    m_Key: msg.dock_denied
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919937
+    m_Key: msg.dock_granted
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919938
+    m_Key: msg.dock_lost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919939
+    m_Key: msg.dock_autopilot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919940
+    m_Key: msg.cargo_full
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919941
+    m_Key: msg.gate_jump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919942
+    m_Key: msg.bought
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919943
+    m_Key: msg.sold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919944
+    m_Key: trade.InvalidQuantity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919945
+    m_Key: trade.NotSold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919946
+    m_Key: trade.NotBought
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919947
+    m_Key: trade.NoCargoSpace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919948
+    m_Key: trade.NotEnoughCredits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919949
+    m_Key: trade.NotInCargo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919950
+    m_Key: terminal.market
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919951
+    m_Key: terminal.services
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919952
+    m_Key: terminal.launch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919953
+    m_Key: terminal.col_resource
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919954
+    m_Key: terminal.col_price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919955
+    m_Key: terminal.col_cargo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919956
+    m_Key: terminal.col_station
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919957
+    m_Key: terminal.col_qty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919958
+    m_Key: terminal.buys_sells
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919959
+    m_Key: terminal.sells
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919960
+    m_Key: terminal.buys
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919961
+    m_Key: terminal.buy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919962
+    m_Key: terminal.sell
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919963
+    m_Key: terminal.fuel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919964
+    m_Key: terminal.repair
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919965
+    m_Key: terminal.ammo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919966
+    m_Key: terminal.service_ok
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 8647590386497749098
+  references:
+    version: 2
+    RefIds:
+    - rid: 8647590386497749098
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1793413600009

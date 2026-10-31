@@ -16,6 +16,8 @@ MonoBehaviour:
   acceleration: 40
   maxSpeed: 220
   turnRateDeg: 90
+  angularResponse: 4
+  steerAngleDeg: 25
   fullCargoSpeedPenalty: 0.4
   releaseDecelFactor: 0.3
   cruiseAdjustRate: 60

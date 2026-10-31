@@ -64,13 +64,69 @@ namespace PulseFactor.Tests
             Assert.AreEqual(160f, m.CruiseTarget, 0.5f);
         }
 
+        // Mira "presa" a nave (como o reticulo do jogador): erro constante em relacao ao nariz.
+        static Quaternion Steer(FlightModel m, Quaternion r, float yawDeg, float seconds)
+        {
+            int steps = Mathf.RoundToInt(seconds / Dt);
+            for (int i = 0; i < steps; i++)
+            {
+                var aim = r * Quaternion.Euler(0, yawDeg, 0) * Vector3.forward;
+                r = m.StepRotation(r, new FlightInput { aimDirection = aim }, Dt);
+            }
+            return r;
+        }
+
         [Test]
-        public void Rotation_turns_toward_aim_limited_by_turn_rate()
+        public void Turn_rate_ramps_up_instead_of_jumping()
         {
             var m = new FlightModel(Scout());
-            var input = new FlightInput { aimDirection = Vector3.right };
-            var r = m.StepRotation(Quaternion.identity, input, 0.5f);
-            Assert.AreEqual(45f, Quaternion.Angle(Quaternion.identity, r), 0.5f);
+            Steer(m, Quaternion.identity, 90f, Dt);
+            Assert.AreEqual(90f * 4f * Dt, m.AngularVelocity.y, 0.01f);
+        }
+
+        [Test]
+        public void Large_error_saturates_at_turn_rate()
+        {
+            var m = new FlightModel(Scout());
+            Steer(m, Quaternion.identity, 90f, 0.5f);
+            Assert.AreEqual(90f, m.AngularVelocity.y, 0.01f);
+        }
+
+        [Test]
+        public void Small_error_turns_proportionally()
+        {
+            var m = new FlightModel(Scout());
+            Steer(m, Quaternion.identity, 5f, 0.5f);
+            Assert.AreEqual(90f * 5f / 25f, m.AngularVelocity.y, 0.1f);
+        }
+
+        [Test]
+        public void Centering_the_aim_stops_the_turn_smoothly()
+        {
+            var m = new FlightModel(Scout());
+            var r = Steer(m, Quaternion.identity, 90f, 0.5f);
+            Steer(m, r, 0f, 0.1f);
+            Assert.Greater(m.AngularVelocity.y, 0f, "ainda desacelerando");
+            Steer(m, r, 0f, 0.3f);
+            Assert.AreEqual(0f, m.AngularVelocity.y, 0.01f);
+        }
+
+        [Test]
+        public void Turning_right_rotates_toward_right()
+        {
+            var m = new FlightModel(Scout());
+            var r = Steer(m, Quaternion.identity, 90f, 0.5f);
+            Assert.Greater((r * Vector3.forward).x, 0.1f);
+        }
+
+        [Test]
+        public void Roll_input_rolls_around_forward()
+        {
+            var m = new FlightModel(Scout());
+            var r = Quaternion.identity;
+            for (int i = 0; i < 25; i++) r = m.StepRotation(r, new FlightInput { roll = 1, aimDirection = r * Vector3.forward }, Dt);
+            Assert.Less(m.AngularVelocity.z, 0f);
+            Assert.AreEqual(1f, Vector3.Dot(r * Vector3.forward, Vector3.forward), 0.01f);
         }
 
         [Test]

@@ -1,0 +1,411 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_pt-BR
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: pt-BR
+  m_SharedData: {fileID: 11400000, guid: af5adbaf44904344e98d410686df46bd, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 3525005312
+    m_Localized: Setor {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3583725568
+    m_Localized: Aster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919872
+    m_Localized: Venera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919873
+    m_Localized: Centarus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919874
+    m_Localized: "Cintur\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919875
+    m_Localized: Aster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919876
+    m_Localized: Aster I
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919877
+    m_Localized: Venera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919878
+    m_Localized: Venera I
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919879
+    m_Localized: Centarus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919880
+    m_Localized: Centarus I
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919881
+    m_Localized: Centarus II
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919882
+    m_Localized: Centarus III
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919883
+    m_Localized: Centarus IV
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919884
+    m_Localized: Grande Asteroide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919885
+    m_Localized: "Esta\xE7\xE3o Aster Orbital"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919886
+    m_Localized: Entreposto Venera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919887
+    m_Localized: Doca Centarus II
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919888
+    m_Localized: "Central do Cintur\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919889
+    m_Localized: Campo de Aster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919890
+    m_Localized: Campo de Venera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919891
+    m_Localized: Campo de Centarus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919892
+    m_Localized: "Cintur\xE3o Denso A"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919893
+    m_Localized: "Cintur\xE3o Denso B"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919894
+    m_Localized: "Portal \u2192 Venera"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919895
+    m_Localized: "Portal \u2192 Cintur\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919896
+    m_Localized: "Portal \u2192 Aster"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919897
+    m_Localized: "Portal \u2192 Aster"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919898
+    m_Localized: "Portal \u2192 Centarus"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919899
+    m_Localized: "Portal \u2192 Cintur\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919900
+    m_Localized: Pirata
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919901
+    m_Localized: Ferro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919902
+    m_Localized: Gelo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919903
+    m_Localized: "Carv\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919904
+    m_Localized: Cobre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919905
+    m_Localized: "Tit\xE2nio"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919906
+    m_Localized: Cobalto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919907
+    m_Localized: "Cr\xE9ditos: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919908
+    m_Localized: MODO DE TESTE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919909
+    m_Localized: 'CRUZEIRO {0} m/s  [X]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919910
+    m_Localized: "m\xE1x {0} m/s"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919911
+    m_Localized: Carga {0}/{1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919912
+    m_Localized: "{0} Laser de minera\xE7\xE3o [LMB]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919913
+    m_Localized: "Skill [1]: \u2014"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919914
+    m_Localized: Velocidade {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919915
+    m_Localized: 'DOBRA PRONTA [J]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919916
+    m_Localized: AQUECENDO DOBRA {0}%
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919917
+    m_Localized: EM DOBRA  [J] sair
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919918
+    m_Localized: BLOQUEIO DE MASSA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919919
+    m_Localized: 'SEM ALVO [T]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919920
+    m_Localized: STATUS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919921
+    m_Localized: Escudo {0}%   Casco {1}%
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919922
+    m_Localized: 'Alvo: {0}  {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919923
+    m_Localized: Sem alvo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919924
+    m_Localized: ARMAS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919925
+    m_Localized: SISTEMAS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919926
+    m_Localized: 'Alvo: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919927
+    m_Localized: Nenhum alvo na mira
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919928
+    m_Localized: "Aquecendo dobra\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919929
+    m_Localized: 'Bloqueio de massa: afaste-se'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919930
+    m_Localized: Selecione um alvo (T)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919931
+    m_Localized: Dobra cancelada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919932
+    m_Localized: Saindo da dobra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919933
+    m_Localized: "Nenhuma esta\xE7\xE3o por perto"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919934
+    m_Localized: Fora do alcance de docagem (7,5 km)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919935
+    m_Localized: Sem docas livres
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919936
+    m_Localized: Docagem negada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919937
+    m_Localized: 'Docagem autorizada: doca {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919938
+    m_Localized: "Autoriza\xE7\xE3o de docagem perdida"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919939
+    m_Localized: "Pouso autom\xE1tico ativado"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919940
+    m_Localized: Carga cheia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919941
+    m_Localized: Bem-vindo ao {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919942
+    m_Localized: 'Comprado: {0} {1} ({2} cr)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919943
+    m_Localized: 'Vendido: {0} {1} (+{2} cr)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919944
+    m_Localized: "Quantidade inv\xE1lida"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919945
+    m_Localized: "A esta\xE7\xE3o n\xE3o vende isso"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919946
+    m_Localized: "A esta\xE7\xE3o n\xE3o compra isso"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919947
+    m_Localized: "Sem espa\xE7o na carga"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919948
+    m_Localized: "Cr\xE9ditos insuficientes"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919949
+    m_Localized: "Voc\xEA n\xE3o tem isso na carga"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919950
+    m_Localized: MERCADO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919951
+    m_Localized: "SERVI\xC7OS"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919952
+    m_Localized: DECOLAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919953
+    m_Localized: Recurso
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919954
+    m_Localized: "Pre\xE7o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919955
+    m_Localized: Na carga
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919956
+    m_Localized: "Esta\xE7\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919957
+    m_Localized: Qtd
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919958
+    m_Localized: Compra e vende
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919959
+    m_Localized: Vende
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919960
+    m_Localized: Compra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919961
+    m_Localized: Comprar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919962
+    m_Localized: Vender
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919963
+    m_Localized: "Combust\xEDvel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919964
+    m_Localized: Reparo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919965
+    m_Localized: "Muni\xE7\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587919966
+    m_Localized: "OK \u2014 gr\xE1tis no modo de teste"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

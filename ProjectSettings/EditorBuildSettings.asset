@@ -4,7 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Project/Scenes/Slice.unity
+    guid: 92ad509fbd6e4c749a1b624b2048201b
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: c811ca12cefbabb47835000f22de3312, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+    com.unity.localization.settings: {fileID: 11400000, guid: 075a9b448bdbecd42b3e9ea535625ee1, type: 2}
   m_UseUCBPForAssetBundles: 0
