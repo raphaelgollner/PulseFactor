@@ -16,7 +16,17 @@ namespace PulseFactor
         bool worldAuthoritative; // MoveWorld/SetWorld neste frame: nao reler do transform
         Rigidbody body;
 
-        public WorldPosition World => world;
+        public WorldPosition World
+        {
+            get
+            {
+                if (!dynamic || worldAuthoritative) return world;
+                var o = FloatingOrigin.Instance;
+                return WorldPosition.FromLocal(PhysicsPosition, o ? o.Origin : default);
+            }
+        }
+
+        Vector3 PhysicsPosition => body ? body.position : transform.position;
 
         void Awake() => body = GetComponent<Rigidbody>();
 
@@ -40,12 +50,12 @@ namespace PulseFactor
         // Move em double sem passar pelo float (usado pela dobra).
         public void MoveWorld(double3 delta)
         {
-            world = world + delta;
+            world = World + delta; // parte da posicao atual (nao da ultima gravada no rebase)
             worldAuthoritative = true;
         }
 
         public WorldPosition CurrentWorld(WorldPosition origin) =>
-            dynamic && !worldAuthoritative ? WorldPosition.FromLocal(transform.position, origin) : world;
+            dynamic && !worldAuthoritative ? WorldPosition.FromLocal(PhysicsPosition, origin) : world;
 
         internal void BeforeRebase(WorldPosition oldOrigin)
         {

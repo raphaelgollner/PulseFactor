@@ -190,7 +190,7 @@ Quatro módulos, cada um com **tiers** (melhor tier = melhor desempenho):
 - **Dobra ("Velocidade de Dobra")**: muito mais rápida, para viagens entre corpos celestes. **3 níveis** (decisão do autor, 2026-10-31): nível 1 até 200 km/s, nível 2 até 500 km/s, nível 3 até 1 000 km/s. Todas as naves têm os 3 níveis; **W/S trocam o nível durante a dobra** (marchas). O jogador **pilota com o mouse durante a dobra**; alvo não é obrigatório. **[decisão do Claude]** Rampa de ~3 s até o teto; freio automático v ≤ 0,5/s × distância ao alvo quando apontado para ele; v ≤ 1/s × distância à superfície do corpo mais próximo.
   - **Aquecimento** de alguns segundos antes de entrar em dobra — a fuga fica difícil mas não impossível nem frustrante. **[decisão do Claude]** ~5 s; levar dano atrasa (não cancela) o aquecimento.
   - **Na dobra o jogador está seguro** (sem interdição por enquanto).
-  - **[decisão do Claude]** Estilo supercruise do Elite: velocidade cresce com a distância de massas grandes; bloqueio por massa (mass lock) perto de estações/planetas; sem armas/mineração em dobra; saída a alguns km do alvo selecionado.
+  - **[decisão do Claude]** Estilo supercruise do Elite: velocidade cresce com a distância de massas grandes; bloqueio por massa (mass lock) perto de estações (5 km) e planetas/luas (1,5 × raio do centro, dentro da zona do alerta de proximidade); sem armas/mineração em dobra; saída a alguns km do alvo selecionado.
 
 ### 4.4 Câmeras
 - **Primeira pessoa (cockpit)** e **terceira pessoa**, alternáveis em voo.

@@ -6,7 +6,7 @@ namespace PulseFactor
 {
     // Mantem o jogador perto da origem do Unity: quando o foco se afasta demais,
     // move a origem do mundo e reposiciona todos os WorldAnchor.
-    [DefaultExecutionOrder(1000)]
+    [DefaultExecutionOrder(-1000)]
     public class FloatingOrigin : MonoBehaviour
     {
         public static FloatingOrigin Instance { get; private set; }

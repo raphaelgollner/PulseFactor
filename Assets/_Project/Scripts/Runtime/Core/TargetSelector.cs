@@ -9,7 +9,18 @@ namespace PulseFactor
         [SerializeField] double maxAsteroidDistance = 10000;
 
         public PlayerShipInput Input;
-        public ITargetable Current { get; private set; }
+        ITargetable current;
+
+        // Alvos de setores descarregados, asteroides esgotados ou docas destruidas somem sozinhos.
+        public ITargetable Current
+        {
+            get
+            {
+                if (current is Object o && !o) current = null;
+                else if (current is DockTarget d && !d.IsAlive) current = null;
+                return current;
+            }
+        }
 
         public event System.Action<ITargetable> Changed;
 
@@ -20,7 +31,7 @@ namespace PulseFactor
 
         public void Select(ITargetable t)
         {
-            Current = t;
+            current = t;
             Changed?.Invoke(t);
         }
 

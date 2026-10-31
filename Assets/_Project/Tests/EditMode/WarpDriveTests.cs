@@ -177,11 +177,22 @@ namespace PulseFactor.Tests
         }
 
         [Test]
-        public void Locked_within_three_radii_of_planet()
+        public void Locked_within_one_and_a_half_radii_of_planet()
         {
             var s = new[] { Planet(double3.zero, 6e6) };
-            Assert.IsTrue(MassLock.IsLocked(new double3(1.79e7, 0, 0), s));
-            Assert.IsFalse(MassLock.IsLocked(new double3(1.81e7, 0, 0), s));
+            Assert.IsTrue(MassLock.IsLocked(new double3(8.9e6, 0, 0), s));
+            Assert.IsFalse(MassLock.IsLocked(new double3(9.1e6, 0, 0), s));
+        }
+
+        // Revisao C1: a nave liberada pelo alerta de proximidade nao pode ficar presa no bloqueio de massa.
+        [Test]
+        public void Ship_released_by_proximity_guard_is_not_mass_locked()
+        {
+            const double r = 6e6;
+            var s = new[] { Planet(double3.zero, r) };
+            var edge = new double3(2 * r + 1, 0, 0); // primeiro ponto fora da zona de perigo
+            Assert.IsFalse(ProximityRules.InDanger(MassLock.NearestDistance(edge, s), r, 1.0));
+            Assert.IsFalse(MassLock.IsLocked(edge, s));
         }
 
         [Test]

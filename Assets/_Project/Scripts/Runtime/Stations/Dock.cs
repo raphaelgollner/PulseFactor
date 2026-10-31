@@ -26,12 +26,14 @@ namespace PulseFactor
 
         public DockTarget(Dock dock) { this.dock = dock; }
 
+        public bool IsAlive => dock && dock.LandingPoint;
+
         public WorldPosition Position
         {
             get
             {
                 var o = FloatingOrigin.Instance;
-                return o ? o.ToWorld(dock.LandingPoint.position) : default;
+                return o && IsAlive ? o.ToWorld(dock.LandingPoint.position) : default;
             }
         }
 
