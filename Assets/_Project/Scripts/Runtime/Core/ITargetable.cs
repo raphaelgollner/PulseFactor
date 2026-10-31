@@ -1,6 +1,6 @@
 namespace PulseFactor
 {
-    public enum TargetKind { Body, Station, Asteroid, Pirate, Ship }
+    public enum TargetKind { Body, Station, Asteroid, Pirate, Ship, Gate }
 
     public interface ITargetable
     {

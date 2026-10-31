@@ -55,7 +55,7 @@ namespace PulseFactor
         PiratePatrol SpawnShip(WorldPosition pos, PiratePatrol leader, Vector3 formation)
         {
             var bp = generator.Generate(rng);
-            var visual = ShipAssembler.Build(bp, null);
+            var visual = ShipAssembler.Build(bp, transform);
             visual.name = "Pirate";
             var body = visual.AddComponent<Rigidbody>();
             var ship = visual.AddComponent<ShipController>();

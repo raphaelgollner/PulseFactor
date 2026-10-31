@@ -288,6 +288,14 @@ Documento aprovado pelo autor. A **primeira fatia jogável** (substitui a Fase 1
 - **Naves piratas procedurais**: montadas com os blocos seguindo as regras de classe/multiclasse, **sempre com corpo de Assault** (substitui "Scouts e Assaults" do §7). Pintura pirata em **vermelho, preto e branco** — uma cor só ou mescladas. **[decisão do Claude]** Nesta fatia os piratas só surgem e patrulham campos de asteroides; combate fica para a fase de combate.
 - **Modo de teste**: tudo gratuito e reputação zerada. **[decisão do Claude]** Comprar no mercado não desconta créditos (preços aparecem normalmente); vender ainda credita, para testar o fluxo.
 
+### 9.2 Setores e jump gates (decisão do autor, 2026-10-30)
+- O sistema é dividido em **setores**, estilo X4 Foundations: cada setor é a vizinhança de **um planeta** com suas luas, estações e campos de asteroides.
+- Dentro do setor: subluz e dobra, como no §4.3. Entre setores: **jump gates**.
+- Jump gate = **"rosquinha" gigante** (toro). **[decisão do Claude]** Raio externo 1 000 m, raio do tubo 150 m (abertura de ~1,7 km). Atravessar o anel leva ao gate pareado no setor vizinho; o jogador sai 1,5 km à frente do gate de chegada, mantendo a velocidade.
+- O sol aparece ao fundo em todos os setores (direção e tamanho por setor).
+- Setores recebem o **nome do corpo celeste principal** (decisão do autor): Setor Aster (planeta, inicial), Setor Venera (planeta), Setor Centarus (gigante gasoso com 4 luas), Setor Cinturão (só asteroides, estação central num asteroide gigante).
+- **[decisão do Claude]** Só o setor atual fica carregado. A fatia 1 tem os **4 setores**. Rotas: Aster↔Venera, Aster↔Cinturão, Cinturão↔Centarus. O Cinturão é o setor mais perigoso (campo denso, mais piratas).
+
 ## 10. Plano de fases (cada fase jogável)
 
 1. **Voo e mundo** — uma nave em blocos (primitivos), controles estilo Everspace, subluz/cruzeiro/dobra, sistema solar pequeno com origem flutuante, câmeras cockpit e terceira pessoa, HUD básico. **[decisão do Claude]** "HUD básico" = HUD de tela simples na terceira pessoa (escudo/casco/combustível, velocidade, cruzeiro, dobra, marcador do alvo) + o sistema de painéis físicos funcionando numa cabine (mesmos dados), sem polimento visual.
