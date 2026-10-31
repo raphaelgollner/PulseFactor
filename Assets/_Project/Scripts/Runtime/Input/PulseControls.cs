@@ -14,7 +14,7 @@ namespace PulseFactor
 
         public readonly InputAction Throttle, Strafe, Vertical, Roll, AimDelta, AimStick;
         public readonly InputAction FirePrimary, FireSecondary, Skill1, Skill2, Skill3;
-        public readonly InputAction Cruise, Warp, RequestDock, ToggleCamera, Interact, SelectTarget, Pause;
+        public readonly InputAction Cruise, Warp, RequestDock, ToggleCamera, Interact, SelectTarget, Pause, FreeLook;
         public readonly InputAction DockedInteract, DockedBack;
 
         public PulseControls()
@@ -48,6 +48,7 @@ namespace PulseFactor
             Interact = Button(Flight, "Interact", "<Keyboard>/f", "<Gamepad>/buttonWest");
             SelectTarget = Button(Flight, "SelectTarget", "<Keyboard>/t", "<Gamepad>/rightStickPress");
             Pause = Button(Flight, "Pause", "<Keyboard>/escape", "<Gamepad>/start");
+            FreeLook = Button(Flight, "FreeLook", "<Keyboard>/z", "<Gamepad>/leftStickPress");
 
             DockedInteract = Button(Docked, "Interact", "<Keyboard>/f", "<Gamepad>/buttonWest");
             DockedBack = Button(Docked, "Back", "<Keyboard>/escape", "<Gamepad>/buttonEast");

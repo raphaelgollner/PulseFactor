@@ -7,6 +7,7 @@ namespace PulseFactor
         public AssembledShip Visual;
         public PlayerShipInput Input;
         public WarpController Warp;
+        public ProximityGuard Proximity;
         public TargetSelector Targets;
         public DockingAutopilot Docking;
         public MiningLaser Laser;

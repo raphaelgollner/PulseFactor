@@ -22,7 +22,7 @@ namespace PulseFactor
         {
             Def = def;
             Docks = docks;
-            Docking = new DockingService(docks.Length);
+            Docking = new DockingService(System.Array.ConvertAll(docks, d => d.size));
             Market = new Market(def, config);
         }
 

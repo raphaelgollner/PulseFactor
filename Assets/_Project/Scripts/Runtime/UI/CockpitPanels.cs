@@ -93,13 +93,17 @@ namespace PulseFactor
                 var name = p.doc.gameObject.name;
                 if (name.EndsWith("Center"))
                 {
-                    p.title.text = Loc.T("panel.status");
+                    var prox = Player.Proximity;
+                    bool alert = prox && prox.AlertActive;
+                    p.title.text = alert ? Loc.T("hud.proximity_alert", Loc.T("target." + prox.AlertBodyId)) : Loc.T("panel.status");
+                    p.title.EnableInClassList("panel-alert", alert);
                     p.a.text = Loc.T("panel.shield_hull", 100, 100);
                     p.b.text = Loc.T("hud.speed", HudModel.FormatSpeed(Player.Warp && Player.Warp.Drive.State == WarpState.Active ? Player.Warp.Drive.Speed : ship.Velocity.magnitude));
                     p.c.text = target != null && origin
                         ? Loc.T("panel.target", Loc.T("target." + target.DisplayId), HudModel.FormatDistance(WorldPosition.Distance(origin.ToWorld(ship.transform.position), target.Position)))
                         : Loc.T("panel.no_target");
-                    p.d.text = Player.SectorName;
+                    p.d.text = HudNotice.Active ? HudNotice.Text : Player.SectorName;
+                    p.d.EnableInClassList("panel-notice", HudNotice.Active);
                 }
                 else if (name.EndsWith("Left"))
                 {
@@ -113,15 +117,7 @@ namespace PulseFactor
                 {
                     p.title.text = Loc.T("panel.systems");
                     p.a.text = Loc.T("hud.skill_empty");
-                    var w = Player.Warp ? WarpHud.From(Player.Warp.Drive, Player.Warp.MassLocked, target != null) : default;
-                    p.b.text = w.state switch
-                    {
-                        WarpHudState.Charging => Loc.T("hud.warp_charging", Mathf.RoundToInt(w.progress * 100)),
-                        WarpHudState.Active => Loc.T("hud.warp_active"),
-                        WarpHudState.MassLocked => Loc.T("hud.warp_masslocked"),
-                        WarpHudState.NoTarget => Loc.T("hud.warp_no_target"),
-                        _ => Loc.T("hud.warp_ready"),
-                    };
+                    p.b.text = WarpHud.Text(Player.Warp);
                     p.c.text = ship.Flight.CruiseActive ? Loc.T("hud.cruise", Mathf.RoundToInt(ship.Flight.CruiseTarget)) : "";
                     p.d.text = "";
                 }

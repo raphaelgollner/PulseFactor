@@ -10,12 +10,13 @@ namespace PulseFactor
 
         public enum Phase { Free, Authorized, Landing, Docked, Undocking }
 
-        [SerializeField] float autopilotRange = 150f;
+        [SerializeField] float autopilotRange = 250f;
         [SerializeField] float landingSeconds = 6f;
         [SerializeField] float undockSeconds = 4f;
 
         public PlayerShipInput Input;
         public WarpController Warp;
+        public TargetSelector Targets;
 
         public Phase Current { get; private set; }
         public Station Station { get; private set; }
@@ -60,7 +61,14 @@ namespace PulseFactor
             var s = NearestStation(out float dist);
             if (!s) { GameMessages.Post("msg.dock_no_station"); return; }
 
-            var r = s.Docking.Request(PlayerId, dist);
+            if (dist > s.Docking.RequestRange)
+            {
+                // Fora da zona de influencia: aviso em destaque com a distancia atual.
+                HudNotice.Show("notice.dock_too_far", 4f, HudModel.FormatDistance(s.Docking.RequestRange), HudModel.FormatDistance(dist));
+                return;
+            }
+            var shipSize = ship.ClassDef ? ship.ClassDef.dockSize : DockSize.P;
+            var r = s.Docking.Request(PlayerId, dist, shipSize);
             if (!r.granted)
             {
                 GameMessages.Post(r.reason switch
@@ -73,7 +81,8 @@ namespace PulseFactor
             }
             SetDock(s, s.Docks[r.dockIndex]);
             Current = Phase.Authorized;
-            GameMessages.Post("msg.dock_granted", r.dockIndex + 1);
+            GameMessages.Post("msg.dock_granted", Dock.Number, Dock.size);
+            if (Targets) Targets.Select(new DockTarget(Dock));
         }
 
         void SetDock(Station s, Dock d)

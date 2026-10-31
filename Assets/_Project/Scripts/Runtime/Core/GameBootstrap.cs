@@ -108,9 +108,12 @@ namespace PulseFactor
             var warp = go.AddComponent<WarpController>();
             warp.Input = input;
             warp.Targets = targets;
+            var proximity = go.AddComponent<ProximityGuard>();
+            proximity.Warp = warp;
             var docking = go.AddComponent<DockingAutopilot>();
             docking.Input = input;
             docking.Warp = warp;
+            docking.Targets = targets;
             var laser = go.AddComponent<MiningLaser>();
             laser.Input = input;
             laser.Warp = warp;
@@ -121,11 +124,12 @@ namespace PulseFactor
 
             var rig = cam.GetComponent<CameraRig>();
             rig.Attach(go);
+            rig.LookSource = input;
             rig.SetMode(CameraRig.Mode.ThirdPerson);
 
             return new PlayerContext
             {
-                Ship = ship, Visual = visual, Input = input, Warp = warp, Targets = targets,
+                Ship = ship, Visual = visual, Input = input, Warp = warp, Proximity = proximity, Targets = targets,
                 Docking = docking, Laser = laser, CameraRig = rig, Config = config,
                 Wallet = new Wallet(config.startingCredits),
             };

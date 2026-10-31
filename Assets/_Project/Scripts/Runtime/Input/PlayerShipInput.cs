@@ -12,6 +12,7 @@ namespace PulseFactor
         [SerializeField] float reticleRadius = 0.35f;      // fracao da altura da tela
         [SerializeField] float deadZone = 0.02f;
         [SerializeField] float stickSpeed = 1.5f;
+        [SerializeField] float lookSensitivity = 0.15f;   // graus por pixel no olhar livre
 
         public ShipController Ship;
         public Camera AimCamera;
@@ -73,19 +74,25 @@ namespace PulseFactor
                               && mouse.sqrMagnitude < maxMouseDelta * maxMouseDelta;
             if (!mouseValid) mouse = Vector2.zero;
 
-            Vector2 offset = ReticleOffset
-                + mouse * mouseSensitivity
-                + Controls.AimStick.ReadValue<Vector2>() * (stickSpeed * Time.deltaTime);
-            ReticleOffset = Vector2.ClampMagnitude(offset, reticleRadius);
-
-            Vector3 aim = Ship.transform.forward;
-            if (cam && ReticleOffset.magnitude > deadZone)
+            // Z segurado: o mouse gira a camera (olhar ao redor); a mira da nave fica parada.
+            FreeLooking = Controls.FreeLook.IsPressed();
+            Vector2 stick = Controls.AimStick.ReadValue<Vector2>();
+            if (FreeLooking)
             {
-                var screen = new Vector3(
-                    Screen.width * 0.5f + ReticleOffset.x * Screen.height,
-                    Screen.height * 0.5f + ReticleOffset.y * Screen.height, 0f);
-                aim = cam.ScreenPointToRay(screen).direction;
+                var look = LookAngles + new Vector2(mouse.x, -mouse.y) * lookSensitivity + new Vector2(stick.x, -stick.y) * (120f * Time.deltaTime);
+                LookAngles = new Vector2(Mathf.Clamp(look.x, -160f, 160f), Mathf.Clamp(look.y, -80f, 80f));
             }
+            else
+            {
+                LookAngles = Vector2.Lerp(LookAngles, Vector2.zero, 1f - Mathf.Exp(-8f * Time.deltaTime));
+                Vector2 offset = ReticleOffset + mouse * mouseSensitivity + stick * (stickSpeed * Time.deltaTime);
+                ReticleOffset = Vector2.ClampMagnitude(offset, reticleRadius);
+            }
+
+            // Mira no referencial da nave (independe da camera): deslocamento do reticulo * campo de visao.
+            float fov = cam ? cam.fieldOfView : 60f;
+            AimDirection = Ship.transform.rotation * Quaternion.Euler(-ReticleOffset.y * fov, ReticleOffset.x * fov, 0f) * Vector3.forward;
+            Vector3 aim = ReticleOffset.magnitude > deadZone ? AimDirection : Ship.transform.forward;
 
             var input = Ship.Input;
             input.throttle = Controls.Throttle.ReadValue<float>();
@@ -96,9 +103,20 @@ namespace PulseFactor
             Ship.Input = input;
         }
 
-        // Posicao do reticulo em pixels, para o HUD.
-        public Vector2 ReticleScreenPosition => new(
-            Screen.width * 0.5f + ReticleOffset.x * Screen.height,
-            Screen.height * 0.5f + ReticleOffset.y * Screen.height);
+        public bool FreeLooking { get; private set; }
+        public Vector2 LookAngles { get; private set; } // graus: x = yaw, y = pitch
+        public Vector3 AimDirection { get; private set; } = Vector3.forward;
+
+        // Posicao do reticulo em pixels (projecao da mira), para o HUD; fora da tela quando atras da camera.
+        public Vector2 ReticleScreenPosition
+        {
+            get
+            {
+                var cam = AimCamera ? AimCamera : Camera.main;
+                if (!cam) return new Vector2(Screen.width, Screen.height) * 0.5f;
+                var sp = cam.WorldToScreenPoint(cam.transform.position + AimDirection * 1000f);
+                return sp.z > 0 ? new Vector2(sp.x, sp.y) : new Vector2(-10000f, -10000f);
+            }
+        }
     }
 }

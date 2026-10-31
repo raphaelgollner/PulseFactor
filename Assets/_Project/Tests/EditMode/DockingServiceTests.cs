@@ -17,7 +17,7 @@ namespace PulseFactor.Tests
         [Test]
         public void Denies_out_of_range()
         {
-            var r = new DockingService(4).Request("player", 8000);
+            var r = new DockingService(4).Request("player", 8100);
             Assert.IsFalse(r.granted);
             Assert.AreEqual(DockDenyReason.OutOfRange, r.reason);
         }
@@ -47,7 +47,7 @@ namespace PulseFactor.Tests
         {
             var s = new DockingService(4);
             s.Request("player", 5000);
-            s.Tick("player", 8000);
+            s.Tick("player", 8100);
             Assert.IsNull(s.AssignedDock("player"));
             Assert.AreEqual(0, s.Request("other", 1000).dockIndex);
         }
@@ -71,6 +71,51 @@ namespace PulseFactor.Tests
             s.Release("a");
             Assert.IsNull(s.AssignedDock("a"));
             Assert.IsTrue(s.Request("b", 1000).granted);
+        }
+
+        // Estacao padrao: 4 P, 2 M, 1 G (docas 1-4, 5-6, 7).
+        static DockingService Standard() => new DockingService(new[]
+        {
+            DockSize.P, DockSize.P, DockSize.P, DockSize.P, DockSize.M, DockSize.M, DockSize.G,
+        });
+
+        [Test]
+        public void Default_request_range_is_8km()
+        {
+            var s = Standard();
+            Assert.AreEqual(8000f, s.RequestRange);
+            Assert.IsTrue(s.Request("player", 7900).granted);
+        }
+
+        [Test]
+        public void Small_ship_gets_small_dock_first()
+        {
+            var s = Standard();
+            var r = s.Request("player", 1000, DockSize.P);
+            Assert.AreEqual(DockSize.P, s.SizeOf(r.dockIndex));
+        }
+
+        [Test]
+        public void Small_ship_falls_back_to_larger_dock_when_small_full()
+        {
+            var s = Standard();
+            for (int i = 0; i < 4; i++) s.Request("p" + i, 1000, DockSize.P);
+            var r = s.Request("player", 1000, DockSize.P);
+            Assert.IsTrue(r.granted);
+            Assert.AreEqual(DockSize.M, s.SizeOf(r.dockIndex));
+        }
+
+        [Test]
+        public void Medium_ship_never_gets_small_dock()
+        {
+            var s = Standard();
+            var a = s.Request("m1", 1000, DockSize.M);
+            var b = s.Request("m2", 1000, DockSize.M);
+            var c = s.Request("m3", 1000, DockSize.M);
+            Assert.AreEqual(DockSize.M, s.SizeOf(a.dockIndex));
+            Assert.AreEqual(DockSize.M, s.SizeOf(b.dockIndex));
+            Assert.AreEqual(DockSize.G, s.SizeOf(c.dockIndex));
+            Assert.AreEqual(DockDenyReason.NoFreeDock, s.Request("m4", 1000, DockSize.M).reason);
         }
     }
 }

@@ -5,31 +5,39 @@ namespace PulseFactor.Tests
 {
     public class WarpDriveTests
     {
+        const double Far = 1e12;
+        const double NoTarget = double.PositiveInfinity;
+
         static WarpDrive Drive() => new WarpDrive(new WarpSettings());
 
         static WarpDrive Active()
         {
             var d = Drive();
-            Assert.IsTrue(d.TryStartCharge(false, true, out _));
-            d.Tick(5.1f, 1e9, 1e10);
+            Assert.IsTrue(d.TryStartCharge(false, out _));
+            d.Tick(5.1f, Far, NoTarget, false);
             Assert.AreEqual(WarpState.Active, d.State);
             return d;
         }
 
-        [Test]
-        public void Cannot_charge_without_target()
+        static double Run(WarpDrive d, float seconds, double body = Far, double target = NoTarget, bool heading = false)
         {
-            var d = Drive();
-            Assert.IsFalse(d.TryStartCharge(false, false, out var reason));
-            Assert.AreEqual(WarpFailReason.NoTarget, reason);
-            Assert.AreEqual(WarpState.Idle, d.State);
+            double v = 0;
+            for (int i = 0; i < (int)(seconds / 0.1f); i++) v = d.Tick(0.1f, body, target, heading);
+            return v;
+        }
+
+        [Test]
+        public void Can_charge_without_target()
+        {
+            Assert.IsTrue(Drive().TryStartCharge(false, out var reason));
+            Assert.AreEqual(WarpFailReason.None, reason);
         }
 
         [Test]
         public void Cannot_charge_when_mass_locked()
         {
             var d = Drive();
-            Assert.IsFalse(d.TryStartCharge(true, true, out var reason));
+            Assert.IsFalse(d.TryStartCharge(true, out var reason));
             Assert.AreEqual(WarpFailReason.MassLocked, reason);
             Assert.AreEqual(WarpState.Idle, d.State);
         }
@@ -38,10 +46,10 @@ namespace PulseFactor.Tests
         public void Charge_takes_five_seconds()
         {
             var d = Drive();
-            d.TryStartCharge(false, true, out _);
-            d.Tick(4.9f, 1e9, 1e10);
+            d.TryStartCharge(false, out _);
+            d.Tick(4.9f, Far, NoTarget, false);
             Assert.AreEqual(WarpState.Charging, d.State);
-            d.Tick(0.2f, 1e9, 1e10);
+            d.Tick(0.2f, Far, NoTarget, false);
             Assert.AreEqual(WarpState.Active, d.State);
         }
 
@@ -49,11 +57,11 @@ namespace PulseFactor.Tests
         public void Damage_delays_charge_capped_at_3s()
         {
             var d = Drive();
-            d.TryStartCharge(false, true, out _);
+            d.TryStartCharge(false, out _);
             for (int i = 0; i < 5; i++) d.OnDamage();
-            d.Tick(7.9f, 1e9, 1e10);
+            d.Tick(7.9f, Far, NoTarget, false);
             Assert.AreEqual(WarpState.Charging, d.State);
-            d.Tick(0.2f, 1e9, 1e10);
+            d.Tick(0.2f, Far, NoTarget, false);
             Assert.AreEqual(WarpState.Active, d.State);
         }
 
@@ -61,48 +69,84 @@ namespace PulseFactor.Tests
         public void Charge_progress_reports_fraction()
         {
             var d = Drive();
-            d.TryStartCharge(false, true, out _);
-            d.Tick(3f, 1e9, 1e10);
+            d.TryStartCharge(false, out _);
+            d.Tick(3f, Far, NoTarget, false);
             Assert.AreEqual(0.6f, d.ChargeProgress, 0.001f);
         }
 
         [Test]
-        public void Speed_scales_with_nearest_distance()
+        public void Starts_at_level_1_and_ramps_up_quickly()
         {
             var d = Active();
-            Assert.AreEqual(1e7, d.Tick(0.02f, 1e8, 1e10), 1.0);
+            Assert.AreEqual(1, d.Level);
+            Assert.Less(d.Tick(0.1f, Far, NoTarget, false), 2e5 * 0.5);
+            Assert.AreEqual(2e5, Run(d, 4f), 1.0);
         }
 
         [Test]
-        public void Speed_clamped_to_min()
+        public void Levels_cap_at_200_500_1000_kms()
         {
             var d = Active();
-            Assert.AreEqual(1000.0, d.Tick(0.02f, 5000, 15000), 1e-6);
+            Assert.AreEqual(2e5, Run(d, 5f), 1.0);
+            d.ShiftUp();
+            Assert.AreEqual(5e5, Run(d, 5f), 1.0);
+            d.ShiftUp();
+            Assert.AreEqual(1e6, Run(d, 5f), 1.0);
+            d.ShiftUp();
+            Assert.AreEqual(3, d.Level);
+            d.ShiftDown(); d.ShiftDown(); d.ShiftDown();
+            Assert.AreEqual(1, d.Level);
+            Assert.AreEqual(2e5, Run(d, 5f), 1.0);
         }
 
         [Test]
-        public void Speed_clamped_to_max()
+        public void Brakes_near_target_when_heading_to_it()
         {
             var d = Active();
-            Assert.AreEqual(3e8, d.Tick(0.02f, 1e12, 1e12), 1.0);
+            d.ShiftUp(); d.ShiftUp();
+            Run(d, 5f);
+            Assert.LessOrEqual(Run(d, 0.5f, Far, 1e5, true), 0.5 * 1e5 + 1);
         }
 
         [Test]
-        public void Exits_at_10km()
+        public void Does_not_brake_when_not_heading_to_target()
         {
             var d = Active();
-            d.Tick(0.02f, 1e8, 9999);
+            Assert.AreEqual(2e5, Run(d, 5f, Far, 1e5, false), 1.0);
+        }
+
+        [Test]
+        public void Nearby_body_caps_speed()
+        {
+            var d = Active();
+            Assert.LessOrEqual(Run(d, 5f, 5e4), 5e4 + 1);
+        }
+
+        [Test]
+        public void Exits_at_10km_from_target()
+        {
+            var d = Active();
+            d.Tick(0.1f, Far, 9999, true);
             Assert.AreEqual(WarpState.Exiting, d.State);
             d.Complete();
             Assert.AreEqual(WarpState.Idle, d.State);
+            Assert.AreEqual(1, d.Level);
+        }
+
+        [Test]
+        public void Shifting_outside_warp_does_nothing()
+        {
+            var d = Drive();
+            d.ShiftUp();
+            Assert.AreEqual(1, d.Level);
         }
 
         [Test]
         public void Starting_while_charging_is_rejected_and_cancel_returns_idle()
         {
             var d = Drive();
-            d.TryStartCharge(false, true, out _);
-            Assert.IsFalse(d.TryStartCharge(false, true, out var reason));
+            d.TryStartCharge(false, out _);
+            Assert.IsFalse(d.TryStartCharge(false, out var reason));
             Assert.AreEqual(WarpFailReason.AlreadyActive, reason);
             d.Cancel();
             Assert.AreEqual(WarpState.Idle, d.State);
@@ -113,8 +157,8 @@ namespace PulseFactor.Tests
         {
             var d = Drive();
             d.OnDamage();
-            d.TryStartCharge(false, true, out _);
-            d.Tick(5.05f, 1e9, 1e10);
+            d.TryStartCharge(false, out _);
+            d.Tick(5.05f, Far, NoTarget, false);
             Assert.AreEqual(WarpState.Active, d.State);
         }
     }

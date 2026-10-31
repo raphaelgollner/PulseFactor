@@ -134,7 +134,24 @@ namespace PulseFactor.Tests
         {
             var m = new FlightModel(Scout());
             var v = Run(m, Vector3.zero, new FlightInput { strafe = new Vector2(1, 0), aimDirection = Vector3.forward }, 0f, 1f);
-            Assert.AreEqual(40f, v.x, 0.01f);
+            Assert.AreEqual(40f * 0.3f, v.x, 0.01f);
+        }
+
+        [Test]
+        public void Strafe_speed_is_capped_low_for_fine_adjustments()
+        {
+            var m = new FlightModel(Scout());
+            var v = Run(m, Vector3.zero, new FlightInput { strafe = new Vector2(0, 1), aimDirection = Vector3.forward }, 0f, 30f);
+            Assert.AreEqual(220f * 0.15f, v.y, 0.01f);
+        }
+
+        [Test]
+        public void Strafe_cap_does_not_kill_forward_speed()
+        {
+            var m = new FlightModel(Scout());
+            var v = Run(m, new Vector3(0, 0, 200), new FlightInput { throttle = 1, strafe = new Vector2(1, 0), aimDirection = Vector3.forward }, 0f, 2f);
+            Assert.AreEqual(220f, v.magnitude, 0.5f);
+            Assert.LessOrEqual(v.x, 220f * 0.15f + 0.01f);
         }
     }
 }

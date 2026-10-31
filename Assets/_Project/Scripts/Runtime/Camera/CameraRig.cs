@@ -14,6 +14,10 @@ namespace PulseFactor
 
         public Mode CurrentMode { get; private set; } = Mode.ThirdPerson;
 
+        // Olhar livre (Z): yaw/pitch em graus somados a camera, em qualquer modo de voo.
+        public PlayerShipInput LookSource;
+        Quaternion Look => LookSource ? Quaternion.Euler(LookSource.LookAngles.y, LookSource.LookAngles.x, 0f) : Quaternion.identity;
+
         Camera cam;
         AssembledShip ship;
         Quaternion followRotation = Quaternion.identity;
@@ -64,7 +68,8 @@ namespace PulseFactor
                     // Rotacao com leve atraso (peso); posicao presa a nave para nao tremer em alta velocidade.
                     float k = 1f - Mathf.Exp(-rotationFollow * Time.deltaTime);
                     followRotation = Quaternion.Slerp(followRotation, ship.transform.rotation, k);
-                    transform.SetPositionAndRotation(ThirdPersonPosition(followRotation), followRotation);
+                    var orbit = followRotation * Look;
+                    transform.SetPositionAndRotation(ThirdPersonPosition(orbit), orbit);
                     break;
                 case Mode.Showcase:
                     showcaseAngle += showcaseSpeed * Time.unscaledDeltaTime;
@@ -80,7 +85,7 @@ namespace PulseFactor
             {
                 case Mode.Cockpit:
                     var eye = ship.EyePoint ? ship.EyePoint : ship.transform;
-                    transform.SetPositionAndRotation(eye.position, ship.transform.rotation);
+                    transform.SetPositionAndRotation(eye.position, ship.transform.rotation * Look);
                     break;
                 case Mode.ThirdPerson:
                     followRotation = ship.transform.rotation;

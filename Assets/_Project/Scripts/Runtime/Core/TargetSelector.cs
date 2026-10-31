@@ -31,11 +31,7 @@ namespace PulseFactor
             var origin = FloatingOrigin.Instance;
             var camWorld = origin ? origin.ToWorld(cam.transform.position) : default;
             Vector3 aim = cam.transform.forward;
-            if (Input)
-            {
-                var ray = cam.ScreenPointToRay(Input.ReticleScreenPosition);
-                aim = ray.direction;
-            }
+            if (Input) aim = Input.AimDirection;
 
             ITargetable best = null;
             float bestAngle = maxAngle;

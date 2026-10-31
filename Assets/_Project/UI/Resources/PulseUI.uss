@@ -24,6 +24,11 @@
 .test-mode { position: absolute; right: 28px; top: 50px; color: rgb(255, 200, 60); font-size: 12px; }
 .sector { position: absolute; left: 0; right: 0; top: 18px; -unity-text-align: upper-center; font-size: 14px; color: rgb(150, 210, 230); }
 
+.alert { position: absolute; left: 0; right: 0; top: 44px; -unity-text-align: upper-center; font-size: 22px; color: rgb(255, 255, 255); background-color: rgba(190, 20, 20, 0.75); padding: 6px; }
+.notice { position: absolute; left: 0; right: 0; top: 44px; -unity-text-align: upper-center; font-size: 18px; color: rgb(20, 20, 20); background-color: rgba(255, 190, 60, 0.85); padding: 5px; }
+.panel-notice { color: rgb(255, 190, 60); }
+.panel-alert { color: rgb(255, 80, 70); font-size: 18px; }
+
 .messages { position: absolute; left: 0; right: 0; top: 70px; align-items: center; }
 .message { font-size: 16px; color: rgb(230, 245, 250); background-color: rgba(5, 20, 30, 0.5); padding: 4px 12px; margin-bottom: 4px; border-radius: 3px; }
 

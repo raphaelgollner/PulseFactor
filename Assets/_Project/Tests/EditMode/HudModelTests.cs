@@ -25,9 +25,9 @@ namespace PulseFactor.Tests
         public void Warp_charging_maps_progress()
         {
             var d = new WarpDrive(new WarpSettings());
-            d.TryStartCharge(false, true, out _);
-            d.Tick(3f, 1e9, 1e10);
-            var w = WarpHud.From(d, massLocked: false, hasTarget: true);
+            d.TryStartCharge(false, out _);
+            d.Tick(3f, 1e12, double.PositiveInfinity, false);
+            var w = WarpHud.From(d, massLocked: false);
             Assert.AreEqual(WarpHudState.Charging, w.state);
             Assert.AreEqual(0.6f, w.progress, 0.001f);
         }
@@ -36,18 +36,19 @@ namespace PulseFactor.Tests
         public void Warp_idle_states()
         {
             var d = new WarpDrive(new WarpSettings());
-            Assert.AreEqual(WarpHudState.MassLocked, WarpHud.From(d, true, true).state);
-            Assert.AreEqual(WarpHudState.NoTarget, WarpHud.From(d, false, false).state);
-            Assert.AreEqual(WarpHudState.Ready, WarpHud.From(d, false, true).state);
+            Assert.AreEqual(WarpHudState.MassLocked, WarpHud.From(d, true).state);
+            Assert.AreEqual(WarpHudState.Ready, WarpHud.From(d, false).state);
         }
 
         [Test]
         public void Warp_active_state()
         {
             var d = new WarpDrive(new WarpSettings());
-            d.TryStartCharge(false, true, out _);
-            d.Tick(5.1f, 1e9, 1e10);
-            Assert.AreEqual(WarpHudState.Active, WarpHud.From(d, false, true).state);
+            d.TryStartCharge(false, out _);
+            d.Tick(5.1f, 1e12, double.PositiveInfinity, false);
+            var w = WarpHud.From(d, false);
+            Assert.AreEqual(WarpHudState.Active, w.state);
+            Assert.AreEqual(1, w.level);
         }
     }
 }

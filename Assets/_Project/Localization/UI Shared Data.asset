@@ -403,6 +403,54 @@ MonoBehaviour:
     m_Key: terminal.service_ok
     m_Metadata:
       m_Items: []
+  - m_Id: 15463087820800
+    m_Key: msg.warp_emergency
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986624
+    m_Key: msg.proximity_alert
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986625
+    m_Key: hud.proximity_alert
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986626
+    m_Key: msg.warp_level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986627
+    m_Key: notice.dock_too_far
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986628
+    m_Key: target.dock_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986629
+    m_Key: target.dock_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986630
+    m_Key: target.dock_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986631
+    m_Key: target.dock_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986632
+    m_Key: target.dock_5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986633
+    m_Key: target.dock_6
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986634
+    m_Key: target.dock_7
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

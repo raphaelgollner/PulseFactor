@@ -16,6 +16,7 @@ namespace PulseFactor
         VisualElement root, bars, bottomLeft, bottomRight, bottomCenter, glassArcs;
         VisualElement shieldFill, hullFill, fuelFill, shieldArc, hullArc;
         VisualElement reticle, centerDot, bracket, messages;
+        Label alert, notice;
         Label credits, testMode, sector, speed, cruise, warp, cargo, slotLabel, skillLabel, targetLabel;
         readonly List<(VisualElement marker, Label label)> markers = new();
         readonly List<(Label label, float until)> messageItems = new();
@@ -41,6 +42,8 @@ namespace PulseFactor
             testMode = Text(hud, "test-mode");
             sector = Text(hud, "sector");
             messages = Add(hud, "messages");
+            alert = Text(hud, "alert");
+            notice = Text(hud, "notice");
 
             bottomCenter = Add(hud, "bottom-center");
             speed = Text(bottomCenter, "label label-big");
@@ -122,6 +125,15 @@ namespace PulseFactor
             credits.style.display = full;
             glassArcs.style.display = cockpit ? DisplayStyle.Flex : DisplayStyle.None;
 
+            // Alerta de proximidade: no topo em terceira pessoa; no cockpit vai para o painel central.
+            var prox = Player.Proximity;
+            bool alertOn = prox && prox.AlertActive && !cockpit;
+            alert.style.display = alertOn ? DisplayStyle.Flex : DisplayStyle.None;
+            if (alertOn) alert.text = Loc.T("hud.proximity_alert", Loc.T("target." + prox.AlertBodyId));
+            bool noticeOn = HudNotice.Active && !cockpit && !alertOn;
+            notice.style.display = noticeOn ? DisplayStyle.Flex : DisplayStyle.None;
+            if (noticeOn) notice.text = HudNotice.Text;
+
             UpdateBars();
             UpdateTexts();
             UpdateReticle();
@@ -158,19 +170,7 @@ namespace PulseFactor
             skillLabel.text = Loc.T("hud.skill_empty");
         }
 
-        string WarpText()
-        {
-            if (!Player.Warp) return "";
-            var w = WarpHud.From(Player.Warp.Drive, Player.Warp.MassLocked, Player.Targets && Player.Targets.Current != null);
-            return w.state switch
-            {
-                WarpHudState.Charging => Loc.T("hud.warp_charging", Mathf.RoundToInt(w.progress * 100)),
-                WarpHudState.Active => Loc.T("hud.warp_active"),
-                WarpHudState.MassLocked => Loc.T("hud.warp_masslocked"),
-                WarpHudState.NoTarget => Loc.T("hud.warp_no_target"),
-                _ => Loc.T("hud.warp_ready"),
-            };
-        }
+        string WarpText() => WarpHud.Text(Player.Warp);
 
         float PanelScale => root.panel != null && Screen.width > 0 ? root.layout.width / Screen.width : 1f;
 

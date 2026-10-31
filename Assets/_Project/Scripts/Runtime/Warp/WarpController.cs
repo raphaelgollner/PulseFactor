@@ -4,10 +4,13 @@ using UnityEngine;
 
 namespace PulseFactor
 {
-    // Liga a tecla de dobra ao WarpDrive e move a nave em double durante a dobra.
+    // Velocidade de Dobra: J aquece/cancela/sai; W/S trocam o nivel; o mouse continua pilotando.
+    // A nave anda em double na direcao do nariz e a origem flutuante acompanha a cada frame.
     [RequireComponent(typeof(ShipController), typeof(WorldAnchor))]
     public class WarpController : MonoBehaviour
     {
+        const float HeadingDot = 0.9f;
+
         public WarpSettings settings = new();
         public PlayerShipInput Input;
         public TargetSelector Targets;
@@ -21,7 +24,9 @@ namespace PulseFactor
         ShipController ship;
         WorldAnchor anchor;
         WarpState lastState;
-        readonly List<MassSource> sources = new();
+        float lastThrottle;
+        readonly List<MassSource> lockSources = new();
+        readonly List<MassSource> bodies = new();
 
         void Awake()
         {
@@ -42,11 +47,8 @@ namespace PulseFactor
             switch (Drive.State)
             {
                 case WarpState.Idle:
-                    bool hasTarget = Targets && Targets.Current != null;
-                    if (Drive.TryStartCharge(MassLocked, hasTarget, out var reason))
-                        GameMessages.Post("msg.warp_charging");
-                    else
-                        GameMessages.Post(reason == WarpFailReason.MassLocked ? "msg.warp_masslocked" : "msg.warp_no_target");
+                    if (Drive.TryStartCharge(MassLocked, out _)) GameMessages.Post("msg.warp_charging");
+                    else GameMessages.Post("msg.warp_masslocked");
                     break;
                 case WarpState.Charging:
                     Drive.Cancel();
@@ -64,31 +66,36 @@ namespace PulseFactor
             if (!origin) return;
             var shipWorld = origin.ToWorld(transform.position);
 
-            sources.Clear();
+            lockSources.Clear();
+            bodies.Clear();
             foreach (var t in TargetRegistry.All)
             {
-                if (t is CelestialBody b) sources.Add(b.AsMassSource());
-                else if (t.Kind == TargetKind.Station) sources.Add(MassSource.Station(t.Position.value));
+                if (t is CelestialBody b) { var m = b.AsMassSource(); lockSources.Add(m); bodies.Add(m); }
+                else if (t.Kind == TargetKind.Station || t.Kind == TargetKind.Gate) lockSources.Add(MassSource.Station(t.Position.value));
             }
-            MassLocked = MassLock.IsLocked(shipWorld.value, sources);
-            double nearest = MassLock.NearestDistance(shipWorld.value, sources);
+            MassLocked = MassLock.IsLocked(shipWorld.value, lockSources);
+            double nearestBody = MassLock.NearestDistance(shipWorld.value, bodies);
 
             var target = Targets ? Targets.Current : null;
-            DistanceToTarget = target != null ? WorldPosition.Distance(shipWorld, target.Position) : 0;
-
-            if (Drive.State == WarpState.Charging && target == null) Drive.Cancel();
-            if (Drive.State == WarpState.Active && target == null) ExitWarp();
-            double speed = Drive.Tick(Time.deltaTime, nearest, target != null ? DistanceToTarget : double.PositiveInfinity);
-
-            if (Drive.State == WarpState.Active && target != null)
+            bool heading = false;
+            DistanceToTarget = double.PositiveInfinity;
+            if (target != null)
             {
-                ship.ControlsLocked = true;
+                var delta = target.Position - shipWorld;
+                DistanceToTarget = math.length(delta);
+                if (DistanceToTarget > 1)
+                    heading = Vector3.Dot(transform.forward, (Vector3)(float3)(delta / DistanceToTarget)) > HeadingDot;
+            }
+
+            if (Drive.State == WarpState.Active) ReadGearShift();
+            double speed = Drive.Tick(Time.deltaTime, nearestBody, DistanceToTarget, heading);
+
+            if (Drive.State == WarpState.Active)
+            {
+                ship.TranslationLocked = true;
                 ship.Stop();
-                double3 dir = math.normalize(target.Position - shipWorld);
-                var look = Quaternion.LookRotation((float3)dir, transform.up);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, look, 30f * Time.deltaTime);
-                double step = math.min(speed * Time.deltaTime, DistanceToTarget - settings.exitDistance * 0.9);
-                anchor.MoveWorld(dir * math.max(0, step));
+                double3 dir = (float3)transform.forward;
+                anchor.MoveWorld(dir * speed * Time.deltaTime);
                 origin.Rebase(anchor.World);
             }
             else if (Drive.State == WarpState.Exiting)
@@ -103,10 +110,31 @@ namespace PulseFactor
             }
         }
 
+        // W/S em dobra: um toque sobe/desce um nivel.
+        void ReadGearShift()
+        {
+            float t = Input ? Input.Controls.Throttle.ReadValue<float>() : 0f;
+            if (t > 0.5f && lastThrottle <= 0.5f) { Drive.ShiftUp(); GameMessages.Post("msg.warp_level", Drive.Level); }
+            if (t < -0.5f && lastThrottle >= -0.5f) { Drive.ShiftDown(); GameMessages.Post("msg.warp_level", Drive.Level); }
+            lastThrottle = t;
+        }
+
+        // Saida forcada (ex.: perto demais de um planeta).
+        public void ForceExit()
+        {
+            if (Drive.State == WarpState.Idle) return;
+            bool wasActive = Drive.State != WarpState.Charging;
+            Drive.Complete();
+            ship.TranslationLocked = false;
+            if (wasActive) ship.SetVelocity(transform.forward * ship.Flight.EffectiveMaxSpeed(ship.Cargo.LoadFraction) * 0.5f);
+            GameMessages.Post("msg.warp_emergency");
+        }
+
         void ExitWarp()
         {
             Drive.Complete();
-            ship.ControlsLocked = false;
+            ship.TranslationLocked = false;
+            ship.SetVelocity(transform.forward * ship.Flight.EffectiveMaxSpeed(ship.Cargo.LoadFraction));
             GameMessages.Post("msg.warp_exit");
         }
     }

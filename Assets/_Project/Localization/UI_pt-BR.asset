@@ -207,7 +207,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3587919917
-    m_Localized: EM DOBRA  [J] sair
+    m_Localized: "DOBRA N\xCDVEL {0}   [W/S] n\xEDvel   [J] sair"
     m_Metadata:
       m_Items: []
   - m_Id: 3587919918
@@ -275,7 +275,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3587919934
-    m_Localized: Fora do alcance de docagem (7,5 km)
+    m_Localized: Fora do alcance de docagem (8 km)
     m_Metadata:
       m_Items: []
   - m_Id: 3587919935
@@ -287,7 +287,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3587919937
-    m_Localized: 'Docagem autorizada: doca {0}'
+    m_Localized: "Docagem autorizada: doca {0} ({1}) \u2014 siga a seta azul"
     m_Metadata:
       m_Items: []
   - m_Id: 3587919938
@@ -404,6 +404,55 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3587919966
     m_Localized: "OK \u2014 gr\xE1tis no modo de teste"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463087820800
+    m_Localized: "Sa\xEDda de emerg\xEAncia da dobra!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986624
+    m_Localized: 'ALERTA DE PROXIMIDADE: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986625
+    m_Localized: "\u26A0 PROXIMIDADE: {0} \u2014 EVAS\xC3O AUTOM\xC1TICA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986626
+    m_Localized: "Velocidade de Dobra: n\xEDvel {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986627
+    m_Localized: "Docagem s\xF3 a at\xE9 {0} da esta\xE7\xE3o \u2014 dist\xE2ncia
+      atual: {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986628
+    m_Localized: Doca 1 (P)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986629
+    m_Localized: Doca 2 (P)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986630
+    m_Localized: Doca 3 (P)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986631
+    m_Localized: Doca 4 (P)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986632
+    m_Localized: Doca 5 (M)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986633
+    m_Localized: Doca 6 (M)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986634
+    m_Localized: Doca 7 (G)
     m_Metadata:
       m_Items: []
   references:

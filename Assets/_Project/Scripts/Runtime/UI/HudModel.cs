@@ -2,22 +2,34 @@ using System.Globalization;
 
 namespace PulseFactor
 {
-    public enum WarpHudState { Ready, NoTarget, MassLocked, Charging, Active }
+    public enum WarpHudState { Ready, MassLocked, Charging, Active }
 
     public struct WarpHud
     {
         public WarpHudState state;
         public float progress;
+        public int level;
 
-        public static WarpHud From(WarpDrive d, bool massLocked, bool hasTarget) => d.State switch
+        public static WarpHud From(WarpDrive d, bool massLocked) => d.State switch
         {
-            WarpState.Charging => new WarpHud { state = WarpHudState.Charging, progress = d.ChargeProgress },
-            WarpState.Active or WarpState.Exiting => new WarpHud { state = WarpHudState.Active, progress = 1f },
-            _ => new WarpHud
-            {
-                state = massLocked ? WarpHudState.MassLocked : !hasTarget ? WarpHudState.NoTarget : WarpHudState.Ready,
-            },
+            WarpState.Charging => new WarpHud { state = WarpHudState.Charging, progress = d.ChargeProgress, level = d.Level },
+            WarpState.Active or WarpState.Exiting => new WarpHud { state = WarpHudState.Active, progress = 1f, level = d.Level },
+            _ => new WarpHud { state = massLocked ? WarpHudState.MassLocked : WarpHudState.Ready, level = d.Level },
         };
+
+        // Texto localizado do estado da dobra (HUD e paineis).
+        public static string Text(WarpController warp)
+        {
+            if (!warp) return "";
+            var w = From(warp.Drive, warp.MassLocked);
+            return w.state switch
+            {
+                WarpHudState.Charging => Loc.T("hud.warp_charging", UnityEngine.Mathf.RoundToInt(w.progress * 100)),
+                WarpHudState.Active => Loc.T("hud.warp_active", w.level),
+                WarpHudState.MassLocked => Loc.T("hud.warp_masslocked"),
+                _ => Loc.T("hud.warp_ready"),
+            };
+        }
     }
 
     public static class HudModel

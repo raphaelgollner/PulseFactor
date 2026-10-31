@@ -207,7 +207,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3587919917
-    m_Localized: IN WARP  [J] exit
+    m_Localized: WARP LEVEL {0}   [W/S] level   [J] exit
     m_Metadata:
       m_Items: []
   - m_Id: 3587919918
@@ -275,7 +275,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3587919934
-    m_Localized: Out of docking range (7.5 km)
+    m_Localized: Out of docking range (8 km)
     m_Metadata:
       m_Items: []
   - m_Id: 3587919935
@@ -287,7 +287,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3587919937
-    m_Localized: 'Docking granted: dock {0}'
+    m_Localized: "Docking granted: dock {0} ({1}) \u2014 follow the blue arrow"
     m_Metadata:
       m_Items: []
   - m_Id: 3587919938
@@ -404,6 +404,55 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3587919966
     m_Localized: "OK \u2014 free in test mode"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463087820800
+    m_Localized: Emergency warp drop!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986624
+    m_Localized: 'PROXIMITY ALERT: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986625
+    m_Localized: "\u26A0 PROXIMITY: {0} \u2014 AUTO EVASION"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986626
+    m_Localized: 'Warp speed: level {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986627
+    m_Localized: "Docking only within {0} of the station \u2014 current distance:
+      {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986628
+    m_Localized: Dock 1 (S)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986629
+    m_Localized: Dock 2 (S)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986630
+    m_Localized: Dock 3 (S)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986631
+    m_Localized: Dock 4 (S)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986632
+    m_Localized: Dock 5 (M)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986633
+    m_Localized: Dock 6 (M)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15463112986634
+    m_Localized: Dock 7 (L)
     m_Metadata:
       m_Items: []
   references:

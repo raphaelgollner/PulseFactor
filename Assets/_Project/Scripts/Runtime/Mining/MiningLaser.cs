@@ -78,7 +78,7 @@ namespace PulseFactor
 
             var cam = Camera.main;
             Vector3 origin = transform.position + transform.forward * 4f - transform.up * 0.8f;
-            Ray ray = cam && Input ? cam.ScreenPointToRay(Input.ReticleScreenPosition) : new Ray(origin, transform.forward);
+            Ray ray = cam && Input ? new Ray(cam.transform.position, Input.AimDirection) : new Ray(origin, transform.forward);
             Vector3 end = ray.origin + ray.direction * range;
 
             if (RaycastIgnoringSelf(ray, out var hit))

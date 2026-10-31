@@ -49,17 +49,22 @@ namespace PulseFactor
                 local.z = Mathf.MoveTowards(local.z, 0f, release * dt);
             }
 
-            local.x = Axis(local.x, input.strafe.x, accel, release, dt);
-            local.y = Axis(local.y, input.strafe.y, accel, release, dt);
+            float strafeAccel = accel * def.strafeAccelFactor;
+            float strafeMax = maxSpeed * def.strafeMaxFactor;
+            local.x = Axis(local.x, input.strafe.x, strafeAccel, release, strafeMax, dt);
+            local.y = Axis(local.y, input.strafe.y, strafeAccel, release, strafeMax, dt);
 
             Vector3 result = rotation * local;
             return Vector3.ClampMagnitude(result, maxSpeed);
         }
 
-        static float Axis(float speed, float input, float accel, float release, float dt) =>
-            Mathf.Abs(input) > 0.001f
-                ? speed + input * accel * dt
-                : Mathf.MoveTowards(speed, 0f, release * dt);
+        // Lateral/vertical: acelera ate o limite de strafe; acima dele (ex.: depois de uma curva) so desacelera.
+        static float Axis(float speed, float input, float accel, float release, float max, float dt)
+        {
+            if (Mathf.Abs(input) <= 0.001f || Mathf.Abs(speed) > max)
+                return Mathf.MoveTowards(speed, 0f, release * dt);
+            return Mathf.Clamp(speed + input * accel * dt, -max, max);
+        }
 
         // Velocidade angular local (graus/s): x = pitch, y = yaw, z = roll.
         public Vector3 AngularVelocity { get; private set; }
