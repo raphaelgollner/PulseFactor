@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c55aa804a3f07a04a97952b63c0eb5f6, type: 3}
+  m_Name: Block_typec_wing
+  m_EditorClassIdentifier: PulseFactor.Runtime::PulseFactor.BlockDef
+  id: typec_wing
+  type: 3
+  manufacturer: {fileID: 11400000, guid: e48e75ad3837f40488dd10791e525e7c, type: 2}
+  originClass: 1
+  multiclass: 1
+  prefab: {fileID: 3913074906497111263, guid: 7701ef8bb8a0a624e83307e508d60cbe, type: 3}
+  classDef: {fileID: 0}

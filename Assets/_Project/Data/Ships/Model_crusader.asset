@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbd8c0ad872e884cbc07561ab6ebfc2, type: 3}
+  m_Name: Model_crusader
+  m_EditorClassIdentifier: PulseFactor.Runtime::PulseFactor.ShipModelDef
+  id: crusader
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  cockpit: {fileID: 11400000, guid: 23b0f628ea841cf478e1afe2fee25e60, type: 2}
+  body: {fileID: 11400000, guid: d3703646bf96e4c46950ca0ddf6ee2ac, type: 2}
+  tail: {fileID: 11400000, guid: a15ad368d73927a46b0072a3d61f54f7, type: 2}
+  wing: {fileID: 11400000, guid: 5ab0217e6d7085f4a991539b7ad40cad, type: 2}
+  references:
+    version: 2
+    RefIds: []

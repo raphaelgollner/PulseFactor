@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c55aa804a3f07a04a97952b63c0eb5f6, type: 3}
+  m_Name: Block_horder_body
+  m_EditorClassIdentifier: PulseFactor.Runtime::PulseFactor.BlockDef
+  id: horder_body
+  type: 1
+  manufacturer: {fileID: 11400000, guid: 5c78fce4336f2ab40bf5207499984305, type: 2}
+  originClass: 1
+  multiclass: 1
+  prefab: {fileID: 4394323319822644883, guid: 395e7eb825901dc4aa0e51a65907a0ec, type: 3}
+  classDef: {fileID: 11400000, guid: 1dc29397364c2b9439a29e5d231e824b, type: 2}

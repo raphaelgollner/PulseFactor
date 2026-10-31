@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db55fc2043c0cf24584e4919bbb38ae4, type: 3}
+  m_Name: Manufacturer_masterhauling
+  m_EditorClassIdentifier: PulseFactor.Runtime::PulseFactor.ManufacturerDef
+  id: masterhauling
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  primary: {r: 0.92, g: 0.92, b: 0.9, a: 1}
+  secondary: {r: 0.12, g: 0.2, b: 0.35, a: 1}
+  accent: {r: 1, g: 0.8, b: 0.1, a: 1}
+  references:
+    version: 2
+    RefIds: []

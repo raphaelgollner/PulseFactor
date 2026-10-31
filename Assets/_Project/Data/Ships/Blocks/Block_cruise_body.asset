@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c55aa804a3f07a04a97952b63c0eb5f6, type: 3}
+  m_Name: Block_cruise_body
+  m_EditorClassIdentifier: PulseFactor.Runtime::PulseFactor.BlockDef
+  id: cruise_body
+  type: 1
+  manufacturer: {fileID: 11400000, guid: e8de05e4ad132dd47a8b9dfe996ee155, type: 2}
+  originClass: 0
+  multiclass: 1
+  prefab: {fileID: 5291232216151690867, guid: 35862c393040e80478ead8387938fe54, type: 3}
+  classDef: {fileID: 11400000, guid: 761656b3f711f0a48a821f58b1671339, type: 2}
