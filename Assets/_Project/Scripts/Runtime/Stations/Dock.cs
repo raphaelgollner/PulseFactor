@@ -7,6 +7,7 @@ namespace PulseFactor
     {
         public int index;
         public DockSize size;
+        public float padSize = 44f;
         public Transform ApproachPoint;
         public Transform LandingPoint;
         public GameObject Marker; // seta azul translucida

@@ -151,7 +151,7 @@ namespace PulseFactor
                 {
                     var s = Galaxy.sectors[i];
                     var main = s.bodies.Count > 0 ? s.bodies[0] : null;
-                    var e = AddNode(26f, "map-node-planet", main != null ? main.color : Color.gray,
+                    var e = AddNode(26f, IconKind.Planet, main != null ? main.color : Color.gray,
                         Loc.T("sector.name", Loc.T("body." + s.id)), () => EnterSector(s));
                     e.unit = new Vector2(i, 0); // indice do setor (posicao calculada em Layout)
                     if (s == CurrentSector) e.node.AddToClassList("map-node-here");
@@ -164,14 +164,15 @@ namespace PulseFactor
                 hint.text = Loc.T("map.hint_sector");
                 foreach (var n in SystemMapLayout.BuildSector(zoom))
                 {
-                    var (cls, size) = n.kind switch
+                    float size = n.kind switch
                     {
-                        MapNodeKind.MainBody => ("map-node-planet", 40f),
-                        MapNodeKind.Moon => ("map-node-moon", 18f),
-                        MapNodeKind.Station => ("map-node-station", 16f),
-                        MapNodeKind.Field => ("map-node-field", 16f),
-                        _ => ("map-node-gate", 18f),
+                        MapNodeKind.MainBody => 40f,
+                        MapNodeKind.Moon => 20f,
+                        MapNodeKind.Station => 22f,
+                        MapNodeKind.Field => 22f,
+                        _ => 22f,
                     };
+                    var cls = HudIcons.For(n.kind);
                     var color = n.kind == MapNodeKind.MainBody || n.kind == MapNodeKind.Moon
                         ? zoom.bodies.First(b => b.id == n.id).color : Color.clear;
                     var sector = zoom;
@@ -195,12 +196,14 @@ namespace PulseFactor
             Rebuild();
         }
 
-        Entry AddNode(float size, string cls, Color color, string label, System.Action onClick)
+        // Mesmos icones do HUD (planeta, lua, estacao com $, campo, portal), em tamanho de mapa.
+        Entry AddNode(float size, IconKind kind, Color color, string label, System.Action onClick)
         {
             var e = new Entry { size = size };
-            e.node = new VisualElement();
+            e.node = HudIcons.Create();
+            e.node.pickingMode = PickingMode.Position;
             e.node.AddToClassList("map-node");
-            e.node.AddToClassList(cls);
+            HudIcons.Apply(e.node, kind);
             e.node.style.width = size;
             e.node.style.height = size;
             if (color.a > 0) e.node.style.backgroundColor = color;

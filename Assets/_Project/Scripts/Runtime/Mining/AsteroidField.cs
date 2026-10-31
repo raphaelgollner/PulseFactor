@@ -13,7 +13,7 @@ namespace PulseFactor
 
         public WorldPosition Position => Center;
         public string DisplayId => Def ? Def.id : name;
-        public TargetKind Kind => TargetKind.Body; // alvo de navegacao (dobra), nao de mineracao
+        public TargetKind Kind => TargetKind.Field; // alvo de navegacao (dobra), nao de mineracao
 
         void OnEnable() => TargetRegistry.Register(this);
         void OnDisable() => TargetRegistry.Unregister(this);

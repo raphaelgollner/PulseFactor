@@ -14,8 +14,8 @@ namespace PulseFactor
         public PlayerContext Player;
 
         VisualElement root, bars, bottomLeft, bottomRight, bottomCenter, glassArcs;
-        VisualElement shieldFill, hullFill, fuelFill, shieldArc, hullArc;
-        VisualElement reticle, centerDot, bracket, messages;
+        VisualElement shieldFill, hullFill, fuelFill, boostFill, shieldArc, hullArc;
+        VisualElement reticle, centerDot, bracket, messages, targetIcon, targetTriangle;
         Label alert, notice;
         VisualElement contractList, routeMarker, routeArrow;
         Label routeLabel;
@@ -40,6 +40,7 @@ namespace PulseFactor
             shieldFill = Bar(bars, "bar-shield");
             hullFill = Bar(bars, "bar-hull");
             fuelFill = Bar(bars, "bar-fuel");
+            boostFill = Bar(bars, "bar-boost");
 
             credits = Text(hud, "label credits");
             testMode = Text(hud, "test-mode");
@@ -66,11 +67,15 @@ namespace PulseFactor
 
             for (int i = 0; i < MaxMarkers; i++)
             {
-                var m = Add(hud, "marker");
+                var m = HudIcons.Create();
+                hud.Add(m);
                 var l = Text(hud, "marker-label");
                 markers.Add((m, l));
             }
             bracket = Add(hud, "target-bracket");
+            targetIcon = HudIcons.Create();
+            hud.Add(targetIcon);
+            targetTriangle = Add(hud, "target-tri");
             targetLabel = Text(hud, "label marker-label");
             arrow = Add(hud, "arrow");
             routeMarker = Add(hud, "route-marker");
@@ -177,6 +182,7 @@ namespace PulseFactor
         {
             // Sem dano nesta fatia: escudo, casco e combustivel cheios.
             SetFill(shieldFill, 1f); SetFill(hullFill, 1f); SetFill(fuelFill, 1f);
+            SetFill(boostFill, Player.Boost && Player.Boost.Tank != null ? Player.Boost.Tank.Fraction : 1f);
             SetFill(shieldArc, 1f); SetFill(hullArc, 1f);
         }
 
@@ -222,6 +228,8 @@ namespace PulseFactor
             Place(glassArcs, ToPanel(r));
         }
 
+        double ScannerRange => Player.Ship && Player.Ship.ClassDef ? Player.Ship.ClassDef.scannerRange : Scanner.DefaultRange;
+
         static Color KindColor(TargetKind k) => k switch
         {
             TargetKind.Station => new Color(0.3f, 0.9f, 1f),
@@ -243,17 +251,15 @@ namespace PulseFactor
             foreach (var t in TargetRegistry.All)
             {
                 if (used >= MaxMarkers) break;
-                // Asteroides so aparecem quando sao o alvo; o resto sempre (estacoes, gates, corpos, piratas).
-                if (t.Kind == TargetKind.Asteroid && !ReferenceEquals(t, current)) continue;
+                // Scanner: naves e asteroides so aparecem dentro do alcance; estacoes, corpos e portais sempre.
                 if (ReferenceEquals(t, current)) continue;
                 if (!Project(cam, camWorld, t, out var screen, out double dist)) continue;
+                if (!Scanner.Detects(t.Kind, dist, ScannerRange)) continue;
                 var (marker, label) = markers[used++];
                 marker.style.display = DisplayStyle.Flex;
                 label.style.display = DisplayStyle.Flex;
-                var c = KindColor(t.Kind);
-                marker.style.borderTopColor = c; marker.style.borderBottomColor = c;
-                marker.style.borderLeftColor = c; marker.style.borderRightColor = c;
-                label.style.color = c;
+                HudIcons.Apply(marker, HudIcons.For(t));
+                label.style.color = KindColor(t.Kind);
                 var p = ToPanel(screen);
                 Place(marker, p);
                 Place(label, p);
@@ -267,6 +273,8 @@ namespace PulseFactor
 
             bracket.style.display = DisplayStyle.None;
             targetLabel.style.display = DisplayStyle.None;
+            targetIcon.style.display = DisplayStyle.None;
+            targetTriangle.style.display = DisplayStyle.None;
             arrow.style.display = DisplayStyle.None;
             if (current == null) return;
 
@@ -280,6 +288,15 @@ namespace PulseFactor
                 var p = ToPanel(sp);
                 bracket.style.display = DisplayStyle.Flex;
                 targetLabel.style.display = DisplayStyle.Flex;
+                targetIcon.style.display = DisplayStyle.Flex;
+                targetTriangle.style.display = DisplayStyle.Flex;
+                HudIcons.Apply(targetIcon, HudIcons.For(current));
+                Place(targetIcon, p);
+                // Triangulo do alvo marcado: neutro branco, aliado verde, inimigo vermelho.
+                var stance = HudIcons.StanceOf(current, Player.Contracts ? Player.Contracts.Reputation : null);
+                foreach (var c in new[] { "tri-neutral", "tri-ally", "tri-enemy" }) targetTriangle.RemoveFromClassList(c);
+                targetTriangle.AddToClassList(HudIcons.TriangleClass(stance));
+                Place(targetTriangle, p + new Vector2(0, -38));
                 Place(bracket, p);
                 Place(targetLabel, p + new Vector2(18, 10));
                 targetLabel.text = $"{Loc.T("target." + current.DisplayId)}\n{HudModel.FormatDistance(d)}";

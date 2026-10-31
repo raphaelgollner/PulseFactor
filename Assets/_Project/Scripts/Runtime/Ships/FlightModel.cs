@@ -11,13 +11,19 @@ namespace PulseFactor
         public FlightModel(ShipClassDef def) { this.def = def; }
 
         public bool CruiseActive { get; private set; }
+
+        // Multiplicador da velocidade maxima (Boost 1,5; Sobrecarga de Motor 2,0).
+        public float SpeedMultiplier { get; set; } = 1f;
+
+        // Peso do giro (1 = normal; em dobra cai por nivel): reduz giro maximo e resposta angular.
+        public float SteeringScale { get; set; } = 1f;
         public float CruiseTarget { get; private set; }
 
         // Fracao da velocidade maxima permitida em re.
         const float ReverseFraction = 0.25f;
 
         public float EffectiveMaxSpeed(float loadFraction) =>
-            def.maxSpeed * (1f - def.fullCargoSpeedPenalty * Mathf.Clamp01(loadFraction));
+            def.maxSpeed * (1f - def.fullCargoSpeedPenalty * Mathf.Clamp01(loadFraction)) * SpeedMultiplier;
 
         public Vector3 StepVelocity(Vector3 velocity, Quaternion rotation, FlightInput input, float loadFraction, float dt)
         {
@@ -72,7 +78,7 @@ namespace PulseFactor
         // Giro proporcional ao erro da mira (satura em steerAngle) com aceleracao angular: a nave tem peso.
         public Quaternion StepRotation(Quaternion rotation, FlightInput input, float dt)
         {
-            float rate = def.turnRateDeg;
+            float rate = def.turnRateDeg * SteeringScale;
             Vector2 steer = Vector2.zero;
             if (input.aimDirection.sqrMagnitude > 1e-6f)
             {
@@ -86,7 +92,7 @@ namespace PulseFactor
             }
 
             var target = new Vector3(steer.y * rate, steer.x * rate, -Mathf.Clamp(input.roll, -1f, 1f) * rate);
-            float accel = rate * def.angularResponse * dt;
+            float accel = rate * def.angularResponse * SteeringScale * dt;
             var w = AngularVelocity;
             w = new Vector3(
                 Mathf.MoveTowards(w.x, target.x, accel),

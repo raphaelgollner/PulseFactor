@@ -48,6 +48,7 @@ namespace PulseFactor
             var dock = go.AddComponent<Dock>();
             dock.index = index;
             dock.size = size;
+            dock.padSize = padSize;
             dock.LandingPoint = Point(t, "LandingPoint", new Vector3(0, 4f, 0));
             dock.ApproachPoint = Point(t, "ApproachPoint", new Vector3(0, 150f, 0));
 

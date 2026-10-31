@@ -14,6 +14,7 @@ namespace PulseFactor
             key = textKey;
             args = arguments;
             until = Time.unscaledTime + seconds;
+            MessageLog.Add(Loc.T(textKey, arguments));
         }
 
         public static bool Active => key != null && Time.unscaledTime < until;

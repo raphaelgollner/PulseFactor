@@ -20,6 +20,7 @@ namespace PulseFactor
         public double px, py, pz;
         public float rx, ry, rz, rw = 1f;
         public string routeSectorId, routeTargetId;
+        public string shipName;
         public List<CargoEntry> cargo = new();
         public List<RepEntry> reputation = new();
         public List<Contract> contracts = new();

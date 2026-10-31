@@ -145,6 +145,15 @@ namespace PulseFactor.Tests
             Assert.AreEqual(WarpState.Active, d.State);
         }
 
+        [TestCase(0, 1f)]
+        [TestCase(1, 0.5f)]
+        [TestCase(2, 0.3f)]
+        [TestCase(3, 0.15f)]
+        public void Steering_gets_heavier_per_warp_level(int level, float factor)
+        {
+            Assert.AreEqual(factor, WarpDrive.SteeringFactor(level), 1e-5f);
+        }
+
         [Test]
         public void Shifting_outside_warp_does_nothing()
         {
@@ -181,11 +190,19 @@ namespace PulseFactor.Tests
         static MassSource Planet(double3 p, double r) => MassSource.Body(p, r);
 
         [Test]
-        public void Locked_within_5km_of_station()
+        public void Locked_within_7km_of_station()
         {
             var s = new[] { Station(double3.zero) };
-            Assert.IsTrue(MassLock.IsLocked(new double3(4999, 0, 0), s));
-            Assert.IsFalse(MassLock.IsLocked(new double3(5001, 0, 0), s));
+            Assert.IsTrue(MassLock.IsLocked(new double3(6999, 0, 0), s));
+            Assert.IsFalse(MassLock.IsLocked(new double3(7001, 0, 0), s));
+        }
+
+        [Test]
+        public void Gate_mass_lock_is_only_2km()
+        {
+            var s = new[] { MassSource.Gate(double3.zero) };
+            Assert.IsTrue(MassLock.IsLocked(new double3(1999, 0, 0), s));
+            Assert.IsFalse(MassLock.IsLocked(new double3(2001, 0, 0), s));
         }
 
         [Test]

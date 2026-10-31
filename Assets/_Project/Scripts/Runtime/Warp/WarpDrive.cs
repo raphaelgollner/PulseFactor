@@ -58,6 +58,9 @@ namespace PulseFactor
                 addedDelay = Mathf.Min(addedDelay + s.damageDelay, s.maxDamageDelay);
         }
 
+        // Peso do giro em dobra: nivel 1 = 50%, 2 = 30%, 3 = 15% do normal (fora da dobra = 100%).
+        public static float SteeringFactor(int level) => level switch { 1 => 0.5f, 2 => 0.3f, 3 => 0.15f, _ => 1f };
+
         public void ShiftUp() { if (State == WarpState.Active) Level = Math.Min(Level + 1, MaxLevel); }
         public void ShiftDown() { if (State == WarpState.Active) Level = Math.Max(Level - 1, 1); }
 

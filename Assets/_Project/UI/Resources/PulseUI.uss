@@ -19,6 +19,7 @@
 .bar-shield { background-color: rgb(70, 170, 255); }
 .bar-hull { background-color: rgb(240, 80, 70); }
 .bar-fuel { background-color: rgb(255, 160, 40); }
+.bar-boost { background-color: rgb(120, 255, 210); }
 
 .credits { position: absolute; right: 28px; top: 24px; -unity-text-align: upper-right; }
 .test-mode { position: absolute; right: 28px; top: 50px; color: rgb(255, 200, 60); font-size: 12px; }
@@ -56,6 +57,46 @@
 .map-info { position: absolute; right: 24px; top: 90px; width: 340px; padding: 16px; background-color: rgba(6, 18, 26, 0.95); border-width: 1px; border-color: rgb(60, 150, 190); }
 .map-desc { font-size: 14px; color: rgb(185, 210, 220); white-space: normal; margin-top: 6px; margin-bottom: 8px; }
 .btn-route { margin-top: 12px; padding: 8px 14px; background-color: rgb(120, 60, 200); }
+
+/* Icones padronizados (HUD e mapa) */
+.icon { position: absolute; width: 16px; height: 16px; margin-left: -8px; margin-top: -8px; border-width: 2px; border-color: rgb(230, 230, 230); }
+.icon-planet { border-radius: 50%; border-color: rgb(230, 235, 240); }
+.icon-moon { width: 11px; height: 11px; margin-left: -6px; margin-top: -6px; border-radius: 50%; border-color: rgb(190, 190, 200); }
+.icon-station { border-radius: 50%; border-color: rgb(80, 220, 255); }
+.icon-asteroid { border-top-left-radius: 40%; border-top-right-radius: 65%; border-bottom-left-radius: 60%; border-bottom-right-radius: 30%; border-color: rgb(255, 190, 80); }
+.icon-ship { border-radius: 0; border-color: rgb(225, 225, 235); }
+.icon-pirate { border-radius: 0; border-color: rgb(255, 60, 50); }
+.icon-gate { border-radius: 50%; border-color: rgb(150, 170, 255); }
+.icon-field { border-width: 0; }
+.icon-dollar { display: none; position: absolute; left: 0; right: 0; top: 0; bottom: 0; -unity-text-align: middle-center; font-size: 10px; padding: 0; margin: 0; color: rgb(80, 220, 255); -unity-font-style: bold; }
+.icon-station > .icon-dollar { display: flex; }
+.icon-inner { display: none; position: absolute; left: 2px; top: 2px; right: 2px; bottom: 2px; border-width: 2px; border-radius: 50%; border-color: rgb(150, 170, 255); }
+.icon-gate > .icon-inner { display: flex; }
+.icon-dot { display: none; position: absolute; width: 7px; height: 6px; margin-left: -3px; margin-top: -3px; border-width: 1.5px; border-color: rgb(255, 190, 80); border-top-left-radius: 40%; border-top-right-radius: 65%; border-bottom-left-radius: 60%; border-bottom-right-radius: 30%; }
+.icon-field > .icon-dot { display: flex; }
+.map-node.icon { margin-left: 0; margin-top: 0; }
+
+/* Triangulo do alvo marcado */
+.target-tri { position: absolute; width: 0; height: 0; margin-left: -9px; margin-top: -7px; border-left-width: 9px; border-right-width: 9px; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); }
+.tri-neutral { border-top-width: 14px; border-top-color: rgb(255, 255, 255); }
+.tri-ally { border-top-width: 14px; border-top-color: rgb(80, 255, 120); }
+.tri-enemy { border-bottom-width: 14px; border-bottom-color: rgb(255, 60, 50); }
+
+/* Paineis do cockpit (3 embaixo + 2 em cima) */
+.panel-title { -unity-text-align: middle-center; color: rgb(110, 220, 250); font-size: 24px; margin-top: 4px; margin-bottom: 6px; }
+.panel-bar-label { font-size: 18px; color: rgb(170, 210, 225); margin-bottom: 2px; }
+.panel-bar { height: 18px; width: 100%; margin-bottom: 8px; background-color: rgba(10, 30, 40, 0.9); border-width: 1px; border-color: rgba(120, 200, 230, 0.4); }
+.panel-tabs { flex-direction: row; justify-content: space-between; margin-bottom: 6px; }
+.panel-tab { flex-grow: 1; margin: 0 2px; padding: 4px 2px; font-size: 15px; background-color: rgba(30, 70, 90, 0.7); color: rgb(200, 235, 245); border-width: 0; }
+.panel-tab-active { background-color: rgb(40, 150, 190); color: rgb(5, 15, 20); }
+.panel-list { flex-grow: 1; }
+.panel-feed { font-size: 16px; color: rgb(205, 230, 240); white-space: normal; margin-bottom: 3px; }
+.panel-hostile { color: rgb(255, 80, 70); }
+.panel-centered { justify-content: center; align-items: center; }
+.panel-clock { font-size: 72px; color: rgb(150, 230, 255); -unity-font-style: bold; -unity-text-align: middle-center; }
+.panel-ship-name { font-size: 48px; color: rgb(230, 250, 255); -unity-font-style: bold; -unity-text-align: middle-center; }
+.panel-ship-sub { font-size: 20px; color: rgb(140, 190, 210); -unity-text-align: middle-center; }
+.name-field { width: 260px; font-size: 15px; }
 
 .notice { position: absolute; left: 0; right: 0; top: 44px; -unity-text-align: upper-center; font-size: 18px; color: rgb(20, 20, 20); background-color: rgba(255, 190, 60, 0.85); padding: 5px; }
 .panel-notice { color: rgb(255, 190, 60); }

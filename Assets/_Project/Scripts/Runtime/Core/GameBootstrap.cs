@@ -125,6 +125,7 @@ namespace PulseFactor
                 rx = rot.x, ry = rot.y, rz = rot.z, rw = rot.w,
                 routeSectorId = Player.Route ? Player.Route.DestinationSectorId : null,
                 routeTargetId = Player.Route ? Player.Route.DestinationId : null,
+                shipName = Player.ShipName,
             };
             foreach (var kv in ship.Cargo.Contents)
                 data.cargo.Add(new SaveData.CargoEntry { resourceId = kv.Key.id, count = kv.Value, reserved = ship.Cargo.Reserved(kv.Key) });
@@ -215,6 +216,10 @@ namespace PulseFactor
             docking.Input = input;
             docking.Warp = warp;
             docking.Targets = targets;
+            var boost = go.AddComponent<BoostController>();
+            boost.Input = input;
+            boost.Warp = warp;
+            boost.Docking = docking;
             var laser = go.AddComponent<MiningLaser>();
             laser.Input = input;
             laser.Warp = warp;
@@ -231,8 +236,9 @@ namespace PulseFactor
             return new PlayerContext
             {
                 Ship = ship, Visual = visual, Input = input, Warp = warp, Proximity = proximity, Targets = targets,
-                Docking = docking, Laser = laser, CameraRig = rig, Config = config,
+                Docking = docking, Laser = laser, Boost = boost, CameraRig = rig, Config = config,
                 Wallet = new Wallet(save != null ? save.credits : config.startingCredits),
+                ShipName = save != null && !string.IsNullOrEmpty(save.shipName) ? PlayerContext.CleanShipName(save.shipName) : "PULSE-01",
             };
         }
 
@@ -282,7 +288,15 @@ namespace PulseFactor
                 terminal.OpenWithWelcome();
             };
             docking.Undocked += () => input.SetDocked(false);
-            input.OnInteract += () => { if (docking.Current == DockingAutopilot.Phase.Docked && !terminal.IsOpen) terminal.Open(); };
+            // F: docado abre o terminal; em voo (cockpit) liga/desliga o modo mouse das telas.
+            input.OnInteract += () =>
+            {
+                if (docking.Current == DockingAutopilot.Phase.Docked) { if (!terminal.IsOpen) terminal.Open(); return; }
+                if (map.IsOpen) return;
+                if (rig.CurrentMode == CameraRig.Mode.Cockpit) panels.SetMouseMode(!panels.MouseMode);
+            };
+            input.OnPanelNext += panels.NextTab;
+            input.OnPanelPrev += panels.PrevTab;
             input.OnMap += map.Toggle;
             input.OnClearTarget += () =>
             {
@@ -294,6 +308,7 @@ namespace PulseFactor
             input.OnPause += () =>
             {
                 if (map.IsOpen) { map.Close(); return; }
+                if (panels.MouseMode) { panels.SetMouseMode(false); return; }
                 if (docking.Current == DockingAutopilot.Phase.Docked) return;
                 bool locked = UnityEngine.Cursor.lockState == CursorLockMode.Locked;
                 UnityEngine.Cursor.lockState = locked ? CursorLockMode.None : CursorLockMode.Locked;

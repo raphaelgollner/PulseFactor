@@ -771,6 +771,190 @@ MonoBehaviour:
     m_Key: desc.gate_centaurus_cinturao
     m_Metadata:
       m_Items: []
+  - m_Id: 193878898200576
+    m_Key: system.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560704
+    m_Key: class.Scout
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560705
+    m_Key: class.Cargo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560706
+    m_Key: class.Assault
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560707
+    m_Key: maker.razzor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560708
+    m_Key: maker.cybertech
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560709
+    m_Key: maker.masterhauling
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560710
+    m_Key: panel.status_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560711
+    m_Key: panel.hull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560712
+    m_Key: panel.shields
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560713
+    m_Key: panel.boost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560714
+    m_Key: panel.speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560715
+    m_Key: panel.system_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560716
+    m_Key: panel.system_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560717
+    m_Key: panel.sector_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560718
+    m_Key: panel.power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560719
+    m_Key: panel.sector_corp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560720
+    m_Key: panel.target_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560721
+    m_Key: panel.target_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560722
+    m_Key: panel.target_distance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560723
+    m_Key: panel.target_hull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560724
+    m_Key: panel.target_shield
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560725
+    m_Key: panel.affiliation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560726
+    m_Key: panel.pirate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560727
+    m_Key: panel.neutral
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560728
+    m_Key: panel.tab_messages
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560729
+    m_Key: panel.tab_contracts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560730
+    m_Key: panel.tab_reputation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560731
+    m_Key: panel.tab_modules
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560732
+    m_Key: panel.tab_messages_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560733
+    m_Key: panel.tab_contracts_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560734
+    m_Key: panel.tab_reputation_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560735
+    m_Key: panel.tab_modules_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560736
+    m_Key: panel.no_contracts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560737
+    m_Key: panel.rep_line
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560738
+    m_Key: panel.slot_mining
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560739
+    m_Key: panel.module_line
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560740
+    m_Key: panel.module_generator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560741
+    m_Key: panel.module_engine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560742
+    m_Key: panel.module_hull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560743
+    m_Key: panel.module_booster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560744
+    m_Key: panel.module_scanner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560745
+    m_Key: panel.module_skill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560746
+    m_Key: terminal.ship_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560747
+    m_Key: terminal.rename
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560748
+    m_Key: msg.ship_renamed
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

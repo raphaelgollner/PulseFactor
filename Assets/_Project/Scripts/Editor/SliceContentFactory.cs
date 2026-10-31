@@ -112,6 +112,11 @@ namespace PulseFactor.EditorTools
             Field(cinturao, "cinturao_field_b", "cinturao", 8e5, 150, 220, 5000, 505, true,
                 (r["iron"], 25), (r["cobalt"], 25), (r["titanium"], 20), (r["ice"], 30));
 
+            aster.dominantCorporationId = "nova";
+            venera.dominantCorporationId = "magna";
+            cinturao.dominantCorporationId = "atlas";
+            centaurus.dominantCorporationId = "federation";
+
             // Gates: Aster-Venera, Aster-Cinturao, Cinturao-Centaurus.
             Link(aster, "gate_aster_venera", "aster", 4e7, 120, venera, "gate_venera_aster", "venera", 4e7, 300);
             Link(aster, "gate_aster_cinturao", "aster", 4e7, 240, cinturao, "gate_cinturao_aster", "cinturao", 3e6, 60);
@@ -126,8 +131,8 @@ namespace PulseFactor.EditorTools
         }
 
         // Escala geral das distancias (playtest 2026-10-31: -20%). Tamanhos dos corpos nao mudam.
-        const double DistanceScale = 0.8;
-        const double StationOrbitFactor = 1.2;
+        const double DistanceScale = 1.0; // 0,8 no teste anterior; voltou ao original
+        const double StationOrbitFactor = 1.0; // 1,2 no teste anterior; voltou ao original
 
         // Distancia escalada, sem nunca entrar no corpo-pai (ex.: estacao colada no asteroide do Cinturao).
         static double Scaled(SectorDef s, string parentId, double dist)

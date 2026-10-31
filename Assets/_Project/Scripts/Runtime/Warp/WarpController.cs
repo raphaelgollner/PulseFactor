@@ -75,7 +75,8 @@ namespace PulseFactor
             foreach (var t in TargetRegistry.All)
             {
                 if (t is CelestialBody b) { var m = b.AsMassSource(); lockSources.Add(m); bodies.Add(m); }
-                else if (t.Kind == TargetKind.Station || t.Kind == TargetKind.Gate) lockSources.Add(MassSource.Station(t.Position.value));
+                else if (t.Kind == TargetKind.Station) lockSources.Add(MassSource.Station(t.Position.value));
+                else if (t.Kind == TargetKind.Gate) lockSources.Add(MassSource.Gate(t.Position.value));
             }
             MassLocked = MassLock.IsLocked(shipWorld.value, lockSources);
             double nearestBody = MassLock.NearestDistance(shipWorld.value, bodies);
@@ -93,6 +94,7 @@ namespace PulseFactor
             }
 
             if (Drive.State == WarpState.Active) ReadGearShift();
+            ship.Flight.SteeringScale = Drive.State == WarpState.Active ? WarpDrive.SteeringFactor(Drive.Level) : 1f;
             double speed = Drive.Tick(Time.deltaTime, nearestBody, DistanceToTarget, heading);
 
             if (Drive.State == WarpState.Active)

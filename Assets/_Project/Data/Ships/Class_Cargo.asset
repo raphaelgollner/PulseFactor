@@ -18,10 +18,15 @@ MonoBehaviour:
   turnRateDeg: 45
   angularResponse: 4
   steerAngleDeg: 25
-  fullCargoSpeedPenalty: 0.4
+  fullCargoSpeedPenalty: 0.15
   releaseDecelFactor: 0.3
   cruiseAdjustRate: 60
+  strafeAccelFactor: 0.3
+  strafeMaxFactor: 0.15
   cargoCapacity: 500
   weaponSlots: 2
   skillSlots: 1
+  dockSize: 0
+  boostCapacity: 150
+  scannerRange: 5000
   startingHull: {fileID: 11400000, guid: ba8fce366d5acab44a2b8dafd39e0a60, type: 2}

@@ -80,11 +80,12 @@ namespace PulseFactor.Tests
         });
 
         [Test]
-        public void Default_request_range_is_8km()
+        public void Default_request_range_is_6km()
         {
             var s = Standard();
-            Assert.AreEqual(8000f, s.RequestRange);
-            Assert.IsTrue(s.Request("player", 7900).granted);
+            Assert.AreEqual(6000f, s.RequestRange);
+            Assert.IsTrue(s.Request("player", 5900).granted);
+            Assert.AreEqual(DockDenyReason.OutOfRange, s.Request("other", 6100).reason);
         }
 
         [Test]

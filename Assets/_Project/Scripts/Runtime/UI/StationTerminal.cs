@@ -242,6 +242,21 @@ namespace PulseFactor
 
         void BuildServices()
         {
+            // Nome da nave (max. 18 caracteres). Na compra de nave, futuramente, o nome e pedido ali.
+            var nameRow = Row(content, "market-row");
+            Lbl(nameRow, "cell cell-wide").text = Loc.T("terminal.ship_name");
+            var field = new TextField { value = Player.ShipName, maxLength = PlayerContext.MaxShipNameLength };
+            field.AddToClassList("name-field");
+            nameRow.Add(field);
+            Btn(nameRow, Loc.T("terminal.rename"), () =>
+            {
+                var clean = PlayerContext.CleanShipName(field.value);
+                if (clean.Length == 0) return;
+                Player.ShipName = clean;
+                GameMessages.Post("msg.ship_renamed", clean);
+                Refresh();
+            }, "btn");
+
             foreach (var key in new[] { "terminal.fuel", "terminal.repair", "terminal.ammo" })
             {
                 var row = Row(content, "market-row");

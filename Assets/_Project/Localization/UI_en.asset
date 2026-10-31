@@ -645,7 +645,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 147046805491718
-    m_Localized: "Click a point for details \u2022 Scroll back to return"
+    m_Localized: "Scroll to zoom \u2022 drag to pan \u2022 click a point for details
+      \u2022 scroll back at 1x to return"
     m_Metadata:
       m_Items: []
   - m_Id: 147046805491719
@@ -781,6 +782,190 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 147046805491750
     m_Localized: Jump gate to the Belt Sector.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878898200576
+    m_Localized: Tau Ceti
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560704
+    m_Localized: SCOUT CLASS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560705
+    m_Localized: CARGO CLASS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560706
+    m_Localized: ASSAULT CLASS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560707
+    m_Localized: RAZZOR SHIPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560708
+    m_Localized: CYBERTECH SA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560709
+    m_Localized: MASTER HAULING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560710
+    m_Localized: SHIP STATUS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560711
+    m_Localized: HULL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560712
+    m_Localized: SHIELDS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560713
+    m_Localized: BOOST
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560714
+    m_Localized: 'SPEED: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560715
+    m_Localized: SYSTEM INFORMATION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560716
+    m_Localized: 'System: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560717
+    m_Localized: 'Sector: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560718
+    m_Localized: 'Ruling power: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560719
+    m_Localized: 'Dominant corporation: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560720
+    m_Localized: TARGET
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560721
+    m_Localized: 'Marked target: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560722
+    m_Localized: 'Distance: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560723
+    m_Localized: 'Hull: {0}%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560724
+    m_Localized: 'Shield: {0}%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560725
+    m_Localized: 'Affiliation: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560726
+    m_Localized: PIRATE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560727
+    m_Localized: Neutral
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560728
+    m_Localized: MESSAGES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560729
+    m_Localized: CONTRACTS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560730
+    m_Localized: REPUTATION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560731
+    m_Localized: MODULES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560732
+    m_Localized: MESSAGE CENTER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560733
+    m_Localized: ACTIVE CONTRACTS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560734
+    m_Localized: REPUTATION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560735
+    m_Localized: WEAPONS AND MODULES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560736
+    m_Localized: No active contracts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560737
+    m_Localized: '{0}: {1} ({2}% off)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560738
+    m_Localized: 'Weapon 1: Mining laser (primary)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560739
+    m_Localized: '{0}: {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560740
+    m_Localized: Generator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560741
+    m_Localized: Engine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560742
+    m_Localized: Hull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560743
+    m_Localized: Booster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560744
+    m_Localized: Signal scanner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560745
+    m_Localized: Skill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560746
+    m_Localized: Ship name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560747
+    m_Localized: Rename
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560748
+    m_Localized: 'Ship renamed: {0}'
     m_Metadata:
       m_Items: []
   references:

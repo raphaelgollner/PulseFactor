@@ -22,6 +22,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  dominantCorporationId: federation
   sunDirection: {x: 0.9, y: -0.2, z: -0.3}
   sunDistance: 150000000000
   sunRadius: 700000000
@@ -68,6 +69,7 @@ MonoBehaviour:
       distance: 8000000
       angleDeg: 0
       elevationDeg: 0
+    faceTowardStationId: 
   fields:
   - def: {fileID: 11400000, guid: d64bbf77fae015a4cbb589535c750a1f, type: 2}
     at:

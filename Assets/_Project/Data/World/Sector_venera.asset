@@ -22,6 +22,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  dominantCorporationId: magna
   sunDirection: {x: -0.6, y: 0.1, z: 0.8}
   sunDistance: 150000000000
   sunRadius: 700000000
@@ -47,6 +48,7 @@ MonoBehaviour:
       distance: 18000000
       angleDeg: 90
       elevationDeg: 0
+    faceTowardStationId: 
   fields:
   - def: {fileID: 11400000, guid: 7af3d8e664334594aac32cd93442e96e, type: 2}
     at:

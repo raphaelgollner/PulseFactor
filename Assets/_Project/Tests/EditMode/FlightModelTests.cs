@@ -18,10 +18,10 @@ namespace PulseFactor.Tests
         static FlightInput Throttle(float t) => new FlightInput { throttle = t, aimDirection = Vector3.forward };
 
         [Test]
-        public void Full_cargo_reduces_max_speed_by_40_percent()
+        public void Full_cargo_reduces_max_speed_by_15_percent()
         {
             var m = new FlightModel(Cargo());
-            Assert.AreEqual(78f, m.EffectiveMaxSpeed(1f), 0.01f);
+            Assert.AreEqual(110.5f, m.EffectiveMaxSpeed(1f), 0.01f);
             Assert.AreEqual(130f, m.EffectiveMaxSpeed(0f), 0.01f);
         }
 
@@ -40,7 +40,7 @@ namespace PulseFactor.Tests
         {
             var m = new FlightModel(Cargo());
             var v = Run(m, Vector3.zero, Throttle(1), 1f, 60f);
-            Assert.LessOrEqual(v.magnitude, 78f + 0.01f);
+            Assert.LessOrEqual(v.magnitude, 110.5f + 0.01f);
         }
 
         [Test]
@@ -74,6 +74,26 @@ namespace PulseFactor.Tests
                 r = m.StepRotation(r, new FlightInput { aimDirection = aim }, Dt);
             }
             return r;
+        }
+
+        [Test]
+        public void Speed_multiplier_raises_max_speed()
+        {
+            var m = new FlightModel(Scout()) { SpeedMultiplier = 1.5f };
+            Assert.AreEqual(330f, m.EffectiveMaxSpeed(0f), 0.01f);
+            var v = Run(m, Vector3.zero, Throttle(1), 0f, 30f);
+            Assert.AreEqual(330f, v.magnitude, 0.5f);
+        }
+
+        [Test]
+        public void Steering_scale_makes_ship_heavier()
+        {
+            var m = new FlightModel(Scout()) { SteeringScale = 0.15f };
+            Steer(m, Quaternion.identity, 90f, 3f);
+            Assert.AreEqual(90f * 0.15f, m.AngularVelocity.y, 0.05f);
+            var fresh = new FlightModel(Scout()) { SteeringScale = 0.15f };
+            Steer(fresh, Quaternion.identity, 90f, Dt);
+            Assert.AreEqual(90f * 0.15f * 4f * 0.15f * Dt, fresh.AngularVelocity.y, 0.01f, "resposta angular tambem fica mais lenta");
         }
 
         [Test]

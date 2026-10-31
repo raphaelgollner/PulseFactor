@@ -22,6 +22,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  dominantCorporationId: nova
   sunDirection: {x: 0.4, y: 0.15, z: 1}
   sunDistance: 150000000000
   sunRadius: 700000000
@@ -47,12 +48,14 @@ MonoBehaviour:
       distance: 20000000
       angleDeg: 0
       elevationDeg: 0
+    faceTowardStationId: 
   - def: {fileID: 11400000, guid: df11addb3f06f324bae7a293403ae00e, type: 2}
     at:
       parentId: aster_i
-      distance: 5000000
-      angleDeg: 0
+      distance: 2400000
+      angleDeg: -148.50311
       elevationDeg: 0
+    faceTowardStationId: gollner
   fields:
   - def: {fileID: 11400000, guid: 89d3ee08d2184f54e8ae959b88d2b7b5, type: 2}
     at:

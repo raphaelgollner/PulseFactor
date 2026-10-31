@@ -51,15 +51,21 @@ namespace PulseFactor
             if (ringMaterial) mr.sharedMaterial = ringMaterial;
             ring.AddComponent<MeshCollider>().sharedMesh = mesh;
 
-            // Veu luminoso no centro do anel.
-            var portal = GameObject.CreatePrimitive(PrimitiveType.Quad);
-            Destroy(portal.GetComponent<Collider>());
-            portal.name = "Portal";
-            portal.transform.SetParent(transform, false);
-            portal.transform.localScale = Vector3.one * (InnerRadius * 1.9f);
-            if (portalMaterial) portal.GetComponent<Renderer>().sharedMaterial = portalMaterial;
-            var back = Instantiate(portal, transform);
-            back.transform.localRotation = Quaternion.Euler(0, 180, 0);
+            // Veu luminoso no centro do anel, visivel dos dois lados e sem colisor (da para atravessar
+            // pelos dois lados). DestroyImmediate: um Destroy normal so remove no fim do quadro.
+            Veil(portalMaterial, Quaternion.identity);
+            Veil(portalMaterial, Quaternion.Euler(0, 180, 0));
+        }
+
+        void Veil(Material m, Quaternion rotation)
+        {
+            var veil = GameObject.CreatePrimitive(PrimitiveType.Quad);
+            DestroyImmediate(veil.GetComponent<Collider>());
+            veil.name = "Portal";
+            veil.transform.SetParent(transform, false);
+            veil.transform.localRotation = rotation;
+            veil.transform.localScale = Vector3.one * (InnerRadius * 1.9f);
+            if (m) veil.GetComponent<Renderer>().sharedMaterial = m;
         }
 
         void Update()

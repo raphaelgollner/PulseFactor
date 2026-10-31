@@ -645,7 +645,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 147046805491718
-    m_Localized: "Clique num ponto para ver detalhes \u2022 Scroll para tr\xE1s volta"
+    m_Localized: "Scroll aproxima \u2022 arraste para mover \u2022 clique num ponto
+      para detalhes \u2022 scroll para tr\xE1s em 1x volta"
     m_Metadata:
       m_Items: []
   - m_Id: 147046805491719
@@ -784,6 +785,190 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 147046805491750
     m_Localized: "Portal de salto para o Setor Cintur\xE3o."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878898200576
+    m_Localized: Tau Ceti
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560704
+    m_Localized: CLASSE SCOUT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560705
+    m_Localized: CLASSE CARGO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560706
+    m_Localized: CLASSE ASSAULT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560707
+    m_Localized: RAZZOR SHIPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560708
+    m_Localized: CYBERTECH SA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560709
+    m_Localized: MASTER HAULING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560710
+    m_Localized: STATUS DA NAVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560711
+    m_Localized: CASCO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560712
+    m_Localized: ESCUDOS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560713
+    m_Localized: BOOST
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560714
+    m_Localized: 'VELOCIDADE: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560715
+    m_Localized: "INFORMA\xC7\xD5ES DO SISTEMA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560716
+    m_Localized: 'Sistema: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560717
+    m_Localized: 'Setor: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560718
+    m_Localized: 'Poder dominante: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560719
+    m_Localized: "Corpora\xE7\xE3o dominante: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560720
+    m_Localized: ALVO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560721
+    m_Localized: 'Alvo marcado: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560722
+    m_Localized: "Dist\xE2ncia: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560723
+    m_Localized: "Sa\xFAde: {0}%"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560724
+    m_Localized: 'Escudo: {0}%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560725
+    m_Localized: "Filia\xE7\xE3o: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560726
+    m_Localized: PIRATA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560727
+    m_Localized: Neutro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560728
+    m_Localized: MENSAGENS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560729
+    m_Localized: CONTRATOS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560730
+    m_Localized: "REPUTA\xC7\xC3O"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560731
+    m_Localized: "M\xD3DULOS"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560732
+    m_Localized: CENTRAL DE MENSAGENS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560733
+    m_Localized: CONTRATOS ATIVOS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560734
+    m_Localized: "REPUTA\xC7\xC3O"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560735
+    m_Localized: "ARMAMENTO E M\xD3DULOS"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560736
+    m_Localized: Nenhum contrato ativo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560737
+    m_Localized: '{0}: {1} ({2}% desc.)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560738
+    m_Localized: "Arma 1: Laser de minera\xE7\xE3o (prim\xE1rio)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560739
+    m_Localized: '{0}: {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560740
+    m_Localized: Gerador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560741
+    m_Localized: Motor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560742
+    m_Localized: Casco
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560743
+    m_Localized: Propulsor (boost)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560744
+    m_Localized: Scanner de sinal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560745
+    m_Localized: Skill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560746
+    m_Localized: Nome da nave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560747
+    m_Localized: Renomear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193878927560748
+    m_Localized: 'Nave renomeada: {0}'
     m_Metadata:
       m_Items: []
   references:

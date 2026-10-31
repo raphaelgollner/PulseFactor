@@ -18,7 +18,7 @@ namespace PulseFactor
     // Controle de docas de uma estacao: autoriza, cancela fora do alcance e libera.
     public class DockingService
     {
-        public const float DefaultRange = 8000f;
+        public const float DefaultRange = 6000f;
 
         readonly string[] occupant;
         readonly DockSize[] sizes;

@@ -10,7 +10,6 @@ namespace PulseFactor
 
         public enum Phase { Free, Authorized, Landing, Docked, Undocking }
 
-        [SerializeField] float autopilotRange = 250f;
         [SerializeField] float landingSeconds = 6f;
         [SerializeField] float undockSeconds = 4f;
 
@@ -39,6 +38,14 @@ namespace PulseFactor
         void Start()
         {
             if (Input) Input.OnRequestDock += RequestDock;
+        }
+
+        // Em cima da plataforma (dentro do quadrado dela, com folga) e a ate ~250 m de altura.
+        public static bool IsAbovePad(Vector3 localToPad, float padSize, float maxHeight = 250f)
+        {
+            float half = padSize * 0.6f;
+            return Mathf.Abs(localToPad.x) < half && Mathf.Abs(localToPad.z) < half
+                && localToPad.y > 5f && localToPad.y < maxHeight;
         }
 
         public Station NearestStation(out float distance)
@@ -106,7 +113,7 @@ namespace PulseFactor
                         Current = Phase.Free;
                         GameMessages.Post("msg.dock_lost");
                     }
-                    else if (Vector3.Distance(transform.position, Dock.ApproachPoint.position) < autopilotRange)
+                    else if (IsAbovePad(Dock.transform.InverseTransformPoint(transform.position), Dock.padSize))
                     {
                         BeginMove(Phase.Landing);
                     }

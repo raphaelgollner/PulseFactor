@@ -13,7 +13,7 @@ namespace PulseFactor
         public float turnRateDeg = 90f;      // graus/s
         public float angularResponse = 4f;   // aceleracao angular = turnRate * isto (1/s): peso da nave
         public float steerAngleDeg = 25f;    // erro de mira que pede giro maximo
-        [Range(0, 1)] public float fullCargoSpeedPenalty = 0.4f;
+        [Range(0, 1)] public float fullCargoSpeedPenalty = 0.15f;
         [Range(0, 1)] public float releaseDecelFactor = 0.3f;
         public float cruiseAdjustRate = 60f; // m/s por segundo
         [Range(0, 1)] public float strafeAccelFactor = 0.3f;  // strafe/vertical: ajuste fino, bem mais lento que o W
@@ -24,6 +24,10 @@ namespace PulseFactor
         public int weaponSlots = 1;
         public int skillSlots = 1;
         public DockSize dockSize = DockSize.P; // todas as naves atuais sao P
+
+        [Header("Modulos padrao")]
+        public float boostCapacity = 150f;        // modulo Propulsor (P padrao)
+        public double scannerRange = 5000;        // modulo Scanner de sinal (m)
         public HullTypeDef startingHull;
     }
 }

@@ -350,9 +350,12 @@ namespace PulseFactor.EditorTools
             Prim(interior, PrimitiveType.Cube, "FrameR", eye + new Vector3(w / 2f, 0.2f, 0.95f), new Vector3(0.05f, 1f, 0.05f), Ch.Interior, rot: new Vector3(-20, 0, 0));
 
             Empty(interior, "EyePoint", eye);
-            Screen(interior, "ScreenMount_Center", eye, eye + new Vector3(0, -0.2f, 0.72f), new Vector2(0.5f, 0.2f));
-            Screen(interior, "ScreenMount_Left", eye, eye + new Vector3(-0.45f, -0.22f, 0.66f), new Vector2(0.3f, 0.16f));
-            Screen(interior, "ScreenMount_Right", eye, eye + new Vector3(0.45f, -0.22f, 0.66f), new Vector2(0.3f, 0.16f));
+            // 3 embaixo (status, alvo, abas) e 2 em cima (hora, nome da nave). Proporcoes iguais as texturas.
+            Screen(interior, "ScreenMount_Center", eye, eye + new Vector3(0, -0.24f, 0.74f), new Vector2(0.39f, 0.26f));
+            Screen(interior, "ScreenMount_Left", eye, eye + new Vector3(-0.42f, -0.24f, 0.66f), new Vector2(0.3f, 0.225f));
+            Screen(interior, "ScreenMount_Right", eye, eye + new Vector3(0.42f, -0.24f, 0.66f), new Vector2(0.3f, 0.225f));
+            Screen(interior, "ScreenMount_TopLeft", eye, eye + new Vector3(-0.3f, 0.3f, 0.78f), new Vector2(0.24f, 0.09f));
+            Screen(interior, "ScreenMount_TopRight", eye, eye + new Vector3(0.3f, 0.3f, 0.78f), new Vector2(0.24f, 0.09f));
 
             Empty(r, "WeaponMount_Cockpit", new Vector3(0, -height * 0.4f, length));
         }
@@ -438,7 +441,7 @@ namespace PulseFactor.EditorTools
             var d = Asset<ShipClassDef>($"{ShipsData}/Class_{c}.asset");
             d.shipClass = c; d.acceleration = accel; d.maxSpeed = maxSpeed; d.turnRateDeg = turn;
             d.cargoCapacity = cargo; d.weaponSlots = weapons; d.skillSlots = 1; d.startingHull = hull;
-            d.fullCargoSpeedPenalty = 0.4f; d.releaseDecelFactor = 0.3f; d.cruiseAdjustRate = 60f;
+            d.fullCargoSpeedPenalty = 0.15f; d.releaseDecelFactor = 0.3f; d.cruiseAdjustRate = 60f;
             EditorUtility.SetDirty(d);
             return d;
         }

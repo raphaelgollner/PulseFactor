@@ -6,9 +6,17 @@ namespace PulseFactor
     public class TargetSelector : MonoBehaviour
     {
         [SerializeField] float maxAngle = 25f;
-        [SerializeField] double maxAsteroidDistance = 10000;
 
         public PlayerShipInput Input;
+
+        double ScannerRange
+        {
+            get
+            {
+                var ship = Input ? Input.Ship : null;
+                return ship && ship.ClassDef ? ship.ClassDef.scannerRange : Scanner.DefaultRange;
+            }
+        }
         ITargetable current;
 
         // Alvos de setores descarregados, asteroides esgotados ou docas destruidas somem sozinhos.
@@ -51,7 +59,7 @@ namespace PulseFactor
                 if (ReferenceEquals(t, GetComponent<ITargetable>())) continue;
                 var delta = t.Position - camWorld;
                 double dist = Unity.Mathematics.math.length(delta);
-                if (t.Kind == TargetKind.Asteroid && dist > maxAsteroidDistance) continue;
+                if (!Scanner.Detects(t.Kind, dist, ScannerRange)) continue;
                 if (dist < 1) continue;
                 var dir = (Vector3)(Unity.Mathematics.float3)(delta / dist);
                 float angle = Vector3.Angle(aim, dir);

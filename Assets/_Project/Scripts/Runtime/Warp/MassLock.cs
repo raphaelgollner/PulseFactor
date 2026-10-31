@@ -5,7 +5,8 @@ namespace PulseFactor
 {
     public struct MassSource
     {
-        public const double StationLockRadius = 5000;
+        public const double StationLockRadius = 7000;
+        public const double GateLockRadius = 2000;
         public const double BodyLockFactor = 1.1; // dentro da zona de perigo (1,2 R do centro): quem sai do alerta pode dobrar
 
         public double3 position;
@@ -13,6 +14,7 @@ namespace PulseFactor
         public double lockRadius;
 
         public static MassSource Station(double3 p) => new() { position = p, radius = 0, lockRadius = StationLockRadius };
+        public static MassSource Gate(double3 p) => new() { position = p, radius = 0, lockRadius = GateLockRadius };
         public static MassSource Body(double3 p, double r) => new() { position = p, radius = r, lockRadius = r * BodyLockFactor };
     }
 

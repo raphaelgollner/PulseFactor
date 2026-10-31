@@ -48,6 +48,7 @@ namespace PulseFactor
     {
         public string id;
         public LocalizedString displayName;
+        public string dominantCorporationId; // ex.: aster -> nova
 
         [Header("Sol ao fundo")]
         public Vector3 sunDirection = new(0.3f, 0.2f, 1f);

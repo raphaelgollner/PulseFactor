@@ -16,6 +16,10 @@ namespace PulseFactor
     public static class GameMessages
     {
         public static event System.Action<string, object[]> Posted;
-        public static void Post(string key, params object[] args) => Posted?.Invoke(key, args);
+        public static void Post(string key, params object[] args)
+        {
+            Posted?.Invoke(key, args);
+            MessageLog.Add(Loc.T(key, args)); // historico da central de mensagens do cockpit
+        }
     }
 }
