@@ -16,3 +16,17 @@ Referência: print de "PAD 04" do Elite Dangerous (enviado no chat).
 - Relação fabricantes × corporações (quem vende o quê).
 - Posição dos encaixes de arma em cada nave.
 - Lore e nomes finais das corporações.
+
+## Ajustes menores da revisão final (2026-10-31)
+- Erro de conteúdo dos piratas aborta o carregamento do setor (gates são criados depois dos campos).
+- Segurar W enquanto a dobra aquece já pula para o nível 2.
+- Patrulha pirata confere chegada ao waypoint com posição do quadro anterior.
+- Alocações de memória por quadro (HUD, registros de alvos).
+- Materiais, malhas e texturas não são liberados ao trocar de setor.
+- Texto "PT / EN" fixo no terminal.
+- Passos de quantidade no terminal (10 → 1 → 11); mensagem de compra mostra créditos no modo de teste.
+- Proxies de corpos celestes podem se sobrepor na ordem errada (lua dentro do planeta).
+- Mensagem de "saída de emergência" quando o alerta só cancela o aquecimento.
+- Bloqueio de massa não é rechecado durante o aquecimento da dobra.
+- Rotação da estação usa a posição interpolada da nave.
+- Lacunas de teste: gerador sem cockpit/cauda/asa; caminho de autorização perdida.
