@@ -22,9 +22,11 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  corporationId: corp_a
-  hasShipyard: 0
-  dockCount: 4
+  corporationId: atlas
+  corporation: {fileID: 11400000, guid: e9bbd8429a28ce049a93f83f8ef5d4e9, type: 2}
+  style: 0
+  hasShipyard: 1
+  dockSizes: 00000000000000000000000000000000010000000100000002000000
   market:
   - resource: {fileID: 11400000, guid: 833c601c3d1f36940858a3bf16771b24, type: 2}
     sells: 1

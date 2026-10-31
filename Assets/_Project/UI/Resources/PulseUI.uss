@@ -25,6 +25,38 @@
 .sector { position: absolute; left: 0; right: 0; top: 18px; -unity-text-align: upper-center; font-size: 14px; color: rgb(150, 210, 230); }
 
 .alert { position: absolute; left: 0; right: 0; top: 44px; -unity-text-align: upper-center; font-size: 22px; color: rgb(255, 255, 255); background-color: rgba(190, 20, 20, 0.75); padding: 6px; }
+.contracts { position: absolute; right: 28px; top: 90px; width: 460px; align-items: flex-end; }
+.contract-line { font-size: 14px; color: rgb(220, 240, 250); background-color: rgba(10, 30, 40, 0.55); padding: 3px 8px; margin-bottom: 3px; border-right-width: 3px; border-color: rgb(255, 170, 60); -unity-text-align: middle-right; }
+.welcome { position: absolute; left: 0; right: 0; top: 0; bottom: 0; align-items: center; justify-content: center; background-color: rgba(2, 8, 12, 0.85); }
+.welcome-text { font-size: 42px; color: rgb(150, 230, 255); -unity-font-style: bold; }
+.section-title { font-size: 17px; color: rgb(110, 220, 250); margin-top: 10px; margin-bottom: 4px; }
+.contract-row { flex-direction: row; align-items: center; padding: 6px 4px; border-bottom-width: 1px; border-color: rgba(80, 160, 190, 0.25); }
+.btn-danger { background-color: rgb(150, 50, 40); }
+.btn-deliver { background-color: rgb(40, 150, 80); padding: 8px 18px; margin-top: 6px; align-self: flex-start; }
+.route-marker { position: absolute; width: 16px; height: 16px; margin-left: -8px; margin-top: -8px; rotate: 45deg; background-color: rgba(170, 90, 255, 0.35); border-width: 2px; border-color: rgb(190, 110, 255); }
+.route-label { color: rgb(205, 150, 255); }
+.route-arrow { border-bottom-color: rgb(190, 110, 255); }
+
+.map { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(2, 6, 12, 0.94); }
+.map-title { position: absolute; left: 30px; top: 20px; font-size: 26px; color: rgb(150, 220, 250); -unity-font-style: bold; }
+.map-hint { position: absolute; left: 30px; top: 56px; font-size: 14px; color: rgb(130, 170, 190); }
+.map-canvas { position: absolute; left: 0; top: 70px; right: 380px; bottom: 0; }
+.map-nodes { position: absolute; left: 0; top: 0; right: 0; bottom: 0; }
+.map-node { position: absolute; border-radius: 50%; border-width: 2px; border-color: rgba(200, 230, 255, 0.6); }
+.map-node:hover { border-color: rgb(255, 255, 255); }
+.map-node-planet { border-color: rgba(220, 240, 255, 0.8); }
+.map-node-moon { border-color: rgba(200, 200, 210, 0.7); }
+.map-node-station { border-radius: 2px; background-color: rgb(80, 220, 255); }
+.map-node-field { border-radius: 30%; background-color: rgb(230, 170, 70); }
+.map-node-gate { background-color: rgba(0, 0, 0, 0); border-width: 4px; border-color: rgb(150, 170, 255); }
+.map-node-here { border-width: 3px; border-color: rgb(90, 255, 140); }
+.map-node-selected { border-width: 3px; border-color: rgb(255, 230, 120); }
+.map-label { position: absolute; width: 180px; -unity-text-align: upper-center; font-size: 13px; color: rgb(210, 235, 245); }
+.map-route { position: absolute; width: 16px; height: 16px; rotate: 45deg; background-color: rgba(170, 90, 255, 0.6); border-width: 2px; border-color: rgb(200, 130, 255); }
+.map-info { position: absolute; right: 24px; top: 90px; width: 340px; padding: 16px; background-color: rgba(6, 18, 26, 0.95); border-width: 1px; border-color: rgb(60, 150, 190); }
+.map-desc { font-size: 14px; color: rgb(185, 210, 220); white-space: normal; margin-top: 6px; margin-bottom: 8px; }
+.btn-route { margin-top: 12px; padding: 8px 14px; background-color: rgb(120, 60, 200); }
+
 .notice { position: absolute; left: 0; right: 0; top: 44px; -unity-text-align: upper-center; font-size: 18px; color: rgb(20, 20, 20); background-color: rgba(255, 190, 60, 0.85); padding: 5px; }
 .panel-notice { color: rgb(255, 190, 60); }
 .panel-alert { color: rgb(255, 80, 70); font-size: 18px; }

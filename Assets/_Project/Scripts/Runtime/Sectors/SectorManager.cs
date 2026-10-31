@@ -12,6 +12,7 @@ namespace PulseFactor
         public List<BlockDef> Catalog = new();
         public Material PlanetMaterial, SunMaterial, HullMaterial, LightMaterial, AsteroidMaterial, GateMaterial, PortalMaterial;
         public Camera Camera;
+        public Reputation Reputation;
     }
 
     // Carrega um setor por vez: corpos celestes, sol, estacoes, campos (com piratas) e jump gates.
@@ -42,10 +43,17 @@ namespace PulseFactor
             foreach (var b in sector.bodies) BuildBody(b, bodies[b.id]);
             foreach (var s in sector.stations)
             {
-                var station = StationBuilder.Build(s.def, Context.Config, SectorDef.Resolve(s.at, bodies), Context.HullMaterial, Context.LightMaterial);
+                var pos = SectorDef.Resolve(s.at, bodies);
+                var station = s.def.style switch
+                {
+                    StationStyle.Outpost => OutpostBuilder.Build(s.def, Context.Config, Context.Reputation, pos, Context.HullMaterial, Context.AsteroidMaterial),
+                    StationStyle.Industrial => IndustrialStationBuilder.Build(s.def, Context.Config, Context.Reputation, pos, Context.HullMaterial),
+                    _ => StationBuilder.Build(s.def, Context.Config, Context.Reputation, pos, Context.HullMaterial, Context.LightMaterial),
+                };
                 station.transform.SetParent(root.transform, true);
                 Stations.Add(station);
             }
+            OrientStations(sector);
             foreach (var f in sector.fields) BuildField(f, SectorDef.Resolve(f.at, bodies));
 
             var planetPos = bodies.Count > 0 ? bodies[sector.bodies[0].id] : double3.zero;
@@ -82,6 +90,21 @@ namespace PulseFactor
         }
 
         public JumpGate FindGate(string id) => Gates.Find(g => g.DisplayId == id);
+
+        // Estacoes com faceTowardStationId ficam com o topo virado para a outra estacao.
+        void OrientStations(SectorDef sector)
+        {
+            foreach (var p in sector.stations)
+            {
+                if (string.IsNullOrEmpty(p.faceTowardStationId) || !p.def) continue;
+                var me = Stations.Find(s => s.DisplayId == p.def.id);
+                var other = Stations.Find(s => s.DisplayId == p.faceTowardStationId);
+                if (!me || !other) continue;
+                var d = other.Position - me.Position;
+                var dir = (Vector3)(float3)math.normalize(d);
+                me.transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+            }
+        }
 
         void PlaceAtGate(string gateId)
         {

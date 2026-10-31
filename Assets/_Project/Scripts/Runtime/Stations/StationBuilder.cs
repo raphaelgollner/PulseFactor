@@ -15,9 +15,9 @@ namespace PulseFactor
         const float HubHalfHeight = 80f;
         const float ApproachHeight = 150f;
 
-        static Material white, blue, dark, orange, glass, pad, holo, arrow;
+        static Material white, blue, dark, orange, glass;
 
-        public static Station Build(StationDef def, GameConfig config, WorldPosition position, Material hull, Material light)
+        public static Station Build(StationDef def, GameConfig config, Reputation reputation, WorldPosition position, Material hull, Material light)
         {
             CreateMaterials(hull, light);
             var root = new GameObject("Station_" + def.id);
@@ -35,16 +35,23 @@ namespace PulseFactor
                 float a = 45f + i * 90f;
                 var dir = Quaternion.Euler(0, a, 0) * Vector3.forward;
                 var node = Part(t, PrimitiveType.Cube, "Node" + i, dir * RingRadius, new Vector3(74, 36, 74), new Vector3(0, a, 0), white);
-                docks[i] = BuildDock(t, i, DockSize.P, dir * RingRadius + Vector3.up * 18f, a, 44f);
+                docks[i] = PadBuilder.Build(t, i, DockSize.P, dir * RingRadius + Vector3.up * 18f, a, 44f, hull);
                 Part(node, PrimitiveType.Cube, "Trim", new Vector3(0, 0.36f, 0), new Vector3(1.02f, 0.08f, 1.02f), Vector3.zero, blue);
             }
             // 5-6: M e 7: G no topo do eixo.
             Part(t, PrimitiveType.Cube, "TopDeck", new Vector3(0, HubHalfHeight + 3f, 0), new Vector3(250, 6, 90), Vector3.zero, dark);
-            docks[4] = BuildDock(t, 4, DockSize.M, new Vector3(-88, HubHalfHeight + 6f, 0), 0f, 58f);
-            docks[5] = BuildDock(t, 5, DockSize.M, new Vector3(88, HubHalfHeight + 6f, 0), 0f, 58f);
-            docks[6] = BuildDock(t, 6, DockSize.G, new Vector3(0, HubHalfHeight + 6f, 0), 0f, 78f);
+            docks[4] = PadBuilder.Build(t, 4, DockSize.M, new Vector3(-88, HubHalfHeight + 6f, 0), 0f, 58f, hull);
+            docks[5] = PadBuilder.Build(t, 5, DockSize.M, new Vector3(88, HubHalfHeight + 6f, 0), 0f, 58f, hull);
+            docks[6] = PadBuilder.Build(t, 6, DockSize.G, new Vector3(0, HubHalfHeight + 6f, 0), 0f, 78f, hull);
 
-            station.Initialize(def, config, docks);
+            for (int i = 0; i < 4; i++)
+            {
+                var dir = Quaternion.Euler(0, i * 90f, 0) * Vector3.forward;
+                PadBuilder.AddLight(t, dir * RingRadius + Vector3.up * 70f, new Color(0.8f, 0.9f, 1f), 380f, 3f);
+            }
+            PadBuilder.AddLight(t, Vector3.up * (HubHalfHeight + 120f), new Color(1f, 0.9f, 0.75f), 500f, 3f);
+
+            station.Initialize(def, config, docks, reputation);
             anchor.SetWorld(position);
             root.AddComponent<StationSpin>();
             return station;
@@ -91,87 +98,6 @@ namespace PulseFactor
             }
         }
 
-        static Dock BuildDock(Transform station, int index, DockSize size, Vector3 pos, float yaw, float padSize)
-        {
-            var go = new GameObject($"Dock{index + 1}_{size}");
-            var t = go.transform;
-            t.SetParent(station, false);
-            t.localPosition = pos;
-            t.localRotation = Quaternion.Euler(0, yaw, 0);
-
-            // Plataforma com borda laranja e um "H".
-            Part(t, PrimitiveType.Cube, "Pad", Vector3.zero, new Vector3(padSize, 2f, padSize), Vector3.zero, pad);
-            float b = padSize / 2f;
-            Part(t, PrimitiveType.Cube, "EdgeN", new Vector3(0, 1.1f, b - 1.5f), new Vector3(padSize, 0.3f, 2f), Vector3.zero, orange);
-            Part(t, PrimitiveType.Cube, "EdgeS", new Vector3(0, 1.1f, -b + 1.5f), new Vector3(padSize, 0.3f, 2f), Vector3.zero, orange);
-            Part(t, PrimitiveType.Cube, "EdgeE", new Vector3(b - 1.5f, 1.1f, 0), new Vector3(2f, 0.3f, padSize), Vector3.zero, orange);
-            Part(t, PrimitiveType.Cube, "EdgeW", new Vector3(-b + 1.5f, 1.1f, 0), new Vector3(2f, 0.3f, padSize), Vector3.zero, orange);
-            float h = padSize * 0.35f;
-            Part(t, PrimitiveType.Cube, "H1", new Vector3(-h * 0.45f, 1.1f, 0), new Vector3(h * 0.12f, 0.3f, h), Vector3.zero, white);
-            Part(t, PrimitiveType.Cube, "H2", new Vector3(h * 0.45f, 1.1f, 0), new Vector3(h * 0.12f, 0.3f, h), Vector3.zero, white);
-            Part(t, PrimitiveType.Cube, "H3", new Vector3(0, 1.1f, 0), new Vector3(h * 0.9f, 0.3f, h * 0.12f), Vector3.zero, white);
-
-            var dock = go.AddComponent<Dock>();
-            dock.index = index;
-            dock.size = size;
-            dock.LandingPoint = Point(t, "LandingPoint", new Vector3(0, 4f, 0));
-            dock.ApproachPoint = Point(t, "ApproachPoint", new Vector3(0, ApproachHeight, 0));
-            dock.Marker = BuildArrow(t, padSize);
-            dock.Marker.SetActive(false);
-            BuildNumber(t, dock.Number, size, padSize);
-            return dock;
-        }
-
-        // Numero holografico (1-7) com o tamanho da doca, virado para a camera.
-        static void BuildNumber(Transform dock, int number, DockSize size, float padSize)
-        {
-            var go = new GameObject("Hologram");
-            go.transform.SetParent(dock, false);
-            go.transform.localPosition = new Vector3(0, padSize * 0.55f + 10f, 0);
-            var text = go.AddComponent<TextMesh>();
-            text.text = $"{number}\n<size=60>{size}</size>";
-            text.richText = true;
-            text.anchor = TextAnchor.MiddleCenter;
-            text.alignment = TextAlignment.Center;
-            text.fontSize = 120;
-            text.characterSize = padSize * 0.035f;
-            text.color = new Color(0.35f, 0.85f, 1f, 0.55f);
-            text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            go.GetComponent<MeshRenderer>().sharedMaterial = text.font.material;
-            go.AddComponent<Billboard>();
-        }
-
-        // Seta azul translucida apontando para baixo, sobre a doca autorizada.
-        static GameObject BuildArrow(Transform dock, float padSize)
-        {
-            var root = new GameObject("Arrow");
-            root.transform.SetParent(dock, false);
-            root.transform.localPosition = new Vector3(0, padSize + 30f, 0);
-            var shaft = Part(root.transform, PrimitiveType.Cube, "Shaft", new Vector3(0, 14f, 0), new Vector3(6f, 22f, 6f), Vector3.zero, arrow);
-            Object.Destroy(shaft.GetComponent<Collider>());
-            var head = new GameObject("Head");
-            head.transform.SetParent(root.transform, false);
-            head.AddComponent<MeshFilter>().sharedMesh = PyramidDown(16f, 14f);
-            head.AddComponent<MeshRenderer>().sharedMaterial = arrow;
-            root.AddComponent<Bob>();
-            return root;
-        }
-
-        static Mesh PyramidDown(float width, float height)
-        {
-            float w = width / 2f;
-            var v = new[]
-            {
-                new Vector3(-w, height, -w), new Vector3(w, height, -w), new Vector3(w, height, w), new Vector3(-w, height, w),
-                Vector3.zero,
-            };
-            var tris = new[] { 0, 1, 2, 0, 2, 3, 4, 1, 0, 4, 2, 1, 4, 3, 2, 4, 0, 3 };
-            var m = new Mesh { name = "ArrowHead", vertices = v, triangles = tris };
-            m.RecalculateNormals();
-            m.RecalculateBounds();
-            return m;
-        }
-
         static void CreateMaterials(Material hull, Material light)
         {
             if (white) return;
@@ -179,9 +105,7 @@ namespace PulseFactor
             blue = Tint(hull, new Color(0.55f, 0.72f, 0.9f));
             dark = Tint(hull, new Color(0.3f, 0.33f, 0.38f));
             orange = Tint(hull, new Color(1f, 0.5f, 0.12f));
-            pad = Tint(hull, new Color(0.2f, 0.22f, 0.25f));
             glass = Transparent(new Color(0.6f, 0.85f, 1f, 0.35f));
-            arrow = Transparent(new Color(0.25f, 0.65f, 1f, 0.45f));
         }
 
         static Material Tint(Material baseMat, Color c)

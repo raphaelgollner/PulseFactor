@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9be87c1d55689c4cb3c850f5ed2b463, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: PulseFactor.Runtime::PulseFactor.GameConfig
-  testMode: 1
+  testMode: 0
   startingCredits: 1000

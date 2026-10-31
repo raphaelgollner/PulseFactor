@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace PulseFactor
@@ -26,14 +28,28 @@ namespace PulseFactor
 
         public PlayerContext Player { get; private set; }
 
+        // Testes automaticos nao leem nem gravam o save do jogador.
+        public static bool SkipSave;
+
+        FloatingOrigin origin;
+        bool quitting;
+
         void Start()
         {
-            var origin = new GameObject("FloatingOrigin").AddComponent<FloatingOrigin>();
+            var save = SkipSave ? null : SaveSystem.Load(SaveSystem.DefaultPath);
+            origin = new GameObject("FloatingOrigin").AddComponent<FloatingOrigin>();
             var cam = SetupCamera();
             new GameObject("StarField").AddComponent<StarField>().Material = starMaterial;
 
-            Player = BuildPlayer(cam);
+            Player = BuildPlayer(cam, save);
             origin.Focus = Player.Ship.transform;
+
+            var contracts = new GameObject("Contracts").AddComponent<ContractService>();
+            contracts.Galaxy = galaxy;
+            contracts.Resources = resources;
+            contracts.Player = Player;
+            Player.Contracts = contracts;
+            if (save != null) RestoreProgress(save, contracts);
 
             var dust = new GameObject("SpaceDust").AddComponent<SpaceDust>();
             dust.Ship = Player.Ship;
@@ -48,12 +64,97 @@ namespace PulseFactor
                 PlanetMaterial = planetMaterial, SunMaterial = sunMaterial, HullMaterial = hullMaterial,
                 LightMaterial = lightMaterial, AsteroidMaterial = asteroidMaterial,
                 GateMaterial = gateMaterial, PortalMaterial = portalMaterial,
+                Reputation = contracts.Reputation,
             };
             Player.Sectors = sectors;
-            sectors.Load(galaxy.start, null);
-            PlaceNearFirstStation(sectors, origin);
+
+            var route = new GameObject("Route").AddComponent<RouteService>();
+            route.Galaxy = galaxy;
+            route.Sectors = sectors;
+            Player.Route = route;
+            Player.Warp.Route = route;
+            if (save != null && !string.IsNullOrEmpty(save.routeTargetId))
+                route.SetDestination(save.routeSectorId, save.routeTargetId);
+
+            var savedSector = save != null ? galaxy.sectors.Find(s => s.id == save.sectorId) : null;
+            sectors.Load(savedSector ? savedSector : galaxy.start, null);
+            if (savedSector) PlaceAtSaved(save);
+            else PlaceNearFirstStation(sectors, origin);
 
             BuildUi();
+
+            Player.Docking.Docked += Save;
+            Player.Docking.Undocked += Save;
+            sectors.Loaded += _ => Save();
+        }
+
+        void Update()
+        {
+            // Atalho de desenvolvimento: F10 = novo jogo.
+            if (Keyboard.current != null && Keyboard.current.f10Key.wasPressedThisFrame)
+            {
+                SaveSystem.Delete(SaveSystem.DefaultPath);
+                quitting = true; // nao regravar ao descarregar a cena
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
+
+        void OnApplicationQuit()
+        {
+            Save();
+            quitting = true;
+        }
+
+        public void Save()
+        {
+            if (SkipSave || quitting || Player == null || !Player.Ship || !Player.Sectors || !Player.Sectors.Current) return;
+            var ship = Player.Ship;
+            var pos = ship.transform.position;
+            // Docado: grava o ponto de aproximacao da doca (fora da plataforma).
+            if (Player.Docking.Current == DockingAutopilot.Phase.Docked && Player.Docking.Dock)
+                pos = Player.Docking.Dock.ApproachPoint.position;
+            var world = origin.ToWorld(pos);
+            var rot = ship.transform.rotation;
+            var c = Player.Contracts;
+            var data = new SaveData
+            {
+                credits = Player.Wallet.Credits,
+                clock = c.Clock.Seconds,
+                sectorId = Player.Sectors.Current.id,
+                px = world.value.x, py = world.value.y, pz = world.value.z,
+                rx = rot.x, ry = rot.y, rz = rot.z, rw = rot.w,
+                routeSectorId = Player.Route ? Player.Route.DestinationSectorId : null,
+                routeTargetId = Player.Route ? Player.Route.DestinationId : null,
+            };
+            foreach (var kv in ship.Cargo.Contents)
+                data.cargo.Add(new SaveData.CargoEntry { resourceId = kv.Key.id, count = kv.Value, reserved = ship.Cargo.Reserved(kv.Key) });
+            foreach (var (corp, value) in c.Reputation.All)
+                data.reputation.Add(new SaveData.RepEntry { corpId = corp, value = value });
+            data.contracts.AddRange(c.Log.Active);
+            try { SaveSystem.Save(data, SaveSystem.DefaultPath); }
+            catch (System.Exception e) { Debug.LogWarning("[PulseFactor] Falha ao salvar: " + e.Message); }
+        }
+
+        void RestoreProgress(SaveData save, ContractService contracts)
+        {
+            contracts.Clock.Seconds = save.clock;
+            foreach (var r in save.reputation) contracts.Reputation.Set(r.corpId, r.value);
+            foreach (var e in save.cargo)
+            {
+                var res = contracts.Res(e.resourceId);
+                if (!res) { Debug.LogWarning("[PulseFactor] Recurso do save desconhecido: " + e.resourceId); continue; }
+                Player.Ship.Cargo.Add(res, e.count);
+                Player.Ship.Cargo.Reserve(res, e.reserved);
+            }
+            contracts.Log.Restore(save.contracts);
+        }
+
+        void PlaceAtSaved(SaveData save)
+        {
+            var pos = new WorldPosition(new double3(save.px, save.py, save.pz));
+            Player.Ship.GetComponent<WorldAnchor>().SetWorld(pos);
+            origin.Rebase(pos);
+            Player.Ship.transform.rotation = new Quaternion(save.rx, save.ry, save.rz, save.rw);
         }
 
         Camera SetupCamera()
@@ -83,7 +184,7 @@ namespace PulseFactor
             return cam;
         }
 
-        PlayerContext BuildPlayer(Camera cam)
+        PlayerContext BuildPlayer(Camera cam, SaveData save)
         {
             var bp = startingShip.ToBlueprint();
             var go = ShipAssembler.Build(bp, null);
@@ -131,7 +232,7 @@ namespace PulseFactor
             {
                 Ship = ship, Visual = visual, Input = input, Warp = warp, Proximity = proximity, Targets = targets,
                 Docking = docking, Laser = laser, CameraRig = rig, Config = config,
-                Wallet = new Wallet(config.startingCredits),
+                Wallet = new Wallet(save != null ? save.credits : config.startingCredits),
             };
         }
 
@@ -159,6 +260,12 @@ namespace PulseFactor
             terminal.Resources = resources;
             termGo.SetActive(true);
 
+            var mapGo = Doc("SystemMap", terminalPanel, 20);
+            var map = mapGo.AddComponent<SystemMapView>();
+            map.Galaxy = galaxy;
+            map.Player = Player;
+            mapGo.SetActive(true);
+
             var panels = new GameObject("CockpitPanels").AddComponent<CockpitPanels>();
             panels.Player = Player;
             panels.BaseSettings = cockpitPanelBase;
@@ -172,12 +279,21 @@ namespace PulseFactor
             {
                 input.SetDocked(true);
                 rig.SetMode(CameraRig.Mode.Cockpit); // menus da estacao sempre em primeira pessoa
-                terminal.Open();
+                terminal.OpenWithWelcome();
             };
             docking.Undocked += () => input.SetDocked(false);
             input.OnInteract += () => { if (docking.Current == DockingAutopilot.Phase.Docked && !terminal.IsOpen) terminal.Open(); };
+            input.OnMap += map.Toggle;
+            input.OnClearTarget += () =>
+            {
+                Player.Targets.Select(null);
+                Player.Route.Clear();
+                GameMessages.Post("msg.target_cleared");
+            };
+            docking.Docked += () => Player.Route.ArrivedAt(docking.Station ? docking.Station.DisplayId : null);
             input.OnPause += () =>
             {
+                if (map.IsOpen) { map.Close(); return; }
                 if (docking.Current == DockingAutopilot.Phase.Docked) return;
                 bool locked = UnityEngine.Cursor.lockState == CursorLockMode.Locked;
                 UnityEngine.Cursor.lockState = locked ? CursorLockMode.None : CursorLockMode.Locked;
@@ -185,6 +301,8 @@ namespace PulseFactor
             };
             Player.Wallet.Changed += terminal.Refresh;
             Player.Ship.Cargo.Changed += terminal.Refresh;
+            Player.Contracts.Log.Completed += _ => terminal.Refresh();
+            Player.Contracts.Log.Failed += _ => terminal.Refresh();
         }
 
         static GameObject Doc(string name, PanelSettings settings, int sortingOrder)

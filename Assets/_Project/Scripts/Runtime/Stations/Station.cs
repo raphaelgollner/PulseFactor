@@ -18,12 +18,12 @@ namespace PulseFactor
 
         void Awake() => anchor = GetComponent<WorldAnchor>();
 
-        public void Initialize(StationDef def, GameConfig config, Dock[] docks)
+        public void Initialize(StationDef def, GameConfig config, Dock[] docks, Reputation reputation = null)
         {
             Def = def;
             Docks = docks;
             Docking = new DockingService(System.Array.ConvertAll(docks, d => d.size));
-            Market = new Market(def, config);
+            Market = new Market(def, config, reputation);
         }
 
         void OnEnable() => TargetRegistry.Register(this);

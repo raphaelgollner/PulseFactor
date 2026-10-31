@@ -20,6 +20,7 @@ namespace PulseFactor.Tests
         public IEnumerator Load()
         {
             if (!System.IO.File.Exists(ScenePath)) Assert.Ignore("Cena Slice ainda nao gerada");
+            GameBootstrap.SkipSave = true; // nao le nem grava o save do jogador
             yield return EditorSceneManager.LoadSceneAsyncInPlayMode(ScenePath, new LoadSceneParameters(LoadSceneMode.Single));
             yield return null;
             yield return null;
@@ -36,6 +37,34 @@ namespace PulseFactor.Tests
             Assert.GreaterOrEqual(sectors.Stations.Count, 1);
             Assert.GreaterOrEqual(sectors.Fields.Count, 1);
             Assert.AreEqual(2, sectors.Gates.Count);
+            Assert.AreEqual(2, sectors.Stations.Count, "Gollner + Apollo");
+        }
+
+        [UnityTest]
+        public IEnumerator Venera_has_Magna_station()
+        {
+            var sectors = boot.Player.Sectors;
+            var venera = boot.galaxy.sectors.First(s => s.id == "venera");
+            sectors.Jump(venera, "gate_venera_aster");
+            yield return null;
+            Assert.IsTrue(sectors.Stations.Any(s => s.DisplayId == "magna"));
+            Assert.AreEqual(7, sectors.Stations.First(s => s.DisplayId == "magna").Docks.Length);
+        }
+
+        [UnityTest]
+        public IEnumerator Apollo_has_one_pad_of_each_size()
+        {
+            yield return null;
+            var apollo = boot.Player.Sectors.Stations.First(s => s.DisplayId == "apollo");
+            CollectionAssert.AreEqual(new[] { DockSize.P, DockSize.M, DockSize.G }, apollo.Docks.Select(d => d.size).ToArray());
+        }
+
+        [UnityTest]
+        public IEnumerator Station_offers_contracts()
+        {
+            yield return null;
+            var offers = boot.Player.Contracts.Offers("gollner");
+            Assert.That(offers.Count, Is.InRange(3, 6));
         }
 
         [UnityTest]

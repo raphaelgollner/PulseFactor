@@ -215,7 +215,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3587919919
-    m_Localized: 'NO TARGET [T]'
+    m_Localized: 'NO TARGET [T] / ROUTE [M]'
     m_Metadata:
       m_Items: []
   - m_Id: 3587919920
@@ -259,7 +259,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3587919930
-    m_Localized: Select a target (T)
+    m_Localized: Select a target (T) or set a route on the map (M)
     m_Metadata:
       m_Items: []
   - m_Id: 3587919931
@@ -453,6 +453,334 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 15463112986634
     m_Localized: Dock 7 (L)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898168635392
+    m_Localized: Centaurus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384128
+    m_Localized: Centaurus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384129
+    m_Localized: Centaurus I
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384130
+    m_Localized: Centaurus II
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384131
+    m_Localized: Centaurus III
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384132
+    m_Localized: Centaurus IV
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384133
+    m_Localized: Gollner Station
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384134
+    m_Localized: Apollo Outpost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384135
+    m_Localized: Magna Station
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384136
+    m_Localized: Centaurus II Yard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384137
+    m_Localized: Centaurus Field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384138
+    m_Localized: "Gate \u2192 Centaurus"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384139
+    m_Localized: "Gate \u2192 Belt"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384140
+    m_Localized: Nova Technology
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384141
+    m_Localized: Magna Hauling Co.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384142
+    m_Localized: Atlas Universal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384143
+    m_Localized: Federation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384144
+    m_Localized: DELIVERY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384145
+    m_Localized: REQUISITION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384146
+    m_Localized: 'Limit of 5 active contracts: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384147
+    m_Localized: 'No cargo space for: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384148
+    m_Localized: 'Contract unavailable: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384149
+    m_Localized: 'Invalid contract: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384150
+    m_Localized: 'Contract accepted: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384151
+    m_Localized: 'Contract completed: {0} (+{1} cr, +{2} rep)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384152
+    m_Localized: "Contract failed: {0} (fine {1} cr, \u2212{2} rep)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384153
+    m_Localized: 'Partial delivery: {0} units'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384154
+    m_Localized: Landing request received and permission granted. Please proceed
+      to pad {0}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384155
+    m_Localized: Welcome to {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384156
+    m_Localized: CONTRACTS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384157
+    m_Localized: Your contracts ({0}/{1})
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384158
+    m_Localized: Station board
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384159
+    m_Localized: Accept
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384160
+    m_Localized: Abandon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384161
+    m_Localized: DELIVER CONTRACT CARGO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384162
+    m_Localized: "{0} \u2014 reputation {1} \u2014 discount {2}%"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384163
+    m_Localized: PT / EN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384164
+    m_Localized: Buy for
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384165
+    m_Localized: Sell for
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384166
+    m_Localized: '{0} ({1} on contract)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046776131584
+    m_Localized: Target and route cleared
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491712
+    m_Localized: 'Route set: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491713
+    m_Localized: 'Destination reached: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491714
+    m_Localized: "\u25C6 {0}  {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491715
+    m_Localized: "\u25C6 {0}\nvia {1}  {2}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491716
+    m_Localized: SYSTEM MAP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491717
+    m_Localized: "Scroll or click a sector to zoom \u2022 M or Esc closes"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491718
+    m_Localized: "Click a point for details \u2022 Scroll back to return"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491719
+    m_Localized: 'Faction: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491720
+    m_Localized: 'Corporation: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491721
+    m_Localized: 'Sells: {0}
+
+      Buys: {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491722
+    m_Localized: 'Resources: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491723
+    m_Localized: SET ROUTE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491724
+    m_Localized: CLEAR ROUTE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491725
+    m_Localized: Ocean world, cradle of the system's colonization. Scientific home
+      of Nova Technology.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491726
+    m_Localized: Rocky moon of Aster. A captured asteroid in its orbit hosts Apollo
+      Outpost.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491727
+    m_Localized: Nova Technology's ring station. Labs, logistics and the main port
+      of the Aster Sector.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491728
+    m_Localized: Surface base on an asteroid orbiting Aster I. Ore extraction and
+      refining.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491729
+    m_Localized: Quiet asteroid field, good for beginner miners.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491730
+    m_Localized: Arid golden world, rich in copper. A traditional cargo route.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491731
+    m_Localized: Small moon of Venera.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491732
+    m_Localized: Magna Hauling Co.'s industrial platform. Containers, tanks and constant
+      traffic.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491733
+    m_Localized: Copper and ice field. Pirates often prowl here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491734
+    m_Localized: Gas giant with four moons. Administrative seat of the Federation.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491735
+    m_Localized: Inner moon of Centaurus.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491736
+    m_Localized: Moon of Centaurus that hosts the Federation yard.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491737
+    m_Localized: Moon of Centaurus ringed by a titanium field.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491738
+    m_Localized: Distant icy moon of Centaurus.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491739
+    m_Localized: Federation yard. License control and official supply.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491740
+    m_Localized: Field rich in titanium and cobalt.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491741
+    m_Localized: Giant asteroid at the heart of the Belt. It holds the central station.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491742
+    m_Localized: Atlas Universal's base in the most dangerous sector of the system.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491743
+    m_Localized: Dense, lucrative field. High pirate risk.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491744
+    m_Localized: Dense cobalt and ice field. High pirate risk.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491745
+    m_Localized: Jump gate to the Venera Sector.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491746
+    m_Localized: Jump gate to the Belt Sector.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491747
+    m_Localized: Jump gate to the Aster Sector.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491748
+    m_Localized: Jump gate to the Aster Sector.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491749
+    m_Localized: Jump gate to the Centaurus Sector.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491750
+    m_Localized: Jump gate to the Belt Sector.
     m_Metadata:
       m_Items: []
   references:

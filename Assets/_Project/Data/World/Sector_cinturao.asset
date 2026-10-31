@@ -64,14 +64,14 @@ MonoBehaviour:
       elevationDeg: 0
     target: {fileID: 11400000, guid: d2d9e9fee89b1f743b341b604b83b40f, type: 2}
     targetGateId: gate_aster_cinturao
-  - id: gate_cinturao_centarus
+  - id: gate_cinturao_centaurus
     at:
       parentId: cinturao
       distance: 3000000
       angleDeg: 240
       elevationDeg: 0
-    target: {fileID: 11400000, guid: f0fbfb99a4e11934197acf7b81a198a7, type: 2}
-    targetGateId: gate_centarus_cinturao
+    target: {fileID: 11400000, guid: a320cf454d731b0468b708e188cd69c5, type: 2}
+    targetGateId: gate_centaurus_cinturao
   references:
     version: 2
     RefIds: []

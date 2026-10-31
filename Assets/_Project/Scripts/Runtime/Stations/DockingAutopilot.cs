@@ -81,7 +81,7 @@ namespace PulseFactor
             }
             SetDock(s, s.Docks[r.dockIndex]);
             Current = Phase.Authorized;
-            GameMessages.Post("msg.dock_granted", Dock.Number, Dock.size);
+            HudNotice.Show("notice.dock_granted", 7f, Dock.Number.ToString("00"));
             if (Targets) Targets.Select(new DockTarget(Dock));
         }
 
@@ -129,6 +129,7 @@ namespace PulseFactor
                         Station.Docking.Release(PlayerId);
                         body.isKinematic = false;
                         ship.ControlsLocked = false;
+                        if (Targets && Targets.Current is DockTarget) Targets.Select(null); // a doca deixa de ser o alvo
                         SetDock(null, null);
                         Current = Phase.Free;
                         Undocked?.Invoke();

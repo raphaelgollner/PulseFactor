@@ -6,7 +6,7 @@ namespace PulseFactor
     public struct MassSource
     {
         public const double StationLockRadius = 5000;
-        public const double BodyLockFactor = 1.5; // menor que a zona de perigo (2 R do centro): quem sai do alerta pode dobrar
+        public const double BodyLockFactor = 1.1; // dentro da zona de perigo (1,2 R do centro): quem sai do alerta pode dobrar
 
         public double3 position;
         public double radius;

@@ -15,6 +15,8 @@ namespace PulseFactor
         public SectorManager Sectors;
         public CameraRig CameraRig;
         public GameConfig Config;
+        public ContractService Contracts;
+        public RouteService Route;
 
         public string SectorName => Sectors && Sectors.Current
             ? Loc.T("sector.name", Loc.T("body." + Sectors.Current.bodies[0].id))

@@ -14,6 +14,10 @@ namespace PulseFactor
         public WarpSettings settings = new();
         public PlayerShipInput Input;
         public TargetSelector Targets;
+        public RouteService Route;
+
+        // Alvo da dobra: o selecionado com T ou, se nenhum, o proximo ponto da rota.
+        public ITargetable Target => (Targets ? Targets.Current : null) ?? (Route ? Route.Waypoint : null);
 
         public WarpDrive Drive { get; private set; }
         public bool MassLocked { get; private set; }
@@ -47,8 +51,8 @@ namespace PulseFactor
             switch (Drive.State)
             {
                 case WarpState.Idle:
-                    if (Drive.TryStartCharge(MassLocked, out _)) GameMessages.Post("msg.warp_charging");
-                    else GameMessages.Post("msg.warp_masslocked");
+                    if (Drive.TryStartCharge(MassLocked, Target != null, out var reason)) GameMessages.Post("msg.warp_charging");
+                    else GameMessages.Post(reason == WarpFailReason.NoTarget ? "msg.warp_no_target" : "msg.warp_masslocked");
                     break;
                 case WarpState.Charging:
                     Drive.Cancel();
@@ -76,7 +80,8 @@ namespace PulseFactor
             MassLocked = MassLock.IsLocked(shipWorld.value, lockSources);
             double nearestBody = MassLock.NearestDistance(shipWorld.value, bodies);
 
-            var target = Targets ? Targets.Current : null;
+            var target = Target;
+            if (Drive.State == WarpState.Charging && target == null) { Drive.Cancel(); GameMessages.Post("msg.warp_cancelled"); }
             bool heading = false;
             DistanceToTarget = double.PositiveInfinity;
             if (target != null)

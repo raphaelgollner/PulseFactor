@@ -5,7 +5,7 @@ namespace PulseFactor
 {
     public enum WarpState { Idle, Charging, Active, Exiting }
 
-    public enum WarpFailReason { None, MassLocked, AlreadyActive }
+    public enum WarpFailReason { None, NoTarget, MassLocked, AlreadyActive }
 
     [Serializable]
     public class WarpSettings
@@ -13,9 +13,9 @@ namespace PulseFactor
         public float chargeTime = 5f;
         public float damageDelay = 1f;
         public float maxDamageDelay = 3f;
-        public double[] levelSpeeds = { 2e5, 5e5, 1e6 }; // m/s: niveis 1, 2 e 3 da Velocidade de Dobra
+        public double[] levelSpeeds = { 5e5, 1.5e6, 5e6 }; // m/s: niveis 1, 2 e 3 da Velocidade de Dobra (500, 1500, 5000 km/s)
         public double rampSeconds = 3;                  // tempo para ir de 0 ao teto do nivel
-        public double brakeK = 0.5;                     // 1/s: v <= brakeK * distancia ao alvo (indo na direcao dele)
+        public double brakeK = 1.0;                     // 1/s: v <= brakeK * distancia ao alvo (indo na direcao dele)
         public double bodyK = 1.0;                      // 1/s: v <= bodyK * distancia a superficie do corpo mais proximo
         public double exitDistance = 10000;
     }
@@ -38,9 +38,11 @@ namespace PulseFactor
         public float ChargeProgress => State == WarpState.Charging ? Mathf.Clamp01(elapsed / ChargeTotal) : 0f;
         public double Speed { get; private set; }
 
-        public bool TryStartCharge(bool massLocked, out WarpFailReason reason)
+        // A dobra so ativa com alvo (selecionado com T ou proximo ponto da rota).
+        public bool TryStartCharge(bool massLocked, bool hasTarget, out WarpFailReason reason)
         {
             reason = State != WarpState.Idle ? WarpFailReason.AlreadyActive
+                : !hasTarget ? WarpFailReason.NoTarget
                 : massLocked ? WarpFailReason.MassLocked
                 : WarpFailReason.None;
             if (reason != WarpFailReason.None) return false;
@@ -80,7 +82,8 @@ namespace PulseFactor
                     Speed = 0;
                     break;
                 case WarpState.Active:
-                    if (distToTarget < s.exitDistance)
+                    // So sai sozinha quando esta indo na direcao do alvo (a doca recem-deixada nao conta).
+                    if (headingToTarget && distToTarget < s.exitDistance)
                     {
                         State = WarpState.Exiting;
                         Speed = 0;

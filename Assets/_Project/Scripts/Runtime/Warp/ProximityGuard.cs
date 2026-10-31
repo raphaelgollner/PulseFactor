@@ -6,6 +6,9 @@ namespace PulseFactor
 {
     public static class ProximityRules
     {
+        // Playtest 2026-10-31: zona reduzida 80% (antes 1 R). Pode chegar perto, so nao pode encostar.
+        public const double DefaultDangerFactor = 0.2;
+
         // Perigo: mais perto da superficie do que (fator x raio).
         public static bool InDanger(double surfaceDistance, double radius, double factor) => surfaceDistance < radius * factor;
 
@@ -30,7 +33,7 @@ namespace PulseFactor
     [RequireComponent(typeof(ShipController))]
     public class ProximityGuard : MonoBehaviour
     {
-        [SerializeField] double dangerFactor = 1.0;
+        [SerializeField] double dangerFactor = ProximityRules.DefaultDangerFactor;
         [SerializeField] float evasionSeconds = 4f;
         [SerializeField] double minBodyRadius = 5e5; // so planetas e luas; o asteroide gigante do Cinturao tem estacao colada nele
 

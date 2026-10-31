@@ -14,7 +14,7 @@ namespace PulseFactor
 
         public readonly InputAction Throttle, Strafe, Vertical, Roll, AimDelta, AimStick;
         public readonly InputAction FirePrimary, FireSecondary, Skill1, Skill2, Skill3;
-        public readonly InputAction Cruise, Warp, RequestDock, ToggleCamera, Interact, SelectTarget, Pause, FreeLook;
+        public readonly InputAction Cruise, Warp, RequestDock, ToggleCamera, Interact, SelectTarget, Pause, FreeLook, Map, ClearTarget;
         public readonly InputAction DockedInteract, DockedBack;
 
         public PulseControls()
@@ -49,6 +49,9 @@ namespace PulseFactor
             SelectTarget = Button(Flight, "SelectTarget", "<Keyboard>/t", "<Gamepad>/rightStickPress");
             Pause = Button(Flight, "Pause", "<Keyboard>/escape", "<Gamepad>/start");
             FreeLook = Button(Flight, "FreeLook", "<Keyboard>/z", "<Gamepad>/leftStickPress");
+            Map = Button(Flight, "Map", "<Keyboard>/m", "<Gamepad>/dpad/up");
+            ClearTarget = Flight.AddAction("ClearTarget", InputActionType.Button);
+            ClearTarget.AddCompositeBinding("OneModifier").With("Modifier", "<Keyboard>/ctrl").With("Binding", "<Keyboard>/t");
 
             DockedInteract = Button(Docked, "Interact", "<Keyboard>/f", "<Gamepad>/buttonWest");
             DockedBack = Button(Docked, "Back", "<Keyboard>/escape", "<Gamepad>/buttonEast");

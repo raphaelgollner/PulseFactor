@@ -41,10 +41,16 @@ MonoBehaviour:
     color: {r: 0.6, g: 0.6, b: 0.62, a: 1}
     isStar: 0
   stations:
-  - def: {fileID: 11400000, guid: 8a1242ae7d4de15409ce57ca730204b0, type: 2}
+  - def: {fileID: 11400000, guid: 3564da4e5c8a4bf41930779a57044e8f, type: 2}
     at:
       parentId: aster
       distance: 20000000
+      angleDeg: 0
+      elevationDeg: 0
+  - def: {fileID: 11400000, guid: df11addb3f06f324bae7a293403ae00e, type: 2}
+    at:
+      parentId: aster_i
+      distance: 5000000
       angleDeg: 0
       elevationDeg: 0
   fields:

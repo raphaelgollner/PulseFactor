@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEditor.Localization;
 using UnityEditor.SceneManagement;
@@ -32,8 +33,9 @@ namespace PulseFactor.EditorTools
             AssetDatabase.Refresh();
 
             var res = LoadResources();
+            BuildCorporations();
             var config = Asset<GameConfig>($"{Root}/Data/GameConfig.asset");
-            config.testMode = true;
+            config.testMode = false; // fase 2: economia real
             config.startingCredits = 1000;
             EditorUtility.SetDirty(config);
 
@@ -74,16 +76,19 @@ namespace PulseFactor.EditorTools
             // Aster: planeta azulado, 1 lua, setor inicial.
             Body(aster, "aster", null, 6e6, 0, 0, new Color(0.3f, 0.5f, 0.85f));
             Body(aster, "aster_i", "aster", 1.7e6, 4e8, 30, new Color(0.6f, 0.6f, 0.62f));
-            Station(aster, "aster_orbital", "corp_a", "aster", 2e7, 0, r,
-                sells: new[] { "iron", "ice", "coal" }, buys: new[] { "iron", "ice", "coal", "copper", "titanium", "cobalt" }, buyMult: 1.2f);
+            Station(aster, "gollner", "nova", StationStyle.Ring, Standard, "aster", 2e7, 0, r,
+                Sell("iron", 1f), Sell("ice", 1f), Sell("coal", 1f), Buy("copper", 1.25f), Buy("titanium", 1.3f), Buy("cobalt", 1.3f));
+            Station(aster, "apollo", "nova", StationStyle.Outpost, Outpost, "aster_i", 5e6, 0, r,
+                Sell("copper", 0.9f), Sell("titanium", 0.95f), Buy("ice", 1.35f), Buy("coal", 1.3f), Buy("iron", 1.2f));
+            PlaceApolloFacingGollner(aster);
             Field(aster, "aster_field", "aster", 2.15e7, 3, 150, 3000, 101, false,
                 (r["iron"], 35), (r["ice"], 25), (r["coal"], 20), (r["copper"], 12), (r["titanium"], 5), (r["cobalt"], 3));
 
             // Venera: planeta dourado.
             Body(venera, "venera", null, 5e6, 0, 0, new Color(0.85f, 0.65f, 0.35f));
             Body(venera, "venera_i", "venera", 1.2e6, 3e8, 200, new Color(0.55f, 0.5f, 0.45f));
-            Station(venera, "venera_hub", "corp_b", "venera", 1.8e7, 90, r,
-                sells: new[] { "copper", "ice" }, buys: new[] { "iron", "coal", "titanium", "cobalt" }, buyMult: 1.25f);
+            Station(venera, "magna", "magna", StationStyle.Industrial, Standard, "venera", 1.8e7, 90, r,
+                Sell("copper", 1f), Sell("iron", 0.95f), Sell("coal", 0.95f), Buy("ice", 1.3f), Buy("titanium", 1.35f), Buy("cobalt", 1.4f));
             Field(venera, "venera_field", "venera", 2e7, 95, 120, 3000, 202, true,
                 (r["copper"], 35), (r["ice"], 30), (r["iron"], 20), (r["titanium"], 10), (r["cobalt"], 5));
 
@@ -93,15 +98,15 @@ namespace PulseFactor.EditorTools
             Body(centaurus, "centaurus_ii", "centaurus", 2e6, 3.5e8, 80, new Color(0.5f, 0.55f, 0.6f));
             Body(centaurus, "centaurus_iii", "centaurus", 1.5e6, 5e8, 170, new Color(0.65f, 0.55f, 0.5f));
             Body(centaurus, "centaurus_iv", "centaurus", 2.5e6, 7e8, 260, new Color(0.8f, 0.82f, 0.85f));
-            Station(centaurus, "centaurus_ii_yard", "corp_c", "centaurus_ii", 8e6, 0, r,
-                sells: new[] { "titanium", "coal" }, buys: new[] { "iron", "ice", "copper", "cobalt" }, buyMult: 1.3f);
+            Station(centaurus, "centaurus_ii_yard", "federation", StationStyle.Ring, Standard, "centaurus_ii", 8e6, 0, r,
+                Sell("titanium", 1f), Sell("coal", 1f), Buy("iron", 1.3f), Buy("ice", 1.3f), Buy("copper", 1.3f), Buy("cobalt", 1.3f));
             Field(centaurus, "centaurus_field", "centaurus_iii", 1e7, 40, 150, 3500, 303, true,
                 (r["titanium"], 30), (r["cobalt"], 20), (r["iron"], 25), (r["ice"], 25));
 
             // Cinturao: so asteroides, estacao central no asteroide gigante.
             Body(cinturao, "cinturao", null, 4e4, 0, 0, new Color(0.45f, 0.42f, 0.4f));
-            Station(cinturao, "cinturao_central", "corp_a", "cinturao", 4.5e4, 0, r,
-                sells: new[] { "iron", "cobalt" }, buys: new[] { "ice", "coal", "copper" }, buyMult: 1.3f, sellMult: 0.9f);
+            Station(cinturao, "cinturao_central", "atlas", StationStyle.Ring, Standard, "cinturao", 4.5e4, 0, r,
+                Sell("iron", 0.9f), Sell("cobalt", 0.9f), Buy("ice", 1.3f), Buy("coal", 1.3f), Buy("copper", 1.3f));
             Field(cinturao, "cinturao_field_a", "cinturao", 5e5, 0, 260, 5000, 404, true,
                 (r["iron"], 30), (r["cobalt"], 20), (r["titanium"], 15), (r["coal"], 20), (r["copper"], 15));
             Field(cinturao, "cinturao_field_b", "cinturao", 8e5, 150, 220, 5000, 505, true,
@@ -120,6 +125,18 @@ namespace PulseFactor.EditorTools
             return galaxy;
         }
 
+        // Escala geral das distancias (playtest 2026-10-31: -20%). Tamanhos dos corpos nao mudam.
+        const double DistanceScale = 0.8;
+        const double StationOrbitFactor = 1.2;
+
+        // Distancia escalada, sem nunca entrar no corpo-pai (ex.: estacao colada no asteroide do Cinturao).
+        static double Scaled(SectorDef s, string parentId, double dist)
+        {
+            var parent = s.bodies.Find(b => b.id == parentId);
+            double scaled = dist * DistanceScale;
+            return parent != null && scaled < parent.radius * 1.05 ? dist : scaled;
+        }
+
         static SectorDef Sector(string id, Vector3 sunDir)
         {
             var s = Asset<SectorDef>($"{WorldData}/Sector_{id}.asset");
@@ -133,22 +150,29 @@ namespace PulseFactor.EditorTools
         }
 
         static void Body(SectorDef s, string id, string parent, double radius, double orbit, float angle, Color color) =>
-            s.bodies.Add(new SolarSystemDef.Body { id = id, parentId = parent, radius = radius, orbitDistance = orbit, orbitAngleDeg = angle, color = color });
+            s.bodies.Add(new SolarSystemDef.Body { id = id, parentId = parent, radius = radius, orbitDistance = orbit * DistanceScale, orbitAngleDeg = angle, color = color });
 
-        static void Station(SectorDef s, string id, string corp, string parent, double dist, float angle, Dictionary<string, ResourceDef> r,
-            string[] sells, string[] buys, float buyMult, float sellMult = 1f)
+        static readonly DockSize[] Standard = { DockSize.P, DockSize.P, DockSize.P, DockSize.P, DockSize.M, DockSize.M, DockSize.G };
+        static readonly DockSize[] Outpost = { DockSize.P, DockSize.M, DockSize.G };
+
+        static (string res, bool sells, float mult) Sell(string res, float mult) => (res, true, mult);
+        static (string res, bool sells, float mult) Buy(string res, float mult) => (res, false, mult);
+
+        // Cada recurso: a estacao vende OU compra, com o seu multiplicador de preco.
+        static void Station(SectorDef s, string id, string corp, StationStyle style, DockSize[] docks, string parent, double dist, float angle,
+            Dictionary<string, ResourceDef> r, params (string res, bool sells, float mult)[] market)
         {
             var def = Asset<StationDef>($"{WorldData}/Station_{id}.asset");
             def.id = id;
             def.corporationId = corp;
-            def.market = new List<MarketEntry>();
-            foreach (var key in sells.Union(buys))
-            {
-                bool sell = sells.Contains(key), buy = buys.Contains(key);
-                def.market.Add(new MarketEntry { resource = r[key], sells = sell, buys = buy, priceMultiplier = buy && !sell ? buyMult : sellMult });
-            }
+            def.corporation = AssetDatabase.LoadAssetAtPath<CorporationDef>($"{WorldData}/Corp_{corp}.asset");
+            def.style = style;
+            def.dockSizes = docks;
+            def.hasShipyard = style != StationStyle.Outpost;
+            def.market = market.Select(m => new MarketEntry { resource = r[m.res], sells = m.sells, buys = !m.sells, priceMultiplier = m.mult }).ToList();
             EditorUtility.SetDirty(def);
-            s.stations.Add(new StationPlacement { def = def, at = new Placement { parentId = parent, distance = dist, angleDeg = angle } });
+            // Estacoes 20% mais afastadas do corpo que orbitam (playtest 2026-10-31).
+            s.stations.Add(new StationPlacement { def = def, at = new Placement { parentId = parent, distance = Scaled(s, parent, dist * StationOrbitFactor), angleDeg = angle } });
         }
 
         static void Field(SectorDef s, string id, string parent, double dist, float angle, int count, float radius, int seed, bool pirates,
@@ -158,14 +182,46 @@ namespace PulseFactor.EditorTools
             def.id = id; def.count = count; def.radius = radius; def.seed = seed;
             def.composition = composition.Select(c => new AsteroidFieldDef.Composition { resource = c.res, weight = c.weight }).ToList();
             EditorUtility.SetDirty(def);
-            s.fields.Add(new FieldPlacement { def = def, pirates = pirates, at = new Placement { parentId = parent, distance = dist, angleDeg = angle } });
+            s.fields.Add(new FieldPlacement { def = def, pirates = pirates, at = new Placement { parentId = parent, distance = Scaled(s, parent, dist), angleDeg = angle } });
         }
 
         static void Link(SectorDef a, string gateA, string parentA, double distA, float angleA,
                          SectorDef b, string gateB, string parentB, double distB, float angleB)
         {
-            a.gates.Add(new GatePlacement { id = gateA, target = b, targetGateId = gateB, at = new Placement { parentId = parentA, distance = distA, angleDeg = angleA } });
-            b.gates.Add(new GatePlacement { id = gateB, target = a, targetGateId = gateA, at = new Placement { parentId = parentB, distance = distB, angleDeg = angleB } });
+            a.gates.Add(new GatePlacement { id = gateA, target = b, targetGateId = gateB, at = new Placement { parentId = parentA, distance = Scaled(a, parentA, distA), angleDeg = angleA } });
+            b.gates.Add(new GatePlacement { id = gateB, target = a, targetGateId = gateA, at = new Placement { parentId = parentB, distance = Scaled(b, parentB, distB), angleDeg = angleB } });
+        }
+
+        // Ajuste individual (playtest 2026-10-31): o Apollo fica do lado de Aster I voltado para a Gollner,
+        // um pouco acima do bloqueio de dobra da lua, para a rota direta nao cruzar a zona da lua.
+        const double ApolloDistance = 2.4e6; // m do centro de Aster I (raio 1,7e6; bloqueio 1,87e6; alerta 2,04e6)
+
+        static void PlaceApolloFacingGollner(SectorDef aster)
+        {
+            var bodies = aster.BodyPositions();
+            var gollner = aster.stations.Find(p => p.def.id == "gollner");
+            var apollo = aster.stations.Find(p => p.def.id == "apollo");
+            var toGollner = SectorDef.Resolve(gollner.at, bodies).value - bodies[apollo.at.parentId];
+            float angle = (float)math.degrees(math.atan2(toGollner.z, toGollner.x));
+            apollo.at = new Placement { parentId = apollo.at.parentId, distance = ApolloDistance, angleDeg = angle };
+            apollo.faceTowardStationId = "gollner";
+        }
+
+        static void BuildCorporations()
+        {
+            void Corp(string id, Color color)
+            {
+                var c = Asset<CorporationDef>($"{WorldData}/Corp_{id}.asset");
+                c.id = id;
+                c.color = color;
+                EditorUtility.SetDirty(c);
+            }
+            Corp("nova", new Color(0.4f, 0.8f, 1f));
+            Corp("magna", new Color(1f, 0.7f, 0.15f));
+            Corp("atlas", new Color(0.85f, 0.25f, 0.25f));
+            Corp("federation", new Color(0.9f, 0.9f, 0.95f));
+            foreach (var old in new[] { "Station_aster_orbital", "Station_venera_hub" })
+                AssetDatabase.DeleteAsset($"{WorldData}/{old}.asset");
         }
 
         // ---------- Materiais ----------

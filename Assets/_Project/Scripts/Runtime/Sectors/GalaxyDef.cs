@@ -49,6 +49,33 @@ namespace PulseFactor
             return -1;
         }
 
+        // Primeiro portal do caminho mais curto de 'from' ate 'to' (null se mesmo setor ou sem caminho).
+        public GatePlacement NextGate(SectorDef from, SectorDef to)
+        {
+            if (!from || !to || from == to) return null;
+            var firstGate = new Dictionary<SectorDef, GatePlacement>();
+            var visited = new HashSet<SectorDef> { from };
+            var queue = new Queue<SectorDef>();
+            foreach (var g in from.gates)
+            {
+                if (!g.target || !visited.Add(g.target)) continue;
+                firstGate[g.target] = g;
+                queue.Enqueue(g.target);
+            }
+            while (queue.Count > 0)
+            {
+                var s = queue.Dequeue();
+                if (s == to) return firstGate[s];
+                foreach (var g in s.gates)
+                {
+                    if (!g.target || !visited.Add(g.target)) continue;
+                    firstGate[g.target] = firstGate[s];
+                    queue.Enqueue(g.target);
+                }
+            }
+            return null;
+        }
+
         public int JumpsBetween(string fromId, string toId) =>
             JumpsBetween(sectors.Find(s => s.id == fromId), sectors.Find(s => s.id == toId));
 

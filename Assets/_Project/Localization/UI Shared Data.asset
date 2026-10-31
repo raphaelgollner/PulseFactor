@@ -451,6 +451,326 @@ MonoBehaviour:
     m_Key: target.dock_7
     m_Metadata:
       m_Items: []
+  - m_Id: 137898168635392
+    m_Key: body.centaurus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384128
+    m_Key: target.centaurus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384129
+    m_Key: target.centaurus_i
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384130
+    m_Key: target.centaurus_ii
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384131
+    m_Key: target.centaurus_iii
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384132
+    m_Key: target.centaurus_iv
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384133
+    m_Key: target.gollner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384134
+    m_Key: target.apollo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384135
+    m_Key: target.magna
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384136
+    m_Key: target.centaurus_ii_yard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384137
+    m_Key: target.centaurus_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384138
+    m_Key: target.gate_cinturao_centaurus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384139
+    m_Key: target.gate_centaurus_cinturao
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384140
+    m_Key: corp.nova
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384141
+    m_Key: corp.magna
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384142
+    m_Key: corp.atlas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384143
+    m_Key: corp.federation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384144
+    m_Key: contract.type_delivery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384145
+    m_Key: contract.type_requisition
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384146
+    m_Key: contract.TooMany
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384147
+    m_Key: contract.NoCargoSpace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384148
+    m_Key: contract.NotAvailable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384149
+    m_Key: contract.UnknownResource
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384150
+    m_Key: msg.contract_accepted
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384151
+    m_Key: msg.contract_completed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384152
+    m_Key: msg.contract_failed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384153
+    m_Key: msg.contract_partial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384154
+    m_Key: notice.dock_granted
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384155
+    m_Key: terminal.welcome
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384156
+    m_Key: terminal.contracts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384157
+    m_Key: terminal.contracts_active
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384158
+    m_Key: terminal.contracts_board
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384159
+    m_Key: terminal.accept
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384160
+    m_Key: terminal.abandon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384161
+    m_Key: terminal.deliver_all
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384162
+    m_Key: terminal.corp_rep
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384163
+    m_Key: terminal.language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384164
+    m_Key: terminal.col_buy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384165
+    m_Key: terminal.col_sell
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384166
+    m_Key: terminal.reserved
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046776131584
+    m_Key: msg.target_cleared
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491712
+    m_Key: msg.route_set
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491713
+    m_Key: msg.route_arrived
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491714
+    m_Key: hud.route
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491715
+    m_Key: hud.route_via
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491716
+    m_Key: map.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491717
+    m_Key: map.hint_overview
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491718
+    m_Key: map.hint_sector
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491719
+    m_Key: map.faction
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491720
+    m_Key: map.corporation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491721
+    m_Key: map.trade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491722
+    m_Key: map.resources
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491723
+    m_Key: map.route_set
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491724
+    m_Key: map.route_clear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491725
+    m_Key: desc.aster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491726
+    m_Key: desc.aster_i
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491727
+    m_Key: desc.gollner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491728
+    m_Key: desc.apollo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491729
+    m_Key: desc.aster_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491730
+    m_Key: desc.venera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491731
+    m_Key: desc.venera_i
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491732
+    m_Key: desc.magna
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491733
+    m_Key: desc.venera_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491734
+    m_Key: desc.centaurus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491735
+    m_Key: desc.centaurus_i
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491736
+    m_Key: desc.centaurus_ii
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491737
+    m_Key: desc.centaurus_iii
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491738
+    m_Key: desc.centaurus_iv
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491739
+    m_Key: desc.centaurus_ii_yard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491740
+    m_Key: desc.centaurus_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491741
+    m_Key: desc.cinturao
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491742
+    m_Key: desc.cinturao_central
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491743
+    m_Key: desc.cinturao_field_a
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491744
+    m_Key: desc.cinturao_field_b
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491745
+    m_Key: desc.gate_aster_venera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491746
+    m_Key: desc.gate_aster_cinturao
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491747
+    m_Key: desc.gate_venera_aster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491748
+    m_Key: desc.gate_cinturao_aster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491749
+    m_Key: desc.gate_cinturao_centaurus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491750
+    m_Key: desc.gate_centaurus_cinturao
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

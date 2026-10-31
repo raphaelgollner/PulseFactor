@@ -17,6 +17,9 @@ namespace PulseFactor
         VisualElement shieldFill, hullFill, fuelFill, shieldArc, hullArc;
         VisualElement reticle, centerDot, bracket, messages;
         Label alert, notice;
+        VisualElement contractList, routeMarker, routeArrow;
+        Label routeLabel;
+        readonly List<Label> contractLabels = new();
         Label credits, testMode, sector, speed, cruise, warp, cargo, slotLabel, skillLabel, targetLabel;
         readonly List<(VisualElement marker, Label label)> markers = new();
         readonly List<(Label label, float until)> messageItems = new();
@@ -44,6 +47,8 @@ namespace PulseFactor
             messages = Add(hud, "messages");
             alert = Text(hud, "alert");
             notice = Text(hud, "notice");
+            contractList = Add(hud, "contracts");
+            for (int i = 0; i < 3; i++) contractLabels.Add(Text(contractList, "contract-line"));
 
             bottomCenter = Add(hud, "bottom-center");
             speed = Text(bottomCenter, "label label-big");
@@ -68,6 +73,9 @@ namespace PulseFactor
             bracket = Add(hud, "target-bracket");
             targetLabel = Text(hud, "label marker-label");
             arrow = Add(hud, "arrow");
+            routeMarker = Add(hud, "route-marker");
+            routeLabel = Text(hud, "label marker-label route-label");
+            routeArrow = Add(hud, "arrow route-arrow");
 
             centerDot = Add(hud, "center-dot");
             reticle = Add(hud, "reticle");
@@ -134,12 +142,36 @@ namespace PulseFactor
             notice.style.display = noticeOn ? DisplayStyle.Flex : DisplayStyle.None;
             if (noticeOn) notice.text = HudNotice.Text;
 
+            contractList.style.display = full;
+            UpdateContracts();
             UpdateBars();
             UpdateTexts();
             UpdateReticle();
             UpdateMarkers();
+            UpdateRoute();
             ExpireMessages();
         }
+
+        void UpdateContracts()
+        {
+            var service = Player.Contracts;
+            var active = service ? service.Log.Active : null;
+            for (int i = 0; i < contractLabels.Count; i++)
+            {
+                var l = contractLabels[i];
+                bool show = active != null && i < active.Count;
+                l.style.display = show ? DisplayStyle.Flex : DisplayStyle.None;
+                if (show) l.text = ContractLine(active[i], service.Clock.Seconds);
+            }
+        }
+
+        // "ENTREGA  Ferro ×20 → Posto Avançado Apollo   28:41"
+        public static string ContractLine(Contract c, double now) =>
+            $"{Loc.T(c.type == ContractType.Delivery ? "contract.type_delivery" : "contract.type_requisition")}  " +
+            (c.type == ContractType.Requisition
+                ? $"{Loc.T("target." + c.resourceId)} {c.delivered}/{c.quantity} → {Loc.T("target." + c.destinationStationId)}"
+                : $"{Loc.T("target." + c.resourceId)} ×{c.quantity} → {Loc.T("target." + c.destinationStationId)}") +
+            $"   {ContractService.FormatTime(c.TimeLeft(now))}";
 
         void UpdateBars()
         {
@@ -265,6 +297,49 @@ namespace PulseFactor
                 arrow.style.borderBottomColor = KindColor(current.Kind);
                 Place(arrow, ToPanel(edge));
                 arrow.style.rotate = new Rotate(new Angle(Mathf.Atan2(v.x, v.y) * Mathf.Rad2Deg));
+            }
+        }
+
+        // Rota marcada no mapa: losango roxo no proximo ponto (destino ou portal do caminho).
+        void UpdateRoute()
+        {
+            routeMarker.style.display = DisplayStyle.None;
+            routeLabel.style.display = DisplayStyle.None;
+            routeArrow.style.display = DisplayStyle.None;
+            var route = Player.Route;
+            var cam = Camera.main;
+            var origin = FloatingOrigin.Instance;
+            var wp = route ? route.Waypoint : null;
+            if (wp == null || !cam || !origin) return;
+
+            var camWorld = origin.ToWorld(cam.transform.position);
+            var delta = wp.Position - camWorld;
+            double d = Unity.Mathematics.math.length(delta);
+            var dir = (Vector3)(Unity.Mathematics.float3)(delta / System.Math.Max(d, 1e-3));
+            var sp = cam.WorldToScreenPoint(cam.transform.position + dir * 1000f);
+            bool onScreen = sp.z > 0 && sp.x >= 0 && sp.x <= Screen.width && sp.y >= 0 && sp.y <= Screen.height;
+            if (onScreen)
+            {
+                var p = ToPanel(sp);
+                routeMarker.style.display = DisplayStyle.Flex;
+                routeLabel.style.display = DisplayStyle.Flex;
+                Place(routeMarker, p);
+                Place(routeLabel, p + new Vector2(16, 12));
+                routeLabel.text = route.WaypointIsGate
+                    ? Loc.T("hud.route_via", Loc.T("target." + route.DestinationId), Loc.T("target." + wp.DisplayId), HudModel.FormatDistance(d))
+                    : Loc.T("hud.route", Loc.T("target." + route.DestinationId), HudModel.FormatDistance(d));
+            }
+            else
+            {
+                var local = cam.transform.InverseTransformDirection(dir);
+                var v = new Vector2(local.x, local.y);
+                if (v.sqrMagnitude < 1e-6f) v = Vector2.down;
+                v.Normalize();
+                var center = new Vector2(Screen.width, Screen.height) * 0.5f;
+                var edge = center + v * (Mathf.Min(Screen.width, Screen.height) * 0.38f);
+                routeArrow.style.display = DisplayStyle.Flex;
+                Place(routeArrow, ToPanel(edge));
+                routeArrow.style.rotate = new Rotate(new Angle(Mathf.Atan2(v.x, v.y) * Mathf.Rad2Deg));
             }
         }
 

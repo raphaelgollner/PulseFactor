@@ -21,6 +21,8 @@ namespace PulseFactor
     {
         public StationDef def;
         public Placement at;
+        [Tooltip("Opcional: o topo da estacao aponta para esta outra estacao do setor (ex.: Apollo -> Gollner).")]
+        public string faceTowardStationId;
     }
 
     [Serializable]

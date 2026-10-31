@@ -41,6 +41,9 @@ namespace PulseFactor
             var rt = new RenderTexture(center ? 768 : 512, center ? 352 : 352, 0) { name = mount.name };
             var settings = Instantiate(BaseSettings);
             settings.targetTexture = rt;
+            // Painel desenhado em textura: nao recebe cliques da tela. Sem isto o Unity mapeia a tela
+            // inteira para o painel e ele "rouba" os cliques do canto superior esquerdo (abas do terminal).
+            settings.SetScreenToPanelSpaceFunction(_ => new Vector2(float.NaN, float.NaN));
             settings.clearColor = true;
             settings.colorClearValue = new Color(0.02f, 0.06f, 0.08f, 1f);
 
@@ -111,7 +114,10 @@ namespace PulseFactor
                     p.a.text = Loc.T("hud.slot_mining", Player.Laser && Player.Laser.Firing ? "●" : "○");
                     p.b.text = Loc.T("hud.cargo", ship.Cargo.Used, ship.Cargo.Capacity);
                     p.c.text = Loc.T("hud.credits", Player.Wallet.Credits.ToString("N0"));
-                    p.d.text = "";
+                    var service = Player.Contracts;
+                    p.d.text = service && service.Log.Active.Count > 0
+                        ? ScreenHud.ContractLine(service.Log.Active[0], service.Clock.Seconds)
+                        : "";
                 }
                 else
                 {

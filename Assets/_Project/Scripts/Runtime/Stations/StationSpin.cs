@@ -9,7 +9,7 @@ namespace PulseFactor
     {
         public const float InfluenceRadius = 8000f;
 
-        public float degreesPerSecond = 0.5f;
+        public float degreesPerSecond = 0.15f; // ~1 volta a cada 40 min (playtest: 0,5 era perceptivel demais)
 
         public static bool InInfluence(float distance) => distance < InfluenceRadius;
 

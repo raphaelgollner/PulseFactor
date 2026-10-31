@@ -187,7 +187,7 @@ Quatro módulos, cada um com **tiers** (melhor tier = melhor desempenho):
 
 ### 4.3 Modos de voo
 - **Subluz**: velocidade padrão. Combate, mineração, docagem.
-- **Dobra ("Velocidade de Dobra")**: muito mais rápida, para viagens entre corpos celestes. **3 níveis** (decisão do autor, 2026-10-31): nível 1 até 200 km/s, nível 2 até 500 km/s, nível 3 até 1 000 km/s. Todas as naves têm os 3 níveis; **W/S trocam o nível durante a dobra** (marchas). O jogador **pilota com o mouse durante a dobra**; alvo não é obrigatório. **[decisão do Claude]** Rampa de ~3 s até o teto; freio automático v ≤ 0,5/s × distância ao alvo quando apontado para ele; v ≤ 1/s × distância à superfície do corpo mais próximo.
+- **Dobra ("Velocidade de Dobra")**: muito mais rápida, para viagens entre corpos celestes. **3 níveis** (decisão do autor, 2026-10-31): nível 1 até 500 km/s, nível 2 até 1 500 km/s, nível 3 até 5 000 km/s (ajustado no playtest de 2026-10-31; antes 200/500/1 000). Todas as naves têm os 3 níveis; **W/S trocam o nível durante a dobra** (marchas). O jogador **pilota com o mouse durante a dobra**; alvo não é obrigatório. **[decisão do Claude]** Rampa de ~3 s até o teto; freio automático v ≤ 0,5/s × distância ao alvo quando apontado para ele; v ≤ 1/s × distância à superfície do corpo mais próximo.
   - **Aquecimento** de alguns segundos antes de entrar em dobra — a fuga fica difícil mas não impossível nem frustrante. **[decisão do Claude]** ~5 s; levar dano atrasa (não cancela) o aquecimento.
   - **Na dobra o jogador está seguro** (sem interdição por enquanto).
   - **[decisão do Claude]** Estilo supercruise do Elite: velocidade cresce com a distância de massas grandes; bloqueio por massa (mass lock) perto de estações (5 km) e planetas/luas (1,5 × raio do centro, dentro da zona do alerta de proximidade); sem armas/mineração em dobra; saída a alguns km do alvo selecionado.
@@ -365,3 +365,52 @@ Lore completa em `Docs/Lore.md`. A **Federação** é dona do sistema; corporaç
 - Plataformas estilo Elite: faixas laranja laterais, cantoneiras, número **pintado** `01`…`07` na borda (sem P/M/G, sem holograma do tamanho).
 - Ao conceder docagem: aviso em destaque "Solicitação de pouso recebida e permissão concedida. Por favor, dirija-se até a doca 0X." + holograma do número **só** sobre a doca concedida (com a seta azul).
 - Ao pousar: "Bem-vindo à <estação>" (~2 s) e então o terminal.
+
+### 12.7 Mapa do sistema, rota e dobra com alvo (decisão do autor, 2026-10-31)
+Referências: `Docs/Design/refs/mapa-sistema.webp`, `Docs/Design/refs/mapa-setor-zoom.webp`.
+- **M** abre o mapa. Visão geral: estrela no centro, corpos principais em órbita, cada setor delimitado por linhas.
+- **Scroll** sobre um setor dá zoom: planeta, luas, estações, campos, portais. Scroll para trás volta.
+- Clique num ponto: nome, descrição, facção (Federação), corporação, foco de comércio e botão **Definir rota**.
+- Destino da rota: **losango roxo** no HUD. Em outro setor, a rota aponta o próximo portal do caminho.
+- **Ctrl+T** limpa rota e alvo.
+- **A dobra só ativa com alvo** (selecionado com T ou o próximo ponto da rota). **[decisão do Claude]** A dobra só sai sozinha a 10 km do alvo quando a nave está indo na direção dele.
+- **[decisão do Claude]** Rota é salva no save. Descrições dos lugares são provisórias. Órbitas continuam estáticas (movimento orbital no backlog).
+
+## 13. Fase 2B — Ajustes de jogo, módulos e cockpit (decisões do autor, 2026-10-31)
+
+### 13.1 Sistema
+- O sistema se chama **Tau Ceti** (estrela real; planetas não confirmados → os nossos são ficção). Poder dominante: **Federação**.
+- Corporação dominante por setor: Aster → Nova Technology; Venera → Magna Hauling Co.; Cinturão → Atlas Universal; Centaurus → Federação.
+
+### 13.2 Pilotagem
+- **Peso em dobra**: a partir do nível 1 a nave fica mais pesada, mais no 2 e ainda mais no 3 — só ajustes de direção, sem curvas fechadas. **[decisão do Claude]** Giro máximo 50% / 30% / 15% do normal e resposta angular proporcionalmente mais lenta.
+- **Penalidade de carga** reduzida. **[decisão do Claude]** −15% de velocidade máxima com porão cheio (antes −40%).
+- **Boost (Shift esquerdo)**: barra consumida enquanto segura; +50% na velocidade máxima. Toda nave P: **150** de boost. Melhorável → **módulo Propulsor**. **[decisão do Claude]** Consome 30/s, recarrega 15/s após 1 s sem usar; não funciona em dobra.
+- **Skill "Sobrecarga de Motor"** (antes "Boost"): impulso extremo em subluz, até **200%** da velocidade máxima padrão da nave, por tempo limitado.
+- **Nenhuma skill ou armamento funciona em dobra.**
+
+### 13.3 Estações e docagem
+- Distâncias voltam às originais da fatia 1 (desfeitos o −20% geral e o +20% das estações). O Apollo mantém o ajuste individual (perto de Aster I, virado para a Gollner).
+- **Bloqueio de massa de estações: 7 km.** **Pedido de docagem: até 6 km.**
+- **Pouso automático** só começa com a nave **em cima** da plataforma e próxima dela.
+
+### 13.4 Módulos (atualiza §3.4)
+Além de gerador, motor, casco e skill:
+- **Propulsor (Boost)**: capacidade da barra de boost (P padrão 150). Melhorável.
+- **Scanner de sinal**: alcance para detectar **naves e asteroides mineráveis** (padrão **5 km** em todas as naves atuais). Fora do alcance, não aparecem no HUD. Estações, planetas, luas e portais sempre aparecem. Melhorável.
+
+### 13.5 Ícones (HUD e mapa iguais)
+- Planeta: círculo. **[decisão do Claude]** Lua: círculo menor. Portal: anel duplo. Campo de asteroides: 3 círculos irregulares.
+- Estação: círculo com **$** no meio.
+- Asteroide minerável: círculo irregular.
+- Nave: quadrado. Nave pirata: quadrado **vermelho**.
+- Alvo marcado: triângulo invertido **branco** (neutro), **verde** (aliado — **[decisão do Claude]** reputação ≥ 25 com a corporação), triângulo normal **vermelho** (inimigo; por enquanto só piratas).
+
+### 13.6 Painéis do cockpit
+Toda nave: **3 painéis embaixo e 2 em cima** (formato/posição variam por cabine; conteúdo igual, layout adaptável).
+- **Central (baixo)**: título "STATUS DA NAVE"; CASCO, ESCUDOS, BOOST (barras na largura toda); VELOCIDADE. Título "INFORMAÇÕES DO SISTEMA"; nome do sistema; nome do setor; poder dominante do sistema (Federação); corporação dominante do setor.
+- **Esquerdo (baixo)**: alvo marcado; distância; saúde e escudo do alvo (se houver); filiação (corporação, neutro ou pirata — pirata em vermelho).
+- **Direito (baixo), com abas**: CENTRAL DE MENSAGENS (feed com hora real), CONTRATOS ATIVOS, REPUTAÇÃO, ARMAMENTO E MÓDULOS. **F** ativa o modo mouse para clicar; **6** vai para a aba à direita, **7** para a esquerda, sem dar a volta.
+- **Cima esquerdo**: hora real, centralizada.
+- **Cima direito**: nome da nave (grande; máx. 18 caracteres, definido na compra), classe e fabricante (menores). **[decisão do Claude]** Até existir estaleiro: nome padrão "PULSE-01", renomeável na aba Serviços do terminal.
+- **[decisão do Claude]** Em terceira pessoa o HUD de tela continua como está; as abas existem nos painéis físicos.

@@ -27,6 +27,12 @@ namespace PulseFactor.EditorTools
             }
 
             pipeline.supportsHDR = true;
+            var rendererData = AssetDatabase.LoadAssetAtPath<UniversalRendererData>(RendererPath);
+            if (rendererData)
+            {
+                rendererData.renderingMode = RenderingMode.ForwardPlus; // estacoes tem varias luzes pontuais
+                EditorUtility.SetDirty(rendererData);
+            }
             EditorUtility.SetDirty(pipeline);
 
             GraphicsSettings.defaultRenderPipeline = pipeline;

@@ -41,7 +41,7 @@ MonoBehaviour:
     color: {r: 0.55, g: 0.5, b: 0.45, a: 1}
     isStar: 0
   stations:
-  - def: {fileID: 11400000, guid: 27cbe336a839ffb40b3acb0ae5fe108d, type: 2}
+  - def: {fileID: 11400000, guid: 7a10a2748ad7f304180bec8f3ae19e9e, type: 2}
     at:
       parentId: venera
       distance: 18000000

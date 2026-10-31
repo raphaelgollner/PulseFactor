@@ -21,7 +21,7 @@ namespace PulseFactor
         // Deslocamento do reticulo em fracao da altura da tela (centro = 0).
         public Vector2 ReticleOffset { get; private set; }
 
-        public event Action OnToggleCamera, OnWarp, OnRequestDock, OnInteract, OnSelectTarget, OnPause;
+        public event Action OnToggleCamera, OnWarp, OnRequestDock, OnInteract, OnSelectTarget, OnPause, OnMap, OnClearTarget;
         public event Action<bool> OnFirePrimary, OnFireSecondary;
         public event Action<int> OnSkill;
 
@@ -36,7 +36,15 @@ namespace PulseFactor
             Controls.RequestDock.performed += _ => OnRequestDock?.Invoke();
             Controls.Interact.performed += _ => OnInteract?.Invoke();
             Controls.DockedInteract.performed += _ => OnInteract?.Invoke();
-            Controls.SelectTarget.performed += _ => OnSelectTarget?.Invoke();
+            // T sozinho seleciona; Ctrl+T limpa alvo e rota.
+            Controls.SelectTarget.performed += _ =>
+            {
+                var kb = UnityEngine.InputSystem.Keyboard.current;
+                if (kb != null && kb.ctrlKey.isPressed) return;
+                OnSelectTarget?.Invoke();
+            };
+            Controls.ClearTarget.performed += _ => OnClearTarget?.Invoke();
+            Controls.Map.performed += _ => OnMap?.Invoke();
             Controls.Pause.performed += _ => OnPause?.Invoke();
             Controls.DockedBack.performed += _ => OnPause?.Invoke();
             Controls.FirePrimary.started += _ => OnFirePrimary?.Invoke(true);

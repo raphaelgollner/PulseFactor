@@ -215,7 +215,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3587919919
-    m_Localized: 'SEM ALVO [T]'
+    m_Localized: 'SEM ALVO [T] / ROTA [M]'
     m_Metadata:
       m_Items: []
   - m_Id: 3587919920
@@ -259,7 +259,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3587919930
-    m_Localized: Selecione um alvo (T)
+    m_Localized: Selecione um alvo (T) ou defina uma rota no mapa (M)
     m_Metadata:
       m_Items: []
   - m_Id: 3587919931
@@ -453,6 +453,337 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 15463112986634
     m_Localized: Doca 7 (G)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898168635392
+    m_Localized: Centaurus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384128
+    m_Localized: Centaurus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384129
+    m_Localized: Centaurus I
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384130
+    m_Localized: Centaurus II
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384131
+    m_Localized: Centaurus III
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384132
+    m_Localized: Centaurus IV
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384133
+    m_Localized: "Esta\xE7\xE3o Gollner"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384134
+    m_Localized: "Posto Avan\xE7ado Apollo"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384135
+    m_Localized: "Esta\xE7\xE3o Magna"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384136
+    m_Localized: Doca Centaurus II
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384137
+    m_Localized: Campo de Centaurus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384138
+    m_Localized: "Portal \u2192 Centaurus"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384139
+    m_Localized: "Portal \u2192 Cintur\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384140
+    m_Localized: Nova Technology
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384141
+    m_Localized: Magna Hauling Co.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384142
+    m_Localized: Atlas Universal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384143
+    m_Localized: "Federa\xE7\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384144
+    m_Localized: ENTREGA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384145
+    m_Localized: "REQUISI\xC7\xC3O"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384146
+    m_Localized: 'Limite de 5 contratos ativos: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384147
+    m_Localized: "Sem espa\xE7o na carga para: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384148
+    m_Localized: "Contrato indispon\xEDvel: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384149
+    m_Localized: "Contrato inv\xE1lido: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384150
+    m_Localized: 'Contrato aceito: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384151
+    m_Localized: "Contrato conclu\xEDdo: {0} (+{1} cr, +{2} rep)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384152
+    m_Localized: "Contrato falhou: {0} (multa {1} cr, \u2212{2} rep)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384153
+    m_Localized: 'Entrega parcial: {0} unidades'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384154
+    m_Localized: "Solicita\xE7\xE3o de pouso recebida e permiss\xE3o concedida. Por
+      favor, dirija-se at\xE9 a doca {0}."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384155
+    m_Localized: "Bem-vindo \xE0 {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384156
+    m_Localized: CONTRATOS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384157
+    m_Localized: Seus contratos ({0}/{1})
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384158
+    m_Localized: "Mural da esta\xE7\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384159
+    m_Localized: Aceitar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384160
+    m_Localized: Abandonar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384161
+    m_Localized: ENTREGAR CARGA DOS CONTRATOS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384162
+    m_Localized: "{0} \u2014 reputa\xE7\xE3o {1} \u2014 desconto {2}%"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384163
+    m_Localized: PT / EN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384164
+    m_Localized: Comprar por
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384165
+    m_Localized: Vender por
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137898206384166
+    m_Localized: '{0} ({1} em contrato)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046776131584
+    m_Localized: Alvo e rota limpos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491712
+    m_Localized: 'Rota definida: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491713
+    m_Localized: "Destino alcan\xE7ado: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491714
+    m_Localized: "\u25C6 {0}  {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491715
+    m_Localized: "\u25C6 {0}\nvia {1}  {2}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491716
+    m_Localized: MAPA DO SISTEMA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491717
+    m_Localized: "Scroll ou clique num setor para ampliar \u2022 M ou Esc fecha"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491718
+    m_Localized: "Clique num ponto para ver detalhes \u2022 Scroll para tr\xE1s volta"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491719
+    m_Localized: "Fac\xE7\xE3o: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491720
+    m_Localized: "Corpora\xE7\xE3o: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491721
+    m_Localized: 'Vende: {0}
+
+      Compra: {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491722
+    m_Localized: 'Recursos: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491723
+    m_Localized: DEFINIR ROTA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491724
+    m_Localized: REMOVER ROTA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491725
+    m_Localized: "Planeta oce\xE2nico, ber\xE7o da coloniza\xE7\xE3o do sistema.
+      Sede cient\xEDfica da Nova Technology."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491726
+    m_Localized: "Lua rochosa de Aster. Um asteroide capturado em sua \xF3rbita abriga
+      o Posto Avan\xE7ado Apollo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491727
+    m_Localized: "Esta\xE7\xE3o em anel da Nova Technology. Laborat\xF3rios, log\xEDstica
+      e o principal porto do Setor Aster."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491728
+    m_Localized: "Base de superf\xEDcie num asteroide em \xF3rbita de Aster I. Extra\xE7\xE3o
+      e refino de min\xE9rios."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491729
+    m_Localized: Campo de asteroides tranquilo, bom para mineradores iniciantes.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491730
+    m_Localized: "Planeta \xE1rido e dourado, rico em cobre. Rota tradicional de
+      carga."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491731
+    m_Localized: Pequena lua de Venera.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491732
+    m_Localized: "Plataforma industrial da Magna Hauling Co. Cont\xEAineres, tanques
+      e muito movimento."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491733
+    m_Localized: Campo de cobre e gelo. Piratas costumam rondar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491734
+    m_Localized: "Gigante gasoso com quatro luas. Sede administrativa da Federa\xE7\xE3o."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491735
+    m_Localized: Lua interna de Centaurus.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491736
+    m_Localized: "Lua de Centaurus que abriga a doca da Federa\xE7\xE3o."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491737
+    m_Localized: "Lua de Centaurus cercada por um campo de tit\xE2nio."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491738
+    m_Localized: Lua gelada e distante de Centaurus.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491739
+    m_Localized: "Doca da Federa\xE7\xE3o. Controle de licen\xE7as e abastecimento
+      oficial."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491740
+    m_Localized: "Campo rico em tit\xE2nio e cobalto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491741
+    m_Localized: "Asteroide gigante no cora\xE7\xE3o do Cintur\xE3o. Sustenta a esta\xE7\xE3o
+      central."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491742
+    m_Localized: Base da Atlas Universal no setor mais perigoso do sistema.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491743
+    m_Localized: Campo denso e lucrativo. Alto risco de piratas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491744
+    m_Localized: Campo denso de cobalto e gelo. Alto risco de piratas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491745
+    m_Localized: Portal de salto para o Setor Venera.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491746
+    m_Localized: "Portal de salto para o Setor Cintur\xE3o."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491747
+    m_Localized: Portal de salto para o Setor Aster.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491748
+    m_Localized: Portal de salto para o Setor Aster.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491749
+    m_Localized: Portal de salto para o Setor Centaurus.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147046805491750
+    m_Localized: "Portal de salto para o Setor Cintur\xE3o."
     m_Metadata:
       m_Items: []
   references:
