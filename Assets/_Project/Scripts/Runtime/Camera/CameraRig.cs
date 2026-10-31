@@ -34,6 +34,7 @@ namespace PulseFactor
         {
             Init();
             ship = shipObject.GetComponent<AssembledShip>();
+            lastShipPos = ship.transform.position;
             SetMode(CurrentMode);
         }
 
@@ -50,9 +51,16 @@ namespace PulseFactor
             Snap();
         }
 
+        Vector3 lastShipPos;
+
         void LateUpdate()
         {
             if (!ship) return;
+            // Rebase da origem flutuante: a nave "pula"; a camera acompanha o pulo sem suavizar.
+            var shipPos = ship.transform.position;
+            if ((shipPos - lastShipPos).sqrMagnitude > 500f * 500f) transform.position += shipPos - lastShipPos;
+            lastShipPos = shipPos;
+
             switch (CurrentMode)
             {
                 case Mode.Cockpit:
