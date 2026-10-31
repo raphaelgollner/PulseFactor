@@ -48,11 +48,12 @@ namespace PulseFactor
             body.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         }
 
-        public void Initialize(ShipClassDef def)
+        // cargo: carga ja existente (troca de nave); senao porao vazio.
+        public void Initialize(ShipClassDef def, CargoHold cargo = null)
         {
             SetupBody();
             ClassDef = def;
-            Cargo = new CargoHold(def.cargoCapacity);
+            Cargo = cargo ?? new CargoHold(def.cargoCapacity);
             Flight = new FlightModel(def);
         }
 

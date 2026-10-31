@@ -17,5 +17,7 @@ MonoBehaviour:
   manufacturer: {fileID: 11400000, guid: e48e75ad3837f40488dd10791e525e7c, type: 2}
   originClass: 1
   multiclass: 1
+  size: 0
+  price: 2000
   prefab: {fileID: 3913074906497111263, guid: 7701ef8bb8a0a624e83307e508d60cbe, type: 3}
   classDef: {fileID: 0}

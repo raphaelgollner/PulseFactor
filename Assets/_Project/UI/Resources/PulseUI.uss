@@ -103,6 +103,37 @@
 .panel-ship-sub { font-size: 20px; color: rgb(140, 190, 210); -unity-text-align: middle-center; }
 .name-field { width: 260px; font-size: 15px; }
 
+/* Estaleiro e armazenamento */
+.shipyard-modes { flex-direction: row; margin-bottom: 8px; flex-shrink: 0; }
+.shipyard-layout { flex-direction: row; align-items: stretch; flex-grow: 1; flex-shrink: 1; min-height: 0; }
+.shipyard-left { width: 42%; margin-right: 16px; flex-shrink: 0; }
+.shipyard-right { flex-grow: 1; flex-shrink: 1; min-height: 0; }
+.shipyard-preview { height: 340px; border-width: 1px; border-color: rgba(80, 160, 190, 0.5); background-color: rgb(8, 18, 26); }
+.shipyard-stat-title { font-size: 18px; color: rgb(150, 230, 255); -unity-font-style: bold; margin-top: 8px; }
+.shipyard-stat { font-size: 15px; color: rgb(200, 235, 245); white-space: normal; }
+.shipyard-warning { font-size: 15px; color: rgb(255, 140, 110); white-space: normal; }
+.shipyard-section { font-size: 15px; color: rgb(150, 230, 255); -unity-font-style: bold; margin-top: 10px; margin-bottom: 4px; }
+.card-row { flex-direction: row; flex-wrap: wrap; }
+.part-card { width: 132px; padding: 4px; margin: 0 6px 6px 0; flex-direction: column; align-items: center; background-color: rgba(20, 50, 66, 0.8); border-width: 2px; border-color: rgba(0, 0, 0, 0); border-radius: 4px; }
+.part-card:hover { background-color: rgba(40, 90, 115, 0.9); }
+.part-card-selected { border-color: rgb(90, 220, 255); background-color: rgba(30, 90, 120, 0.95); }
+.part-thumb { width: 120px; height: 80px; }
+.part-name { font-size: 13px; color: rgb(220, 240, 250); -unity-text-align: middle-center; }
+.part-price { font-size: 12px; color: rgb(255, 210, 120); -unity-text-align: middle-center; }
+.swatch-row { flex-direction: row; align-items: center; margin-bottom: 4px; }
+.swatch-label { width: 96px; font-size: 14px; color: rgb(200, 235, 245); }
+.swatch { width: 24px; height: 24px; margin-right: 4px; border-width: 2px; border-color: rgba(0, 0, 0, 0.6); border-radius: 3px; }
+.swatch-selected { border-color: rgb(255, 255, 255); }
+.shipyard-footer { flex-direction: row; align-items: center; justify-content: space-between; margin-top: 14px; padding-top: 10px; border-top-width: 1px; border-color: rgba(80, 160, 190, 0.4); }
+.shipyard-price { font-size: 20px; color: rgb(255, 210, 120); -unity-font-style: bold; }
+.preparing { padding: 30px; align-items: center; background-color: rgba(20, 50, 66, 0.8); }
+.preparing-title { font-size: 26px; color: rgb(150, 230, 255); -unity-font-style: bold; margin-bottom: 10px; }
+.storage-row { flex-direction: row; align-items: center; padding: 6px; border-bottom-width: 1px; border-color: rgba(80, 160, 190, 0.25); }
+.storage-thumb { width: 120px; height: 80px; margin-right: 12px; }
+.storage-info { flex-grow: 1; }
+.storage-state { width: 180px; font-size: 15px; color: rgb(255, 210, 120); }
+.debug-box { position: absolute; right: 20px; top: 80px; width: 520px; padding: 18px; background-color: rgba(30, 6, 6, 0.95); border-width: 2px; border-color: rgb(210, 80, 60); }
+
 /* Menu do Esc */
 .pause-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; align-items: center; justify-content: center; background-color: rgba(2, 6, 12, 0.8); }
 .pause-box { width: 560px; padding: 26px; background-color: rgba(6, 18, 26, 0.97); border-width: 2px; border-color: rgb(60, 170, 210); }
@@ -146,8 +177,10 @@
 
 /* Terminal da estacao */
 .terminal { position: absolute; left: 8%; right: 8%; top: 8%; bottom: 8%; background-color: rgba(4, 14, 20, 0.94); border-width: 2px; border-color: rgb(60, 170, 210); padding: 22px; }
-.terminal-header { flex-direction: row; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-.terminal-tabs { flex-direction: row; margin-bottom: 12px; }
+.terminal-header { flex-direction: row; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-shrink: 0; min-height: 64px; }
+.terminal-tabs { flex-direction: row; margin-bottom: 12px; flex-shrink: 0; height: 36px; }
+.terminal-tabs > .tab { height: 34px; -unity-text-align: middle-center; }
+.terminal-fixed { flex-grow: 1; flex-shrink: 1; min-height: 0; }
 .tab { margin-right: 8px; padding: 6px 16px; background-color: rgba(30, 70, 90, 0.6); color: rgb(200, 235, 245); border-width: 0; }
 .tab-active { background-color: rgb(40, 150, 190); color: rgb(5, 15, 20); }
 .market-row { flex-direction: row; align-items: center; padding: 6px 4px; border-bottom-width: 1px; border-color: rgba(80, 160, 190, 0.25); }

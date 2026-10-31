@@ -33,6 +33,20 @@ namespace PulseFactor.Tests
             Assert.Greater(ship.transform.Find("WingL").lossyScale.x, 0f);
         }
 
+        // Regressao: o raio do laser (LineRenderer no mundo, filho da nave) afastava a camera em 3a pessoa.
+        [UnityTest]
+        public IEnumerator Bounds_ignore_world_space_effects()
+        {
+            ship = ShipAssembler.Build(PlayModeFixtures.Blueprint(ShipClass.Scout), null);
+            ship.transform.position = new Vector3(1500, 0, 0);
+            var beam = new GameObject("MiningBeam").AddComponent<LineRenderer>();
+            beam.transform.SetParent(ship.transform, false);
+            beam.useWorldSpace = true;
+            beam.SetPositions(new[] { Vector3.zero, Vector3.forward });
+            yield return null;
+            Assert.Less(ship.GetComponent<AssembledShip>().LocalBounds().size.magnitude, 100f);
+        }
+
         [Test]
         public void Invalid_blueprint_throws()
         {

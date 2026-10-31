@@ -32,7 +32,7 @@ namespace PulseFactor
             if (cam) return;
             cam = GetComponent<Camera>();
             cam.farClipPlane = 100000f;
-            fullMask = cam.cullingMask;
+            fullMask = cam.cullingMask & ~(1 << ShipPreview.Layer); // palco do estaleiro
         }
 
         public void Attach(GameObject shipObject)

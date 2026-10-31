@@ -26,6 +26,7 @@ MonoBehaviour:
   corporation: {fileID: 11400000, guid: 5e204ea595e22684db9459e1f3250a25, type: 2}
   style: 2
   hasShipyard: 0
+  shipyardModels: []
   dockSizes: 00000000000000000000000000000000010000000100000002000000
   market:
   - resource: {fileID: 11400000, guid: 4340199683d5d194ab4c71a7c49450af, type: 2}

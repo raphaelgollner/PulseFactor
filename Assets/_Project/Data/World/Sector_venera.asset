@@ -49,6 +49,20 @@ MonoBehaviour:
       angleDeg: 90
       elevationDeg: 0
     faceTowardStationId: 
+  - def: {fileID: 11400000, guid: 3b35b8049198396419fce29778feef77, type: 2}
+    at:
+      parentId: venera
+      distance: 24000000
+      angleDeg: 200
+      elevationDeg: 0
+    faceTowardStationId: 
+  - def: {fileID: 11400000, guid: 31ca3b9f383b8534d91bab68430e0658, type: 2}
+    at:
+      parentId: venera_i
+      distance: 3000000
+      angleDeg: 0
+      elevationDeg: 0
+    faceTowardStationId: 
   fields:
   - def: {fileID: 11400000, guid: 7af3d8e664334594aac32cd93442e96e, type: 2}
     at:

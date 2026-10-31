@@ -70,6 +70,20 @@ MonoBehaviour:
       angleDeg: 0
       elevationDeg: 0
     faceTowardStationId: 
+  - def: {fileID: 11400000, guid: 1bda0653d148a6541aa71542c45dee8f, type: 2}
+    at:
+      parentId: centaurus_i
+      distance: 4000000
+      angleDeg: 0
+      elevationDeg: 0
+    faceTowardStationId: 
+  - def: {fileID: 11400000, guid: 179338cc7e9c72a46b2e0402dd6c5a1c, type: 2}
+    at:
+      parentId: centaurus_iv
+      distance: 6000000
+      angleDeg: 0
+      elevationDeg: 0
+    faceTowardStationId: 
   fields:
   - def: {fileID: 11400000, guid: d64bbf77fae015a4cbb589535c750a1f, type: 2}
     at:

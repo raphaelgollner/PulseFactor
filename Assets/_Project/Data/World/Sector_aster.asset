@@ -56,6 +56,20 @@ MonoBehaviour:
       angleDeg: -148.50311
       elevationDeg: 0
     faceTowardStationId: gollner
+  - def: {fileID: 11400000, guid: a8f2ca2fb415cbd46886ce9f4f54ee22, type: 2}
+    at:
+      parentId: aster
+      distance: 26000000
+      angleDeg: 60
+      elevationDeg: 0
+    faceTowardStationId: 
+  - def: {fileID: 11400000, guid: ceed37d0a25b53e42aca3bf02a3b9bb5, type: 2}
+    at:
+      parentId: aster_i
+      distance: 4000000
+      angleDeg: 180
+      elevationDeg: 0
+    faceTowardStationId: 
   fields:
   - def: {fileID: 11400000, guid: 89d3ee08d2184f54e8ae959b88d2b7b5, type: 2}
     at:

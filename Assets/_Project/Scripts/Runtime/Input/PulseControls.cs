@@ -51,8 +51,8 @@ namespace PulseFactor
             FreeLook = Button(Flight, "FreeLook", "<Keyboard>/z", "<Gamepad>/leftStickPress");
             Map = Button(Flight, "Map", "<Keyboard>/m", "<Gamepad>/dpad/up");
             Boost = Button(Flight, "Boost", "<Keyboard>/leftShift", null); // controle: definir quando houver mapa de botoes final
-            PanelNext = Button(Flight, "PanelNext", "<Keyboard>/6", null);
-            PanelPrev = Button(Flight, "PanelPrev", "<Keyboard>/7", null);
+            PanelPrev = Button(Flight, "PanelPrev", "<Keyboard>/6", null);
+            PanelNext = Button(Flight, "PanelNext", "<Keyboard>/7", null);
             ClearTarget = Flight.AddAction("ClearTarget", InputActionType.Button);
             ClearTarget.AddCompositeBinding("OneModifier").With("Modifier", "<Keyboard>/ctrl").With("Binding", "<Keyboard>/t");
 

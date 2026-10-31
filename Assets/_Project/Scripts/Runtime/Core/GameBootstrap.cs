@@ -36,10 +36,12 @@ namespace PulseFactor
 
         FloatingOrigin origin;
         bool quitting;
+        SaveData loaded;
 
         void Start()
         {
             var save = SkipSave ? null : SaveSystem.Load(SaveSystem.DefaultPath);
+            loaded = save;
             origin = new GameObject("FloatingOrigin").AddComponent<FloatingOrigin>();
             var cam = SetupCamera();
             new GameObject("StarField").AddComponent<StarField>().Material = starMaterial;
@@ -137,6 +139,13 @@ namespace PulseFactor
             foreach (var (corp, value) in c.Reputation.All)
                 data.reputation.Add(new SaveData.RepEntry { corpId = corp, value = value });
             data.contracts.AddRange(c.Log.Active);
+            var fleet = Player.Fleet ? Player.Fleet.Fleet : null;
+            if (fleet?.Active != null)
+            {
+                fleet.Active.name = Player.ShipName;
+                data.activeShip = fleet.Active;
+                data.fleet.AddRange(fleet.Stored);
+            }
             data.stocks.AddRange(c.Economy.Snapshot());
             try { SaveSystem.Save(data, SaveSystem.DefaultPath); }
             catch (System.Exception e) { Debug.LogWarning("[PulseFactor] Falha ao salvar: " + e.Message); }
@@ -195,6 +204,12 @@ namespace PulseFactor
         PlayerContext BuildPlayer(Camera cam, SaveData save)
         {
             var bp = startingShip.ToBlueprint();
+            // Nave em uso salva (fase 3: frota); pecas que nao existem mais voltam para a nave inicial.
+            if (save?.activeShip != null && !string.IsNullOrEmpty(save.activeShip.body))
+            {
+                var saved = save.activeShip.ToBlueprint(id => catalog.Find(b => b && b.id == id));
+                if (saved.body && BlockRules.IsValid(saved, out _)) bp = saved;
+            }
             var go = ShipAssembler.Build(bp, null);
             go.name = "PlayerShip";
             var visual = go.GetComponent<AssembledShip>();
@@ -284,6 +299,23 @@ namespace PulseFactor
             panels.BaseSettings = cockpitPanelBase;
             panels.Build(Player.Visual);
 
+            // Frota: compra, modificacao e troca de nave (estaleiro/armazenamento).
+            var fleet = new GameObject("Fleet").AddComponent<FleetService>();
+            fleet.Player = Player;
+            fleet.Catalog = catalog;
+            fleet.Panels = panels;
+            Player.Fleet = fleet;
+            bool savedFleet = loaded?.activeShip != null && !string.IsNullOrEmpty(loaded.activeShip.body)
+                && loaded.activeShip.ToBlueprint(fleet.Block).body == Player.Visual.Blueprint.body;
+            fleet.Init(savedFleet ? loaded.activeShip : null, loaded?.fleet);
+            fleet.PreparingChanged += terminal.Refresh;
+            Player.ShipChanged += () =>
+            {
+                Player.Ship.Cargo.Changed += terminal.Refresh;
+                terminal.Refresh();
+                Save();
+            };
+
             var input = Player.Input;
             var docking = Player.Docking;
             var rig = Player.CameraRig;
@@ -318,6 +350,12 @@ namespace PulseFactor
             pause.ShouldLockCursorOnResume = () => docking.Current != DockingAutopilot.Phase.Docked && !map.IsOpen;
             pause.BeforeQuit = Save;
             pauseGo.SetActive(true);
+
+            var debugGo = Doc("DebugMenu", terminalPanel, 50);
+            var debug = debugGo.AddComponent<DebugMenu>();
+            debug.Player = Player;
+            debug.ShouldLockCursorOnClose = () => docking.Current != DockingAutopilot.Phase.Docked && !map.IsOpen && !pause.IsOpen;
+            debugGo.SetActive(true);
             input.OnPause += () =>
             {
                 if (pause.IsOpen) { pause.Close(); return; }

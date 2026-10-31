@@ -12,11 +12,15 @@ namespace PulseFactor
         public readonly List<Transform> Thrusters = new();
         public readonly List<Transform> ScreenMounts = new();
 
+        // So as pecas da nave: o raio do laser de mineracao (LineRenderer em coordenadas do mundo) e outros
+        // efeitos filhos da nave nao contam, senao a camera em terceira pessoa se afasta quilometros.
         public Bounds LocalBounds()
         {
             var b = new Bounds(Vector3.zero, Vector3.one);
-            foreach (var r in GetComponentsInChildren<Renderer>())
+            foreach (var part in new[] { Cockpit, Body, Tail, WingL, WingR })
+            foreach (var r in part ? part.GetComponentsInChildren<Renderer>() : new Renderer[0])
             {
+                if (r is LineRenderer or TrailRenderer or ParticleSystemRenderer) continue;
                 var c = transform.InverseTransformPoint(r.bounds.center);
                 b.Encapsulate(new Bounds(c, r.bounds.size));
             }

@@ -4,16 +4,16 @@ using UnityEngine.UIElements;
 
 namespace PulseFactor
 {
-    // Menu do Esc: CONTINUAR, CONTROLES (atalhos) e SAIR (com confirmacao; salva antes). Pausa o jogo.
+    // Menu do Esc: CONTINUAR, CONTROLES (atalhos), CONFIGURACOES (idioma) e SAIR (com confirmacao; salva antes). Pausa o jogo.
     [RequireComponent(typeof(UIDocument))]
     public class PauseMenu : MonoBehaviour
     {
         public Func<bool> ShouldLockCursorOnResume = () => true;
         public Action BeforeQuit;
 
-        VisualElement root, main, controls, confirm;
-        Label title, controlsList, confirmText;
-        Button resume, controlsButton, quit, back, yes, no;
+        VisualElement root, main, controls, confirm, settings, page;
+        Label title, controlsList, confirmText, languageLabel;
+        Button resume, controlsButton, settingsButton, quit, back, settingsBack, yes, no;
 
         public bool IsOpen { get; private set; }
 
@@ -22,7 +22,7 @@ namespace PulseFactor
             "controls.aim", "controls.throttle", "controls.strafe", "controls.vertical", "controls.roll",
             "controls.boost", "controls.cruise", "controls.fire", "controls.warp", "controls.target",
             "controls.clear", "controls.dock", "controls.interact", "controls.camera", "controls.freelook",
-            "controls.map", "controls.tabs", "controls.menu", "controls.newgame",
+            "controls.map", "controls.tabs", "controls.menu", "controls.debug", "controls.newgame",
         };
 
         void OnEnable()
@@ -44,6 +44,7 @@ namespace PulseFactor
             box.Add(main);
             resume = Btn(main, Close);
             controlsButton = Btn(main, () => Show(controls));
+            settingsButton = Btn(main, () => Show(settings));
             quit = Btn(main, () => Show(confirm));
 
             controls = new VisualElement();
@@ -53,6 +54,16 @@ namespace PulseFactor
             controls.Add(scroll);
             controlsList = Lbl(scroll, "pause-controls-text");
             back = Btn(controls, () => Show(main));
+
+            settings = new VisualElement();
+            box.Add(settings);
+            languageLabel = Lbl(settings, "pause-confirm");
+            var langs = new VisualElement();
+            langs.AddToClassList("pause-row");
+            settings.Add(langs);
+            Btn(langs, () => Loc.SetLanguage("pt-BR")).text = "Português";
+            Btn(langs, () => Loc.SetLanguage("en")).text = "English";
+            settingsBack = Btn(settings, () => Show(main));
 
             confirm = new VisualElement();
             box.Add(confirm);
@@ -65,6 +76,12 @@ namespace PulseFactor
             no = Btn(row, () => Show(main));
 
             root.style.display = DisplayStyle.None;
+            Loc.LanguageChanged += OnLanguageChanged;
+        }
+
+        void OnLanguageChanged()
+        {
+            if (IsOpen && page != null) Show(page);
         }
 
         public void Toggle() { if (IsOpen) Close(); else Open(); }
@@ -91,13 +108,22 @@ namespace PulseFactor
             }
         }
 
-        void OnDisable() => Time.timeScale = 1f;
+        void OnDisable()
+        {
+            Time.timeScale = 1f;
+            Loc.LanguageChanged -= OnLanguageChanged;
+        }
 
         void Show(VisualElement page)
         {
-            title.text = Loc.T(page == controls ? "pause.controls_title" : page == confirm ? "pause.quit_title" : "pause.title");
+            this.page = page;
+            title.text = Loc.T(page == controls ? "pause.controls_title" : page == confirm ? "pause.quit_title"
+                : page == settings ? "pause.settings" : "pause.title");
             resume.text = Loc.T("pause.resume");
             controlsButton.text = Loc.T("pause.controls");
+            settingsButton.text = Loc.T("pause.settings");
+            settingsBack.text = Loc.T("pause.back");
+            languageLabel.text = Loc.T("pause.language");
             quit.text = Loc.T("pause.quit");
             back.text = Loc.T("pause.back");
             yes.text = Loc.T("pause.yes");
@@ -107,6 +133,7 @@ namespace PulseFactor
             main.style.display = page == main ? DisplayStyle.Flex : DisplayStyle.None;
             controls.style.display = page == controls ? DisplayStyle.Flex : DisplayStyle.None;
             confirm.style.display = page == confirm ? DisplayStyle.Flex : DisplayStyle.None;
+            settings.style.display = page == settings ? DisplayStyle.Flex : DisplayStyle.None;
         }
 
         void Quit()

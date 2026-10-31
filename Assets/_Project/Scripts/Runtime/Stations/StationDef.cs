@@ -19,7 +19,7 @@ namespace PulseFactor
         public float ratePerHour;
     }
 
-    public enum StationStyle { Ring, Outpost, Industrial }
+    public enum StationStyle { Ring, Outpost, Industrial, IndustrialOutpost, ScienceOutpost, MilitaryOutpost }
 
     [CreateAssetMenu(menuName = "PulseFactor/Station")]
     public class StationDef : ScriptableObject
@@ -30,6 +30,7 @@ namespace PulseFactor
         public CorporationDef corporation;
         public StationStyle style = StationStyle.Ring;
         public bool hasShipyard;
+        public List<ShipModelDef> shipyardModels = new(); // naves vendidas no estaleiro (e as pecas delas)
         public DockSize[] dockSizes = { DockSize.P, DockSize.P, DockSize.P, DockSize.P, DockSize.M, DockSize.M, DockSize.G };
 
         public string CorpId => corporation ? corporation.id : corporationId;

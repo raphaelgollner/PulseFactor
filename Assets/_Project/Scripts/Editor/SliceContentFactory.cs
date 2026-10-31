@@ -93,6 +93,12 @@ namespace PulseFactor.EditorTools
                 Buy("ice", 1.35f), Buy("coal", 1.3f), Buy("iron", 1.2f),
                 Buy("rations", 1.3f), Buy("medical", 1.3f), Buy("energy_cells", 1.3f), Buy("solid_fuel", 1.3f));
             PlaceApolloFacingGollner(aster);
+            Station(aster, "kepler_lab", "nova", StationStyle.ScienceOutpost, ScienceDocks, "aster", 2.6e7, 60, r,
+                Sell("medical", 0.9f), Sell("processors", 0.95f), Sell("water", 0.95f),
+                Buy("energy_cells", 1.3f), Buy("copper", 1.3f), Buy("cobalt", 1.35f), Buy("ice", 1.25f), Buy("rations", 1.25f));
+            Station(aster, "halden_foundry", "magna", StationStyle.IndustrialOutpost, IndustrialDocks, "aster_i", 4e6, 180, r,
+                Sell("construction", 0.9f), Sell("alloys", 0.95f), Sell("scrap", 0.9f),
+                Buy("iron", 1.3f), Buy("titanium", 1.3f), Buy("coal", 1.3f), Buy("energy_cells", 1.25f), Buy("rations", 1.25f));
             Field(aster, "aster_field", "aster", 2.15e7, 3, 150, 3000, 101, false,
                 (r["iron"], 35), (r["ice"], 25), (r["coal"], 20), (r["copper"], 12), (r["titanium"], 5), (r["cobalt"], 3));
 
@@ -103,6 +109,12 @@ namespace PulseFactor.EditorTools
                 Sell("copper", 1f), Sell("construction", 0.95f), Sell("alloys", 0.95f), Sell("ship_parts", 0.95f), Sell("solid_fuel", 0.95f),
                 Buy("iron", 1.25f), Buy("ice", 1.3f), Buy("titanium", 1.35f), Buy("cobalt", 1.4f),
                 Buy("scrap", 1.3f), Buy("processors", 1.3f));
+            Station(venera, "ignis_refinery", "magna", StationStyle.IndustrialOutpost, IndustrialDocks, "venera", 2.4e7, 200, r,
+                Sell("alloys", 0.9f), Sell("solid_fuel", 0.9f), Sell("construction", 0.95f),
+                Buy("iron", 1.3f), Buy("coal", 1.35f), Buy("titanium", 1.3f), Buy("scrap", 1.3f), Buy("water", 1.25f));
+            Station(venera, "bastiao_post", "federation", StationStyle.MilitaryOutpost, MilitaryDocks, "venera_i", 3e6, 0, r,
+                Sell("scrap", 0.9f), Sell("energy_cells", 1f),
+                Buy("rations", 1.35f), Buy("medical", 1.3f), Buy("ship_parts", 1.35f), Buy("solid_fuel", 1.3f), Buy("alloys", 1.3f));
             Field(venera, "venera_field", "venera", 2e7, 95, 120, 3000, 202, true,
                 (r["copper"], 35), (r["ice"], 30), (r["iron"], 20), (r["titanium"], 10), (r["cobalt"], 5));
 
@@ -116,6 +128,12 @@ namespace PulseFactor.EditorTools
                 Sell("titanium", 1f), Sell("coal", 1f), Sell("energy_cells", 1f),
                 Buy("iron", 1.3f), Buy("copper", 1.3f),
                 Buy("ship_parts", 1.35f), Buy("alloys", 1.3f), Buy("construction", 1.3f), Buy("processors", 1.3f));
+            Station(centaurus, "sentinela_base", "federation", StationStyle.MilitaryOutpost, MilitaryDocks, "centaurus_i", 4e6, 0, r,
+                Sell("energy_cells", 0.95f), Sell("scrap", 0.9f),
+                Buy("rations", 1.35f), Buy("medical", 1.3f), Buy("ship_parts", 1.35f), Buy("solid_fuel", 1.3f), Buy("processors", 1.3f));
+            Station(centaurus, "orion_institute", "nova", StationStyle.ScienceOutpost, ScienceDocks, "centaurus_iv", 6e6, 0, r,
+                Sell("medical", 0.95f), Sell("processors", 0.9f),
+                Buy("titanium", 1.3f), Buy("cobalt", 1.3f), Buy("water", 1.3f), Buy("energy_cells", 1.3f), Buy("construction", 1.25f));
             Field(centaurus, "centaurus_field", "centaurus_iii", 1e7, 40, 150, 3500, 303, true,
                 (r["titanium"], 30), (r["cobalt"], 20), (r["iron"], 25), (r["ice"], 25));
 
@@ -125,6 +143,12 @@ namespace PulseFactor.EditorTools
                 Sell("iron", 0.9f), Sell("cobalt", 0.9f), Sell("rations", 0.95f), Sell("energy_cells", 0.95f),
                 Buy("ice", 1.3f), Buy("coal", 1.3f), Buy("copper", 1.3f),
                 Buy("ship_parts", 1.35f), Buy("medical", 1.3f), Buy("solid_fuel", 1.3f));
+            Station(cinturao, "atlas7_scrapyard", "atlas", StationStyle.IndustrialOutpost, IndustrialDocks, "cinturao", 3e5, 90, r,
+                Sell("scrap", 0.8f), Sell("iron", 0.9f), Sell("alloys", 0.95f),
+                Buy("energy_cells", 1.3f), Buy("rations", 1.3f), Buy("water", 1.3f), Buy("solid_fuel", 1.25f));
+            Station(cinturao, "vega_observatory", "atlas", StationStyle.ScienceOutpost, ScienceDocks, "cinturao", 1.2e6, 270, r,
+                Sell("processors", 0.95f), Sell("medical", 0.95f), Sell("water", 0.9f),
+                Buy("ice", 1.3f), Buy("cobalt", 1.35f), Buy("copper", 1.3f), Buy("energy_cells", 1.3f));
             Field(cinturao, "cinturao_field_a", "cinturao", 5e5, 0, 260, 5000, 404, true,
                 (r["iron"], 30), (r["cobalt"], 20), (r["titanium"], 15), (r["coal"], 20), (r["copper"], 15));
             Field(cinturao, "cinturao_field_b", "cinturao", 8e5, 150, 220, 5000, 505, true,
@@ -177,6 +201,20 @@ namespace PulseFactor.EditorTools
 
         static readonly DockSize[] Standard = { DockSize.P, DockSize.P, DockSize.P, DockSize.P, DockSize.M, DockSize.M, DockSize.G };
         static readonly DockSize[] Outpost = { DockSize.P, DockSize.M, DockSize.G };
+        static readonly DockSize[] IndustrialDocks = { DockSize.P, DockSize.M, DockSize.G };
+        static readonly DockSize[] ScienceDocks = { DockSize.P, DockSize.P, DockSize.M };
+        static readonly DockSize[] MilitaryDocks = { DockSize.P, DockSize.P, DockSize.M };
+
+        // Estaleiros (fase 3): naves vendidas em cada um. Outposts militares: so Assault P.
+        static readonly string[] AllShips = { "cruise", "crusader", "rapidfire", "typea", "typec", "horder", "hulker" };
+        static readonly string[] MilitaryShips = { "rapidfire", "typea" };
+
+        static string[] ShipyardModels(string id, StationStyle style) => id switch
+        {
+            "gollner" or "cinturao_central" => AllShips,
+            "centaurus_ii_yard" => new[] { "cruise", "crusader", "rapidfire", "typea" },
+            _ => style == StationStyle.MilitaryOutpost ? MilitaryShips : new string[0],
+        };
 
         static (string res, bool sells, float mult) Sell(string res, float mult) => (res, true, mult);
         static (string res, bool sells, float mult) Buy(string res, float mult) => (res, false, mult);
@@ -192,7 +230,9 @@ namespace PulseFactor.EditorTools
             def.style = style;
             def.dockSizes = docks;
             // Magna fabrica Pecas de Naves e nao tem estaleiro; todo estaleiro consome pecas (fase 2E).
-            def.hasShipyard = style != StationStyle.Outpost && id != "magna";
+            def.shipyardModels = ShipyardModels(id, style)
+                .Select(m => AssetDatabase.LoadAssetAtPath<ShipModelDef>($"{Root}/Data/Ships/Model_{m}.asset")).Where(m => m).ToList();
+            def.hasShipyard = def.shipyardModels.Count > 0;
             def.market = market.Select(m => Entry(id, r[m.res], m.sells, m.mult, def.hasShipyard)).ToList();
             EditorUtility.SetDirty(def);
             // Estacoes 20% mais afastadas do corpo que orbitam (playtest 2026-10-31).

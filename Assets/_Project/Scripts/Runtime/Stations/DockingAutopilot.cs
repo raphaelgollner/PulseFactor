@@ -204,6 +204,15 @@ namespace PulseFactor
             }
         }
 
+        // Troca de nave com outro tamanho: o jogador aparece docado na nova plataforma.
+        public void MoveToDock(Dock dock)
+        {
+            if (Current != Phase.Docked || !dock) return;
+            SetDock(Station, dock);
+            Dock.SetHighlighted(false);
+            transform.SetPositionAndRotation(Dock.LandingPoint.position, Dock.LandingPoint.rotation);
+        }
+
         public void Undock()
         {
             if (Current == Phase.Docked) BeginMove(Phase.Undocking);

@@ -1279,6 +1279,234 @@ MonoBehaviour:
     m_Key: demand.Low
     m_Metadata:
       m_Items: []
+  - m_Id: 245759016128512
+    m_Key: target.kepler_lab
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682944
+    m_Key: target.halden_foundry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682945
+    m_Key: target.ignis_refinery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682946
+    m_Key: target.bastiao_post
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682947
+    m_Key: target.atlas7_scrapyard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682948
+    m_Key: target.vega_observatory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682949
+    m_Key: target.sentinela_base
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682950
+    m_Key: target.orion_institute
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682951
+    m_Key: pause.settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682952
+    m_Key: controls.debug
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682953
+    m_Key: debug.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682954
+    m_Key: debug.zero
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682955
+    m_Key: debug.close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682956
+    m_Key: terminal.shipyard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682957
+    m_Key: terminal.storage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682958
+    m_Key: shipyard.mode_buy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682959
+    m_Key: shipyard.mode_modify
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682960
+    m_Key: shipyard.base_model
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682961
+    m_Key: shipyard.part_body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682962
+    m_Key: shipyard.part_cockpit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682963
+    m_Key: shipyard.part_wing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682964
+    m_Key: shipyard.part_tail
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682965
+    m_Key: shipyard.paint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682966
+    m_Key: shipyard.paint_factory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682967
+    m_Key: shipyard.paint_custom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682968
+    m_Key: shipyard.color_primary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682969
+    m_Key: shipyard.color_secondary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682970
+    m_Key: shipyard.color_accent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682971
+    m_Key: shipyard.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682972
+    m_Key: shipyard.total
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682973
+    m_Key: shipyard.fleet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682974
+    m_Key: shipyard.buy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682975
+    m_Key: shipyard.apply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682976
+    m_Key: shipyard.installed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682977
+    m_Key: shipyard.stats
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682978
+    m_Key: shipyard.preparing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682979
+    m_Key: shipyard.preparing_queue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682980
+    m_Key: shipyard.cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682981
+    m_Key: shipyard.NotEnoughCredits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682982
+    m_Key: shipyard.FleetFull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682983
+    m_Key: shipyard.NoDockOfSize
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682984
+    m_Key: shipyard.CargoTooBig
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682985
+    m_Key: shipyard.NotHere
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682986
+    m_Key: shipyard.Invalid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682987
+    m_Key: shipyard.Busy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682988
+    m_Key: storage.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682989
+    m_Key: storage.empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682990
+    m_Key: storage.cargo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682991
+    m_Key: storage.in_use
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682992
+    m_Key: storage.here
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682993
+    m_Key: storage.at
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682994
+    m_Key: storage.use
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682995
+    m_Key: msg.ship_bought
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682996
+    m_Key: msg.ship_modified
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682997
+    m_Key: msg.ship_swapped
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682998
+    m_Key: notice.ship_ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245759049682999
+    m_Key: pause.language
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

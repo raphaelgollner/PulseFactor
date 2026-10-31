@@ -4,21 +4,22 @@ using UnityEngine.UIElements;
 
 namespace PulseFactor
 {
-    // Terminal da estacao (primeira pessoa): mercado, contratos, servicos e decolagem.
+    // Terminal da estacao (primeira pessoa): mercado, contratos, servicos, estaleiro, armazenamento e decolagem.
     [RequireComponent(typeof(UIDocument))]
     public class StationTerminal : MonoBehaviour
     {
-        enum Tab { Market, Contracts, Services }
+        enum Tab { Market, Contracts, Services, Shipyard, Storage }
 
         const long WelcomeMs = 2000;
 
         public PlayerContext Player;
         public List<ResourceDef> Resources = new();
 
-        VisualElement root, window, content, welcome;
+        VisualElement root, window, content, fixedContent, welcome;
         Label title, corp, credits, testMode, cargoLabel, welcomeLabel;
         VisualElement cargoFill;
-        Button tabMarket, tabContracts, tabServices, language;
+        Button tabMarket, tabContracts, tabServices, tabShipyard, tabStorage, language;
+        ShipyardView shipyard;
         Tab tab = Tab.Market;
         readonly Dictionary<ResourceDef, int> quantities = new();
 
@@ -56,10 +57,16 @@ namespace PulseFactor
             tabMarket = Btn(tabs, "", () => SelectTab(Tab.Market), "tab");
             tabContracts = Btn(tabs, "", () => SelectTab(Tab.Contracts), "tab");
             tabServices = Btn(tabs, "", () => SelectTab(Tab.Services), "tab");
+            tabShipyard = Btn(tabs, "", () => SelectTab(Tab.Shipyard), "tab");
+            tabStorage = Btn(tabs, "", () => SelectTab(Tab.Storage), "tab");
 
             content = new ScrollView();
             content.style.flexGrow = 1;
             window.Add(content);
+            // Estaleiro: sem rolagem geral (a previa fica parada; so a coluna de pecas rola).
+            fixedContent = new VisualElement();
+            fixedContent.AddToClassList("terminal-fixed");
+            window.Add(fixedContent);
 
             cargoLabel = Lbl(window, "label");
             var bar = new VisualElement();
@@ -113,10 +120,12 @@ namespace PulseFactor
         {
             IsOpen = false;
             root.style.display = DisplayStyle.None;
+            shipyard?.Hide();
         }
 
         void Launch()
         {
+            if (Player?.Fleet) Player.Fleet.CancelPreparing();
             Close();
             if (Player?.Docking) Player.Docking.Undock();
         }
@@ -141,16 +150,34 @@ namespace PulseFactor
             tabMarket.EnableInClassList("tab-active", tab == Tab.Market);
             tabContracts.EnableInClassList("tab-active", tab == Tab.Contracts);
             tabServices.EnableInClassList("tab-active", tab == Tab.Services);
+            bool hasShipyard = ShipyardView.HasShipyard(Station) && Player.Fleet;
+            if (!hasShipyard && tab == Tab.Shipyard) tab = Tab.Market;
+            if (!Player.Fleet && tab == Tab.Storage) tab = Tab.Market;
+            tabShipyard.text = Loc.T("terminal.shipyard");
+            tabStorage.text = Loc.T("terminal.storage");
+            tabShipyard.style.display = hasShipyard ? DisplayStyle.Flex : DisplayStyle.None;
+            tabStorage.style.display = Player.Fleet ? DisplayStyle.Flex : DisplayStyle.None;
+            tabShipyard.EnableInClassList("tab-active", tab == Tab.Shipyard);
+            tabStorage.EnableInClassList("tab-active", tab == Tab.Storage);
+            tabMarket.EnableInClassList("tab-active", tab == Tab.Market);
             window.Q<Button>("launch").text = Loc.T("terminal.launch");
 
             cargoLabel.text = Loc.T("hud.cargo", ship.Cargo.Used, ship.Cargo.Capacity);
             cargoFill.style.width = Length.Percent(ship.Cargo.LoadFraction * 100f);
 
             content.Clear();
+            fixedContent.Clear();
+            bool fixedTab = tab == Tab.Shipyard;
+            content.style.display = fixedTab ? DisplayStyle.None : DisplayStyle.Flex;
+            fixedContent.style.display = fixedTab ? DisplayStyle.Flex : DisplayStyle.None;
+            shipyard ??= new ShipyardView(Player, Refresh);
+            if (tab != Tab.Shipyard) shipyard.Hide();
             switch (tab)
             {
                 case Tab.Market: BuildMarket(); break;
                 case Tab.Contracts: BuildContracts(); break;
+                case Tab.Shipyard: shipyard.BuildShipyard(fixedContent, Station); break;
+                case Tab.Storage: shipyard.BuildStorage(content, Station); break;
                 default: BuildServices(); break;
             }
         }

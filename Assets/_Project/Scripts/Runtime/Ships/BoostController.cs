@@ -15,7 +15,10 @@ namespace PulseFactor
 
         ShipController ship;
 
-        void Start()
+        void Start() => ResetTank();
+
+        // Chamado tambem na troca de nave (capacidade do propulsor muda com a classe).
+        public void ResetTank()
         {
             ship = GetComponent<ShipController>();
             Tank = new BoostTank(ship.ClassDef ? ship.ClassDef.boostCapacity : 150f);

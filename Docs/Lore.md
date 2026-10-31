@@ -32,3 +32,15 @@ Base da história, conforme definida pelo autor. Mecânicas ligadas a ela estão
 | Estação Gollner | Gollner Station | Aster | Nova Technology | 4 P, 2 M, 1 G |
 | Posto Avançado Apollo | Apollo Outpost | Aster (asteroide em órbita de Aster I) | Nova Technology | 1 P, 1 M, 1 G; sem estaleiro |
 | Estação Magna | Magna Station | (proposto: Venera) | Magna Hauling Co. | 4 P, 2 M, 1 G |
+| Central do Cinturão | Belt Central | Cinturão | Atlas Universal | 4 P, 2 M, 1 G; estaleiro P/M |
+| Doca Centaurus II | Centaurus II Yard | Centaurus | Federação | 4 P, 2 M, 1 G; estaleiro de combate e scouts |
+| Laboratório Kepler | Kepler Lab | Aster | Nova Technology | outpost científico; 2 P, 1 M |
+| Fundição Halden | Halden Foundry | Aster (órbita de Aster I) | Magna Hauling Co. | outpost industrial; 1 P, 1 M, 1 G |
+| Refinaria Ignis | Ignis Refinery | Venera | Magna Hauling Co. | outpost industrial; 1 P, 1 M, 1 G |
+| Posto Bastião | Bastion Post | Venera (órbita de Venera I) | Federação | outpost militar; 2 P, 1 M; estaleiro militar P |
+| Desmonte Atlas-7 | Atlas-7 Scrapyard | Cinturão | Atlas Universal | outpost industrial de desmonte; futura estação de descarte de sucata |
+| Observatório Vega | Vega Observatory | Cinturão | Atlas Universal | outpost científico; 2 P, 1 M |
+| Base Sentinela | Sentinel Base | Centaurus (órbita de Centaurus I) | Federação | outpost militar; 2 P, 1 M; estaleiro militar P |
+| Instituto Orion | Orion Institute | Centaurus (órbita de Centaurus IV) | Nova Technology | outpost científico; 2 P, 1 M |
+
+Observação (fase 3): a Gollner tem estaleiro completo; a Magna não tem (ela fabrica Peças de Naves).

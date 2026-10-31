@@ -102,6 +102,8 @@ namespace PulseFactor.EditorTools
             def.multiclass = multiclass;
             def.prefab = prefab;
             def.classDef = type == BlockType.Body ? classDef : null;
+            def.size = classDef.dockSize;
+            def.price = ShipPricing.DefaultPartPrice(type, classDef.shipClass, multiclass, classDef.dockSize);
             EditorUtility.SetDirty(def);
             return def;
         }
@@ -395,25 +397,27 @@ namespace PulseFactor.EditorTools
             Empty(r, "WeaponMount_Body", Vector3.zero);
         }
 
-        // Cockpit: casca externa (layer escondida na camera de cockpit), vidro compartilhado
-        // (visto de dentro e de fora) e interior com EyePoint e ScreenMounts.
+        // Cockpit: casca externa e vidro (layer escondida na camera de cockpit: por dentro as bordas do vidro
+        // flutuavam no espaco) e interior em escala humana (igual em qualquer nave) com EyePoint e ScreenMounts.
         static void Cockpit(Transform r, float length, float width, float height, float eyeZ,
             System.Action<Transform> glass, System.Action<Transform> shell)
         {
             var shellRoot = Empty(r, "Exterior", Vector3.zero);
             shell(shellRoot);
+            var glassRoot = Empty(shellRoot, "Glass", Vector3.zero);
+            glass(glassRoot);
             SetLayer(shellRoot.gameObject, LayerMask.NameToLayer(ExteriorCockpitLayer));
 
-            var glassRoot = Empty(r, "Glass", Vector3.zero);
-            glass(glassRoot);
-
-            // Interior: painel baixo a frente do piloto e 3 telas apoiadas nele, viradas para o olho.
+            // Interior: painel a frente do piloto com 3 telas, moldura da cabine (teto, colunas) e consoles laterais.
             var interior = Empty(r, "Interior", Vector3.zero);
-            float w = width * 0.8f;
+            float w = Mathf.Min(width * 0.8f, 1.8f); // cabine de uma pessoa, mesmo numa nave M
             var eye = new Vector3(0, 0.1f, eyeZ - 0.4f);
             Prim(interior, PrimitiveType.Cube, "Dash", eye + new Vector3(0, -0.55f, 0.95f), new Vector3(w, 0.5f, 0.6f), Ch.Interior);
-            Prim(interior, PrimitiveType.Cube, "FrameL", eye + new Vector3(-w / 2f, 0.2f, 0.95f), new Vector3(0.05f, 1f, 0.05f), Ch.Interior, rot: new Vector3(-20, 0, 0));
-            Prim(interior, PrimitiveType.Cube, "FrameR", eye + new Vector3(w / 2f, 0.2f, 0.95f), new Vector3(0.05f, 1f, 0.05f), Ch.Interior, rot: new Vector3(-20, 0, 0));
+            Prim(interior, PrimitiveType.Cube, "FrameL", eye + new Vector3(-w / 2f, 0.2f, 0.95f), new Vector3(0.06f, 1f, 0.06f), Ch.Interior, rot: new Vector3(-20, 0, 0));
+            Prim(interior, PrimitiveType.Cube, "FrameR", eye + new Vector3(w / 2f, 0.2f, 0.95f), new Vector3(0.06f, 1f, 0.06f), Ch.Interior, rot: new Vector3(-20, 0, 0));
+            Prim(interior, PrimitiveType.Cube, "Roof", eye + new Vector3(0, 0.66f, 0.55f), new Vector3(w + 0.1f, 0.06f, 0.9f), Ch.Interior);
+            Prim(interior, PrimitiveType.Cube, "ConsoleL", eye + new Vector3(-w / 2f - 0.05f, -0.5f, 0.2f), new Vector3(0.3f, 0.45f, 1.2f), Ch.Interior);
+            Prim(interior, PrimitiveType.Cube, "ConsoleR", eye + new Vector3(w / 2f + 0.05f, -0.5f, 0.2f), new Vector3(0.3f, 0.45f, 1.2f), Ch.Interior);
 
             Empty(interior, "EyePoint", eye);
             // 3 embaixo (status, alvo, abas) e 2 em cima (hora, nome da nave). Proporcoes iguais as texturas.

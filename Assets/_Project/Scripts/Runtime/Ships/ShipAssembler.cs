@@ -15,6 +15,34 @@ namespace PulseFactor
             var root = new GameObject("Ship");
             root.transform.SetParent(parent, false);
             var ship = root.AddComponent<AssembledShip>();
+            BuildParts(ship, bp);
+            return root;
+        }
+
+        // Troca as pecas de uma nave ja montada (mesmo GameObject: fisica, controles e camera continuam).
+        public static void Rebuild(AssembledShip ship, ShipBlueprint bp)
+        {
+            if (!BlockRules.IsValid(bp, out var error)) throw new ArgumentException(error);
+            foreach (var part in new[] { ship.Cockpit, ship.Body, ship.Tail, ship.WingL, ship.WingR })
+            {
+                if (!part) continue;
+                part.SetParent(null, false); // sai da hierarquia ja (Destroy so acontece no fim do quadro)
+                Object.Destroy(part.gameObject);
+            }
+            ship.WingL = ship.WingR = null;
+            ship.Thrusters.Clear();
+            ship.ScreenMounts.Clear();
+            ship.EyePoint = null;
+            var rotation = ship.transform.rotation;
+            var position = ship.transform.position;
+            ship.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity); // monta no espaco local
+            BuildParts(ship, bp);
+            ship.transform.SetPositionAndRotation(position, rotation);
+        }
+
+        static void BuildParts(AssembledShip ship, ShipBlueprint bp)
+        {
+            var root = ship.gameObject;
             ship.Blueprint = bp;
 
             ship.Body = Spawn(bp.body, "Body", root.transform);
@@ -34,7 +62,6 @@ namespace PulseFactor
             }
 
             ApplyPaint(root, bp.paint ?? PaintScheme.FromManufacturers(bp));
-            return root;
         }
 
         static Transform Spawn(BlockDef def, string name, Transform parent)

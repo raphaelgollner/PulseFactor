@@ -32,3 +32,7 @@ Referência: print de "PAD 04" do Elite Dangerous (enviado no chat).
 - Lacunas de teste: gerador sem cockpit/cauda/asa; caminho de autorização perdida.
 - Economia: naves comerciais NPC compram/vendem e mexem nos estoques das estações (hoje só o jogador mexe).
 - Economia: entregas de contratos também abastecem o estoque da estação de destino.
+- Estaleiro: transferir nave guardada para outra estação (com custo e tempo); vender nave; reembolso parcial de peça trocada.
+- Estaleiro: naves G e customização de peças M (hoje só cor).
+- Fase de combate: módulos (gerador, escudo, casco, motor, carga, scanner) em 3 tiers e skills, comprados/instalados só em estaleiros.
+- Câmera em terceira pessoa ao entrar no estaleiro (GDD §5.3) — hoje a prévia é uma imagem 3D no terminal.

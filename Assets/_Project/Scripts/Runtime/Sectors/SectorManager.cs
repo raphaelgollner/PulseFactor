@@ -52,6 +52,8 @@ namespace PulseFactor
                 {
                     StationStyle.Outpost => OutpostBuilder.Build(s.def, Context.Config, Context.Reputation, pos, Context.HullMaterial, Context.AsteroidMaterial, Context.Economy),
                     StationStyle.Industrial => IndustrialStationBuilder.Build(s.def, Context.Config, Context.Reputation, pos, Context.HullMaterial, Context.Economy),
+                    StationStyle.IndustrialOutpost or StationStyle.ScienceOutpost or StationStyle.MilitaryOutpost =>
+                        ModularOutpostBuilder.Build(s.def, Context.Config, Context.Reputation, pos, Context.HullMaterial, Context.Economy),
                     _ => StationBuilder.Build(s.def, Context.Config, Context.Reputation, pos, Context.HullMaterial, Context.LightMaterial, Context.Economy),
                 };
                 station.transform.SetParent(root.transform, true);

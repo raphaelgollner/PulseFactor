@@ -147,6 +147,14 @@ namespace PulseFactor
 
         public bool IsDocked(string shipId) => docked.Contains(shipId);
 
+        // Troca de nave: a vaga reservada com um id provisorio passa a ser do jogador (ja docado).
+        public void Rename(string fromId, string toId)
+        {
+            for (int i = 0; i < occupant.Length; i++)
+                if (occupant[i] == fromId) occupant[i] = toId;
+            if (docked.Remove(fromId)) docked.Add(toId);
+        }
+
         public void Release(string shipId)
         {
             docked.Remove(shipId);

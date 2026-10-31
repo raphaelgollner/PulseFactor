@@ -18,6 +18,11 @@ namespace PulseFactor
         public GameConfig Config;
         public ContractService Contracts;
         public RouteService Route;
+        public FleetService Fleet;
+
+        // Troca de nave ou modificacao (pecas, classe, carga, cockpit): a interface se reconecta.
+        public event System.Action ShipChanged;
+        public void RaiseShipChanged() => ShipChanged?.Invoke();
 
         // Nome da nave (max. 18 caracteres; definido na compra, renomeavel no terminal por enquanto).
         public const int MaxShipNameLength = 18;

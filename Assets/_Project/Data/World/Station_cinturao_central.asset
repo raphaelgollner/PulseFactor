@@ -26,6 +26,14 @@ MonoBehaviour:
   corporation: {fileID: 11400000, guid: e9bbd8429a28ce049a93f83f8ef5d4e9, type: 2}
   style: 0
   hasShipyard: 1
+  shipyardModels:
+  - {fileID: 11400000, guid: dbd1f2208eecb634fb23598fdcf2c392, type: 2}
+  - {fileID: 11400000, guid: 58d137573bb3d3940a79c7444d69c039, type: 2}
+  - {fileID: 11400000, guid: ed6e4b5259cc40a49912d17e96bccd70, type: 2}
+  - {fileID: 11400000, guid: b759297b2c44b094d96a9d0ddc9fff8c, type: 2}
+  - {fileID: 11400000, guid: 4c04ec3f9cb9dba49a3a9843eae6f270, type: 2}
+  - {fileID: 11400000, guid: 93742654d61f5664fbb369401cfc2c8d, type: 2}
+  - {fileID: 11400000, guid: 1e9bea594ffd358479e874aece14c7c3, type: 2}
   dockSizes: 00000000000000000000000000000000010000000100000002000000
   market:
   - resource: {fileID: 11400000, guid: 833c601c3d1f36940858a3bf16771b24, type: 2}

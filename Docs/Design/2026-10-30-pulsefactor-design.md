@@ -455,3 +455,17 @@ Master Hauling · **Hulker** · tamanho **M** · classe Cargo · carga **600** �
   - Produção repõe o estoque do que a estação vende; consumo baixa o estoque do que ela compra (por hora de jogo). Estoques salvos no save.
   - Magna passa a ser **sem estaleiro** (ela fabrica Peças de Naves). Estaleiros: Gollner, Central do Cinturão, Doca Centaurus II.
   - Tabela de produção/consumo por estação no `SliceContentFactory`.
+
+## 17. Fase 3 — Outposts, estaleiro e frota (decisão do autor, 2026-10-31)
+Ordem aprovada: outposts + estaleiro + frota + debug agora; **módulos (3 tiers) e skills ficam para a fase de combate** (quase tudo deles é combate).
+- **Outposts novos** (≥ 2 por setor, flutuantes, estilo das referências `refs/outpost_*`):
+  - Industrial (laranja/ferrugem), Científico (branco/azul com domo), Militar (verde-oliva com torretas e plataformas vermelhas; estaleiro só de naves militares P).
+  - **[decisões do Claude]** Aster: Laboratório Kepler (científico, Nova) e Fundição Halden (industrial, Magna). Venera: Refinaria Ignis (industrial, Magna) e Posto Bastião (militar, Federação). Cinturão: Desmonte Atlas-7 (industrial, Atlas; futura estação de descarte de sucata) e Observatório Vega (científico, Atlas). Centaurus: Base Sentinela (militar, Federação) e Instituto Orion (científico, Nova).
+- **Estaleiros**: Gollner e Central do Cinturão (P/M/G), Doca Centaurus II **[decisão do Claude: é um "yard" da Federação; vende naves de combate e scouts]** e os outposts militares (só Assault P). Ainda não existem naves G.
+- **Compra**: tela visual no terminal (aba ESTALEIRO): modelo base → corpo, cabine, asas, cauda (com miniaturas e prévia 3D girando), cores, nome. Peças disponíveis = peças dos modelos vendidos naquela estação.
+- **Modificar a nave atual**: troca de peças e cores disponíveis na estação; paga só o que mudou. Hulker (M): só cor.
+- **[decisões do Claude] Preços**: cabine 3.000, cauda 2.500, asas 2.000 (par), corpo Scout 7.000 / Cargo 9.000 / Assault 10.000; peça exclusiva +20%. Hulker: corpo 60.000, cabine 15.000, cauda 12.000. Pintura: P 500, M 1.500, G 4.000 (a mais barata). Peça trocada não é reembolsada.
+- **Pintura [decisão do Claude]**: a nave inteira usa 3 cores (principal, secundária, detalhe) de uma paleta; ou "cores de fábrica".
+- **Troca de nave**: a nave atual fica guardada na estação. Se a nova for de outro tamanho, o jogador é levado para uma doca livre do tamanho dela; sem doca livre, aparece "Preparando sua nave" com a posição na fila até liberar.
+- **Armazenamento** (aba do terminal): lista a frota com o local de cada nave; dá para usar as naves guardadas nesta estação. Só guarda nave quem está usando outra. Máximo 15 naves. Cada nave guarda sua própria carga.
+- **Debug (F9)**: adicionar/remover créditos.
