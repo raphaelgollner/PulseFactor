@@ -20,8 +20,11 @@ namespace PulseFactor
             ship.Body = Spawn(bp.body, "Body", root.transform);
             ship.Cockpit = Attach(bp.cockpit, "Cockpit", root.transform, Socket(ship.Body, "Socket_Front"), false);
             ship.Tail = Attach(bp.tail, "Tail", root.transform, Socket(ship.Body, "Socket_Back"), false);
-            ship.WingL = Attach(bp.wing, "WingL", root.transform, Socket(ship.Body, "Socket_WingL"), false);
-            ship.WingR = Attach(bp.wing, "WingR", root.transform, Socket(ship.Body, "Socket_WingR"), true);
+            if (bp.wing) // asas sao opcionais (ex.: Hulker)
+            {
+                ship.WingL = Attach(bp.wing, "WingL", root.transform, Socket(ship.Body, "Socket_WingL"), false);
+                ship.WingR = Attach(bp.wing, "WingR", root.transform, Socket(ship.Body, "Socket_WingR"), true);
+            }
 
             foreach (var t in root.GetComponentsInChildren<Transform>(true))
             {

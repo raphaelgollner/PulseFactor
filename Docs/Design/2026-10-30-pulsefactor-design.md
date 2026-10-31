@@ -423,3 +423,25 @@ Toda nave: **3 painéis embaixo e 2 em cima** (formato/posição variam por cabi
 - **Número da plataforma** pintado legível de cima.
 - **Portal de salto** novo (ref. `Docs/Design/refs/portal-de-salto.webp`), **grande** para naves capitais no futuro: **[decisão do Claude]** raio externo 2 km, abertura ~1,7 km de raio.
 - **Cockpit**: cima-esquerda = feed; cima-direita = informações do sistema; central = **minimapa (radar)** com a nave no centro; direita = abas **NAVE** ("NOME - Modelo", barras, velocidade), **CARGA** (conteúdo + barra), **CONTRATOS**, **REPUTAÇÃO**, **MÓDULOS**, **ENCAIXES** (grupo 1 = botão esquerdo, grupo 2 = botão direito por arma).
+
+## 15. Fase 2D — Nave M, fila de docagem e tráfego NPC (decisões do autor, 2026-10-31)
+
+### 15.1 Hulker (primeira nave M)
+Master Hauling · **Hulker** · tamanho **M** · classe Cargo · carga **600** · encaixes **3** · subluz máx. **300 m/s** · aceleração **igual à Scout (40)** · casco **200 HP** · não multiclasse. Ref.: `Docs/Design/refs/naves/hulker.webp`. Comprimento ≈ 3 naves P, largura ≈ 2 naves P. Sem asas (cabine, corpo, cauda).
+**[decisão do Claude, aprovada]** giro 35°/s, 1 slot de skill, boost 200, scanner 6 km. **Só NPC** até existir estaleiro.
+
+### 15.2 Docagem
+- Cada nave **só pousa na plataforma do seu tamanho** (P, M, G).
+- Sem vaga: **fila**, com aviso no feed "Aguardando na fila de docagem. Por favor aguarde. Previsão X segundos". Ao liberar: seta + mensagem de concessão.
+- NPC docado: no máximo **20 s (P), 45 s (M), 60 s (G)**. NPCs também esperam na fila.
+
+### 15.3 Tráfego NPC
+- **Patrulhas** (corpo de Assault): transitam entre estações do mesmo setor, pousam e decolam; spawn no estilo dos piratas. **Afastam piratas** (sem combate).
+- **Comércio P**: sozinhas ou em grupos de até 3; com 3, uma patrulha acompanha.
+- **Comércio M** (Hulker): chance de 1 ou 2 patrulhas P de escolta.
+- **Escoltas não docam**: orbitam a estação até o cargueiro decolar e seguem junto.
+- **Destinos aleatórios** entre estações e setores (A→B→C, A→C, C→B...).
+- **[decisão do Claude]** Só o setor atual existe: NPC com destino em outro setor entra no portal e some; NPCs também chegam saindo dos portais. Patrulhas pintadas com a cor da corporação dominante do setor. ~8 grupos ativos por setor, reposição a cada 45–90 s. NPC docado sorteia entre metade e o máximo do tempo.
+
+### 15.4 Peso em dobra
++20% a cada nível: giro 40% / 24% / 12% do normal.

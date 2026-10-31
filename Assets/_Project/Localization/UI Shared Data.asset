@@ -1063,6 +1063,154 @@ MonoBehaviour:
     m_Key: msg.asteroid_barren
     m_Metadata:
       m_Items: []
+  - m_Id: 221436956069888
+    m_Key: model.hulker
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458496
+    m_Key: target.npc_patrol
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458497
+    m_Key: target.npc_trader
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458498
+    m_Key: corp.neutral
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458499
+    m_Key: notice.dock_queue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458500
+    m_Key: notice.dock_queue_unknown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458501
+    m_Key: msg.dock_queue_left
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458502
+    m_Key: msg.dock_no_size
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864414142464
+    m_Key: pause.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696896
+    m_Key: pause.resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696897
+    m_Key: pause.controls
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696898
+    m_Key: pause.quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696899
+    m_Key: pause.back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696900
+    m_Key: pause.yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696901
+    m_Key: pause.no
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696902
+    m_Key: pause.quit_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696903
+    m_Key: pause.quit_confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696904
+    m_Key: pause.controls_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696905
+    m_Key: controls.aim
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696906
+    m_Key: controls.throttle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696907
+    m_Key: controls.strafe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696908
+    m_Key: controls.vertical
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696909
+    m_Key: controls.roll
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696910
+    m_Key: controls.boost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696911
+    m_Key: controls.cruise
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696912
+    m_Key: controls.fire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696913
+    m_Key: controls.warp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696914
+    m_Key: controls.target
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696915
+    m_Key: controls.clear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696916
+    m_Key: controls.dock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696917
+    m_Key: controls.interact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696918
+    m_Key: controls.camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864451891200
+    m_Key: controls.freelook
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864451891201
+    m_Key: controls.map
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864451891202
+    m_Key: controls.tabs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864451891203
+    m_Key: controls.menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864451891204
+    m_Key: controls.newgame
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

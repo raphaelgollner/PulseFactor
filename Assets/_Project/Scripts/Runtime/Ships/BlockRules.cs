@@ -17,7 +17,7 @@ namespace PulseFactor
             var shipClass = bp.ShipClass;
             return CheckPart(bp.cockpit, BlockType.Cockpit, shipClass, ref error)
                 && CheckPart(bp.tail, BlockType.Tail, shipClass, ref error)
-                && CheckPart(bp.wing, BlockType.Wing, shipClass, ref error);
+                && (bp.wing == null || CheckPart(bp.wing, BlockType.Wing, shipClass, ref error)); // asas opcionais
         }
 
         static bool CheckPart(BlockDef part, BlockType expected, ShipClass shipClass, ref string error)

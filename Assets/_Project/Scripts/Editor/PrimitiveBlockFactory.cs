@@ -47,6 +47,15 @@ namespace PulseFactor.EditorTools
             Model("typec", cyber, cargo, true, BuildTypeC);
             Model("horder", hauling, cargo, true, BuildHorder);
 
+            // Primeira nave M: Hulker (Master Hauling), cargueira pesada sem asas. So NPC por enquanto.
+            var reinforced = Hull("hull_reinforced", 200);
+            var cargoM = Class(ShipClass.Cargo, 40, 300, 35, 600, 3, reinforced, "Cargo_M");
+            cargoM.dockSize = DockSize.M;
+            cargoM.boostCapacity = 200f;
+            cargoM.scannerRange = 6000;
+            EditorUtility.SetDirty(cargoM);
+            Model("hulker", hauling, cargoM, false, BuildHulker, withWings: false);
+
             Resource("iron", 10); Resource("ice", 8); Resource("coal", 12);
             Resource("copper", 25); Resource("titanium", 60); Resource("cobalt", 80);
 
@@ -59,14 +68,14 @@ namespace PulseFactor.EditorTools
 
         delegate void PartBuilder(BlockType type, Transform root);
 
-        static void Model(string id, ManufacturerDef maker, ShipClassDef classDef, bool multiclass, PartBuilder build)
+        static void Model(string id, ManufacturerDef maker, ShipClassDef classDef, bool multiclass, PartBuilder build, bool withWings = true)
         {
             var model = Asset<ShipModelDef>($"{ShipsData}/Model_{id}.asset");
             model.id = id;
             model.cockpit = Block(id, BlockType.Cockpit, maker, classDef, multiclass, build);
             model.body = Block(id, BlockType.Body, maker, classDef, multiclass, build);
             model.tail = Block(id, BlockType.Tail, maker, classDef, multiclass, build);
-            model.wing = Block(id, BlockType.Wing, maker, classDef, multiclass, build);
+            model.wing = withWings ? Block(id, BlockType.Wing, maker, classDef, multiclass, build) : null;
             EditorUtility.SetDirty(model);
         }
 
@@ -318,6 +327,59 @@ namespace PulseFactor.EditorTools
             }
         }
 
+        // Hulker: ~3 naves P de comprimento (~51 m) e ~2 de largura (~24 m). Cabine de caminhao com antena e prato,
+        // corpo de carga com trelica no topo e tanques laranja nas laterais, cauda com 6 bocais e propulsores laterais.
+        static void BuildHulker(BlockType t, Transform r)
+        {
+            switch (t)
+            {
+                case BlockType.Cockpit:
+                    Cockpit(r, length: 10f, width: 12f, height: 9f, eyeZ: 5f, glass: g =>
+                    {
+                        Prim(g, PrimitiveType.Cube, "WindowL", new Vector3(-2.6f, 1.4f, 9.6f), new Vector3(4.6f, 2.6f, 0.2f), Ch.Glass, rot: new Vector3(-20, 0, 0));
+                        Prim(g, PrimitiveType.Cube, "WindowR", new Vector3(2.6f, 1.4f, 9.6f), new Vector3(4.6f, 2.6f, 0.2f), Ch.Glass, rot: new Vector3(-20, 0, 0));
+                    }, shell: s =>
+                    {
+                        Prim(s, PrimitiveType.Cube, "Cab", new Vector3(0, -0.5f, 5f), new Vector3(12f, 6.5f, 9.5f), Ch.Primary);
+                        Prim(s, PrimitiveType.Cube, "Roof", new Vector3(0, 3.4f, 4.4f), new Vector3(11f, 1.6f, 7.5f), Ch.Accent);
+                        Prim(s, PrimitiveType.Cube, "Grille", new Vector3(0, -2.4f, 9.9f), new Vector3(8f, 2.2f, 0.4f), Ch.Secondary);
+                        Prim(s, PrimitiveType.Cube, "PodL", new Vector3(-7f, -0.6f, 3f), new Vector3(2.2f, 3f, 6f), Ch.Secondary);
+                        Prim(s, PrimitiveType.Cube, "PodR", new Vector3(7f, -0.6f, 3f), new Vector3(2.2f, 3f, 6f), Ch.Secondary);
+                        Prim(s, PrimitiveType.Cylinder, "Antenna", new Vector3(-3f, 6f, 3f), new Vector3(0.25f, 2.4f, 0.25f), Ch.Secondary);
+                        Prim(s, PrimitiveType.Cylinder, "Dish", new Vector3(2f, 4.8f, 3f), new Vector3(2.6f, 0.15f, 2.6f), Ch.Secondary, rot: new Vector3(-30, 0, 0));
+                    });
+                    break;
+                case BlockType.Body:
+                    Body(r, length: 30f, width: 14f, wingX: 7f, wingZ: 0f);
+                    Prim(r, PrimitiveType.Cube, "Frame", Vector3.zero, new Vector3(14f, 10f, 30f), Ch.Secondary);
+                    Prim(r, PrimitiveType.Cube, "CornerF", new Vector3(0, 0, 14.4f), new Vector3(14.6f, 10.6f, 1.4f), Ch.Accent);
+                    Prim(r, PrimitiveType.Cube, "CornerB", new Vector3(0, 0, -14.4f), new Vector3(14.6f, 10.6f, 1.4f), Ch.Accent);
+                    for (int i = 0; i < 6; i++)
+                        Prim(r, PrimitiveType.Cube, "Truss" + i, new Vector3(0, 5.6f, -12.5f + i * 5f), new Vector3(12.5f, 0.6f, 0.6f), Ch.Primary);
+                    Prim(r, PrimitiveType.Cube, "TrussL", new Vector3(-6.2f, 5.6f, 0), new Vector3(0.6f, 0.6f, 28f), Ch.Primary);
+                    Prim(r, PrimitiveType.Cube, "TrussR", new Vector3(6.2f, 5.6f, 0), new Vector3(0.6f, 0.6f, 28f), Ch.Primary);
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Prim(r, PrimitiveType.Capsule, "TankL" + i, new Vector3(-8.3f, -1.5f, -8f + i * 8f), new Vector3(3f, 3.4f, 3f), Ch.Accent, rot: new Vector3(90, 0, 0));
+                        Prim(r, PrimitiveType.Capsule, "TankR" + i, new Vector3(8.3f, -1.5f, -8f + i * 8f), new Vector3(3f, 3.4f, 3f), Ch.Accent, rot: new Vector3(90, 0, 0));
+                    }
+                    break;
+                case BlockType.Tail:
+                    Prim(r, PrimitiveType.Cube, "Block", new Vector3(0, 0, -5f), new Vector3(14f, 11f, 10f), Ch.Primary);
+                    Prim(r, PrimitiveType.Cube, "Stripe", new Vector3(0, 5.8f, -4f), new Vector3(8f, 0.8f, 6f), Ch.Accent);
+                    for (int x = -1; x <= 1; x++)
+                    for (int y = 0; y < 2; y++)
+                        Nozzle(r, new Vector3(x * 4f, -2.2f + y * 4.4f, -10.3f), 3.4f);
+                    foreach (int side in new[] { -1, 1 })
+                    {
+                        Prim(r, PrimitiveType.Cylinder, "Booster", new Vector3(side * 8.6f, 0, -6f), new Vector3(3f, 4f, 3f), Ch.Secondary, rot: new Vector3(90, 0, 0));
+                        Nozzle(r, new Vector3(side * 8.6f, 0, -10.2f), 2.6f);
+                        Prim(r, PrimitiveType.Cube, "Fin", new Vector3(side * 7.6f, -5.5f, -8f), new Vector3(0.5f, 3f, 4f), Ch.Accent);
+                    }
+                    break;
+            }
+        }
+
         // ---------- Pecas genericas ----------
 
         static void Body(Transform r, float length, float width, float wingX, float wingZ)
@@ -436,9 +498,9 @@ namespace PulseFactor.EditorTools
             return h;
         }
 
-        static ShipClassDef Class(ShipClass c, float accel, float maxSpeed, float turn, int cargo, int weapons, HullTypeDef hull)
+        static ShipClassDef Class(ShipClass c, float accel, float maxSpeed, float turn, int cargo, int weapons, HullTypeDef hull, string assetName = null)
         {
-            var d = Asset<ShipClassDef>($"{ShipsData}/Class_{c}.asset");
+            var d = Asset<ShipClassDef>($"{ShipsData}/Class_{assetName ?? c.ToString()}.asset");
             d.shipClass = c; d.acceleration = accel; d.maxSpeed = maxSpeed; d.turnRateDeg = turn;
             d.cargoCapacity = cargo; d.weaponSlots = weapons; d.skillSlots = 1; d.startingHull = hull;
             d.fullCargoSpeedPenalty = 0.15f; d.releaseDecelFactor = 0.3f; d.cruiseAdjustRate = 60f;

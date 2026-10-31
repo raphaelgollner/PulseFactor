@@ -75,7 +75,7 @@ namespace PulseFactor
         {
             if (t == null) return Stance.Neutral;
             if (t.Kind == TargetKind.Pirate) return Stance.Enemy;
-            if (t is Station s && rep != null && rep.Get(s.Def ? s.Def.CorpId : null) >= AllyReputation) return Stance.Ally;
+            if (t is IAffiliated a && rep != null && rep.Get(a.CorpId) >= AllyReputation) return Stance.Ally;
             return Stance.Neutral;
         }
 

@@ -8,7 +8,7 @@ namespace PulseFactor
     {
         public const string PlayerId = "player";
 
-        public enum Phase { Free, Authorized, Landing, Docked, Undocking }
+        public enum Phase { Free, Queued, Authorized, Landing, Docked, Undocking }
 
         [SerializeField] float landingSeconds = 6f;
         [SerializeField] float undockSeconds = 4f;
@@ -63,7 +63,7 @@ namespace PulseFactor
 
         public void RequestDock()
         {
-            if (Current != Phase.Free && Current != Phase.Authorized) return;
+            if (Current != Phase.Free && Current != Phase.Authorized && Current != Phase.Queued) return;
             if (Warp && Warp.Drive.State != WarpState.Idle) return;
             var s = NearestStation(out float dist);
             if (!s) { GameMessages.Post("msg.dock_no_station"); return; }
@@ -75,21 +75,62 @@ namespace PulseFactor
                 return;
             }
             var shipSize = ship.ClassDef ? ship.ClassDef.dockSize : DockSize.P;
-            var r = s.Docking.Request(PlayerId, dist, shipSize);
+            var r = s.Docking.Request(PlayerId, dist, shipSize, Time.time);
+            if (r.reason == DockDenyReason.Queued)
+            {
+                EnterQueue(s, r);
+                return;
+            }
             if (!r.granted)
             {
                 GameMessages.Post(r.reason switch
                 {
                     DockDenyReason.OutOfRange => "msg.dock_out_of_range",
-                    DockDenyReason.NoFreeDock => "msg.dock_no_free",
+                    DockDenyReason.NoDockOfSize => "msg.dock_no_size",
                     _ => "msg.dock_denied",
                 });
                 return;
             }
-            SetDock(s, s.Docks[r.dockIndex]);
+            Grant(s, r.dockIndex);
+        }
+
+        void Grant(Station s, int dockIndex)
+        {
+            if (queuedAt) queuedAt.DockGranted -= OnDockGranted;
+            queuedAt = null;
+            SetDock(s, s.Docks[dockIndex]);
             Current = Phase.Authorized;
             HudNotice.Show("notice.dock_granted", 7f, Dock.Number.ToString("00"));
             if (Targets) Targets.Select(new DockTarget(Dock));
+        }
+
+        // Sem vaga do nosso tamanho: fila, com previsao no feed (atualizada a cada 10 s).
+        Station queuedAt;
+        float queueNoticeTimer;
+
+        void EnterQueue(Station s, DockRequestResult r)
+        {
+            if (queuedAt != s)
+            {
+                if (queuedAt) queuedAt.DockGranted -= OnDockGranted;
+                queuedAt = s;
+                s.DockGranted += OnDockGranted;
+            }
+            Station = s;
+            Current = Phase.Queued;
+            queueNoticeTimer = 0f;
+            ShowQueueNotice(r);
+        }
+
+        static void ShowQueueNotice(DockRequestResult r)
+        {
+            if (double.IsNaN(r.etaSeconds)) HudNotice.Show("notice.dock_queue_unknown", 6f, r.queuePosition);
+            else HudNotice.Show("notice.dock_queue", 6f, r.queuePosition, System.Math.Ceiling(r.etaSeconds));
+        }
+
+        void OnDockGranted(DockGrant g)
+        {
+            if (g.shipId == PlayerId && queuedAt) Grant(queuedAt, g.dockIndex);
         }
 
         void SetDock(Station s, Dock d)
@@ -104,6 +145,24 @@ namespace PulseFactor
         {
             switch (Current)
             {
+                case Phase.Queued:
+                    float qd = Station.DistanceTo(transform.position);
+                    Station.Docking.Tick(PlayerId, qd);
+                    if (Station.Docking.QueuePosition(PlayerId) == 0 && !Station.Docking.AssignedDock(PlayerId).HasValue)
+                    {
+                        if (queuedAt) queuedAt.DockGranted -= OnDockGranted;
+                        queuedAt = null;
+                        Current = Phase.Free;
+                        GameMessages.Post("msg.dock_queue_left");
+                        break;
+                    }
+                    queueNoticeTimer += Time.deltaTime;
+                    if (queueNoticeTimer >= 10f)
+                    {
+                        queueNoticeTimer = 0f;
+                        ShowQueueNotice(Station.Docking.Request(PlayerId, qd, ship.ClassDef ? ship.ClassDef.dockSize : DockSize.P, Time.time));
+                    }
+                    break;
                 case Phase.Authorized:
                     float dist = Station.DistanceTo(transform.position);
                     Station.Docking.Tick(PlayerId, dist);

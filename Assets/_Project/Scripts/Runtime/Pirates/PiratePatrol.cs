@@ -37,6 +37,9 @@ namespace PulseFactor
             var origin = FloatingOrigin.Instance;
             if (!origin || !Field) return;
 
+            // Patrulha por perto: o pirata (lider) escolhe um ponto na direcao oposta.
+            if (!Leader && FleeFromPatrols(origin)) hasWaypoint = true;
+
             Vector3 goal;
             if (Leader)
             {
@@ -58,6 +61,22 @@ namespace PulseFactor
         }
 
         WorldPosition waypointWorld;
+        readonly System.Collections.Generic.List<Unity.Mathematics.double3> patrolPositions = new();
+        float fleeCheck;
+
+        bool FleeFromPatrols(FloatingOrigin origin)
+        {
+            fleeCheck -= Time.deltaTime;
+            if (fleeCheck > 0f) return false;
+            fleeCheck = 1f;
+            patrolPositions.Clear();
+            foreach (var t in TargetRegistry.All)
+                if (t is NpcShip n && n.Role == "npc_patrol") patrolPositions.Add(t.Position.value);
+            if (!TrafficPlanner.ShouldFlee(Position.value, patrolPositions, TrafficPlanner.PatrolFleeRadius, out var away)) return false;
+            waypointWorld = Position + away * (TrafficPlanner.PatrolFleeRadius * 2);
+            waypointLocal = origin.ToLocal(waypointWorld);
+            return true;
+        }
 
         void PickWaypoint(FloatingOrigin origin)
         {

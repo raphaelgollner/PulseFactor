@@ -395,6 +395,11 @@ namespace PulseFactor.EditorTools
             boot.catalog = AssetDatabase.FindAssets("t:BlockDef", new[] { Root + "/Data/Ships/Blocks" })
                 .Select(g => AssetDatabase.LoadAssetAtPath<BlockDef>(AssetDatabase.GUIDToAssetPath(g))).ToList();
             boot.resources = new[] { "iron", "ice", "coal", "copper", "titanium", "cobalt" }.Select(k => res[k]).ToList();
+            boot.smallTraders = new[] { "typec", "horder" }
+                .Select(id => AssetDatabase.LoadAssetAtPath<ShipModelDef>($"{Root}/Data/Ships/Model_{id}.asset")).Where(m => m).ToList();
+            boot.mediumTrader = AssetDatabase.LoadAssetAtPath<ShipModelDef>($"{Root}/Data/Ships/Model_hulker.asset");
+            boot.corporations = new[] { "nova", "magna", "atlas", "federation" }
+                .Select(id => AssetDatabase.LoadAssetAtPath<CorporationDef>($"{WorldData}/Corp_{id}.asset")).Where(c => c).ToList();
             boot.planetMaterial = m.planet; boot.sunMaterial = m.sun; boot.hullMaterial = m.hull; boot.lightMaterial = m.light;
             boot.asteroidMaterial = m.asteroid; boot.gateMaterial = m.gate; boot.portalMaterial = m.portal;
             boot.beamMaterial = m.beam; boot.starMaterial = m.star; boot.dustMaterial = m.dust;

@@ -1079,6 +1079,156 @@ MonoBehaviour:
     m_Localized: "Asteroide sem recursos miner\xE1veis"
     m_Metadata:
       m_Items: []
+  - m_Id: 221436956069888
+    m_Localized: Hulker
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458496
+    m_Localized: Patrulha
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458497
+    m_Localized: Cargueiro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458498
+    m_Localized: Neutro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458499
+    m_Localized: "Aguardando na fila de docagem (posi\xE7\xE3o {0}). Por favor aguarde.
+      Previs\xE3o: {1} segundos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458500
+    m_Localized: "Aguardando na fila de docagem (posi\xE7\xE3o {0}). Por favor aguarde."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458501
+    m_Localized: "Voc\xEA saiu da fila de docagem"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458502
+    m_Localized: "Esta esta\xE7\xE3o n\xE3o tem plataforma para o tamanho da sua
+      nave"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864414142464
+    m_Localized: PAUSADO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696896
+    m_Localized: CONTINUAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696897
+    m_Localized: CONTROLES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696898
+    m_Localized: SAIR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696899
+    m_Localized: VOLTAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696900
+    m_Localized: SIM, SAIR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696901
+    m_Localized: "N\xC3O"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696902
+    m_Localized: SAIR DO JOGO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696903
+    m_Localized: "Tem certeza que deseja sair? Seu progresso ser\xE1 salvo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696904
+    m_Localized: CONTROLES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696905
+    m_Localized: "Mouse \u2014 mirar / pilotar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696906
+    m_Localized: "W / S \u2014 acelerar / desacelerar (em dobra: n\xEDvel)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696907
+    m_Localized: "A / D \u2014 strafe lateral"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696908
+    m_Localized: "Espa\xE7o / C \u2014 subir / descer"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696909
+    m_Localized: "Q / E \u2014 girar (roll)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696910
+    m_Localized: "Shift esquerdo \u2014 boost"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696911
+    m_Localized: "X \u2014 modo cruzeiro"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696912
+    m_Localized: "Bot\xE3o esquerdo / direito \u2014 grupo de armas 1 / 2"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696913
+    m_Localized: "J \u2014 velocidade de dobra (precisa de alvo ou rota)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696914
+    m_Localized: "T \u2014 selecionar alvo na mira"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696915
+    m_Localized: "Ctrl + T \u2014 limpar alvo e rota"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696916
+    m_Localized: "L \u2014 pedir docagem (at\xE9 2 km)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696917
+    m_Localized: "F \u2014 terminal (docado) / modo mouse nas telas (cockpit)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696918
+    m_Localized: "V \u2014 primeira / terceira pessoa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864451891200
+    m_Localized: "Z (segurar) \u2014 olhar ao redor"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864451891201
+    m_Localized: "M \u2014 mapa do sistema"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864451891202
+    m_Localized: "6 / 7 \u2014 aba seguinte / anterior do painel direito"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864451891203
+    m_Localized: "Esc \u2014 menu"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864451891204
+    m_Localized: "F10 \u2014 novo jogo (desenvolvimento)"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

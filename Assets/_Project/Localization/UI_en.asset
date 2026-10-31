@@ -1076,6 +1076,155 @@ MonoBehaviour:
     m_Localized: Asteroid has no mineable resources
     m_Metadata:
       m_Items: []
+  - m_Id: 221436956069888
+    m_Localized: Hulker
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458496
+    m_Localized: Patrol
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458497
+    m_Localized: Freighter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458498
+    m_Localized: Neutral
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458499
+    m_Localized: 'Waiting in the docking queue (position {0}). Please stand by. Estimate:
+      {1} seconds'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458500
+    m_Localized: Waiting in the docking queue (position {0}). Please stand by.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458501
+    m_Localized: You left the docking queue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221436964458502
+    m_Localized: This station has no pad for your ship size
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864414142464
+    m_Localized: PAUSED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696896
+    m_Localized: RESUME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696897
+    m_Localized: CONTROLS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696898
+    m_Localized: QUIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696899
+    m_Localized: BACK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696900
+    m_Localized: YES, QUIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696901
+    m_Localized: NO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696902
+    m_Localized: QUIT GAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696903
+    m_Localized: Are you sure you want to quit? Your progress will be saved.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696904
+    m_Localized: CONTROLS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696905
+    m_Localized: "Mouse \u2014 aim / steer"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696906
+    m_Localized: "W / S \u2014 throttle up / down (in warp: level)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696907
+    m_Localized: "A / D \u2014 strafe"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696908
+    m_Localized: "Space / C \u2014 up / down"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696909
+    m_Localized: "Q / E \u2014 roll"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696910
+    m_Localized: "Left Shift \u2014 boost"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696911
+    m_Localized: "X \u2014 cruise mode"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696912
+    m_Localized: "Left / right mouse \u2014 weapon group 1 / 2"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696913
+    m_Localized: "J \u2014 warp speed (needs a target or route)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696914
+    m_Localized: "T \u2014 select target in sight"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696915
+    m_Localized: "Ctrl + T \u2014 clear target and route"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696916
+    m_Localized: "L \u2014 request docking (within 2 km)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696917
+    m_Localized: "F \u2014 terminal (docked) / mouse mode on screens (cockpit)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864447696918
+    m_Localized: "V \u2014 first / third person"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864451891200
+    m_Localized: "Z (hold) \u2014 free look"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864451891201
+    m_Localized: "M \u2014 system map"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864451891202
+    m_Localized: "6 / 7 \u2014 next / previous right panel tab"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864451891203
+    m_Localized: "Esc \u2014 menu"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228864451891204
+    m_Localized: "F10 \u2014 new game (development)"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

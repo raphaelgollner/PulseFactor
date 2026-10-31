@@ -103,6 +103,17 @@
 .panel-ship-sub { font-size: 20px; color: rgb(140, 190, 210); -unity-text-align: middle-center; }
 .name-field { width: 260px; font-size: 15px; }
 
+/* Menu do Esc */
+.pause-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; align-items: center; justify-content: center; background-color: rgba(2, 6, 12, 0.8); }
+.pause-box { width: 560px; padding: 26px; background-color: rgba(6, 18, 26, 0.97); border-width: 2px; border-color: rgb(60, 170, 210); }
+.pause-title { font-size: 30px; color: rgb(150, 230, 255); -unity-font-style: bold; -unity-text-align: middle-center; margin-bottom: 18px; }
+.pause-button { margin: 6px 0; padding: 10px; font-size: 18px; }
+.pause-row { flex-direction: row; justify-content: space-between; }
+.pause-row > .pause-button { flex-grow: 1; margin: 6px; }
+.pause-confirm { font-size: 18px; color: rgb(220, 235, 245); white-space: normal; -unity-text-align: middle-center; margin-bottom: 12px; }
+.pause-controls { max-height: 520px; }
+.pause-controls-text { font-size: 16px; color: rgb(205, 230, 240); white-space: normal; }
+
 .notice { position: absolute; left: 0; right: 0; top: 44px; -unity-text-align: upper-center; font-size: 18px; color: rgb(20, 20, 20); background-color: rgba(255, 190, 60, 0.85); padding: 5px; }
 .panel-notice { color: rgb(255, 190, 60); }
 .panel-alert { color: rgb(255, 80, 70); font-size: 18px; }

@@ -228,6 +228,38 @@ namespace PulseFactor
             Place(glassArcs, ToPanel(r));
         }
 
+        // Retangulos (no painel do HUD) das telas fisicas do cockpit: o que cair ali fica escondido.
+        readonly List<Rect> blocked = new();
+
+        void UpdateBlockedAreas(Camera cam)
+        {
+            blocked.Clear();
+            bool cockpit = Player.CameraRig && Player.CameraRig.CurrentMode == CameraRig.Mode.Cockpit;
+            if (!cockpit || !Player.Visual) return;
+            foreach (var mount in Player.Visual.ScreenMounts)
+            {
+                if (!mount) continue;
+                float xMin = float.MaxValue, yMin = float.MaxValue, xMax = float.MinValue, yMax = float.MinValue;
+                bool visible = false;
+                foreach (var c in new[] { new Vector3(-0.5f, -0.5f), new Vector3(0.5f, -0.5f), new Vector3(0.5f, 0.5f), new Vector3(-0.5f, 0.5f) })
+                {
+                    var sp = cam.WorldToScreenPoint(mount.TransformPoint(c));
+                    if (sp.z <= 0) continue;
+                    visible = true;
+                    var p = ToPanel(sp);
+                    xMin = Mathf.Min(xMin, p.x); xMax = Mathf.Max(xMax, p.x);
+                    yMin = Mathf.Min(yMin, p.y); yMax = Mathf.Max(yMax, p.y);
+                }
+                if (visible) blocked.Add(Rect.MinMaxRect(xMin, yMin, xMax, yMax));
+            }
+        }
+
+        bool Hidden(Vector2 panelPoint)
+        {
+            foreach (var r in blocked) if (r.Contains(panelPoint)) return true;
+            return false;
+        }
+
         double ScannerRange => Player.Ship && Player.Ship.ClassDef ? Player.Ship.ClassDef.scannerRange : Scanner.DefaultRange;
 
         static Color KindColor(TargetKind k) => k switch
@@ -246,6 +278,7 @@ namespace PulseFactor
             if (!cam || !origin) return;
             var camWorld = origin.ToWorld(cam.transform.position);
             var current = Player.Targets ? Player.Targets.Current : null;
+            UpdateBlockedAreas(cam);
 
             int used = 0;
             foreach (var t in TargetRegistry.All)
@@ -259,12 +292,19 @@ namespace PulseFactor
                 var (marker, label) = markers[used++];
                 marker.style.display = DisplayStyle.Flex;
                 label.style.display = DisplayStyle.Flex;
+                var p = ToPanel(screen);
+                if (Hidden(p))
+                {
+                    marker.style.display = DisplayStyle.None;
+                    label.style.display = DisplayStyle.None;
+                    used--;
+                    continue;
+                }
                 HudIcons.Apply(marker, HudIcons.For(t));
                 label.style.color = KindColor(t.Kind);
-                var p = ToPanel(screen);
                 Place(marker, p);
                 Place(label, p);
-                label.text = $"{Loc.T("target." + t.DisplayId)}  {HudModel.FormatDistance(dist)}";
+                label.text = $"{TargetNames.Of(t)}  {HudModel.FormatDistance(dist)}";
             }
             for (int i = used; i < markers.Count; i++)
             {
@@ -284,6 +324,7 @@ namespace PulseFactor
             var dir = (Vector3)(Unity.Mathematics.float3)(delta / System.Math.Max(d, 1e-3));
             var sp = cam.WorldToScreenPoint(cam.transform.position + dir * 1000f);
             bool onScreen = sp.z > 0 && sp.x >= 0 && sp.x <= Screen.width && sp.y >= 0 && sp.y <= Screen.height;
+            if (onScreen && Hidden(ToPanel(sp))) onScreen = false; // atras de uma tela do cockpit: so a seta na borda
             if (onScreen)
             {
                 var p = ToPanel(sp);
@@ -300,7 +341,7 @@ namespace PulseFactor
                 Place(targetTriangle, p + new Vector2(0, -38));
                 Place(bracket, p);
                 Place(targetLabel, p + new Vector2(18, 10));
-                targetLabel.text = $"{Loc.T("target." + current.DisplayId)}\n{HudModel.FormatDistance(d)}";
+                targetLabel.text = $"{TargetNames.WithKind(current)}\n{HudModel.FormatDistance(d)}";
             }
             else
             {

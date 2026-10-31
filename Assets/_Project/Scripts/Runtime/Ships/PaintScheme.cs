@@ -37,7 +37,7 @@ namespace PulseFactor
             cockpit = BlockPaint.From(bp.cockpit?.manufacturer),
             body = BlockPaint.From(bp.body?.manufacturer),
             tail = BlockPaint.From(bp.tail?.manufacturer),
-            wing = BlockPaint.From(bp.wing?.manufacturer),
+            wing = BlockPaint.From(bp.wing ? bp.wing.manufacturer : null),
         };
     }
 }

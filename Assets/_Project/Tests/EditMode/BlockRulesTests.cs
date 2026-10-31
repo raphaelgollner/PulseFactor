@@ -50,6 +50,19 @@ namespace PulseFactor.Tests
             Assert.AreEqual(ShipClass.Cargo, bp.ShipClass);
         }
 
+        // Hulker: cabine, corpo e cauda, sem asas.
+        [Test]
+        public void Blueprint_without_wings_is_valid()
+        {
+            var bp = new ShipBlueprint
+            {
+                cockpit = Block(BlockType.Cockpit, ShipClass.Cargo, false),
+                body = Block(BlockType.Body, ShipClass.Cargo, false, Cargo()),
+                tail = Block(BlockType.Tail, ShipClass.Cargo, false),
+            };
+            Assert.IsTrue(BlockRules.IsValid(bp, out var error), error);
+        }
+
         [Test]
         public void Wing_in_body_slot_is_invalid()
         {

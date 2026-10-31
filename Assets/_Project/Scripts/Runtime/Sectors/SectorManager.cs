@@ -13,6 +13,9 @@ namespace PulseFactor
         public Material PlanetMaterial, SunMaterial, HullMaterial, LightMaterial, AsteroidMaterial, GateMaterial, PortalMaterial;
         public Camera Camera;
         public Reputation Reputation;
+        public List<ShipModelDef> SmallTraders = new();
+        public ShipModelDef MediumTrader;
+        public List<CorporationDef> Corporations = new();
     }
 
     // Carrega um setor por vez: corpos celestes, sol, estacoes, campos (com piratas) e jump gates.
@@ -59,6 +62,8 @@ namespace PulseFactor
             var planetPos = bodies.Count > 0 ? bodies[sector.bodies[0].id] : double3.zero;
             foreach (var g in sector.gates) BuildGate(g, SectorDef.Resolve(g.at, bodies), planetPos);
 
+            if (Context.Catalog.Count > 0 && Context.SmallTraders.Count > 0) StartTraffic(sector);
+
             if (!string.IsNullOrEmpty(arrivalGateId)) PlaceAtGate(arrivalGateId);
             Loaded?.Invoke(sector);
         }
@@ -90,6 +95,19 @@ namespace PulseFactor
         }
 
         public JumpGate FindGate(string id) => Gates.Find(g => g.DisplayId == id);
+
+        // Trafego NPC do setor (patrulhas e comercio); vive dentro do root do setor e some junto.
+        void StartTraffic(SectorDef sector)
+        {
+            var traffic = root.AddComponent<TrafficSpawner>();
+            traffic.Sectors = this;
+            traffic.Catalog = Context.Catalog;
+            traffic.SmallTraders = Context.SmallTraders;
+            traffic.MediumTrader = Context.MediumTrader;
+            traffic.Corporations = Context.Corporations;
+            traffic.Seed = sector.id.GetHashCode();
+            traffic.Begin();
+        }
 
         // Estacoes com faceTowardStationId ficam com o topo virado para a outra estacao.
         void OrientStations(SectorDef sector)

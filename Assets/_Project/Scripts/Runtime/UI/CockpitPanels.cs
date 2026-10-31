@@ -280,7 +280,7 @@ namespace PulseFactor
             }
             var origin = FloatingOrigin.Instance;
             double dist = origin ? WorldPosition.Distance(origin.ToWorld(Player.Ship.transform.position), target.Position) : 0;
-            L["target"].text = Loc.T("panel.target_name", Loc.T("target." + target.DisplayId));
+            L["target"].text = Loc.T("panel.target_name", TargetNames.WithKind(target));
             L["distance"].text = Loc.T("panel.target_distance", HudModel.FormatDistance(dist));
             if (target is Asteroid rock)
             {
@@ -296,7 +296,7 @@ namespace PulseFactor
             L["target_shield"].text = isShip ? Loc.T("panel.target_shield", 100) : "";
             bool pirate = target.Kind == TargetKind.Pirate;
             string affiliation = pirate ? Loc.T("panel.pirate")
-                : target is Station s && s.Def ? Loc.T("corp." + s.Def.CorpId)
+                : target is IAffiliated a && !string.IsNullOrEmpty(a.CorpId) ? Loc.T("corp." + a.CorpId)
                 : Loc.T("panel.neutral");
             L["affiliation"].text = Loc.T("panel.affiliation", affiliation);
             L["affiliation"].EnableInClassList("panel-hostile", pirate);

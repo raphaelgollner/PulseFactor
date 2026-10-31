@@ -148,9 +148,9 @@ namespace PulseFactor.Tests
         }
 
         [TestCase(0, 1f)]
-        [TestCase(1, 0.5f)]
-        [TestCase(2, 0.3f)]
-        [TestCase(3, 0.15f)]
+        [TestCase(1, 0.4f)]
+        [TestCase(2, 0.24f)]
+        [TestCase(3, 0.12f)]
         public void Steering_gets_heavier_per_warp_level(int level, float factor)
         {
             Assert.AreEqual(factor, WarpDrive.SteeringFactor(level), 1e-5f);

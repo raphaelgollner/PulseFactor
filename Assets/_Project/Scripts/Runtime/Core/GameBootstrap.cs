@@ -18,6 +18,9 @@ namespace PulseFactor
         public ShipModelDef startingShip;
         public List<BlockDef> catalog = new();
         public List<ResourceDef> resources = new();
+        public List<ShipModelDef> smallTraders = new();
+        public ShipModelDef mediumTrader;
+        public List<CorporationDef> corporations = new();
 
         [Header("Materiais")]
         public Material planetMaterial, sunMaterial, hullMaterial, lightMaterial, asteroidMaterial;
@@ -65,6 +68,7 @@ namespace PulseFactor
                 LightMaterial = lightMaterial, AsteroidMaterial = asteroidMaterial,
                 GateMaterial = gateMaterial, PortalMaterial = portalMaterial,
                 Reputation = contracts.Reputation,
+                SmallTraders = smallTraders, MediumTrader = mediumTrader, Corporations = corporations,
             };
             Player.Sectors = sectors;
 
@@ -231,7 +235,7 @@ namespace PulseFactor
             var rig = cam.GetComponent<CameraRig>();
             rig.Attach(go);
             rig.LookSource = input;
-            rig.SetMode(CameraRig.Mode.ThirdPerson);
+            rig.SetMode(CameraRig.Mode.Cockpit); // primeira pessoa e o padrao ao iniciar
 
             return new PlayerContext
             {
@@ -305,14 +309,18 @@ namespace PulseFactor
                 GameMessages.Post("msg.target_cleared");
             };
             docking.Docked += () => Player.Route.ArrivedAt(docking.Station ? docking.Station.DisplayId : null);
+            // Esc: fecha mapa / modo mouse; senao abre/fecha o menu (Continuar, Controles, Sair).
+            var pauseGo = Doc("PauseMenu", terminalPanel, 40);
+            var pause = pauseGo.AddComponent<PauseMenu>();
+            pause.ShouldLockCursorOnResume = () => docking.Current != DockingAutopilot.Phase.Docked && !map.IsOpen;
+            pause.BeforeQuit = Save;
+            pauseGo.SetActive(true);
             input.OnPause += () =>
             {
+                if (pause.IsOpen) { pause.Close(); return; }
                 if (map.IsOpen) { map.Close(); return; }
                 if (panels.MouseMode) { panels.SetMouseMode(false); return; }
-                if (docking.Current == DockingAutopilot.Phase.Docked) return;
-                bool locked = UnityEngine.Cursor.lockState == CursorLockMode.Locked;
-                UnityEngine.Cursor.lockState = locked ? CursorLockMode.None : CursorLockMode.Locked;
-                UnityEngine.Cursor.visible = locked;
+                pause.Open();
             };
             Player.Wallet.Changed += terminal.Refresh;
             Player.Ship.Cargo.Changed += terminal.Refresh;
