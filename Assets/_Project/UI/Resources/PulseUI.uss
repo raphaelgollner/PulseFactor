@@ -134,6 +134,15 @@
 .storage-state { width: 180px; font-size: 15px; color: rgb(255, 210, 120); }
 .debug-box { position: absolute; right: 20px; top: 80px; width: 520px; padding: 18px; background-color: rgba(30, 6, 6, 0.95); border-width: 2px; border-color: rgb(210, 80, 60); }
 
+/* Menu principal e faixa de pre-alpha */
+.menu-screen { position: absolute; left: 0; right: 0; top: 0; bottom: 0; align-items: center; justify-content: center; }
+.menu-logo { font-size: 84px; color: rgb(150, 230, 255); -unity-font-style: bold; letter-spacing: 12px; -unity-text-align: middle-center; }
+.menu-subtitle { font-size: 20px; color: rgb(170, 200, 215); -unity-text-align: middle-center; margin-bottom: 40px; }
+.menu-box { width: 460px; padding: 22px; background-color: rgba(6, 18, 26, 0.9); border-width: 2px; border-color: rgb(60, 170, 210); }
+.pause-note { font-size: 14px; color: rgb(170, 200, 215); -unity-text-align: middle-center; margin-bottom: 14px; white-space: normal; }
+.dev-banner { position: absolute; left: 0; right: 0; bottom: 0; height: 40px; background-color: rgb(170, 20, 20); align-items: center; justify-content: center; }
+.dev-banner-text { font-size: 18px; color: rgb(255, 255, 255); -unity-font-style: bold; letter-spacing: 3px; -unity-text-align: middle-center; }
+
 /* Menu do Esc */
 .pause-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; align-items: center; justify-content: center; background-color: rgba(2, 6, 12, 0.8); }
 .pause-box { width: 560px; padding: 26px; background-color: rgba(6, 18, 26, 0.97); border-width: 2px; border-color: rgb(60, 170, 210); }
@@ -166,8 +175,7 @@
 .marker-label { position: absolute; font-size: 12px; margin-left: 12px; margin-top: -8px; }
 .target-bracket { position: absolute; width: 44px; height: 44px; margin-left: -22px; margin-top: -22px; border-width: 2px; border-color: rgb(255, 210, 90); }
 .arrow { position: absolute; width: 0; height: 0; margin-left: -8px; margin-top: -8px; border-left-width: 8px; border-right-width: 8px; border-bottom-width: 14px; border-left-color: rgba(0,0,0,0); border-right-color: rgba(0,0,0,0); }
-.glass-arcs { position: absolute; width: 90px; margin-left: -45px; margin-top: 26px; }
-.arc { height: 3px; margin-bottom: 3px; background-color: rgba(10, 20, 30, 0.4); }
+.weapon-ring { position: absolute; width: 40px; height: 40px; margin-left: -20px; margin-top: -20px; }
 
 /* Paineis do cockpit (renderizados em textura) */
 .panel { position: absolute; left: 0; top: 0; right: 0; bottom: 0; padding: 14px; background-color: rgb(4, 16, 22); }

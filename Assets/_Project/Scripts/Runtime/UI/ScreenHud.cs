@@ -13,8 +13,9 @@ namespace PulseFactor
 
         public PlayerContext Player;
 
-        VisualElement root, bars, bottomLeft, bottomRight, bottomCenter, glassArcs;
-        VisualElement shieldFill, hullFill, fuelFill, boostFill, shieldArc, hullArc;
+        VisualElement root, bars, bottomLeft, bottomRight, bottomCenter;
+        WeaponChargeRing weaponRing;
+        VisualElement shieldFill, hullFill, fuelFill, boostFill;
         VisualElement reticle, centerDot, bracket, messages, targetIcon, targetTriangle;
         Label alert, notice;
         VisualElement contractList, routeMarker, routeArrow;
@@ -84,9 +85,8 @@ namespace PulseFactor
 
             centerDot = Add(hud, "center-dot");
             reticle = Add(hud, "reticle");
-            glassArcs = Add(hud, "glass-arcs");
-            shieldArc = Bar(glassArcs, "bar-shield", "arc");
-            hullArc = Bar(glassArcs, "bar-hull", "arc");
+            weaponRing = new WeaponChargeRing(); // carga das armas em volta da mira (cockpit e 3a pessoa)
+            hud.Add(weaponRing);
 
             GameMessages.Posted += OnMessage;
         }
@@ -136,7 +136,6 @@ namespace PulseFactor
             var full = cockpit ? DisplayStyle.None : DisplayStyle.Flex;
             bars.style.display = full; bottomLeft.style.display = full; bottomRight.style.display = full; bottomCenter.style.display = full;
             credits.style.display = full;
-            glassArcs.style.display = cockpit ? DisplayStyle.Flex : DisplayStyle.None;
 
             // Alerta de proximidade: no topo em terceira pessoa; no cockpit vai para o painel central.
             var prox = Player.Proximity;
@@ -183,7 +182,7 @@ namespace PulseFactor
             // Sem dano nesta fatia: escudo, casco e combustivel cheios.
             SetFill(shieldFill, 1f); SetFill(hullFill, 1f); SetFill(fuelFill, 1f);
             SetFill(boostFill, Player.Boost && Player.Boost.Tank != null ? Player.Boost.Tank.Fraction : 1f);
-            SetFill(shieldArc, 1f); SetFill(hullArc, 1f);
+            weaponRing.Fraction = 1f; // sem armas ainda: sempre carregado
         }
 
         static void SetFill(VisualElement fill, float f) => fill.style.width = Length.Percent(Mathf.Clamp01(f) * 100f);
@@ -225,7 +224,7 @@ namespace PulseFactor
             Place(centerDot, ToPanel(new Vector2(Screen.width * 0.5f, Screen.height * 0.5f)));
             var r = Player.Input ? Player.Input.ReticleScreenPosition : new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
             Place(reticle, ToPanel(r));
-            Place(glassArcs, ToPanel(r));
+            Place(weaponRing, ToPanel(r));
         }
 
         // Retangulos (no painel do HUD) das telas fisicas do cockpit: o que cair ali fica escondido.
@@ -271,6 +270,9 @@ namespace PulseFactor
             _ => new Color(0.9f, 0.9f, 0.9f),
         };
 
+        // Tecla =: esconde as marcacoes de planetas, estacoes, naves etc. (o alvo marcado e a rota continuam).
+        public static bool MarkersVisible = true;
+
         void UpdateMarkers()
         {
             var cam = Camera.main;
@@ -283,7 +285,7 @@ namespace PulseFactor
             int used = 0;
             foreach (var t in TargetRegistry.All)
             {
-                if (used >= MaxMarkers) break;
+                if (used >= MaxMarkers || !MarkersVisible) break;
                 // Scanner: naves e asteroides so aparecem dentro do alcance; estacoes, corpos e portais sempre.
                 if (ReferenceEquals(t, current)) continue;
                 if (t.Kind == TargetKind.Asteroid) continue; // asteroides so aparecem quando marcados

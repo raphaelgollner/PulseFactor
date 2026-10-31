@@ -25,6 +25,7 @@ namespace PulseFactor.EditorTools
         const string UiDir = Root + "/UI";
         const string LocDir = Root + "/Localization";
         const string ScenePath = Root + "/Scenes/Slice.unity";
+        const string MenuScenePath = Root + "/Scenes/MainMenu.unity";
 
         [MenuItem("PulseFactor/Generate Slice Content")]
         public static void Generate()
@@ -45,9 +46,12 @@ namespace PulseFactor.EditorTools
             var panels = BuildPanelSettings();
             BuildScene(galaxy, config, res, mats, panels);
 
+            // Salvar e validar ANTES de abrir outra cena: trocar de cena descarrega os assets que so a Slice usava.
             AssetDatabase.SaveAssets();
             if (!galaxy.Validate(out var errors)) Debug.LogError("[PulseFactor] Galaxia invalida: " + string.Join("; ", errors));
-            Debug.Log("[PulseFactor] Conteudo da fatia gerado. Abra Assets/_Project/Scenes/Slice.unity e de Play.");
+            BuildMenuScene(mats, panels);
+            AssetDatabase.SaveAssets();
+            Debug.Log("[PulseFactor] Conteudo gerado. A cena MainMenu ficou aberta: de Play para comecar pelo menu.");
         }
 
         // ---------- Recursos ----------
@@ -441,10 +445,12 @@ namespace PulseFactor.EditorTools
             }
             var theme = AssetDatabase.LoadAssetAtPath<ThemeStyleSheet>(themePath);
 
-            PanelSettings P(string name, bool screenSpace)
+            // Ordem entre paineis diferentes e do PanelSettings: HUD embaixo, terminal/menus por cima.
+            PanelSettings P(string name, bool screenSpace, int order)
             {
                 var p = Asset<PanelSettings>($"{UiDir}/{name}.asset");
                 p.themeStyleSheet = theme;
+                p.sortingOrder = order;
                 if (screenSpace)
                 {
                     p.scaleMode = PanelScaleMode.ScaleWithScreenSize;
@@ -460,7 +466,7 @@ namespace PulseFactor.EditorTools
                 return p;
             }
 
-            return new Panels { screen = P("Panel_Screen", true), terminal = P("Panel_Terminal", true), cockpit = P("Panel_Cockpit", false) };
+            return new Panels { screen = P("Panel_Screen", true, 0), terminal = P("Panel_Terminal", true, 10), cockpit = P("Panel_Cockpit", false, 0) };
         }
 
         // ---------- Cena ----------
@@ -495,9 +501,39 @@ namespace PulseFactor.EditorTools
             RenderSettings.skybox = null;
 
             EditorSceneManager.SaveScene(scene, ScenePath);
-            var scenes = EditorBuildSettings.scenes.Where(s => s.path != ScenePath).ToList();
+        }
+
+        // Menu principal: camera escura com estrelas e o UIDocument do menu. Abre primeiro no build.
+        static void BuildMenuScene(Mats m, Panels panels)
+        {
+            // Trocar de cena descarrega os assets da Slice: guardar os caminhos e recarregar depois.
+            string panelPath = AssetDatabase.GetAssetPath(panels.terminal);
+            string starPath = AssetDatabase.GetAssetPath(m.star);
+            var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            var panel = AssetDatabase.LoadAssetAtPath<PanelSettings>(panelPath);
+            var star = AssetDatabase.LoadAssetAtPath<Material>(starPath);
+            var cam = new GameObject("Main Camera").AddComponent<Camera>();
+            cam.tag = "MainCamera";
+            cam.clearFlags = CameraClearFlags.SolidColor;
+            cam.backgroundColor = new Color(0.005f, 0.008f, 0.015f);
+            cam.farClipPlane = 100000f;
+            cam.gameObject.AddComponent<AudioListener>();
+            new GameObject("StarField").AddComponent<StarField>().Material = star;
+
+            var menu = new GameObject("MainMenu");
+            menu.SetActive(false);
+            var doc = menu.AddComponent<UIDocument>();
+            doc.panelSettings = panel;
+            menu.AddComponent<MainMenu>();
+            if (!panel) Debug.LogError("[PulseFactor] Menu principal sem PanelSettings: " + panelPath);
+            menu.SetActive(true);
+            EditorSceneManager.SaveScene(scene, MenuScenePath);
+
+            var scenes = EditorBuildSettings.scenes.Where(s => s.path != ScenePath && s.path != MenuScenePath).ToList();
             scenes.Insert(0, new EditorBuildSettingsScene(ScenePath, true));
+            scenes.Insert(0, new EditorBuildSettingsScene(MenuScenePath, true));
             EditorBuildSettings.scenes = scenes.ToArray();
+            EditorSceneManager.OpenScene(MenuScenePath);
         }
 
         static T Asset<T>(string path) where T : ScriptableObject

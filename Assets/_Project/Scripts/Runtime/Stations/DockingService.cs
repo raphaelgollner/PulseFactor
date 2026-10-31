@@ -147,6 +147,17 @@ namespace PulseFactor
 
         public bool IsDocked(string shipId) => docked.Contains(shipId);
 
+        // Carregar save docado: a doca salva se estiver livre e for do tamanho; senao outra livre do tamanho.
+        public int OccupyNow(string shipId, int preferred, DockSize size)
+        {
+            int dock = preferred >= 0 && preferred < occupant.Length && occupant[preferred] == null && sizes[preferred] == size
+                ? preferred : FreeDock(size);
+            if (dock < 0) return -1;
+            Occupy(dock, shipId, double.PositiveInfinity);
+            docked.Add(shipId);
+            return dock;
+        }
+
         // Troca de nave: a vaga reservada com um id provisorio passa a ser do jogador (ja docado).
         public void Rename(string fromId, string toId)
         {

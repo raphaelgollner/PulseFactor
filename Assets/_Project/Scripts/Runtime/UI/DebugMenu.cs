@@ -13,7 +13,9 @@ namespace PulseFactor
         public Func<bool> ShouldLockCursorOnClose = () => true;
 
         VisualElement root;
-        Label title, credits;
+        Label title, credits, perf;
+        float fps, perfTimer;
+        int frames;
         Button zero, close;
 
         public bool IsOpen { get; private set; }
@@ -32,6 +34,7 @@ namespace PulseFactor
             root.Add(box);
             title = Lbl(box, "pause-title");
             credits = Lbl(box, "label");
+            perf = Lbl(box, "label");
 
             var add = Row(box);
             foreach (var a in Amounts) Btn(add, "+" + a.ToString("N0"), () => Player.Wallet.Add(a));
@@ -52,6 +55,9 @@ namespace PulseFactor
                 if (IsOpen) Close();
                 else Open();
             }
+            frames++;
+            perfTimer += Time.unscaledDeltaTime;
+            if (perfTimer >= 0.5f) { fps = frames / perfTimer; frames = 0; perfTimer = 0f; }
             if (IsOpen) Refresh();
         }
 
@@ -81,6 +87,7 @@ namespace PulseFactor
             credits.text = Loc.T("hud.credits", Player.Wallet.Credits.ToString("N0"));
             zero.text = Loc.T("debug.zero");
             close.text = Loc.T("debug.close");
+            perf.text = Loc.T("debug.perf", Mathf.RoundToInt(fps), ShipController.All.Count - 1, Mathf.RoundToInt(1f / Time.fixedDeltaTime));
         }
 
         static VisualElement Row(VisualElement parent)

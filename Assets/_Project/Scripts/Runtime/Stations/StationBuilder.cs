@@ -15,7 +15,7 @@ namespace PulseFactor
         const float HubHalfHeight = 80f;
         const float ApproachHeight = 150f;
 
-        static Material white, blue, dark, orange, glass;
+        static Material white, blue, dark, orange, glass, garden;
 
         public static Station Build(StationDef def, GameConfig config, Reputation reputation, WorldPosition position, Material hull, Material light, Economy economy = null)
         {
@@ -69,8 +69,13 @@ namespace PulseFactor
                 Part(t, PrimitiveType.Cube, "Ring" + i, dir * RingRadius, new Vector3(segLength, RingHeight, RingDepth), rot, white);
                 Part(t, PrimitiveType.Cube, "Stripe" + i, dir * RingRadius + Vector3.up * (RingHeight / 2f + 0.5f), new Vector3(segLength, 1.2f, RingDepth * 0.45f), rot, blue);
                 Part(t, PrimitiveType.Cube, "Windows" + i, dir * (RingRadius + RingDepth / 2f + 0.3f), new Vector3(segLength * 0.8f, 5f, 0.6f), rot, dark);
-                if (i % 9 == 4)
-                    Part(t, PrimitiveType.Sphere, "Dome" + i, dir * RingRadius + Vector3.up * (RingHeight / 2f), Vector3.one * 34f, Vector3.zero, glass);
+                if (i % 9 == 7) // 70, 160, 250 e 340 graus: longe das plataformas P (45 + 90k) e dos bracos
+                {
+                    var top = dir * RingRadius + Vector3.up * (RingHeight / 2f);
+                    Part(t, PrimitiveType.Cylinder, "DomeBase" + i, top + Vector3.up * 1f, new Vector3(36, 2, 36), Vector3.zero, dark);
+                    Part(t, PrimitiveType.Sphere, "Garden" + i, top + Vector3.up * 2f, new Vector3(30, 8, 30), Vector3.zero, garden);
+                    Part(t, PrimitiveType.Sphere, "Dome" + i, top, Vector3.one * 34f, Vector3.zero, glass);
+                }
                 if (i % 6 == 2)
                     Part(t, PrimitiveType.Cube, "Solar" + i, dir * RingRadius + Vector3.up * (RingHeight / 2f + 3f), new Vector3(30, 1, 14), new Vector3(15, a + 90f, 0), blue);
                 if (i % 7 == 3)
@@ -106,6 +111,7 @@ namespace PulseFactor
             dark = Tint(hull, new Color(0.3f, 0.33f, 0.38f));
             orange = Tint(hull, new Color(1f, 0.5f, 0.12f));
             glass = Transparent(new Color(0.6f, 0.85f, 1f, 0.35f));
+            garden = Tint(hull, new Color(0.25f, 0.55f, 0.25f)); // estufa
         }
 
         static Material Tint(Material baseMat, Color c)

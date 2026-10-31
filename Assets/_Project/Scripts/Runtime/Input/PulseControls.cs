@@ -14,7 +14,7 @@ namespace PulseFactor
 
         public readonly InputAction Throttle, Strafe, Vertical, Roll, AimDelta, AimStick;
         public readonly InputAction FirePrimary, FireSecondary, Skill1, Skill2, Skill3;
-        public readonly InputAction Cruise, Warp, RequestDock, ToggleCamera, Interact, SelectTarget, Pause, FreeLook, Map, ClearTarget, Boost, PanelNext, PanelPrev;
+        public readonly InputAction Cruise, Warp, RequestDock, ToggleCamera, Interact, SelectTarget, Pause, FreeLook, Map, ClearTarget, Boost, PanelNext, PanelPrev, ToggleMarkers;
         public readonly InputAction DockedInteract, DockedBack;
 
         public PulseControls()
@@ -53,6 +53,7 @@ namespace PulseFactor
             Boost = Button(Flight, "Boost", "<Keyboard>/leftShift", null); // controle: definir quando houver mapa de botoes final
             PanelPrev = Button(Flight, "PanelPrev", "<Keyboard>/6", null);
             PanelNext = Button(Flight, "PanelNext", "<Keyboard>/7", null);
+            ToggleMarkers = Button(Flight, "ToggleMarkers", "<Keyboard>/equals", null);
             ClearTarget = Flight.AddAction("ClearTarget", InputActionType.Button);
             ClearTarget.AddCompositeBinding("OneModifier").With("Modifier", "<Keyboard>/ctrl").With("Binding", "<Keyboard>/t");
 

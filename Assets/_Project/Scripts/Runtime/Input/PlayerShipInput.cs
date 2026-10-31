@@ -21,7 +21,7 @@ namespace PulseFactor
         // Deslocamento do reticulo em fracao da altura da tela (centro = 0).
         public Vector2 ReticleOffset { get; private set; }
 
-        public event Action OnToggleCamera, OnWarp, OnRequestDock, OnInteract, OnSelectTarget, OnPause, OnMap, OnClearTarget, OnPanelNext, OnPanelPrev;
+        public event Action OnToggleCamera, OnWarp, OnRequestDock, OnInteract, OnSelectTarget, OnPause, OnMap, OnClearTarget, OnPanelNext, OnPanelPrev, OnToggleMarkers;
         public event Action<bool> OnFirePrimary, OnFireSecondary;
         public event Action<int> OnSkill;
 
@@ -46,6 +46,7 @@ namespace PulseFactor
             };
             Controls.ClearTarget.performed += _ => OnClearTarget?.Invoke();
             Controls.Map.performed += _ => OnMap?.Invoke();
+            Controls.ToggleMarkers.performed += _ => OnToggleMarkers?.Invoke();
             Controls.PanelNext.performed += _ => OnPanelNext?.Invoke();
             Controls.PanelPrev.performed += _ => OnPanelPrev?.Invoke();
             Controls.Pause.performed += _ => OnPause?.Invoke();

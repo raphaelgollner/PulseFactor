@@ -21,6 +21,8 @@ namespace PulseFactor
         public float rx, ry, rz, rw = 1f;
         public string routeSectorId, routeTargetId;
         public string shipName;
+        public string dockedStationId; // salvo docado: volta docado
+        public int dockIndex = -1;
         public List<CargoEntry> cargo = new();
         public List<RepEntry> reputation = new();
         public List<Contract> contracts = new();

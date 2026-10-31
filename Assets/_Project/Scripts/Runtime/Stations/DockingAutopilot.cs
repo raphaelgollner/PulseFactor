@@ -204,6 +204,24 @@ namespace PulseFactor
             }
         }
 
+        // Save feito docado: volta docado na mesma estacao (na doca salva, se ainda estiver livre).
+        public bool RestoreDocked(Station s, int preferredDock)
+        {
+            if (!s || Current != Phase.Free) return false;
+            var size = ship.ClassDef ? ship.ClassDef.dockSize : DockSize.P;
+            int index = s.Docking.OccupyNow(PlayerId, preferredDock, size);
+            if (index < 0) return false;
+            SetDock(s, s.Docks[index]);
+            Dock.SetHighlighted(false);
+            Current = Phase.Docked;
+            ship.ControlsLocked = true;
+            ship.Stop();
+            body.isKinematic = true;
+            transform.SetPositionAndRotation(Dock.LandingPoint.position, Dock.LandingPoint.rotation);
+            Docked?.Invoke();
+            return true;
+        }
+
         // Troca de nave com outro tamanho: o jogador aparece docado na nova plataforma.
         public void MoveToDock(Dock dock)
         {

@@ -89,6 +89,12 @@ namespace PulseFactor
             else PlaceNearFirstStation(sectors, origin);
 
             BuildUi();
+            if (savedSector && !string.IsNullOrEmpty(save.dockedStationId))
+            {
+                var station = sectors.Stations.Find(s => s.DisplayId == save.dockedStationId);
+                if (!Player.Docking.RestoreDocked(station, save.dockIndex))
+                    Debug.Log("[PulseFactor] Sem doca livre para voltar docado; comecando perto da estacao.");
+            }
 
             Player.Docking.Docked += Save;
             Player.Docking.Undocked += Save;
@@ -134,6 +140,11 @@ namespace PulseFactor
                 routeTargetId = Player.Route ? Player.Route.DestinationId : null,
                 shipName = Player.ShipName,
             };
+            if (Player.Docking.Current == DockingAutopilot.Phase.Docked && Player.Docking.Station && Player.Docking.Dock)
+            {
+                data.dockedStationId = Player.Docking.Station.DisplayId;
+                data.dockIndex = Player.Docking.Dock.index;
+            }
             foreach (var kv in ship.Cargo.Contents)
                 data.cargo.Add(new SaveData.CargoEntry { resourceId = kv.Key.id, count = kv.Value, reserved = ship.Cargo.Reserved(kv.Key) });
             foreach (var (corp, value) in c.Reputation.All)
@@ -337,6 +348,11 @@ namespace PulseFactor
             input.OnPanelNext += panels.NextTab;
             input.OnPanelPrev += panels.PrevTab;
             input.OnMap += map.Toggle;
+            input.OnToggleMarkers += () =>
+            {
+                ScreenHud.MarkersVisible = !ScreenHud.MarkersVisible;
+                HudNotice.Show(ScreenHud.MarkersVisible ? "notice.markers_on" : "notice.markers_off", 2.5f);
+            };
             input.OnClearTarget += () =>
             {
                 Player.Targets.Select(null);

@@ -1130,7 +1130,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 228864447696900
-    m_Localized: YES, QUIT
+    m_Localized: YES
     m_Metadata:
       m_Items: []
   - m_Id: 228864447696901
@@ -1142,7 +1142,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 228864447696903
-    m_Localized: Are you sure you want to quit? Your progress will be saved.
+    m_Localized: Are you sure you want to quit the game?
     m_Metadata:
       m_Items: []
   - m_Id: 228864447696904
@@ -1521,6 +1521,70 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 245759049682999
     m_Localized: LANGUAGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519935053824
+    m_Localized: MAIN MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413952
+    m_Localized: MAIN MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413953
+    m_Localized: Are you sure you want to return to the main menu?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413954
+    m_Localized: Your progress will be saved.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413955
+    m_Localized: Tau Ceti System
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413956
+    m_Localized: CONTINUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413957
+    m_Localized: NEW GAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413958
+    m_Localized: OPTIONS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413959
+    m_Localized: Start a new game?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413960
+    m_Localized: Your current saved progress will be erased.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413961
+    m_Localized: Are you sure you want to quit?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413962
+    m_Localized: PRE-ALPHA - DEVELOPMENT VERSION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413963
+    m_Localized: "= \u2014 show / hide HUD markers"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413964
+    m_Localized: 'HUD markers: on'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413965
+    m_Localized: 'HUD markers: off'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 262523284312064
+    m_Localized: "FPS: {0} \xB7 NPC ships in sector: {1} \xB7 Physics: {2} Hz"
     m_Metadata:
       m_Items: []
   references:

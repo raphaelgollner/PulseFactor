@@ -1134,7 +1134,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 228864447696900
-    m_Localized: SIM, SAIR
+    m_Localized: SIM
     m_Metadata:
       m_Items: []
   - m_Id: 228864447696901
@@ -1146,7 +1146,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 228864447696903
-    m_Localized: "Tem certeza que deseja sair? Seu progresso ser\xE1 salvo."
+    m_Localized: Tem certeza que deseja sair do jogo?
     m_Metadata:
       m_Items: []
   - m_Id: 228864447696904
@@ -1525,6 +1525,70 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 245759049682999
     m_Localized: IDIOMA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519935053824
+    m_Localized: MENU PRINCIPAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413952
+    m_Localized: MENU PRINCIPAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413953
+    m_Localized: Tem certeza que deseja voltar ao menu principal?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413954
+    m_Localized: "Seu progresso ser\xE1 salvo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413955
+    m_Localized: Sistema Tau Ceti
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413956
+    m_Localized: CONTINUAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413957
+    m_Localized: NOVO JOGO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413958
+    m_Localized: "OP\xC7\xD5ES"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413959
+    m_Localized: "Come\xE7ar um novo jogo?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413960
+    m_Localized: "O progresso salvo atual ser\xE1 apagado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413961
+    m_Localized: Tem certeza que deseja sair?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413962
+    m_Localized: "PR\xC9-ALPHA - VERS\xC3O DE DESENVOLVIMENTO"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413963
+    m_Localized: "= \u2014 mostrar / esconder marca\xE7\xF5es do HUD"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413964
+    m_Localized: "Marca\xE7\xF5es do HUD: ligadas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413965
+    m_Localized: "Marca\xE7\xF5es do HUD: desligadas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 262523284312064
+    m_Localized: "FPS: {0} \xB7 Naves NPC no setor: {1} \xB7 F\xEDsica: {2} Hz"
     m_Metadata:
       m_Items: []
   references:

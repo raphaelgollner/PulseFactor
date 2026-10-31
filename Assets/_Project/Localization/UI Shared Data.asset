@@ -1507,6 +1507,70 @@ MonoBehaviour:
     m_Key: pause.language
     m_Metadata:
       m_Items: []
+  - m_Id: 256519935053824
+    m_Key: pause.main_menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413952
+    m_Key: pause.menu_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413953
+    m_Key: pause.menu_confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413954
+    m_Key: pause.progress_saved
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413955
+    m_Key: menu.subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413956
+    m_Key: menu.continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413957
+    m_Key: menu.new_game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413958
+    m_Key: menu.options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413959
+    m_Key: menu.new_game_confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413960
+    m_Key: menu.new_game_note
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413961
+    m_Key: menu.quit_confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413962
+    m_Key: menu.dev_banner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413963
+    m_Key: controls.markers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413964
+    m_Key: notice.markers_on
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256519964413965
+    m_Key: notice.markers_off
+    m_Metadata:
+      m_Items: []
+  - m_Id: 262523284312064
+    m_Key: debug.perf
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
